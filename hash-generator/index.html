@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hash Generator · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Generate SHA-256, SHA-384 and SHA-512 hashes of any text, instantly in your browser. Free, private, no uploads.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Hash Generator · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Generate SHA-256, SHA-384 and SHA-512 hashes of any text, instantly in your browser. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/hash-generator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/hash-generator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+textarea#hashInput{
+  width:100%;min-height:120px;resize:vertical;font-family:inherit;font-size:.98rem;
+  color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;
+}
+textarea#hashInput:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+textarea#hashInput::placeholder{color:#9CA3AF}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.hash-card{margin-bottom:18px;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+.hash-card.show{opacity:1;transform:none}
+.hash-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.algo{
+  display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1.02rem;
+}
+.algo .tag{
+  font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:#fff;
+}
+.tag.t256{background:linear-gradient(135deg,var(--vio),#6D28D9)}
+.tag.t384{background:linear-gradient(135deg,var(--cyn),#0284C7)}
+.tag.t512{background:linear-gradient(135deg,var(--pnk),#DB2777)}
+.hash-bits{font-size:.78rem;color:var(--mut);font-weight:500}
+.hash-box{
+  font-family:var(--mono);font-size:.82rem;line-height:1.7;word-break:break-all;
+  background:rgba(31,41,55,.93);color:#D1FAE5;border-radius:14px;
+  padding:16px 18px;max-height:220px;overflow:auto;white-space:pre-wrap;
+}
+.copy-btn{
+  font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;
+  padding:8px 20px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);
+  transition:background .15s,transform .15s;
+}
+.copy-btn:hover{background:#fff}
+.copy-btn:active{transform:scale(.96)}
+.copy-btn.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+.error{
+  display:none;margin-bottom:18px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{display:block;margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .hash-head{align-items:flex-start}
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Hash Generator — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/hash-generator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Text input">
+    <label class="lab" for="hashInput" style="display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px">Your text</label>
+    <textarea id="hashInput" placeholder="Type or paste text to hash…" aria-label="Text to hash"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-p" id="generateBtn" type="button">Generate Hashes</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="meta">
+      <span class="pill" id="lenNote">0 characters · 0 bytes</span>
+      <span>Hashes are computed locally in your browser — nothing is uploaded.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Hash Generator <span class="plain">— Free Online Tool</span></h1>
+    <p>Turn any text into SHA-256, SHA-384 and SHA-512 digests instantly. Perfect for checksums, integrity checks and fingerprints.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+    Your hashes will appear here after you click <b>Generate Hashes</b>.
+  </div>
+
+  <section class="card hash-card" id="card256" hidden aria-label="SHA-256 result">
+    <div class="hash-head">
+      <div class="algo"><span class="tag t256">SHA-256</span><span class="hash-bits">256-bit · 64 hex chars</span></div>
+      <button class="copy-btn" id="copy256" type="button" aria-label="Copy SHA-256 hash">Copy</button>
+    </div>
+    <div class="hash-box" id="out256"></div>
+  </section>
+
+  <section class="card hash-card" id="card384" hidden aria-label="SHA-384 result">
+    <div class="hash-head">
+      <div class="algo"><span class="tag t384">SHA-384</span><span class="hash-bits">384-bit · 96 hex chars</span></div>
+      <button class="copy-btn" id="copy384" type="button" aria-label="Copy SHA-384 hash">Copy</button>
+    </div>
+    <div class="hash-box" id="out384"></div>
+  </section>
+
+  <section class="card hash-card" id="card512" hidden aria-label="SHA-512 result">
+    <div class="hash-head">
+      <div class="algo"><span class="tag t512">SHA-512</span><span class="hash-bits">512-bit · 128 hex chars</span></div>
+      <button class="copy-btn" id="copy512" type="button" aria-label="Copy SHA-512 hash">Copy</button>
+    </div>
+    <div class="hash-box" id="out512"></div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Type or paste</b> any text into the box above.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Press Generate Hashes</b> — all three SHA-2 digests compute instantly.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Copy any hash</b> with one tap and use it wherever you need it.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is my text uploaded to a server?</summary>
+      <p>No. Hashes are computed with your browser's built-in crypto.subtle API, so your text never leaves this page — nothing is uploaded or stored anywhere.</p>
+    </details>
+    <details>
+      <summary>Which hash algorithms are supported?</summary>
+      <p>SHA-256, SHA-384 and SHA-512 — the full SHA-2 family. Input is encoded as UTF-8 before hashing.</p>
+    </details>
+    <details>
+      <summary>Why are MD5 and SHA-1 not offered?</summary>
+      <p>They are cryptographically broken and should no longer be used for integrity or security purposes, so this tool only offers the secure SHA-2 algorithms.</p>
+    </details>
+  </section>
+
+  <p class="note">SHA-2 family · UTF-8 encoding · 100% local — your text never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var input = document.getElementById('hashInput');
+  var generateBtn = document.getElementById('generateBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var lenNote = document.getElementById('lenNote');
+  var errorBox = document.getElementById('errorBox');
+  var emptyState = document.getElementById('emptyState');
+
+  var cards = {
+    '256': { card: document.getElementById('card256'), out: document.getElementById('out256'), copy: document.getElementById('copy256') },
+    '384': { card: document.getElementById('card384'), out: document.getElementById('out384'), copy: document.getElementById('copy384') },
+    '512': { card: document.getElementById('card512'), out: document.getElementById('out512'), copy: document.getElementById('copy512') }
+  };
+
+  // Standard byte -> two lowercase hex chars conversion
+  function bufferToHex(buffer) {
+    var bytes = new Uint8Array(buffer);
+    var hex = '';
+    for (var i = 0; i < bytes.length; i++) {
+      hex += bytes[i].toString(16).padStart(2, '0');
+    }
+    return hex;
+  }
+
+  function updateLength() {
+    var text = input.value;
+    var bytes = new TextEncoder().encode(text).length;
+    lenNote.textContent = text.length + ' characters · ' + bytes + ' bytes';
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function subtleAvailable() {
+    return typeof window.crypto !== 'undefined' &&
+           typeof window.crypto.subtle !== 'undefined' &&
+           typeof window.crypto.subtle.digest === 'function';
+  }
+
+  async function generate() {
+    hideError();
+    if (!subtleAvailable()) {
+      showError('Secure crypto is unavailable in this browser context (crypto.subtle requires HTTPS or localhost). Please open this page over HTTPS and try again.');
+      return;
+    }
+    var text = input.value;
+    if (!text) {
+      showError('Please enter some text first.');
+      return;
+    }
+    generateBtn.disabled = true;
+    generateBtn.textContent = 'Hashing…';
+    try {
+      var data = new TextEncoder().encode(text);
+      var digests = await Promise.all([
+        window.crypto.subtle.digest('SHA-256', data),
+        window.crypto.subtle.digest('SHA-384', data),
+        window.crypto.subtle.digest('SHA-512', data)
+      ]);
+      cards['256'].out.textContent = bufferToHex(digests[0]);
+      cards['384'].out.textContent = bufferToHex(digests[1]);
+      cards['512'].out.textContent = bufferToHex(digests[2]);
+      emptyState.style.display = 'none';
+      ['256', '384', '512'].forEach(function (k, idx) {
+        var c = cards[k];
+        c.card.hidden = false;
+        setTimeout(function () { c.card.classList.add('show'); }, 60 * idx);
+      });
+    } catch (e) {
+      showError('Could not compute the hashes: ' + (e && e.message ? e.message : e));
+    } finally {
+      generateBtn.disabled = false;
+      generateBtn.textContent = 'Generate Hashes';
+    }
+  }
+
+  function clearAll() {
+    input.value = '';
+    hideError();
+    ['256', '384', '512'].forEach(function (k) {
+      var c = cards[k];
+      c.card.classList.remove('show');
+      c.card.hidden = true;
+      c.out.textContent = '';
+    });
+    emptyState.style.display = '';
+    updateLength();
+    input.focus();
+  }
+
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    copyFeedback(btn, ok);
+  }
+
+  function copyFeedback(btn, ok) {
+    var original = btn.textContent;
+    btn.textContent = ok ? 'Copied ✓' : 'Copy failed';
+    btn.classList.add('ok');
+    setTimeout(function () {
+      btn.textContent = original;
+      btn.classList.remove('ok');
+    }, 1600);
+  }
+
+  function attachCopy(key) {
+    var c = cards[key];
+    c.copy.addEventListener('click', function () {
+      var text = c.out.textContent;
+      if (!text) return;
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        navigator.clipboard.writeText(text).then(
+          function () { copyFeedback(c.copy, true); },
+          function () { fallbackCopy(text, c.copy); }
+        );
+      } else {
+        fallbackCopy(text, c.copy);
+      }
+    });
+  }
+
+  generateBtn.addEventListener('click', generate);
+  clearBtn.addEventListener('click', clearAll);
+  input.addEventListener('input', updateLength);
+  attachCopy('256');
+  attachCopy('384');
+  attachCopy('512');
+  updateLength();
+})();
+</script>
+</body>
+</html>

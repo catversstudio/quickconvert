@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 Encoder / Decoder · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Encode text to Base64 or decode Base64 back to text instantly in your browser. UTF-8 safe, live conversion, free and private.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Base64 Encoder / Decoder · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Encode text to Base64 or decode Base64 back to text instantly in your browser. UTF-8 safe, live conversion, free and private.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/base64-encoder-decoder/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/base64-encoder-decoder/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.mode-pills{display:flex;gap:10px;margin-bottom:16px;background:rgba(255,255,255,.55);
+  border:1px solid var(--line);border-radius:999px;padding:6px;backdrop-filter:blur(10px)}
+.pill-btn{
+  font-family:inherit;font-weight:600;font-size:.92rem;cursor:pointer;flex:1;
+  padding:11px 18px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  background:transparent;color:var(--mut);transition:all .18s;
+}
+.pill-btn.active{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.pill-btn:not(.active):hover{background:rgba(124,58,237,.08);color:var(--ink)}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;
+  text-transform:uppercase;margin:0 2px 8px}
+textarea#b64Input{
+  width:100%;min-height:130px;resize:vertical;font-family:inherit;font-size:.98rem;
+  color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;
+}
+textarea#b64Input:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+textarea#b64Input::placeholder{color:#9CA3AF}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.result-card{margin-bottom:18px}
+.result-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.result-title{font-weight:700;font-size:1.02rem;display:inline-flex;align-items:center;gap:8px}
+.result-title .tag{
+  font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:#fff;
+}
+.tag.tenc{background:linear-gradient(135deg,var(--vio),#6D28D9)}
+.tag.tdec{background:linear-gradient(135deg,var(--cyn),#0284C7)}
+.result-bits{font-size:.78rem;color:var(--mut);font-weight:500}
+.result-box{
+  font-family:var(--mono);font-size:.82rem;line-height:1.7;word-break:break-all;
+  background:rgba(31,41,55,.93);color:#D1FAE5;border-radius:14px;
+  padding:16px 18px;max-height:260px;overflow:auto;white-space:pre-wrap;min-height:88px;
+}
+.copy-btn{
+  font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;
+  padding:8px 20px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);
+  transition:background .15s,transform .15s;
+}
+.copy-btn:hover{background:#fff}
+.copy-btn:active{transform:scale(.96)}
+.copy-btn.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+.error{
+  display:none;margin-bottom:18px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{display:block;margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .result-head{align-items:flex-start}
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Base64 Encoder / Decoder — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/base64-encoder-decoder/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Base64 converter">
+    <div class="mode-pills" role="tablist" aria-label="Conversion mode">
+      <button class="pill-btn active" id="modeEncode" type="button" role="tab" aria-selected="true">Encode</button>
+      <button class="pill-btn" id="modeDecode" type="button" role="tab" aria-selected="false">Decode</button>
+    </div>
+    <label class="lab" for="b64Input" id="inputLabel">Text to encode</label>
+    <textarea id="b64Input" placeholder="Type or paste text to encode…" aria-label="Input text"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-g" id="swapBtn" type="button">⇅ Swap</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="meta">
+      <span class="pill" id="lenNote">0 characters · 0 bytes</span>
+      <span id="liveNote">Converts live as you type — everything runs locally in your browser.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Base64 Encoder / Decoder <span class="plain">— Free Online Tool</span></h1>
+    <p>Convert any text to Base64, or decode Base64 back to readable text. UTF-8 safe, live conversion, nothing ever leaves your browser.</p>
+  </div>
+
+  <section class="card result-card" aria-label="Conversion result">
+    <div class="result-head">
+      <div class="result-title"><span class="tag tenc" id="resultTag">Base64</span><span class="result-bits" id="resultBits">output</span></div>
+      <button class="copy-btn" id="copyBtn" type="button">Copy</button>
+    </div>
+    <div class="result-box" id="resultBox" aria-live="polite"></div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Choose a mode</b> — Encode text to Base64, or Decode Base64 back to text.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Type or paste</b> your input above — the result appears live, instantly.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Copy the result</b> with one tap, or hit Swap to flip the conversion around.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is my text uploaded to a server?</summary>
+      <p>No. Encoding and decoding happen entirely in your browser using the built-in btoa/atob and TextEncoder APIs — your text never leaves this page.</p>
+    </details>
+    <details>
+      <summary>Does it handle emojis and non-English text?</summary>
+      <p>Yes. Input is first encoded as UTF-8 before Base64 conversion, so emojis, Hindi, Odia, and any other Unicode text round-trips correctly.</p>
+    </details>
+    <details>
+      <summary>What happens if I paste invalid Base64 in Decode mode?</summary>
+      <p>The tool checks the input first and shows a friendly error message instead of decoding garbage — nothing breaks, and you can fix the input and try again.</p>
+    </details>
+  </section>
+
+  <p class="note">Base64 (RFC 4648) · UTF-8 safe · 100% local — your text never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var input = document.getElementById('b64Input');
+  var inputLabel = document.getElementById('inputLabel');
+  var modeEncodeBtn = document.getElementById('modeEncode');
+  var modeDecodeBtn = document.getElementById('modeDecode');
+  var swapBtn = document.getElementById('swapBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var copyBtn = document.getElementById('copyBtn');
+  var resultBox = document.getElementById('resultBox');
+  var resultTag = document.getElementById('resultTag');
+  var resultBits = document.getElementById('resultBits');
+  var lenNote = document.getElementById('lenNote');
+  var errorBox = document.getElementById('errorBox');
+
+  var mode = 'encode';
+
+  // UTF-8 safe encode: bytes -> binary string -> btoa
+  function utf8ToBase64(text) {
+    var bytes = new TextEncoder().encode(text);
+    var binary = '';
+    var chunk = 0x8000;
+    for (var i = 0; i < bytes.length; i += chunk) {
+      binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+    }
+    return btoa(binary);
+  }
+
+  // UTF-8 safe decode: atob -> bytes -> TextDecoder
+  function base64ToUtf8(b64) {
+    var binary = atob(b64);
+    var bytes = new Uint8Array(binary.length);
+    for (var i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    return new TextDecoder().decode(bytes);
+  }
+
+  function looksLikeBase64(s) {
+    return /^[A-Za-z0-9+/]*={0,2}$/.test(s) && (s.length % 4 === 0);
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function convert() {
+    hideError();
+    var text = input.value;
+    var bytes = new TextEncoder().encode(text).length;
+    lenNote.textContent = text.length + ' characters · ' + bytes + ' bytes';
+    if (!text.trim()) {
+      resultBox.textContent = '';
+      resultBits.textContent = 'output';
+      return;
+    }
+    if (mode === 'encode') {
+      try {
+        resultBox.textContent = utf8ToBase64(text);
+        resultBits.textContent = 'encoded';
+      } catch (e) {
+        showError('Could not encode this text: ' + (e && e.message ? e.message : e));
+      }
+    } else {
+      var clean = text.replace(/\s+/g, '');
+      if (!looksLikeBase64(clean)) {
+        showError('That does not look like valid Base64 — it should only contain A–Z, a–z, 0–9, +, / and up to two = padding characters.');
+        resultBox.textContent = '';
+        resultBits.textContent = 'output';
+        return;
+      }
+      try {
+        resultBox.textContent = base64ToUtf8(clean);
+        resultBits.textContent = 'decoded';
+      } catch (e) {
+        showError('That does not look like valid Base64 — please check the input and try again.');
+        resultBox.textContent = '';
+        resultBits.textContent = 'output';
+      }
+    }
+  }
+
+  function setMode(newMode) {
+    mode = newMode;
+    var isEncode = mode === 'encode';
+    modeEncodeBtn.classList.toggle('active', isEncode);
+    modeDecodeBtn.classList.toggle('active', !isEncode);
+    modeEncodeBtn.setAttribute('aria-selected', isEncode ? 'true' : 'false');
+    modeDecodeBtn.setAttribute('aria-selected', isEncode ? 'false' : 'true');
+    inputLabel.textContent = isEncode ? 'Text to encode' : 'Base64 to decode';
+    input.setAttribute('placeholder', isEncode ? 'Type or paste text to encode…' : 'Paste Base64 to decode…');
+    resultTag.textContent = isEncode ? 'Base64' : 'Decoded text';
+    resultTag.classList.toggle('tenc', isEncode);
+    resultTag.classList.toggle('tdec', !isEncode);
+    convert();
+  }
+
+  function swapAll() {
+    var out = resultBox.textContent;
+    if (!out) return;
+    setMode(mode === 'encode' ? 'decode' : 'encode');
+    input.value = out;
+    convert();
+    input.focus();
+  }
+
+  function clearAll() {
+    input.value = '';
+    resultBox.textContent = '';
+    resultBits.textContent = 'output';
+    hideError();
+    updateLenEmpty();
+    input.focus();
+  }
+
+  function updateLenEmpty() {
+    lenNote.textContent = '0 characters · 0 bytes';
+  }
+
+  function copyFeedback(ok) {
+    var original = copyBtn.textContent;
+    copyBtn.textContent = ok ? 'Copied ✓' : 'Copy failed';
+    copyBtn.classList.add('ok');
+    setTimeout(function () {
+      copyBtn.textContent = original;
+      copyBtn.classList.remove('ok');
+    }, 1600);
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    copyFeedback(ok);
+  }
+
+  copyBtn.addEventListener('click', function () {
+    var text = resultBox.textContent;
+    if (!text) return;
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      navigator.clipboard.writeText(text).then(
+        function () { copyFeedback(true); },
+        function () { fallbackCopy(text); }
+      );
+    } else {
+      fallbackCopy(text);
+    }
+  });
+
+  modeEncodeBtn.addEventListener('click', function () { setMode('encode'); });
+  modeDecodeBtn.addEventListener('click', function () { setMode('decode'); });
+  swapBtn.addEventListener('click', swapAll);
+  clearBtn.addEventListener('click', clearAll);
+  input.addEventListener('input', convert);
+
+  convert();
+})();
+</script>
+</body>
+</html>

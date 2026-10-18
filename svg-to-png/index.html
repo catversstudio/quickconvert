@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVG to PNG Converter · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Convert SVG code or .svg files to crisp PNG images at any width. Transparency preserved, instant browser rendering. Free, private, no uploads.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16v16H4zM9 9c3 0 3 6 6 6'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:title" content="SVG to PNG Converter · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Convert SVG code or .svg files to crisp PNG images at any width. Transparency preserved, instant browser rendering. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/svg-to-png/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/svg-to-png/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.dropzone{
+  border:1.5px dashed rgba(124,58,237,.35);border-radius:20px;
+  background:rgba(255,255,255,.45);
+  padding:clamp(26px,5vw,40px) 20px;text-align:center;cursor:pointer;
+  transition:border-color .15s,background .15s,box-shadow .15s;
+}
+.dropzone:hover,.dropzone.drag{background:rgba(255,255,255,.75);border-color:var(--vio);
+  box-shadow:0 0 0 4px rgba(124,58,237,.10)}
+.dropzone .ico{width:52px;height:52px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio)}
+.dropzone .ico svg{width:26px;height:26px}
+.dropzone .dz-t{font-weight:700;font-size:1.02rem}
+.dropzone .dz-s{font-size:.85rem;color:var(--mut);margin-top:6px}
+.dropzone .dz-file{display:none;margin-top:12px;font-size:.88rem;font-weight:600;color:#4C1D95;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;padding:8px 18px}
+.dropzone.has-file .dz-file{display:inline-block}
+.check-row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;align-items:center}
+.check-lab{font-size:.85rem;font-weight:600;color:var(--mut)}
+.check-pills{display:flex;gap:8px;flex-wrap:wrap}
+.check-pill{
+  font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
+  min-height:44px;padding:10px 20px;border-radius:999px;
+  border:1.5px solid rgba(124,58,237,.22);background:rgba(255,255,255,.65);color:var(--ink);
+  transition:all .15s;display:inline-flex;align-items:center;gap:8px;
+}
+.check-pill .tick{width:18px;height:18px;border-radius:6px;border:1.5px solid rgba(124,58,237,.4);
+  display:grid;place-items:center;color:transparent;font-size:.75rem;font-weight:800}
+.check-pill.on{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border-color:transparent;
+  box-shadow:0 6px 18px rgba(124,58,237,.35)}
+.check-pill.on .tick{background:rgba(255,255,255,.25);border-color:#fff;color:#fff}
+.btn-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.btn-g:disabled{opacity:.55;cursor:not-allowed}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.progress{display:none;margin-top:16px;font-size:.88rem;color:var(--mut);font-weight:500}
+.progress.show{display:block}
+.progress .bar{height:10px;border-radius:999px;background:rgba(124,58,237,.12);overflow:hidden;margin-top:8px}
+.progress .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--vio),var(--cyn));
+  border-radius:999px;transition:width .2s}
+.error{
+  display:none;margin-top:16px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.preview-wrap{margin:0 0 20px}
+.preview-card{padding:16px;text-align:center}
+canvas.prev,img.prev{
+  max-width:100%;border-radius:14px;border:1px solid var(--line);
+  box-shadow:0 4px 14px rgba(31,41,55,.08);background:#fff;
+}
+img.prev{display:none;margin:0 auto;max-height:320px}
+img.prev.show{display:block}
+canvas.prev{display:none;margin:0 auto;max-height:420px;width:auto}
+canvas.prev.show{display:block}
+.out-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.out-title{font-weight:700;font-size:1.02rem}
+.dl-btn{
+  font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;
+  padding:8px 20px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);
+  transition:background .15s,transform .15s;
+}
+.dl-btn:hover{background:#fff}
+.dl-btn:active{transform:scale(.96)}
+.dl-btn.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+.slider-row{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
+.slider-row label{font-size:.85rem;font-weight:600;color:var(--mut);min-width:150px}
+.slider-row output{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--vio);min-width:64px}
+input[type=range]{flex:1;min-width:180px;min-height:44px;accent-color:var(--vio)}
+input[type=text],input[type=number],textarea.ta{
+  width:100%;font-family:inherit;font-size:.95rem;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);
+  border-radius:16px;padding:12px 16px;outline:none;min-height:44px;
+  transition:border-color .15s,box-shadow .15s;
+}
+input[type=text]:focus,input[type=number]:focus,textarea.ta:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+textarea.ta{min-height:140px;resize:vertical;font-family:var(--mono);font-size:.82rem;line-height:1.6}
+.field{margin-top:16px}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+
+
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "SVG to PNG Converter — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/svg-to-png/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="SVG input and export width">
+
+    <span class="lab" for="svgInput">SVG code</span>
+    <textarea class="ta" id="svgInput" placeholder="Paste your SVG code here, starting with &lt;svg …&gt;" aria-label="SVG code to convert"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-g" id="chooseBtn" type="button">Upload .svg file</button>
+      <input type="file" id="svgFile" accept=".svg,image/svg+xml" hidden>
+    </div>
+    <div class="field">
+      <label class="lab" for="widthInput">Output width (px) — height scales automatically</label>
+      <input type="number" id="widthInput" value="1024" min="16" max="4096" step="1" aria-label="Output width in pixels">
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-p" id="convertBtn" type="button">Convert to PNG</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="meta"><span class="pill" id="svgHint">0 characters</span><span>Transparent backgrounds are preserved.</span></div>
+    <div class="progress" id="progressBox"><span id="progressText">Working…</span><div class="bar"><i id="progressBar"></i></div></div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>SVG to PNG Converter <span class="plain">— Free Online Tool</span></h1>
+    <p>Paste SVG code or drop an .svg file and get a sharp PNG at any width — transparency kept, no quality loss, no watermark.</p>
+  </div>
+
+
+  <section class="card preview-wrap" id="outCard" style="display:none" aria-label="PNG result">
+    <div class="out-head">
+      <div class="out-title">PNG preview</div>
+      <button class="dl-btn" id="dlBtn" type="button">Download PNG</button>
+    </div>
+    <img class="prev" id="previewImg" alt="Converted PNG preview">
+    <div class="meta"><span class="pill" id="outInfo">—</span></div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>Transparency preserved</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>Any width up to 4096 px</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>100% private</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Paste</b> your SVG code or upload an .svg file into the box above.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Set</b> the output width — height follows the aspect ratio automatically.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Download</b> a crisp PNG with the transparent background intact.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Why did I get an "invalid SVG" error?</summary>
+      <p>The code is checked with a real XML parser. Common causes: unclosed tags, mismatched quotes, pasting HTML instead of SVG, or an SVG with no width/height and no viewBox. Fix the markup and try again.</p>
+    </details>
+    <details>
+      <summary>Will transparency be kept?</summary>
+      <p>Yes. The SVG is rasterized onto a transparent canvas, so transparent regions stay transparent in the PNG.</p>
+    </details>
+    <details>
+      <summary>Can SVGs with external images be converted?</summary>
+      <p>No — for security reasons browsers block external references when rasterizing SVG. Inline all images as data URIs first.</p>
+    </details>
+  </section>
+
+  <p class="note">XML validation · any width 16–4096 px · 100% local.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/image-to-png/">Image to PNG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/image-resizer/">Image Resizer</a>
+  </nav>
+</footer>
+
+<script>(function scriptSvgToPng() {
+  var ta = document.getElementById('svgInput');
+  var fileInput = document.getElementById('svgFile');
+  var chooseBtn = document.getElementById('chooseBtn');
+  var widthInput = document.getElementById('widthInput');
+  var convertBtn = document.getElementById('convertBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var errorBox = document.getElementById('errorBox');
+  var progressBox = document.getElementById('progressBox');
+  var progressText = document.getElementById('progressText');
+  var progressBar = document.getElementById('progressBar');
+  var outCard = document.getElementById('outCard');
+  var preview = document.getElementById('previewImg');
+  var outInfo = document.getElementById('outInfo');
+  var dlBtn = document.getElementById('dlBtn');
+  var svgHint = document.getElementById('svgHint');
+
+  var busy = false;
+  var pngBlob = null;
+  var pngUrl = null;
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function hideError() { errorBox.classList.remove('show'); errorBox.textContent = ''; }
+  function setProgress(f, t) {
+    progressBox.classList.add('show'); progressText.textContent = t;
+    progressBar.style.width = Math.round(f * 100) + '%';
+  }
+  function hideProgress() { progressBox.classList.remove('show'); progressBar.style.width = '0'; }
+
+  chooseBtn.addEventListener('click', function () { fileInput.click(); });
+  fileInput.addEventListener('change', function () {
+    var f = fileInput.files && fileInput.files[0];
+    if (!f) return;
+    hideError();
+    if (!/\.svg$/i.test(f.name) && f.type !== 'image/svg+xml') {
+      showError('That does not look like an SVG file (got "' + f.name + '").');
+      return;
+    }
+    var fr = new FileReader();
+    fr.onload = function () {
+      ta.value = String(fr.result);
+      svgHint.textContent = 'Loaded from ' + f.name + ' · ' + ta.value.length + ' characters';
+      hideError();
+    };
+    fr.onerror = function () { showError('Could not read the SVG file.'); };
+    fr.readAsText(f);
+  });
+
+  function normalizeSvg(text) {
+    var doc;
+    try {
+      doc = new DOMParser().parseFromString(text, 'image/svg+xml');
+    } catch (e) {
+      throw new Error('This does not look like valid SVG code. Make sure it starts with <svg …> and is well-formed XML.');
+    }
+    var err = doc.getElementsByTagName('parsererror');
+    if (err && err.length) throw new Error('This SVG code has a syntax error and cannot be rendered. Check for unclosed tags or bad quotes.');
+    var svg = doc.documentElement;
+    if (!svg || svg.tagName.toLowerCase() !== 'svg') {
+      throw new Error('No <svg> root element found. Paste complete SVG code starting with <svg …>.');
+    }
+    var w = svg.getAttribute('width'), h = svg.getAttribute('height');
+    var vb = svg.getAttribute('viewBox');
+    if ((!w || !h) && vb) {
+      var parts = vb.trim().split(/[\s,]+/).map(Number);
+      if (parts.length === 4 && parts[2] > 0 && parts[3] > 0) {
+        svg.setAttribute('width', parts[2]);
+        svg.setAttribute('height', parts[3]);
+      }
+    }
+    if (!svg.getAttribute('width') || !svg.getAttribute('height')) {
+      throw new Error('This SVG has no width/height and no usable viewBox, so it cannot be sized. Add width and height attributes to the <svg> tag.');
+    }
+    if (!svg.getAttribute('xmlns')) svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    return new XMLSerializer().serializeToString(doc);
+  }
+
+  function renderSvg(svgText, outW) {
+    return new Promise(function (resolve, reject) {
+      var blob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var img = new Image();
+      img.onload = function () {
+        URL.revokeObjectURL(url);
+        var natW = img.naturalWidth, natH = img.naturalHeight;
+        if (!natW || !natH) { reject(new Error('The SVG rendered at zero size — it may rely on external resources.')); return; }
+        var outH = Math.max(1, Math.round(outW * natH / natW));
+        var c = document.createElement('canvas');
+        c.width = outW; c.height = outH;
+        var ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, outW, outH);
+        resolve({ canvas: c, w: outW, h: outH });
+      };
+      img.onerror = function () {
+        URL.revokeObjectURL(url);
+        reject(new Error('The SVG could not be rendered. It may reference external files or use unsupported features.'));
+      };
+      img.src = url;
+    });
+  }
+
+  function canvasToBlob(canvas) {
+    return new Promise(function (resolve, reject) {
+      canvas.toBlob(function (blob) {
+        if (blob) resolve(blob); else reject(new Error('PNG encoding failed'));
+      }, 'image/png');
+    });
+  }
+
+  function convert() {
+    if (busy) return;
+    hideError();
+    var text = ta.value.trim();
+    if (!text) { showError('Paste your SVG code first, or upload an .svg file.'); return; }
+    if (text.indexOf('<svg') === -1) { showError('No <svg> tag found in the input. Paste complete SVG code.'); return; }
+    var outW = parseInt(widthInput.value, 10);
+    if (!outW || outW < 16 || outW > 4096) { showError('Output width must be between 16 and 4096 px.'); return; }
+    if (pngUrl) { URL.revokeObjectURL(pngUrl); pngUrl = null; }
+    outCard.style.display = 'none';
+    busy = true;
+    convertBtn.disabled = true;
+    convertBtn.textContent = 'Working…';
+    setProgress(0.15, 'Validating SVG…');
+    var svgText;
+    try {
+      svgText = normalizeSvg(text);
+    } catch (e) {
+      busy = false; convertBtn.disabled = false; convertBtn.textContent = 'Convert to PNG';
+      hideProgress(); showError(e.message); return;
+    }
+    setProgress(0.4, 'Rendering ' + outW + ' px wide…');
+    renderSvg(svgText, outW)
+      .then(function (r) { return canvasToBlob(r.canvas).then(function (blob) { return { blob: blob, w: r.w, h: r.h }; }); })
+      .then(function (r) {
+        pngBlob = r.blob;
+        pngUrl = URL.createObjectURL(r.blob);
+        preview.src = pngUrl;
+        preview.classList.add('show');
+        preview.alt = 'PNG preview ' + r.w + ' by ' + r.h + ' px';
+        outInfo.textContent = r.w + ' × ' + r.h + ' px · ' + Math.round(r.blob.size / 1024) + ' KB · transparent background kept';
+        outCard.style.display = '';
+        setProgress(1, 'Done.');
+        setTimeout(hideProgress, 2000);
+      })
+      .catch(function (e) {
+        hideProgress();
+        showError((e && e.message) ? e.message : String(e));
+      })
+      .then(function () {
+        busy = false;
+        convertBtn.disabled = false;
+        convertBtn.textContent = 'Convert to PNG';
+      });
+  }
+
+  dlBtn.addEventListener('click', function () {
+    if (!pngUrl) return;
+    var a = document.createElement('a');
+    a.href = pngUrl; a.download = 'svg-export.png';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    dlBtn.classList.add('ok'); dlBtn.textContent = 'Saved ✓';
+    setTimeout(function () { dlBtn.classList.remove('ok'); dlBtn.textContent = 'Download PNG'; }, 1600);
+  });
+
+  clearBtn.addEventListener('click', function () {
+    ta.value = ''; fileInput.value = '';
+    svgHint.textContent = '0 characters';
+    hideError(); hideProgress();
+    if (pngUrl) { URL.revokeObjectURL(pngUrl); pngUrl = null; }
+    preview.classList.remove('show'); preview.removeAttribute('src');
+    outCard.style.display = 'none';
+  });
+
+  ta.addEventListener('input', function () {
+    svgHint.textContent = ta.value.length + ' characters';
+  });
+
+  convertBtn.addEventListener('click', convert);
+})()</script>
+</body>
+</html>

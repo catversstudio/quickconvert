@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMI Calculator · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Calculate your loan EMI instantly — monthly payment, total interest and total payable for any loan amount, interest rate and tenure. Free, private, no sign-up.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="EMI Calculator · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Calculate your loan EMI instantly — monthly payment, total interest and total payable for any loan amount, interest rate and tenure. Free, private, no sign-up.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/emi-calculator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/emi-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.field{margin-bottom:20px}
+.field:last-child{margin-bottom:0}
+.frow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:4px}
+.frow .fname{font-weight:600;font-size:.95rem}
+.numwrap{display:flex;align-items:center;background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:14px;padding:0 6px 0 14px;
+  transition:border-color .15s,box-shadow .15s}
+.numwrap:focus-within{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.numwrap .cur{color:var(--mut);font-weight:600;font-size:.95rem}
+.numwrap input{
+  border:none;background:transparent;font-family:inherit;font-size:1rem;font-weight:600;
+  color:var(--ink);padding:12px 10px;min-height:44px;width:132px;text-align:right;outline:none;
+}
+.numwrap .unit{color:var(--mut);font-weight:600;font-size:.85rem;padding-right:8px}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer;
+}
+input[type=range]::-webkit-slider-runnable-track{
+  height:8px;border-radius:999px;
+  background:linear-gradient(90deg,var(--vio) var(--fill,50%),var(--cyn) var(--fill,50%),#E7E2F6 var(--fill,50%));
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:28px;height:28px;border-radius:50%;
+  background:#fff;border:3px solid var(--vio);
+  box-shadow:0 4px 12px rgba(124,58,237,.35);margin-top:-10px;
+}
+input[type=range]::-moz-range-track{height:8px;border-radius:999px;background:#E7E2F6}
+input[type=range]::-moz-range-progress{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--vio),var(--cyn))}
+input[type=range]::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--vio);
+  box-shadow:0 4px 12px rgba(124,58,237,.35);
+}
+.caps{display:flex;justify-content:space-between;font-size:.72rem;color:var(--mut);font-weight:500;margin-top:-6px;padding:0 2px}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+/* results */
+.res-card{margin-bottom:22px}
+.emi-big{text-align:center;padding:6px 0 2px}
+.emi-big .k{font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.1em;text-transform:uppercase}
+.emi-big .v{
+  font-size:clamp(2.4rem,8vw,3.2rem);font-weight:700;letter-spacing:-1px;line-height:1.15;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.emi-big .sub{font-size:.85rem;color:var(--mut);margin-top:2px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.tile{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center}
+.tile .k{font-size:.72rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.tile .v{font-size:1.05rem;font-weight:700;word-break:break-word}
+.tile .v.iv{color:#DB2777}
+.split{margin-top:18px}
+.bar{height:14px;border-radius:999px;background:#EDE9FE;overflow:hidden;display:flex}
+.bar span{display:block;height:100%;transition:width .25s ease}
+.bar .bp{background:linear-gradient(90deg,var(--vio),#9333EA)}
+.bar .bi{background:linear-gradient(90deg,var(--pnk),var(--amb))}
+.legend{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:.82rem;color:var(--mut)}
+.legend .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.legend .dp{background:linear-gradient(135deg,var(--vio),#9333EA)}
+.legend .di{background:linear-gradient(135deg,var(--pnk),var(--amb))}
+.meta{
+  margin-top:16px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+@media(max-width:560px){
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr}
+  .legend{flex-direction:column}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "EMI Calculator — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/emi-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Loan details">
+    <span class="lab">Loan details</span>
+
+    <div class="field">
+      <div class="frow">
+        <span class="fname" id="principalLabel">Loan amount</span>
+        <div class="numwrap"><span class="cur">₹</span><input type="number" id="principalNum" min="10000" max="10000000" step="10000" value="1000000" aria-labelledby="principalLabel"></div>
+      </div>
+      <input type="range" id="principalRange" min="10000" max="10000000" step="10000" value="1000000" aria-label="Loan amount slider">
+      <div class="caps"><span>₹10K</span><span>₹1 Cr</span></div>
+    </div>
+
+    <div class="field">
+      <div class="frow">
+        <span class="fname" id="rateLabel">Interest rate</span>
+        <div class="numwrap"><input type="number" id="rateNum" min="0.1" max="30" step="0.05" value="8.5" aria-labelledby="rateLabel"><span class="unit">% p.a.</span></div>
+      </div>
+      <input type="range" id="rateRange" min="0.1" max="30" step="0.05" value="8.5" aria-label="Interest rate slider">
+      <div class="caps"><span>0.1%</span><span>30%</span></div>
+    </div>
+
+    <div class="field">
+      <div class="frow">
+        <span class="fname" id="yearsLabel">Loan tenure</span>
+        <div class="numwrap"><input type="number" id="yearsNum" min="1" max="30" step="1" value="20" aria-labelledby="yearsLabel"><span class="unit">years</span></div>
+      </div>
+      <input type="range" id="yearsRange" min="1" max="30" step="1" value="20" aria-label="Loan tenure slider">
+      <div class="caps"><span>1 yr</span><span>30 yrs</span></div>
+    </div>
+
+    <div class="meta">
+      <span class="pill" id="calcMeta"></span>
+      <span>Calculated instantly in your browser — nothing is uploaded.</span>
+    </div>
+  </section>
+
+  <section class="card res-card" aria-label="EMI results">
+    <div class="emi-big">
+      <div class="k">Monthly EMI</div>
+      <div class="v" id="emiOut">₹0</div>
+      <div class="sub">per month, for the full tenure</div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div class="k">Principal</div><div class="v" id="tilePrincipal">₹0</div></div>
+      <div class="tile"><div class="k">Total interest</div><div class="v iv" id="tileInterest">₹0</div></div>
+      <div class="tile"><div class="k">Total payable</div><div class="v" id="tileTotal">₹0</div></div>
+    </div>
+    <div class="split">
+      <div class="bar" role="img" aria-label="Principal versus interest split">
+        <span class="bp" id="barPrincipal" style="width:100%"></span><span class="bi" id="barInterest" style="width:0%"></span>
+      </div>
+      <div class="legend">
+        <span><i class="dot dp" aria-hidden="true"></i><span id="legendPrincipal"></span></span>
+        <span><i class="dot di" aria-hidden="true"></i><span id="legendInterest"></span></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="hero">
+    <h1>EMI Calculator <span class="plain">— Free Online Tool</span></h1>
+    <p>Plan your home, car or personal loan in seconds. See your monthly EMI, total interest and full repayment cost — instantly, right in your browser.</p>
+  </div>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Live results as you type</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>100% private — stays in your browser</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Enter your loan details</b> — amount, interest rate and tenure, using the sliders or by typing exact numbers.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Watch results update live</b> — your EMI, total interest and total payable recalculate instantly as you adjust.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Compare loan options</b> — the principal-vs-interest bar shows exactly where your money goes.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>How is the EMI calculated?</summary>
+      <p>EMI = P × r × (1+r)<sup>n</sup> / ((1+r)<sup>n</sup> − 1), where P is the loan amount, r is the monthly interest rate (annual rate ÷ 12 ÷ 100) and n is the number of monthly instalments. It uses the standard reducing-balance method, so interest is charged only on the outstanding principal.</p>
+    </details>
+    <details>
+      <summary>Does this assume a fixed interest rate?</summary>
+      <p>Yes. The calculator assumes a fixed rate for the entire tenure with monthly compounding. Floating-rate loans may differ from the estimate if the lender changes the rate later.</p>
+    </details>
+    <details>
+      <summary>Should I choose a shorter or longer tenure?</summary>
+      <p>A shorter tenure means a higher monthly EMI but much less total interest paid; a longer tenure lowers the EMI but increases the total interest. Use the split bar above to see the trade-off for your own numbers before deciding.</p>
+    </details>
+  </section>
+
+  <p class="note">Reducing-balance method · Monthly compounding · 100% local — your numbers never leave this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  function $(id) { return document.getElementById(id); }
+
+  var fields = [
+    { num: $('principalNum'), range: $('principalRange'), min: 10000, max: 10000000, def: 1000000 },
+    { num: $('rateNum'),      range: $('rateRange'),      min: 0.1,   max: 30,        def: 8.5 },
+    { num: $('yearsNum'),     range: $('yearsRange'),    min: 1,     max: 30,        def: 20 }
+  ];
+
+  var emiOut       = $('emiOut');
+  var tilePrincipal = $('tilePrincipal');
+  var tileInterest  = $('tileInterest');
+  var tileTotal     = $('tileTotal');
+  var barPrincipal  = $('barPrincipal');
+  var barInterest   = $('barInterest');
+  var legendPrincipal = $('legendPrincipal');
+  var legendInterest  = $('legendInterest');
+  var calcMeta      = $('calcMeta');
+
+  // Indian numbering: ₹10,00,000
+  function fmt(n) {
+    return '₹' + Math.round(n).toLocaleString('en-IN');
+  }
+
+  function clamp(v, min, max) {
+    if (isNaN(v)) v = min;
+    return Math.min(max, Math.max(min, v));
+  }
+
+  function setFill(range) {
+    var pct = ((range.value - range.min) / (range.max - range.min)) * 100;
+    range.style.setProperty('--fill', pct + '%');
+  }
+
+  function readField(f) {
+    return clamp(parseFloat(f.num.value), f.min, f.max);
+  }
+
+  function calc() {
+    var P = readField(fields[0]);
+    var annual = readField(fields[1]);
+    var years = readField(fields[2]);
+
+    var n = Math.round(years * 12);
+    var r = annual / 1200; // monthly rate
+    var emi, total, interest;
+
+    if (n <= 0 || P <= 0) {
+      emi = 0; total = 0; interest = 0;
+    } else if (r <= 0) {
+      emi = P / n; total = P; interest = 0; // zero-interest fallback
+    } else {
+      var f = Math.pow(1 + r, n);
+      emi = P * r * f / (f - 1); // standard EMI formula
+      total = emi * n;
+      interest = total - P;
+    }
+
+    emiOut.textContent = fmt(emi);
+    tilePrincipal.textContent = fmt(P);
+    tileInterest.textContent = fmt(interest);
+    tileTotal.textContent = fmt(total);
+
+    var pPct = total > 0 ? (P / total) * 100 : 100;
+    var iPct = 100 - pPct;
+    barPrincipal.style.width = pPct + '%';
+    barInterest.style.width = iPct + '%';
+    legendPrincipal.textContent = 'Principal ' + fmt(P) + ' (' + pPct.toFixed(1) + '%)';
+    legendInterest.textContent = 'Interest ' + fmt(interest) + ' (' + iPct.toFixed(1) + '%)';
+
+    calcMeta.textContent = fmt(P) + ' · ' + annual + '% p.a. · ' + years + ' yr (' + n + ' months)';
+  }
+
+  fields.forEach(function (f) {
+    f.range.addEventListener('input', function () {
+      f.num.value = f.range.value;
+      setFill(f.range);
+      calc();
+    });
+    f.num.addEventListener('input', function () {
+      var raw = parseFloat(f.num.value);
+      f.range.value = isNaN(raw) ? f.min : clamp(raw, f.min, f.max);
+      setFill(f.range);
+      calc();
+    });
+    // Write the clamped value back so the box never shows an out-of-range number
+    f.num.addEventListener('blur', function () {
+      f.num.value = readField(f);
+      setFill(f.range);
+      calc();
+    });
+    setFill(f.range);
+  });
+
+  calc();
+})();
+</script>
+</body>
+</html>

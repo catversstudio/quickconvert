@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Compressor · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Compress JPG, PNG and WebP images to a target file size or quality — 100% free, private, right in your browser.">
+<meta name="theme-color" content="#7C3AED">
+<meta property="og:title" content="Image Compressor — Free Online Tool | QuickConvert">
+<meta property="og:description" content="Compress JPG, PNG and WebP images to a target file size or quality — 100% free, private, right in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/image-compressor/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/image-compressor/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23g)'/%3E%3Cpath d='M37 8 19 37h11l-3 19 18-29H34z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1020; --ink:#F1F5F9; --mut:#94A3B8;
+    --vio:#8B5CF6; --cyn:#22D3EE;
+    --card:rgba(255,255,255,.045); --line:rgba(255,255,255,.10);
+    --grn:#10B981; --amb:#F59E0B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Poppins',system-ui,sans-serif;color:var(--ink);min-height:100vh;
+    background:
+      radial-gradient(1000px 520px at 12% -6%, #7c3aed38, transparent 60%),
+      radial-gradient(900px 520px at 92% 8%, #06b6d42e, transparent 60%),
+      radial-gradient(700px 600px at 50% 115%, #8b5cf61f, transparent 60%),
+      linear-gradient(180deg,#0B1020 0%,#0F172A 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:24px 18px 46px}
+  .sitehead{position:sticky;top:0;z-index:60;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;margin-bottom:16px;background:rgba(11,16,32,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px}
+  .logo small{display:block;font-size:10px;font-weight:600;color:var(--mut);letter-spacing:1.5px;text-transform:uppercase}
+  .mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#fff;font-size:20px;
+    background:linear-gradient(135deg,var(--vio),var(--cyn));box-shadow:0 8px 22px #8b5cf655}
+  .hright{display:flex;align-items:center;gap:10px}
+  .back{font-size:13px;font-weight:600;color:var(--mut);text-decoration:none;background:var(--card);
+    border:1px solid var(--line);padding:8px 15px;border-radius:999px;transition:.2s;backdrop-filter:blur(10px)}
+  .back:hover{color:#fff;border-color:#ffffff2e}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:8px 15px;font-size:12.5px;font-weight:600;color:var(--mut);backdrop-filter:blur(10px)}
+  .pill .dot{width:9px;height:9px;border-radius:50%;background:#10B981;box-shadow:0 0 0 4px #10b98122;animation:blink 2s infinite}
+  @keyframes blink{50%{opacity:.5}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;
+    backdrop-filter:blur(18px);box-shadow:0 24px 60px #00000045;margin-bottom:20px}
+  .card h3.ct{font-size:17px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .card h3.ct::before{content:'';width:26px;height:4px;border-radius:99px;background:linear-gradient(90deg,var(--vio),var(--cyn))}
+
+  .drop{border:2px dashed rgba(255,255,255,.20);border-radius:20px;padding:44px 20px;text-align:center;
+    cursor:pointer;transition:.25s;background:rgba(255,255,255,.02)}
+  .drop:hover,.drop.over{border-color:var(--vio);background:#8b5cf612;box-shadow:0 0 0 4px #8b5cf622, 0 18px 44px #8b5cf62e}
+  .drop .big{font-size:46px;margin-bottom:10px;filter:drop-shadow(0 8px 18px #8b5cf666)}
+  .drop h2{font-size:21px;font-weight:700;margin-bottom:6px}
+  .drop p{color:var(--mut);font-size:14px;margin-bottom:18px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:inherit;
+    font-weight:700;font-size:14.5px;padding:13px 26px;border-radius:999px;transition:.2s;text-decoration:none}
+  .btn-p{background:linear-gradient(135deg,var(--vio),#06B6D4);color:#fff;box-shadow:0 10px 26px #8b5cf655}
+  .btn-p:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 32px #8b5cf677}
+  .btn-g{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink)}
+  .btn-g:hover:not(:disabled){background:rgba(255,255,255,.11)}
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
+  .btn.big{font-size:16px;padding:15px 40px}
+
+  .workhead{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .workhead h3{font-size:17px;font-weight:700}
+  .count{background:linear-gradient(135deg,var(--vio),var(--cyn));color:#fff;font-size:12px;font-weight:800;
+    border-radius:999px;padding:4px 13px}
+  .selbtns{margin-left:auto;display:flex;gap:8px}
+  .mini{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink);font-family:inherit;
+    font-size:12.5px;font-weight:600;padding:8px 15px;border-radius:999px;cursor:pointer;transition:.2s}
+  .mini:hover{background:rgba(255,255,255,.12)}
+
+  .worklist{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+  .wcard{position:relative;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;
+    padding:12px;display:flex;flex-direction:column;gap:10px;transition:.2s}
+  .wcard:hover{border-color:#ffffff2c;transform:translateY(-2px)}
+  .wcard .thumb{width:100%;height:120px;object-fit:cover;border-radius:12px;background:#ffffff10;display:block}
+  .selbox{position:absolute;top:18px;left:18px;z-index:2;background:#0b102ecc;border:1px solid var(--line);
+    border-radius:10px;padding:5px 6px;cursor:pointer;box-shadow:0 4px 12px #00000066;backdrop-filter:blur(6px)}
+  .selbox input{width:18px;height:18px;accent-color:var(--vio);cursor:pointer;display:block;margin:0}
+  .winfo{min-height:64px}
+  .fname{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fmeta{font-size:12px;color:var(--mut);margin-top:4px;line-height:1.5}
+  .savebadge{display:inline-block;font-size:11px;font-weight:800;background:var(--grn);color:#fff;border-radius:999px;padding:3px 10px;margin-top:6px}
+  .savebadge.big{background:#451a03;color:#FBBF24}
+  .dlbtn{align-self:stretch;background:linear-gradient(135deg,var(--vio),#06B6D4);border:1px solid transparent;color:#fff;
+    font-family:inherit;font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;transition:.2s;
+    min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  .dlbtn:hover{filter:brightness(1.12)}
+
+  /* ---------- REDESIGN v1 ---------- */
+  :focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+  .logo .mark{width:44px;height:44px;border-radius:14px}
+  .btn{min-height:44px}
+  .btn svg{width:18px;height:18px;flex:none}
+  .mini{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  .pillopt{min-height:44px}
+  .pagetitle{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.02em;margin:6px 0 18px}
+  .pagetitle .grad{background:linear-gradient(135deg,var(--vio),var(--cyn));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .truststrip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 20px}
+  .truststrip>div{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 10px;font-size:13px;font-weight:600;backdrop-filter:blur(14px);text-align:center}
+  .truststrip svg{width:20px;height:20px;color:var(--cyn);flex:none}
+  .howstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+  .how{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;backdrop-filter:blur(14px)}
+  .how .n{flex:none;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--vio),var(--cyn));color:#fff;font-weight:800;font-size:14px;display:grid;place-items:center}
+  .how b{font-size:14px;display:block;margin-bottom:2px}
+  .how span{font-size:12.5px;color:var(--mut);line-height:1.5}
+  .faq{margin:6px 0 8px}
+  .faq h2{font-size:20px;font-weight:800;margin:0 2px 14px}
+  .faq details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;backdrop-filter:blur(14px)}
+  .faq summary{cursor:pointer;font-weight:700;font-size:14.5px;padding:15px 18px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-size:20px;color:var(--cyn);font-weight:800;flex:none;line-height:1}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{padding:0 18px 16px;font-size:14px;color:var(--mut);line-height:1.65}
+  .sitefoot{text-align:center;color:var(--mut);font-size:13.5px;margin-top:26px;padding:20px 0 6px;border-top:1px solid var(--line)}
+  .sitefoot a{color:var(--cyn);font-weight:700;text-decoration:none}
+  .sitefoot a:hover{text-decoration:underline}
+  .sitefoot .fine{font-size:12.5px;margin-top:6px}
+  .sitefoot .footnav{margin-top:10px;font-size:12.5px}
+  .sitefoot .footnav span{margin:0 8px;opacity:.5}
+  .wait{font-size:12px;color:var(--mut);font-style:italic}
+
+  .setrow{margin-bottom:20px}
+  .setrow:last-of-type{margin-bottom:6px}
+  .lbl{display:block;font-size:13px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+  .lbl .qval{color:#fff;background:linear-gradient(135deg,var(--vio),var(--cyn));border-radius:8px;padding:2px 10px;font-size:13px;margin-left:6px}
+  .hint{font-size:12.5px;color:var(--mut);margin-top:8px;line-height:1.6}
+  input[type=range]{width:100%;accent-color:var(--vio);height:28px;cursor:pointer}
+  input[type=number]{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink);
+    font-family:inherit;font-size:15px;font-weight:600;padding:13px 16px;border-radius:14px;outline:none;transition:.2s}
+  input[type=number]:focus{border-color:var(--vio);box-shadow:0 0 0 4px #8b5cf633}
+  .pills{display:flex;gap:10px;flex-wrap:wrap}
+  .pillopt{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--mut);font-family:inherit;
+    font-size:13.5px;font-weight:600;padding:11px 20px;border-radius:999px;cursor:pointer;transition:.2s}
+  .pillopt small{display:block;font-size:10.5px;font-weight:500;opacity:.75}
+  .pillopt.on{background:linear-gradient(135deg,var(--vio),#06B6D4);color:#fff;border-color:transparent;
+    box-shadow:0 8px 20px #8b5cf644}
+
+  .actionrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;align-items:center}
+  .progress{display:none;height:10px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;margin-top:18px}
+  .progress .fill{height:100%;width:0;background:linear-gradient(90deg,var(--vio),var(--cyn));border-radius:99px;transition:width .3s}
+  .ptext{display:none;font-size:13px;color:var(--mut);margin-top:10px;text-align:center}
+  .msg{font-size:13.5px;border-radius:14px;padding:12px 16px;margin-top:16px;line-height:1.6;display:none}
+  .msg.ok{display:block;background:#10b98118;border:1px solid #10b98144;color:#A7F3D0}
+  .msg.warn{display:block;background:#f59e0b14;border:1px solid #f59e0b3d;color:#FDE68A}
+  .msg.err{display:block;background:#ef444414;border:1px solid #ef44443d;color:#FECACA}
+  .hidden{display:none!important}
+  footer{text-align:center;color:var(--mut);font-size:13.5px;padding:16px 0 4px}
+  footer a{color:var(--cyn);font-weight:700;text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  @media(max-width:640px){
+    .card{padding:20px 16px}
+    .worklist{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+    .actionrow .btn{flex:1;justify-content:center}
+    .truststrip,.howstrip{grid-template-columns:1fr}
+  }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Image Compressor","url":"https://quickconvert.freedev.app/image-compressor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":0,"priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="sitehead">
+    <div class="logo"><span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><span>QuickConvert<small>Free Online Tools</small></span></div>
+    <div class="hright">
+      <a class="back" href="/">← All tools</a>
+    </div>
+  </header>
+
+  <h1 class="pagetitle">Image Compressor <span class="grad">— Free Online Tool</span></h1>
+
+  <section class="card" id="uploadCard">
+    <div class="drop" id="dropzone" tabindex="0" role="button" aria-label="Choose image files">
+      <div class="big"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+      <h2>Drop your images here</h2>
+      <p>JPG, PNG, WebP &amp; more — or click to browse</p>
+      <button class="btn btn-p" type="button" id="browseBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Choose images</button>
+    </div>
+    <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
+    <div class="msg" id="uploadMsg"></div>
+  </section>
+
+  <section class="card hidden" id="workPanel">
+    <div class="workhead">
+      <h3>Your images</h3><span class="count" id="wcount">0</span>
+      <div class="selbtns">
+        <button class="mini" type="button" id="selAllBtn">Select all</button>
+        <button class="mini" type="button" id="selNoneBtn">Clear</button>
+      </div>
+    </div>
+    <div class="worklist" id="workList"></div>
+  </section>
+
+  <section class="card hidden" id="settingsCard">
+    <h3 class="ct">Compression settings</h3>
+    <div class="setrow">
+      <label class="lbl">Compression mode</label>
+      <div class="pills" id="modePills">
+        <button type="button" class="pillopt on" data-v="quality">By quality</button>
+        <button type="button" class="pillopt" data-v="size">Target file size</button>
+      </div>
+      <div class="hint">Target file size auto-adjusts quality to hit the exact KB you enter.</div>
+    </div>
+    <div class="setrow" id="qRow">
+      <label class="lbl" for="qRange">Quality <span class="qval" id="qVal">80</span></label>
+      <input type="range" id="qRange" min="10" max="95" value="80">
+      <div class="hint">Lower quality = smaller file. 75–85 is the sweet spot for photos.</div>
+    </div>
+    <div class="setrow hidden" id="sizeRow">
+      <label class="lbl" for="targetKB">Target size per image (KB)</label>
+      <input type="number" id="targetKB" min="10" value="200" placeholder="e.g. 100">
+      <div class="hint">Each image will be compressed to about this size. Uses JPG (or WebP) automatically.</div>
+    </div>
+    <div class="setrow">
+      <label class="lbl">Output format</label>
+      <div class="pills" id="fmtPills">
+        <button type="button" class="pillopt on" data-v="original">Original</button>
+        <button type="button" class="pillopt" data-v="jpg">JPG</button>
+        <button type="button" class="pillopt" data-v="webp">WebP</button>
+        <button type="button" class="pillopt" data-v="png">PNG</button>
+      </div>
+    </div>
+    <div class="setrow">
+      <label class="lbl" for="maxW">Max width (px) — optional</label>
+      <input type="number" id="maxW" min="1" placeholder="e.g. 1920">
+      <div class="hint">Leave empty to keep the original size. Aspect ratio is always preserved.</div>
+    </div>
+    <div class="actionrow">
+      <button class="btn btn-p big" type="button" id="goBtn">Compress</button>
+      <button class="btn btn-g" type="button" id="addBtn">+ Add more</button>
+      <button class="btn btn-p" type="button" id="zipBtn" disabled>Download Selected</button>
+    </div>
+    <div class="progress" id="progress"><div class="fill" id="pfill"></div></div>
+    <div class="ptext" id="ptext"></div>
+    <div class="msg" id="workMsg"></div>
+  </section>
+
+  <section class="truststrip" aria-label="Why trust QuickConvert">
+    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>100% private — files never leave your device</div>
+    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M17 8l5 5M22 8l-5 5"/></svg>No sign-up needed</div>
+    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Free forever</div>
+  </section>
+
+  <section class="howstrip" aria-label="How it works">
+    <div class="how"><span class="n">1</span><div><b>Add your images</b><span>Drag &amp; drop, or click to browse</span></div></div>
+    <div class="how"><span class="n">2</span><div><b>Pick settings</b><span>Choose quality, a target size, or a max width</span></div></div>
+    <div class="how"><span class="n">3</span><div><b>Download</b><span>Save images one by one, or all together as a ZIP</span></div></div>
+  </section>
+
+  <section class="faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Do my images get uploaded anywhere?</summary><p>No. Compression happens entirely in your browser — your images never leave your device, and nothing is stored.</p></details>
+    <details><summary>How does the target file size mode work?</summary><p>Enter a size in KB and the tool automatically adjusts the quality (shrinking dimensions if needed) until each image lands close to that size.</p></details>
+    <details><summary>Which formats are supported?</summary><p>JPG, PNG, WebP and more can be compressed, and you can output JPG, PNG or WebP — or keep each image's original format. Note that PNG output can sometimes be larger than a photo-style JPG.</p></details>
+  </section>
+
+  <footer class="sitefoot">
+    <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+    <p class="fine">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</p>
+    <nav class="footnav" aria-label="More tools"><a href="/">All tools</a><span aria-hidden="true">·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span aria-hidden="true">·</span><a href="/image-compressor/">Image Compressor</a><span aria-hidden="true">·</span><a href="/qr-code-generator/">QR Generator</a></nav>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+var $ = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function fmtBytes(b){
+  if(b < 1024) return b + ' B';
+  if(b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+  return (b/(1024*1024)).toFixed(2) + ' MB';
+}
+function downloadURL(url, name){
+  var a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function baseName(name){ var i = name.lastIndexOf('.'); return i > 0 ? name.slice(0, i) : name; }
+function extOf(name){ var i = name.lastIndexOf('.'); return i > 0 ? name.slice(i + 1) : ''; }
+
+var jszipPromise = null;
+function ensureJSZip(){
+  if(window.JSZip) return Promise.resolve();
+  if(!jszipPromise){
+    jszipPromise = new Promise(function(res, rej){
+      var s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+      s.onload = function(){ res(); };
+      s.onerror = function(){ rej(new Error('zip')); };
+      document.head.appendChild(s);
+    });
+  }
+  return jszipPromise;
+}
+
+var items = [];       // {file, url, w, h, img, out:null|{blob,url,name,size}, sel}
+var outFormat = 'original';
+var compMode = 'quality';
+
+var drop = $('dropzone'), input = $('fileInput');
+
+function showMsg(text, kind){
+  var m = $('uploadMsg');
+  m.textContent = text;
+  m.className = 'msg ' + kind;
+  clearTimeout(m._t);
+  m._t = setTimeout(function(){ m.className = 'msg'; }, 6000);
+}
+function showWorkMsg(text, kind){
+  var m = $('workMsg');
+  m.textContent = text;
+  m.className = 'msg ' + (kind || '');
+  clearTimeout(m._t);
+  m._t = setTimeout(function(){ m.className = 'msg'; }, 8000);
+}
+
+function openPicker(){ input.click(); }
+drop.addEventListener('click', function(e){ if(e.target.id !== 'browseBtn') openPicker(); });
+$('browseBtn').addEventListener('click', function(e){ e.stopPropagation(); openPicker(); });
+$('addBtn').addEventListener('click', openPicker);
+drop.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openPicker(); } });
+drop.addEventListener('dragover', function(e){ e.preventDefault(); drop.classList.add('over'); });
+drop.addEventListener('dragleave', function(){ drop.classList.remove('over'); });
+drop.addEventListener('drop', function(e){ e.preventDefault(); drop.classList.remove('over'); addFiles(e.dataTransfer.files); });
+input.addEventListener('change', function(){ addFiles(input.files); input.value = ''; });
+
+function isImageFile(f){
+  if(f.type && f.type.indexOf('image/') === 0) return true;
+  return /\.(jpe?g|png|gif|webp|bmp|svg|avif)$/i.test(f.name || '');
+}
+function loadImage(f){
+  return new Promise(function(res, rej){
+    var url = URL.createObjectURL(f);
+    var img = new Image();
+    img.onload = function(){ res({img:img, w:img.naturalWidth, h:img.naturalHeight, url:url}); };
+    img.onerror = function(){ URL.revokeObjectURL(url); rej(new Error('decode')); };
+    img.src = url;
+  });
+}
+
+function addFiles(list){
+  var skipped = [];
+  var jobs = [];
+  for(var i = 0; i < list.length; i++){
+    (function(f){
+      if(!isImageFile(f)){ skipped.push(f.name); return; }
+      jobs.push(loadImage(f).then(function(r){
+        items.push({file:f, url:r.url, w:r.w, h:r.h, img:r.img, out:null, sel:true});
+      }).catch(function(){ skipped.push(f.name); }));
+    })(list[i]);
+  }
+  Promise.all(jobs).then(function(){
+    if(skipped.length){
+      showMsg('Skipped ' + skipped.length + ' non-image file(s): ' + skipped.slice(0,3).map(esc).join(', '), 'warn');
+    }
+    renderWork();
+    if(items.length) $('workPanel').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
+
+// pills
+(function(){
+  var box = $('fmtPills');
+  var btns = box.querySelectorAll('.pillopt');
+  for(var i = 0; i < btns.length; i++){
+    btns[i].addEventListener('click', function(){
+      for(var j = 0; j < btns.length; j++) btns[j].classList.remove('on');
+      this.classList.add('on');
+      outFormat = this.getAttribute('data-v');
+      items.forEach(function(it){ it.out = null; });
+      renderWork();
+    });
+  }
+})();
+(function(){
+  var box = $('modePills');
+  var btns = box.querySelectorAll('.pillopt');
+  for(var i = 0; i < btns.length; i++){
+    btns[i].addEventListener('click', function(){
+      for(var j = 0; j < btns.length; j++) btns[j].classList.remove('on');
+      this.classList.add('on');
+      compMode = this.getAttribute('data-v');
+      $('qRow').classList.toggle('hidden', compMode !== 'quality');
+      $('sizeRow').classList.toggle('hidden', compMode !== 'size');
+      items.forEach(function(it){ it.out = null; });
+      renderWork();
+    });
+  }
+})();
+
+$('qRange').addEventListener('input', function(){
+  $('qVal').textContent = this.value;
+  items.forEach(function(it){ it.out = null; });
+  renderWork();
+});
+$('maxW').addEventListener('input', function(){
+  items.forEach(function(it){ it.out = null; });
+  renderWork();
+});
+$('targetKB').addEventListener('input', function(){
+  items.forEach(function(it){ it.out = null; });
+  renderWork();
+});
+
+function setProgress(frac, text){
+  var p = $('progress'), t = $('ptext');
+  if(frac === null){ p.style.display = 'none'; t.style.display = 'none'; return; }
+  p.style.display = 'block'; t.style.display = 'block';
+  $('pfill').style.width = Math.round(frac * 100) + '%';
+  t.textContent = text || '';
+}
+
+function setBusy(busy){
+  $('goBtn').disabled = busy;
+  $('goBtn').textContent = busy ? 'Working…' : 'Compress';
+  if(busy){ $('zipBtn').disabled = true; } else { refreshZip(); }
+  $('addBtn').disabled = busy;
+}
+
+function selectedReady(){
+  var out = [];
+  var checks = document.querySelectorAll('.selcheck');
+  for(var k = 0; k < checks.length; k++){
+    if(checks[k].checked){
+      var it = items[+checks[k].getAttribute('data-i')];
+      if(it && it.out) out.push(it);
+    }
+  }
+  return out;
+}
+function refreshZip(){
+  var n = selectedReady().length;
+  $('zipBtn').disabled = (n === 0);
+  $('zipBtn').textContent = n ? 'Download Selected (' + n + ')' : 'Download Selected';
+}
+
+function renderWork(){
+  var has = items.length > 0;
+  $('workPanel').classList.toggle('hidden', !has);
+  $('settingsCard').classList.toggle('hidden', !has);
+  if(!has) return;
+  $('wcount').textContent = items.length;
+  var list = $('workList');
+  list.innerHTML = '';
+  items.forEach(function(it, idx){
+    var orig = it.file.size;
+    var card = document.createElement('div');
+    card.className = 'wcard';
+    var meta, badge = '', right;
+    if(it.out){
+      var pct = orig > 0 ? Math.round((1 - it.out.size / orig) * 100) : 0;
+      meta = fmtBytes(orig) + ' → ' + fmtBytes(it.out.size);
+      if(it.out.targetKB) meta += ' · ' + it.out.targetKB + ' KB target';
+      badge = pct >= 0
+        ? ' <span class="savebadge">' + pct + '% smaller</span>'
+        : ' <span class="savebadge big">+' + (-pct) + '% larger</span>';
+      right = '<button type="button" class="dlbtn" data-i="' + idx + '" title="Download" aria-label="Download">Download</button>';
+    } else {
+      meta = fmtBytes(orig) + ' · ' + it.w + '×' + it.h + ' px';
+      right = '<span class="wait">not compressed yet</span>';
+    }
+    card.innerHTML =
+      '<label class="selbox" title="Select for ZIP"><input type="checkbox" class="selcheck" aria-label="Select for ZIP" data-i="' + idx + '"' + (it.sel === false ? '' : ' checked') + '></label>' +
+      '<img class="thumb" src="' + it.url + '" alt="">' +
+      '<div class="winfo"><div class="fname" title="' + esc(it.file.name) + '">' + esc(it.file.name) + '</div>' +
+      '<div class="fmeta">' + meta + '</div>' + badge + '</div>' + right;
+    list.appendChild(card);
+  });
+  var btns = list.querySelectorAll('.dlbtn');
+  for(var i = 0; i < btns.length; i++){
+    btns[i].addEventListener('click', function(){
+      var it = items[+this.getAttribute('data-i')];
+      if(it && it.out) downloadURL(it.out.url, it.out.name);
+    });
+  }
+  refreshZip();
+}
+
+function resolveFormat(origType){
+  var mime, ext;
+  if(outFormat === 'original'){
+    if(origType === 'image/jpeg'){ mime = 'image/jpeg'; ext = 'jpg'; }
+    else if(origType === 'image/webp'){ mime = 'image/webp'; ext = 'webp'; }
+    else if(origType === 'image/png'){ mime = 'image/png'; ext = 'png'; }
+    else { mime = 'image/png'; ext = 'png'; }
+  }
+  else if(outFormat === 'jpg'){ mime = 'image/jpeg'; ext = 'jpg'; }
+  else if(outFormat === 'webp'){ mime = 'image/webp'; ext = 'webp'; }
+  else { mime = 'image/png'; ext = 'png'; }
+  return {mime:mime, ext:ext};
+}
+function canvasToBlob(canvas, mime, q){
+  return new Promise(function(res){
+    if(mime === 'image/png') canvas.toBlob(function(b){ res(b); }, 'image/png');
+    else canvas.toBlob(function(b){ res(b); }, mime, q);
+  });
+}
+function encodeAt(img, w, h, mime, q, whiteBg){
+  return new Promise(function(res){
+    var c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    var ctx = c.getContext('2d');
+    if(whiteBg){ ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, h); }
+    ctx.drawImage(img, 0, 0, w, h);
+    c.toBlob(function(b){ res(b); }, mime, q);
+  });
+}
+async function compressToSize(it, targetBytes, maxW){
+  var w = it.w, h = it.h;
+  if(maxW > 0 && w > maxW){ h = Math.round(h * maxW / w); w = maxW; }
+  var mime = (outFormat === 'webp') ? 'image/webp' : 'image/jpeg';
+  var whiteBg = (mime === 'image/jpeg');
+  var ext = (mime === 'image/webp') ? 'webp' : 'jpg';
+  var cw = w, ch = h, best = null;
+  for(var s = 0; s < 10 && !best; s++){
+    var lo = 0.05, hi = 0.95, cand = null;
+    for(var i = 0; i < 7; i++){
+      var q = (lo + hi) / 2;
+      var blob = await encodeAt(it.img, cw, ch, mime, q, whiteBg);
+      if(!blob) break;
+      if(blob.size <= targetBytes){ cand = {blob:blob, q:q}; lo = q; }
+      else hi = q;
+    }
+    if(cand){ best = {blob:cand.blob, w:cw, h:ch, q:cand.q}; }
+    else { cw = Math.round(cw * 0.8); ch = Math.round(ch * 0.8); if(cw < 16 || ch < 16) break; }
+  }
+  if(!best){
+    var fb = await encodeAt(it.img, cw, ch, mime, 0.05, whiteBg);
+    if(fb) best = {blob:fb, w:cw, h:ch, q:0.05};
+  }
+  if(!best) return null;
+  return {mime:mime, ext:ext, blob:best.blob, w:best.w, h:best.h, q:best.q};
+}
+
+$('selAllBtn').addEventListener('click', function(){
+  document.querySelectorAll('.selcheck').forEach(function(c){ c.checked = true; var itm = items[+c.getAttribute('data-i')]; if(itm) itm.sel = true; });
+  refreshZip();
+});
+$('selNoneBtn').addEventListener('click', function(){
+  document.querySelectorAll('.selcheck').forEach(function(c){ c.checked = false; var itm = items[+c.getAttribute('data-i')]; if(itm) itm.sel = false; });
+  refreshZip();
+});
+$('workList').addEventListener('change', function(e){
+  if(e.target && e.target.classList && e.target.classList.contains('selcheck')){
+    var itm = items[+e.target.getAttribute('data-i')];
+    if(itm) itm.sel = e.target.checked;
+    refreshZip();
+  }
+});
+
+$('goBtn').addEventListener('click', function(){
+  if(!items.length){ showMsg('Please add some images first.', 'warn'); return; }
+  var maxW = parseInt($('maxW').value, 10) || 0;
+
+  if(compMode === 'size'){
+    var targetKB = Math.max(10, parseInt($('targetKB').value, 10) || 200);
+    var targetBytes = targetKB * 1024;
+    setBusy(true);
+    var d2 = 0, ok2 = 0;
+    (async function(){
+      for(var k = 0; k < items.length; k++){
+        var it = items[k];
+        try{
+          var r = await compressToSize(it, targetBytes, maxW);
+          if(r){
+            if(it.out) URL.revokeObjectURL(it.out.url);
+            var url = URL.createObjectURL(r.blob);
+            it.out = {blob:r.blob, url:url, name:baseName(it.file.name) + '-compressed.' + r.ext, size:r.blob.size, targetKB:targetKB};
+            ok2++;
+          } else { it.out = null; }
+        }catch(e){ it.out = null; }
+        d2++;
+        setProgress(d2 / items.length, 'Targeting ' + targetKB + ' KB… ' + d2 + ' of ' + items.length);
+        renderWork();
+      }
+      setProgress(null);
+      setBusy(false);
+      renderWork();
+      showWorkMsg(ok2 + ' of ' + items.length + ' image(s) sized to ≈' + targetKB + ' KB.', ok2 ? 'ok' : 'warn');
+    })();
+    return;
+  }
+
+  var q = Math.min(95, Math.max(10, parseInt($('qRange').value, 10) || 80)) / 100;
+  setBusy(true);
+  var done = 0, okCount = 0;
+  var jobs = items.map(function(it){
+    return (function(){
+      try{
+        var w = it.w, h = it.h;
+        if(maxW > 0 && w > maxW){ h = Math.round(h * maxW / w); w = maxW; }
+        var f = resolveFormat(it.file.type);
+        var quality = (f.mime === 'image/png') ? 1 : q;
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        var ctx = c.getContext('2d');
+        if(f.mime === 'image/jpeg'){ ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, h); }
+        ctx.drawImage(it.img, 0, 0, w, h);
+        return canvasToBlob(c, f.mime, quality).then(function(blob){
+          if(!blob) throw new Error('encode');
+          if(it.out) URL.revokeObjectURL(it.out.url);
+          var url = URL.createObjectURL(blob);
+          it.out = {blob:blob, url:url, name:baseName(it.file.name) + '-compressed.' + f.ext, size:blob.size};
+          okCount++;
+        }).catch(function(){ it.out = null; }).then(function(){
+          done++;
+          setProgress(done / items.length, 'Compressing ' + done + ' of ' + items.length + '…');
+        });
+      }catch(e){
+        it.out = null;
+        done++;
+        setProgress(done / items.length, 'Compressing ' + done + ' of ' + items.length + '…');
+        return Promise.resolve();
+      }
+    })();
+  });
+  Promise.all(jobs).then(function(){
+    setProgress(null);
+    setBusy(false);
+    renderWork();
+    showWorkMsg(okCount + ' of ' + items.length + ' image(s) compressed.', okCount ? 'ok' : 'warn');
+  });
+});
+
+$('zipBtn').addEventListener('click', function(){
+  var ready = selectedReady();
+  if(!ready.length){ showWorkMsg('Tick at least one image to include it in the ZIP.', 'warn'); return; }
+  setBusy(true);
+  setProgress(0, 'Preparing ZIP…');
+  ensureJSZip().then(function(){
+    var zip = new JSZip();
+    var used = {};
+    ready.forEach(function(it){
+      var n = it.out.name, k = 1;
+      while(used[n]){ k++; n = baseName(it.out.name) + '-' + k + '.' + extOf(it.out.name); }
+      used[n] = 1;
+      zip.file(n, it.out.blob);
+    });
+    return zip.generateAsync({type:'blob'}, function(m){
+      setProgress(m.percent / 100, 'Preparing ZIP… ' + Math.round(m.percent) + '%');
+    });
+  }).then(function(blob){
+    downloadURL(URL.createObjectURL(blob), 'quickconvert-compressed.zip');
+    showWorkMsg('ZIP downloaded.', 'ok');
+  }).catch(function(){
+    showWorkMsg('Could not create the ZIP. Please download images one by one.', 'warn');
+  }).then(function(){
+    setProgress(null);
+    setBusy(false);
+    renderWork();
+  });
+});
+</script>
+</body>
+</html>

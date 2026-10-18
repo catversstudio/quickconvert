@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Formatter — Free Online Tool | QuickConvert</title>
+<meta name="description" content="Format, minify and validate JSON instantly in your browser. 100% local — nothing ever leaves your device.">
+<meta name="theme-color" content="#7C3AED">
+<meta property="og:title" content="JSON Formatter — Free Online Tool | QuickConvert">
+<meta property="og:description" content="Format, minify and validate JSON with clear line-by-line error messages — 100% local, nothing leaves your device.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/json-formatter/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/json-formatter/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M35 8 18 36h11l-3 20 17-28h-11z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2937; --mut:#6B7280;
+    --vio:#7C3AED; --cyn:#06B6D4; --pnk:#EC4899; --amb:#F59E0B;
+    --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Poppins',system-ui,sans-serif;color:var(--ink);min-height:100vh;
+    background:
+      radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+      radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+      radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+      linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px 60px}
+
+  /* ---------- header ---------- */
+  header{display:flex;align-items:center;justify-content:space-between;padding:12px 0;
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.72);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--vio),var(--cyn));
+    display:grid;place-items:center;color:#fff;box-shadow:0 10px 24px rgba(124,58,237,.35)}
+  .logo .mark svg{width:24px;height:24px;display:block}
+  .logo small{display:block;font-size:10px;font-weight:700;color:var(--mut);letter-spacing:.18em;text-transform:uppercase}
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--ink);
+    background:rgba(255,255,255,.65);border:1px solid var(--line);padding:9px 16px;border-radius:999px;
+    text-decoration:none;backdrop-filter:blur(10px);box-shadow:0 4px 14px rgba(31,41,55,.06);transition:transform .15s}
+  .back:hover{transform:translateY(-1px)}
+
+  /* ---------- hero ---------- */
+  .hero{text-align:center;padding:22px 0 8px}
+  .hero h1{font-size:clamp(28px,4.6vw,44px);font-weight:800;letter-spacing:-.02em}
+  .hero h1 .g{background:linear-gradient(135deg,var(--vio),var(--pnk));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--mut);font-size:14.5px;margin-top:8px}
+
+  /* ---------- card ---------- */
+  .card{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--line);border-radius:24px;padding:22px;
+    box-shadow:0 20px 50px rgba(124,58,237,.10);margin-top:22px}
+  .lbl{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .lbl span{font-weight:700;font-size:14px}
+  textarea{
+    width:100%;min-height:220px;resize:vertical;font-family:var(--mono);font-size:13.5px;line-height:1.6;
+    color:var(--ink);background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);
+    border-radius:16px;padding:14px 16px;outline:none;transition:border-color .15s, box-shadow .15s;
+  }
+  textarea:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+  #jsonOutput{min-height:190px;background:rgba(248,250,252,.9)}
+
+  /* ---------- buttons ---------- */
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  button{font-family:'Poppins',sans-serif;font-weight:700;font-size:13.5px;border:none;cursor:pointer;min-height:44px;
+    padding:11px 22px;border-radius:999px;transition:transform .12s, box-shadow .12s;display:inline-flex;align-items:center;gap:8px}
+  button:active{transform:scale(.97)}
+  :focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+  .btns svg{width:17px;height:17px;flex:none}
+  .btn-samp svg{width:15px;height:15px;flex:none}
+  .lbl span{display:inline-flex;align-items:center;gap:7px}
+  .lbl svg{width:18px;height:18px}
+  .etitle .et{display:inline-flex;align-items:center;gap:8px}
+  .etitle svg{width:18px;height:18px;flex:none}
+  #errorBox .etitle button svg{width:14px;height:14px;display:block}
+  .btn-p{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.35)}
+  .btn-p:hover{box-shadow:0 10px 26px rgba(124,58,237,.45)}
+  .btn-g{background:rgba(255,255,255,.8);color:var(--ink);border:1px solid var(--line);box-shadow:0 4px 12px rgba(31,41,55,.06)}
+  .btn-g:hover{background:#fff}
+  .btn-samp{background:rgba(255,255,255,.6);color:var(--vio);border:1.5px dashed rgba(124,58,237,.4);
+    padding:8px 16px;font-size:12.5px;box-shadow:none}
+  .btn-samp:hover{background:rgba(124,58,237,.06)}
+
+  /* ---------- error box ---------- */
+  #errorBox{display:none;margin-top:16px;border-radius:16px;padding:14px 16px;
+    background:rgba(254,226,226,.85);border:1.5px solid rgba(239,68,68,.4);backdrop-filter:blur(10px)}
+  #errorBox.show{display:block;animation:shake .3s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  #errorBox .etitle{display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:14px;color:#B91C1C;margin-bottom:6px}
+  #errorBox .etitle button{background:none;border:none;color:#B91C1C;font-size:16px;padding:0 4px;box-shadow:none}
+  #errorBox .emsg{font-family:var(--mono);font-size:12.5px;color:#7F1D1D;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+  #errorBox .epos{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:#fff;background:#DC2626;border-radius:999px;padding:4px 12px}
+
+  /* ---------- status ---------- */
+  .status{display:flex;align-items:center;gap:10px;margin-top:16px;min-height:34px;flex-wrap:wrap}
+  .pill{display:none;align-items:center;gap:8px;font-size:13px;font-weight:600;
+    background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;
+    backdrop-filter:blur(12px);box-shadow:0 4px 14px rgba(31,41,55,.05)}
+  .pill.show{display:inline-flex}
+  .pill.ok{color:#065F46}.pill.ok .dot{background:#10B981;box-shadow:0 0 0 4px rgba(16,185,129,.18)}
+  .pill.info{color:#1F2937}.pill.info .dot{background:var(--cyn);box-shadow:0 0 0 4px rgba(6,182,212,.18)}
+  .pill.hint{color:var(--mut)}.pill.hint .dot{background:var(--amb);box-shadow:0 0 0 4px rgba(245,158,11,.18)}
+  .dot{width:9px;height:9px;border-radius:50%}
+
+  footer{text-align:center;margin-top:44px;color:var(--mut);font-size:13px}
+  footer a{color:var(--vio);font-weight:600;text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  footer .fline{display:block;font-size:12px;margin-top:8px;max-width:560px;margin-left:auto;margin-right:auto}
+  footer .fnav{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px}
+
+  /* trust strip: slim 3-item row under the main action card */
+  .trust{display:flex;justify-content:center;align-items:center;gap:24px;flex-wrap:wrap;margin:22px 0 4px;padding:14px 18px;font-size:13px;font-weight:600;color:var(--mut)}
+  .trust .t{display:inline-flex;align-items:center;gap:9px}
+  .trust svg{width:19px;height:19px;color:var(--vio);flex:none}
+
+  /* how it works */
+  .howto{margin:28px 0 6px}
+  .howto h2{font-size:16px;font-weight:700;text-align:center;margin-bottom:14px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .step{padding:20px 16px;text-align:center;font-size:13px;color:var(--mut);line-height:1.55;margin-top:0}
+  .step .n{display:grid;place-items:center;width:34px;height:34px;margin:0 auto 10px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;font-weight:800;font-size:14px}
+  .step b{color:var(--ink);display:block;margin-bottom:4px;font-size:13.5px}
+
+  /* faq */
+  .faq{margin:28px auto 6px;max-width:760px}
+  .faq h2{font-size:16px;font-weight:700;text-align:center;margin-bottom:14px}
+  .faq details{margin-bottom:10px;padding:0;margin-top:0}
+  .faq summary{cursor:pointer;font-weight:600;font-size:13.5px;padding:16px 20px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:44px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:'+';font-size:18px;color:var(--vio);font-weight:700;flex:none}
+  .faq details[open] summary::after{content:'–'}
+  .faq .a{padding:0 20px 18px;font-size:13px;color:var(--mut);line-height:1.65}
+
+  @media (max-width:560px){
+    .card{padding:16px;border-radius:18px}
+    textarea{min-height:170px}
+    button{padding:10px 18px;font-size:13px}
+  }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JSON Formatter","url":"https://quickconvert.freedev.app/json-formatter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":0,"priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="logo" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+      <span>QuickConvert<small>Free online tools</small></span>
+    </a>
+    <a class="back" href="/">← All tools</a>
+  </header>
+
+  <main class="card">
+    <div class="lbl">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>Input</span>
+      <button class="btn-samp" id="btnSample" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg>Load sample</button>
+    </div>
+    <textarea id="jsonInput" aria-label="JSON input" placeholder="Paste JSON here… e.g. {&quot;name&quot;:&quot;Siaa&quot;}&#10;&#10;Tip: paste messy or minified JSON, then hit Format."></textarea>
+
+    <div class="btns">
+      <button class="btn-p" id="btnFormat" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>Format</button>
+      <button class="btn-g" id="btnMinify" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M10 14l-7 7"/></svg>Minify</button>
+      <button class="btn-g" id="btnValidate" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 5-5"/></svg>Validate</button>
+      <button class="btn-g" id="btnCopy" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button>
+      <button class="btn-g" id="btnClear" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg>Clear</button>
+    </div>
+
+    <div id="errorBox" role="alert">
+      <div class="etitle"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3L2 20h20L12 3z"/><path d="M12 10v4M12 17.5h.01"/></svg>Invalid JSON</span><button id="btnDismiss" type="button" aria-label="Dismiss error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <div class="emsg" id="errorMsg"></div>
+      <span class="epos" id="errorPos" style="display:none"></span>
+    </div>
+
+    <div class="lbl" style="margin-top:20px"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Output</span></div>
+    <textarea id="jsonOutput" readonly aria-label="Formatted JSON output" placeholder="Your formatted result will appear here…"></textarea>
+
+    <div class="status">
+      <span class="pill" id="statusOk"><span class="dot"></span><span id="statusOkText"></span></span>
+      <span class="pill" id="statusInfo"><span class="dot"></span><span id="statusInfoText"></span></span>
+      <span class="pill" id="statusHint"><span class="dot"></span><span id="statusHintText"></span></span>
+    </div>
+  </main>
+
+  <div class="card trust" aria-label="Why trust this tool">
+    <span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Instant results — no waiting</span>
+    <span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-3.5 3.6-6 8-6s8 2.5 8 6"/></svg>No sign-up needed</span>
+    <span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l9 9-8 8-9-9z"/><circle cx="8" cy="9" r="1.5"/></svg>Free forever</span>
+  </div>
+
+  <section class="hero">
+    <h1>JSON <span class="g">Formatter</span> — Free Online Tool</h1>
+    <p>Beautify, minify &amp; validate JSON — instantly, 100% in your browser.</p>
+  </section>
+
+  <section class="howto">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="card step"><span class="n">1</span><b>Paste your JSON</b>Drop in messy or minified JSON — or hit Load sample to try it.</div>
+      <div class="card step"><span class="n">2</span><b>Format, minify or validate</b>One click beautifies, compacts, or checks your JSON.</div>
+      <div class="card step"><span class="n">3</span><b>Copy the result</b>Invalid JSON? The error box shows the exact line and column to fix.</div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2>Frequently asked questions</h2>
+    <details class="card"><summary>Is my JSON uploaded anywhere?</summary><div class="a">No. Parsing, formatting and validation happen 100% in your browser — nothing is sent to any server.</div></details>
+    <details class="card"><summary>What do the error messages mean?</summary><div class="a">The tool shows the exact parse error plus the line and column where it failed, so you can jump straight to the problem and fix it.</div></details>
+    <details class="card"><summary>How large a file can it handle?</summary><div class="a">It is designed for typical API responses and config files. Extremely large pastes may slow down older phones, but there is no hard limit.</div></details>
+  </section>
+
+  <footer>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a>
+    <span class="fline">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</span>
+    <nav class="fnav" aria-label="Footer"><a href="/">All tools</a><a href="/pdf-to-jpg/">PDF to JPG</a><a href="/image-compressor/">Image Compressor</a><a href="/qr-code-generator/">QR Generator</a></nav>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var input   = document.getElementById("jsonInput");
+  var output  = document.getElementById("jsonOutput");
+  var errorBox= document.getElementById("errorBox");
+  var errorMsg= document.getElementById("errorMsg");
+  var errorPos= document.getElementById("errorPos");
+  var sOk = document.getElementById("statusOk"),   sOkT = document.getElementById("statusOkText");
+  var sIn = document.getElementById("statusInfo"),sInT = document.getElementById("statusInfoText");
+  var sHi = document.getElementById("statusHint"),sHiT = document.getElementById("statusHintText");
+
+  var SAMPLE = {
+    app: "QuickConvert",
+    version: 2,
+    free: true,
+    features: ["format", "minify", "validate"],
+    author: { name: "CatVers Studio", contact: "asisasastudent@gmail.com" },
+    limits: { maxSizeKB: null }
+  };
+
+  function hideError(){ errorBox.classList.remove("show"); }
+  function hideAllStatus(){ sOk.classList.remove("show"); sIn.classList.remove("show"); sHi.classList.remove("show"); }
+  function showStatus(which, text){
+    hideAllStatus();
+    if(which === "ok"){ sOkT.textContent = text; sOk.classList.add("show"); }
+    else if(which === "info"){ sInT.textContent = text; sIn.classList.add("show"); }
+    else { sHiT.textContent = text; sHi.classList.add("show"); }
+  }
+
+  function posToLineCol(text, pos){
+    var line = 1, col = 1;
+    for(var i = 0; i < pos && i < text.length; i++){
+      if(text[i] === "\n"){ line++; col = 1; } else { col++; }
+    }
+    return { line: line, col: col };
+  }
+
+  function friendlyError(text, err){
+    var msg = err && err.message ? err.message : String(err);
+    var m = msg.match(/position\s+(\d+)/i);
+    var posInfo = "";
+    if(m){
+      var pos = parseInt(m[1], 10);
+      var lc = posToLineCol(text, pos);
+      posInfo = "Line " + lc.line + ", column " + lc.col;
+    }
+    return { message: msg, pos: posInfo };
+  }
+
+  function showError(err, text){
+    var f = friendlyError(text, err);
+    errorMsg.textContent = f.message;
+    if(f.pos){ errorPos.style.display = "inline-block"; errorPos.textContent = f.pos; }
+    else { errorPos.style.display = "none"; }
+    errorBox.classList.add("show");
+  }
+
+  function statsOf(obj, str){
+    var keys = (obj !== null && typeof obj === "object" && !Array.isArray(obj))
+      ? Object.keys(obj).length
+      : (Array.isArray(obj) ? obj.length : 0);
+    var kind = Array.isArray(obj) ? (keys === 1 ? "1 item" : keys + " items")
+      : (keys === 1 ? "1 key" : keys + " keys");
+    return { keys: kind, chars: str.length };
+  }
+
+  function doFormat(){
+    hideError();
+    var raw = input.value.trim();
+    if(!raw){ showStatus("hint", "Paste some JSON first, then hit Format."); output.value = ""; return; }
+    try{
+      var obj = JSON.parse(raw);
+      var pretty = JSON.stringify(obj, null, 2);
+      output.value = pretty;
+      var s = statsOf(obj, pretty);
+      showStatus("ok", "Valid JSON · " + s.keys + " · " + s.chars + " chars");
+    }catch(e){ output.value = ""; showError(e, raw); hideAllStatus(); }
+  }
+
+  function doMinify(){
+    hideError();
+    var raw = input.value.trim();
+    if(!raw){ showStatus("hint", "Paste some JSON first, then hit Minify."); output.value = ""; return; }
+    try{
+      var obj = JSON.parse(raw);
+      var compact = JSON.stringify(obj);
+      output.value = compact;
+      showStatus("info", "Minified · " + compact.length + " chars" +
+        (compact.length < raw.length ? " (" + Math.round((1 - compact.length / raw.length) * 100) + "% smaller)" : ""));
+    }catch(e){ output.value = ""; showError(e, raw); hideAllStatus(); }
+  }
+
+  function doValidate(){
+    hideError();
+    var raw = input.value.trim();
+    if(!raw){ showStatus("hint", "Nothing to validate — paste some JSON first."); return; }
+    try{
+      var obj = JSON.parse(raw);
+      var s = statsOf(obj, raw);
+      showStatus("ok", "Valid JSON · " + s.keys + " · " + s.chars + " chars");
+    }catch(e){ showError(e, raw); hideAllStatus(); }
+  }
+
+  function doCopy(){
+    var val = output.value;
+    if(!val){ showStatus("hint", "Output is empty — Format or Minify first."); return; }
+    function done(){ showStatus("ok", "Copied to clipboard!"); }
+    function fail(){ showStatus("hint", "Copy failed — select the output and press Ctrl+C"); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(val).then(done, function(){ fallbackCopy(val, done, fail); });
+    } else { fallbackCopy(val, done, fail); }
+  }
+
+  function fallbackCopy(val, done, fail){
+    try{
+      output.removeAttribute("readonly");
+      output.select(); output.setSelectionRange(0, val.length);
+      var ok = document.execCommand("copy");
+      output.setAttribute("readonly", "");
+      output.blur();
+      if(ok) done(); else fail();
+    }catch(e){ fail(); }
+  }
+
+  function doClear(){
+    input.value = ""; output.value = "";
+    hideError(); hideAllStatus();
+    input.focus();
+  }
+
+  document.getElementById("btnFormat").addEventListener("click", doFormat);
+  document.getElementById("btnMinify").addEventListener("click", doMinify);
+  document.getElementById("btnValidate").addEventListener("click", doValidate);
+  document.getElementById("btnCopy").addEventListener("click", doCopy);
+  document.getElementById("btnClear").addEventListener("click", doClear);
+  document.getElementById("btnDismiss").addEventListener("click", hideError);
+  document.getElementById("btnSample").addEventListener("click", function(){
+    input.value = JSON.stringify(SAMPLE, null, 2);
+    hideError(); hideAllStatus();
+    doFormat();
+  });
+})();
+</script>
+</body>
+</html>

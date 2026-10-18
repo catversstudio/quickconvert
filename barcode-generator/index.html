@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barcode Generator · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Generate free CODE128, CODE39, EAN-13 and UPC barcodes online. Instant, private, no sign-up — download crisp PNG barcode images.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Barcode Generator · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Generate free CODE128, CODE39, EAN-13 and UPC barcodes online. Instant, private, no sign-up — download crisp PNG barcode images.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/barcode-generator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/barcode-generator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bwip-js/4.3.0/bwip-js-min.js" onerror="window.__bwipFailed=true"></script>
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+input#barcodeInput{
+  width:100%;font-family:inherit;font-size:1.05rem;color:var(--ink);
+  background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;
+}
+input#barcodeInput:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+input#barcodeInput::placeholder{color:#9CA3AF}
+.fmt-pills{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.fmt-pill{
+  font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
+  padding:10px 22px;min-height:44px;border-radius:999px;border:1.5px solid rgba(124,58,237,.22);
+  background:rgba(255,255,255,.65);color:var(--ink);backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s,background .15s,color .15s;
+}
+.fmt-pill:hover{background:#fff;transform:translateY(-1px)}
+.fmt-pill:active{transform:scale(.96)}
+.fmt-pill.active{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border-color:transparent;
+  box-shadow:0 8px 20px rgba(124,58,237,.35)}
+.fmt-hint{margin-top:10px;font-size:.83rem;color:var(--mut);min-height:1.2em}
+.btn-row{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.preview-card{margin-bottom:18px;display:none}
+.preview-card.show{display:block}
+.barcode-wrap{
+  background:#ffffff;border-radius:16px;padding:26px 20px;
+  display:flex;justify-content:center;overflow-x:auto;
+  border:1px solid rgba(124,58,237,.10);
+}
+.barcode-wrap canvas{max-width:100%;height:auto;display:block}
+.preview-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap}
+.preview-meta .v{font-family:var(--mono);font-size:.85rem;color:var(--mut);word-break:break-all}
+.error{
+  display:none;margin-bottom:18px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .preview-meta{flex-direction:column;align-items:stretch}
+  .preview-meta .btn{width:100%}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Barcode Generator — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/barcode-generator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Barcode input">
+    <label class="lab" for="barcodeInput">Text or number to encode</label>
+    <input id="barcodeInput" type="text" inputmode="text" autocomplete="off" spellcheck="false"
+           placeholder="e.g. 5901234123457 or a product SKU…" aria-label="Text or number to encode">
+    <div class="fmt-pills" role="group" aria-label="Barcode format">
+      <button class="fmt-pill active" type="button" data-fmt="code128" aria-pressed="true">CODE128</button>
+      <button class="fmt-pill" type="button" data-fmt="code39" aria-pressed="false">CODE39</button>
+      <button class="fmt-pill" type="button" data-fmt="ean13" aria-pressed="false">EAN-13</button>
+      <button class="fmt-pill" type="button" data-fmt="upc" aria-pressed="false">UPC</button>
+    </div>
+    <div class="fmt-hint" id="fmtHint">CODE128 encodes any text, numbers or symbols — the best all-rounder.</div>
+    <div class="btn-row">
+      <button class="btn btn-p" id="generateBtn" type="button">Generate Barcode</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="meta">
+      <span class="pill" id="lenNote">0 characters</span>
+      <span>Barcodes render locally in your browser — nothing is uploaded.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Barcode Generator <span class="plain">— Free Online Tool</span></h1>
+    <p>Create sharp, scannable barcodes in CODE128, CODE39, EAN-13 and UPC formats. Perfect for product labels, inventory tags and shipping.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 8v8"/><path d="M11 8v8"/><path d="M15 8v8"/><path d="M18.5 8v8"/></svg></span>
+    Your barcode will appear here as you type.
+  </div>
+
+  <section class="card preview-card" id="previewCard" aria-label="Barcode preview">
+    <div class="barcode-wrap">
+      <canvas id="barcodeCanvas" aria-label="Generated barcode"></canvas>
+    </div>
+    <div class="preview-meta">
+      <span class="v" id="renderInfo"></span>
+      <button class="btn btn-p" id="downloadBtn" type="button">Download PNG</button>
+    </div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Type</b> the text or number in the box above — the barcode updates live.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Pick a format</b> — CODE128 for general use, EAN-13 or UPC for retail products.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Download the PNG</b> and print it or stick it on your product or package.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is my barcode data uploaded anywhere?</summary>
+      <p>No. Barcodes are drawn with the bwip-js library directly in your browser, so the text you encode never leaves this page — nothing is uploaded or stored.</p>
+    </details>
+    <details>
+      <summary>Which barcode formats are supported?</summary>
+      <p>CODE128 (the best all-rounder — text, numbers and symbols), CODE39 (industrial and logistics labels), EAN-13 (12–13 digit retail product codes) and UPC-A (11–12 digit retail codes).</p>
+    </details>
+    <details>
+      <summary>What should I enter for EAN-13 or UPC codes?</summary>
+      <p>Digits only: 12 or 13 digits for EAN-13, 11 or 12 digits for UPC. If you enter the code without its check digit (12 or 11 digits), the check digit is computed for you automatically.</p>
+    </details>
+  </section>
+
+  <p class="note">CODE128 · CODE39 · EAN-13 · UPC-A · Rendered by bwip-js · 100% local — your text never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var input = document.getElementById('barcodeInput');
+  var generateBtn = document.getElementById('generateBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var lenNote = document.getElementById('lenNote');
+  var fmtHint = document.getElementById('fmtHint');
+  var errorBox = document.getElementById('errorBox');
+  var emptyState = document.getElementById('emptyState');
+  var previewCard = document.getElementById('previewCard');
+  var canvas = document.getElementById('barcodeCanvas');
+  var downloadBtn = document.getElementById('downloadBtn');
+  var renderInfo = document.getElementById('renderInfo');
+  var fmtPills = Array.prototype.slice.call(document.querySelectorAll('.fmt-pill'));
+
+  var FORMATS = {
+    code128: {
+      label: 'CODE128',
+      hint: 'CODE128 encodes any text, numbers or symbols — the best all-rounder.',
+      prepare: function (v) { return v; },
+      check: function (v) { return v.length > 0; },
+      err: 'Please enter some text or numbers first.'
+    },
+    code39: {
+      label: 'CODE39',
+      hint: 'CODE39 accepts letters, digits and - . space $ / + % — great for industrial labels.',
+      prepare: function (v) { return v.toUpperCase(); },
+      check: function (v) { return /^[0-9A-Z\-\.\ \$\/\+\%]+$/.test(v); },
+      err: 'CODE39 only accepts letters, digits and these symbols: - . space $ / + %'
+    },
+    ean13: {
+      label: 'EAN-13',
+      hint: 'EAN-13 needs 12 or 13 digits — the last (check) digit is computed for you if missing.',
+      prepare: function (v) { return v; },
+      check: function (v) { return /^\d{12,13}$/.test(v); },
+      err: 'EAN-13 needs exactly 12 or 13 digits (numbers only).'
+    },
+    upc: {
+      label: 'UPC',
+      hint: 'UPC needs 11 or 12 digits — the last (check) digit is computed for you if missing.',
+      prepare: function (v) { return v; },
+      check: function (v) { return /^\d{11,12}$/.test(v); },
+      err: 'UPC needs exactly 11 or 12 digits (numbers only).'
+    }
+  };
+
+  var currentFmt = 'code128';
+  var debounceTimer = null;
+  var lastValue = '';
+
+  function libraryReady() {
+    return !window.__bwipFailed &&
+           typeof window.bwipjs !== 'undefined' &&
+           typeof window.bwipjs.toCanvas === 'function';
+  }
+
+  function updateLength() {
+    var n = input.value.length;
+    lenNote.textContent = n + (n === 1 ? ' character' : ' characters');
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function setFormat(fmt) {
+    currentFmt = fmt;
+    fmtPills.forEach(function (p) {
+      var active = p.getAttribute('data-fmt') === fmt;
+      p.classList.toggle('active', active);
+      p.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    fmtHint.textContent = FORMATS[fmt].hint;
+    generate();
+  }
+
+  function generate() {
+    hideError();
+    var raw = input.value;
+    var value = raw.replace(/^\s+|\s+$/g, '');
+    var fmt = FORMATS[currentFmt];
+
+    if (!libraryReady()) {
+      previewCard.classList.remove('show');
+      showError('Sorry — the barcode library (bwip-js) could not be loaded. Please check your internet connection and refresh the page.');
+      return;
+    }
+    if (!value) {
+      showError(fmt.err);
+      previewCard.classList.remove('show');
+      emptyState.style.display = '';
+      return;
+    }
+    var prepared = fmt.prepare(value);
+    if (!fmt.check(prepared)) {
+      showError(fmt.err);
+      previewCard.classList.remove('show');
+      return;
+    }
+    try {
+      window.bwipjs.toCanvas(canvas, {
+        bcid: currentFmt,
+        text: prepared,
+        scale: 3,
+        height: 10,
+        includetext: true,
+        textxalign: 'center',
+        background: '#ffffff'
+      });
+    } catch (e) {
+      previewCard.classList.remove('show');
+      showError('Could not render this barcode: ' + (e && e.message ? e.message : e));
+      return;
+    }
+    lastValue = prepared;
+    renderInfo.textContent = fmt.label + ' · ' + prepared;
+    emptyState.style.display = 'none';
+    previewCard.classList.add('show');
+  }
+
+  function clearAll() {
+    input.value = '';
+    hideError();
+    previewCard.classList.remove('show');
+    emptyState.style.display = '';
+    updateLength();
+    input.focus();
+  }
+
+  function downloadPng() {
+    if (!previewCard.classList.contains('show')) return;
+    var url = canvas.toDataURL('image/png');
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'barcode-' + currentFmt + '-' + lastValue.replace(/[^a-zA-Z0-9]+/g, '_').slice(0, 40) + '.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  fmtPills.forEach(function (p) {
+    p.addEventListener('click', function () {
+      setFormat(p.getAttribute('data-fmt'));
+    });
+  });
+  generateBtn.addEventListener('click', generate);
+  clearBtn.addEventListener('click', clearAll);
+  downloadBtn.addEventListener('click', downloadPng);
+  input.addEventListener('input', function () {
+    updateLength();
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(generate, 350);
+  });
+
+  updateLength();
+})();
+</script>
+</body>
+</html>

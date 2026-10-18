@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMI Calculator · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Calculate your Body Mass Index instantly with our free BMI calculator. Live results, category guide and visual scale — 100% private, in your browser.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="BMI Calculator · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Calculate your Body Mass Index instantly with our free BMI calculator. Live results, category guide and visual scale — 100% private, in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/bmi-calculator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/bmi-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.field{margin-bottom:20px}
+.field:last-child{margin-bottom:0}
+.field-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.field label{font-size:.85rem;font-weight:600;color:var(--ink);letter-spacing:.04em;text-transform:uppercase}
+.field .val{font-size:1.05rem;font-weight:700;color:var(--vio)}
+.field .val small{font-weight:500;color:var(--mut);font-size:.8rem}
+.slider-row{display:flex;gap:14px;align-items:center}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;flex:1;min-height:44px;background:transparent;cursor:pointer;
+}
+input[type=range]::-webkit-slider-runnable-track{
+  height:10px;border-radius:999px;
+  background:linear-gradient(90deg,var(--vio),var(--cyn));
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.15);
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:28px;height:28px;margin-top:-9px;
+  border-radius:50%;background:#fff;border:3px solid var(--vio);
+  box-shadow:0 3px 10px rgba(124,58,237,.4);cursor:grab;
+}
+input[type=range]::-moz-range-track{
+  height:10px;border-radius:999px;
+  background:linear-gradient(90deg,var(--vio),var(--cyn));
+}
+input[type=range]::-moz-range-thumb{
+  width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--vio);
+  box-shadow:0 3px 10px rgba(124,58,237,.4);cursor:grab;
+}
+.num-input{
+  width:88px;flex:0 0 88px;font-family:inherit;font-size:1.05rem;font-weight:600;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);border-radius:14px;
+  padding:10px 12px;min-height:44px;outline:none;text-align:center;
+  transition:border-color .15s,box-shadow .15s;
+}
+.num-input:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+/* results */
+.result-card{margin-bottom:18px;text-align:center}
+.bmi-big{
+  font-size:clamp(3.2rem,10vw,4.6rem);font-weight:700;letter-spacing:-2px;line-height:1;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin:6px 0 12px;
+}
+.bmi-unit{font-size:.85rem;font-weight:500;color:var(--mut);margin-bottom:14px}
+.cat-pill{
+  display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1.05rem;
+  padding:10px 26px;border-radius:999px;color:#fff;margin-bottom:6px;
+  box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+.cat-pill .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.85)}
+.cat-under{background:linear-gradient(135deg,#38BDF8,#0284C7)}
+.cat-normal{background:linear-gradient(135deg,#34D399,#059669)}
+.cat-over{background:linear-gradient(135deg,#FBBF24,#D97706)}
+.cat-obese{background:linear-gradient(135deg,#FB7185,#E11D48)}
+.cat-sub{font-size:.88rem;color:var(--mut);margin-bottom:20px}
+/* scale bar */
+.scale-wrap{margin:6px 4px 0;text-align:left}
+.scale{position:relative;height:18px;border-radius:999px;overflow:visible;
+  background:linear-gradient(90deg,
+    #38BDF8 0%, #38BDF8 17.3%,
+    #34D399 17.3%, #34D399 41.9%,
+    #FBBF24 41.9%, #FBBF24 61.5%,
+    #FB7185 61.5%, #FB7185 100%);
+  box-shadow:inset 0 1px 4px rgba(0,0,0,.18)}
+.marker{
+  position:absolute;top:50%;width:30px;height:30px;border-radius:50%;background:#fff;
+  border:3px solid var(--ink);transform:translate(-50%,-50%);
+  box-shadow:0 3px 10px rgba(0,0,0,.3);transition:left .25s ease;
+}
+.scale-ticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--mut);margin-top:8px;font-weight:500}
+.scale-legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:.78rem;color:var(--mut);font-weight:500}
+.scale-legend .lg{display:inline-flex;align-items:center;gap:6px}
+.scale-legend .sw{width:12px;height:12px;border-radius:4px;display:inline-block}
+.sw-u{background:#38BDF8}.sw-n{background:#34D399}.sw-o{background:#FBBF24}.sw-ob{background:#FB7185}
+.range-note{margin-top:16px;font-size:.88rem;color:var(--mut)}
+.range-note b{color:var(--ink)}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BMI Calculator — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/bmi-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="BMI inputs">
+    <div class="field">
+      <div class="field-top">
+        <label for="heightSlider">Height</label>
+        <span class="val"><span id="heightVal">170</span> <small>cm</small></span>
+      </div>
+      <div class="slider-row">
+        <input type="range" id="heightSlider" min="100" max="220" step="1" value="170" aria-label="Height in centimeters">
+        <input type="number" class="num-input" id="heightInput" min="100" max="220" value="170" aria-label="Height value in centimeters">
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-top">
+        <label for="weightSlider">Weight</label>
+        <span class="val"><span id="weightVal">70</span> <small>kg</small></span>
+      </div>
+      <div class="slider-row">
+        <input type="range" id="weightSlider" min="30" max="150" step="0.5" value="70" aria-label="Weight in kilograms">
+        <input type="number" class="num-input" id="weightInput" min="30" max="150" step="0.5" value="70" aria-label="Weight value in kilograms">
+      </div>
+    </div>
+  </section>
+
+  <div class="hero">
+    <h1>BMI Calculator <span class="plain">— Free Online Tool</span></h1>
+    <p>Find out your Body Mass Index instantly. Move the sliders, see your result update live, and check where you land on the scale.</p>
+  </div>
+
+  <section class="card result-card" id="resultCard" aria-label="Your BMI result">
+    <div class="bmi-big" id="bmiValue" aria-live="polite">24.2</div>
+    <div class="bmi-unit">kg/m² — Body Mass Index</div>
+    <div>
+      <span class="cat-pill cat-normal" id="catPill"><span class="dot"></span><span id="catLabel">Normal weight</span></span>
+    </div>
+    <div class="cat-sub" id="catSub">Healthy range</div>
+    <div class="scale-wrap">
+      <div class="scale" role="img" aria-label="BMI scale from 14 to 40 with your position marked">
+        <span class="marker" id="marker"></span>
+      </div>
+      <div class="scale-ticks"><span>14</span><span>18.5</span><span>25</span><span>30</span><span>40</span></div>
+      <div class="scale-legend">
+        <span class="lg"><span class="sw sw-u"></span>Underweight</span>
+        <span class="lg"><span class="sw sw-n"></span>Normal</span>
+        <span class="lg"><span class="sw sw-o"></span>Overweight</span>
+        <span class="lg"><span class="sw sw-ob"></span>Obese</span>
+      </div>
+    </div>
+    <p class="range-note" id="rangeNote"></p>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Set your height</b> with the slider or by typing the exact value in cm.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Set your weight</b> in kg — the result updates instantly as you move.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Read your result</b> — BMI value, category and position on the visual scale.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>How is BMI calculated?</summary>
+      <p>BMI = weight (kg) ÷ height (m)². For example, a person weighing 70 kg at 170 cm (1.70 m) has a BMI of 70 ÷ (1.70 × 1.70) ≈ 24.2.</p>
+    </details>
+    <details>
+      <summary>What do the BMI categories mean?</summary>
+      <p>The standard WHO ranges are: Underweight below 18.5, Normal weight 18.5–24.9, Overweight 25–29.9, and Obese at 30 or above. These ranges apply to adults.</p>
+    </details>
+    <details>
+      <summary>Is BMI a reliable health measure?</summary>
+      <p>BMI is only a rough screening guide, not a diagnosis. It doesn't distinguish muscle from fat, and it can mislead for athletes, children, pregnant women and older adults. Think of it as a quick starting point — for real health advice, talk to a doctor or a qualified nutritionist. This tool is not medical advice.</p>
+    </details>
+  </section>
+
+  <p class="note">BMI = weight (kg) ÷ height (m)² · WHO adult categories · 100% local — nothing leaves your device.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your data never leaves your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var heightSlider = document.getElementById('heightSlider');
+  var heightInput = document.getElementById('heightInput');
+  var heightVal = document.getElementById('heightVal');
+  var weightSlider = document.getElementById('weightSlider');
+  var weightInput = document.getElementById('weightInput');
+  var weightVal = document.getElementById('weightVal');
+  var bmiValue = document.getElementById('bmiValue');
+  var catPill = document.getElementById('catPill');
+  var catLabel = document.getElementById('catLabel');
+  var catSub = document.getElementById('catSub');
+  var marker = document.getElementById('marker');
+  var rangeNote = document.getElementById('rangeNote');
+
+  var SCALE_MIN = 14, SCALE_MAX = 40;
+
+  function clamp(v, lo, hi) {
+    return Math.min(hi, Math.max(lo, v));
+  }
+
+  function categoryOf(bmi) {
+    if (bmi < 18.5) {
+      return { label: 'Underweight', cls: 'cat-under', sub: 'Below the healthy range' };
+    }
+    if (bmi < 25) {
+      return { label: 'Normal weight', cls: 'cat-normal', sub: 'Healthy range' };
+    }
+    if (bmi < 30) {
+      return { label: 'Overweight', cls: 'cat-over', sub: 'Above the healthy range' };
+    }
+    return { label: 'Obese', cls: 'cat-obese', sub: 'Well above the healthy range' };
+  }
+
+  function readHeight() {
+    return clamp(parseFloat(heightInput.value) || 0, 100, 220);
+  }
+
+  function readWeight() {
+    return clamp(parseFloat(weightInput.value) || 0, 30, 150);
+  }
+
+  function syncHeights(fromSlider) {
+    var h = fromSlider
+      ? parseFloat(heightSlider.value)
+      : clamp(parseFloat(heightInput.value) || 170, 100, 220);
+    heightSlider.value = h;
+    heightInput.value = h;
+    heightVal.textContent = h;
+    return h;
+  }
+
+  function syncWeights(fromSlider) {
+    var w = fromSlider
+      ? parseFloat(weightSlider.value)
+      : clamp(parseFloat(weightInput.value) || 70, 30, 150);
+    weightSlider.value = w;
+    weightInput.value = w;
+    weightVal.textContent = w;
+    return w;
+  }
+
+  function update() {
+    var hCm = readHeight();
+    var wKg = readWeight();
+    var hM = hCm / 100;
+    var bmi = wKg / (hM * hM);
+
+    bmiValue.textContent = bmi.toFixed(1);
+
+    var cat = categoryOf(bmi);
+    catLabel.textContent = cat.label;
+    catSub.textContent = cat.sub;
+    catPill.classList.remove('cat-under', 'cat-normal', 'cat-over', 'cat-obese');
+    catPill.classList.add(cat.cls);
+
+    var pos = clamp((bmi - SCALE_MIN) / (SCALE_MAX - SCALE_MIN), 0, 1) * 100;
+    marker.style.left = pos.toFixed(2) + '%';
+
+    var lo = (18.5 * hM * hM).toFixed(1);
+    var hi = (24.9 * hM * hM).toFixed(1);
+    rangeNote.innerHTML = 'For your height, a healthy weight is roughly <b>' + lo + '–' + hi + ' kg</b>.';
+  }
+
+  heightSlider.addEventListener('input', function () { syncHeights(true); update(); });
+  weightSlider.addEventListener('input', function () { syncWeights(true); update(); });
+  heightInput.addEventListener('input', function () { syncHeights(false); update(); });
+  weightInput.addEventListener('input', function () { syncWeights(false); update(); });
+  heightInput.addEventListener('change', function () { syncHeights(false); update(); });
+  weightInput.addEventListener('change', function () { syncWeights(false); update(); });
+
+  update();
+})();
+</script>
+</body>
+</html>

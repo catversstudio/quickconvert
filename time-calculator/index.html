@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Calculator · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Add and subtract time durations, or find the time between two clock times — instantly in your browser. Free, private, no sign-up.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Time Calculator · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Add and subtract time durations, or find the time between two clock times — instantly in your browser. Free, private, no sign-up.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/time-calculator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/time-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+/* mode pills */
+.mode-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.mode-pill{
+  font-family:inherit;font-weight:600;font-size:.9rem;cursor:pointer;
+  padding:10px 22px;min-height:44px;border-radius:999px;
+  border:1.5px solid rgba(124,58,237,.25);
+  background:rgba(255,255,255,.65);color:var(--ink);
+  transition:background .15s,color .15s,box-shadow .15s,transform .15s;
+}
+.mode-pill:hover{background:#fff}
+.mode-pill.active{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border-color:transparent;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.mode-pane{display:none}
+.mode-pane.active{display:block}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;
+  text-transform:uppercase;margin:0 2px 8px}
+/* duration rows */
+.rows{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.drow{display:flex;gap:8px;align-items:center}
+.op-sel,.dur-in{
+  font-family:inherit;font-size:1rem;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);
+  border-radius:14px;padding:0 12px;min-height:44px;outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+.op-sel{flex:0 0 64px;cursor:pointer;text-align:center}
+.dur-in{flex:1;font-family:var(--mono);letter-spacing:.5px;min-width:0}
+.op-sel:focus,.dur-in:focus,.t-in:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.dur-in::placeholder{color:#9CA3AF}
+.drow:first-child .op-sel{opacity:.45}
+.rm-row{
+  flex:0 0 44px;width:44px;min-height:44px;border-radius:14px;cursor:pointer;
+  border:1.5px solid #FCA5A5;background:rgba(254,242,242,.8);color:#DC2626;
+  font-size:1.05rem;font-weight:700;line-height:1;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.rm-row:hover{background:#FEE2E2}
+.rm-row:disabled{opacity:.35;cursor:default;background:rgba(255,255,255,.5);border-color:var(--line);color:var(--mut)}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.btn-row{display:flex;gap:12px;margin-top:4px;flex-wrap:wrap}
+/* time-between */
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.tfield .t-in{
+  width:100%;font-family:var(--mono);font-size:1.05rem;letter-spacing:.5px;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);
+  border-radius:14px;padding:0 14px;min-height:44px;outline:none;
+}
+.t-in::placeholder{color:#9CA3AF}
+.tfield .sub{font-size:.78rem;color:var(--mut);margin:6px 2px 0}
+/* result */
+.result{
+  margin-top:18px;border-radius:18px;padding:18px 20px;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);
+  border:1px solid rgba(124,58,237,.2);
+}
+.result .r-lab{font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6D28D9;margin-bottom:4px}
+.result .r-big{font-family:var(--mono);font-size:1.9rem;font-weight:700;color:#1F2937;line-height:1.2}
+.result .r-sub{font-size:.88rem;color:var(--mut);margin-top:4px}
+.error{
+  display:none;margin-top:14px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .result .r-big{font-size:1.5rem}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Time Calculator — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/time-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Time calculator">
+    <div class="mode-pills" role="tablist" aria-label="Calculator mode">
+      <button class="mode-pill active" id="pillAdd" type="button" role="tab" aria-selected="true" aria-controls="paneAdd">➕ Add / Subtract</button>
+      <button class="mode-pill" id="pillBetween" type="button" role="tab" aria-selected="false" aria-controls="paneBetween">⏱ Time Between</button>
+    </div>
+
+    <!-- Mode 1: add / subtract durations -->
+    <div class="mode-pane active" id="paneAdd" role="tabpanel" aria-labelledby="pillAdd">
+      <label class="lab" id="durLabel">Durations (hours : minutes)</label>
+      <div class="rows" id="durRows" aria-labelledby="durLabel"></div>
+      <div class="btn-row">
+        <button class="btn btn-g" id="addRowBtn" type="button">＋ Add row</button>
+        <button class="btn btn-g" id="clearRowsBtn" type="button">Clear</button>
+      </div>
+      <div class="result" id="sumResult" aria-live="polite">
+        <div class="r-lab">Total</div>
+        <div class="r-big" id="sumBig">0h 00m</div>
+        <div class="r-sub" id="sumSub">0 minutes</div>
+      </div>
+      <div class="error" id="sumError" role="alert"></div>
+    </div>
+
+    <!-- Mode 2: time between two clock times -->
+    <div class="mode-pane" id="paneBetween" role="tabpanel" aria-labelledby="pillBetween">
+      <div class="tgrid">
+        <div class="tfield">
+          <label class="lab" for="startTime">Start time</label>
+          <input class="t-in" type="time" id="startTime" value="09:00" aria-label="Start time">
+          <div class="sub">From</div>
+        </div>
+        <div class="tfield">
+          <label class="lab" for="endTime">End time</label>
+          <input class="t-in" type="time" id="endTime" value="17:00" aria-label="End time">
+          <div class="sub">To</div>
+        </div>
+      </div>
+      <div class="result" id="diffResult" aria-live="polite">
+        <div class="r-lab">Difference</div>
+        <div class="r-big" id="diffBig">8h 00m</div>
+        <div class="r-sub" id="diffSub">480 minutes</div>
+      </div>
+      <div class="error" id="diffError" role="alert"></div>
+    </div>
+  </section>
+
+  <div class="hero">
+    <h1>Time Calculator <span class="plain">— Free Online Tool</span></h1>
+    <p>Add up work hours, subtract breaks, or find how much time passes between two clock times. Instant, accurate, and completely private.</p>
+  </div>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Pick a mode</b> — add/subtract durations or find the time between two clock times.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Enter your times</b> — add rows with +/− for each duration, or set start and end.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Read the total</b> — results update live as you type, nothing to submit.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>What duration format should I use?</summary>
+      <p>Use hours and minutes like 2:30 or 02:30 — anything up to 999:59 is fine. You can also type just minutes, e.g. 90 becomes 1h 30m.</p>
+    </details>
+    <details>
+      <summary>Does the "Time Between" mode handle times past midnight?</summary>
+      <p>Yes. If the end time is earlier than the start time, it is treated as the next day — for example 22:00 to 06:00 gives 8 hours.</p>
+    </details>
+    <details>
+      <summary>Can the total go negative?</summary>
+      <p>Yes — if you subtract more than you add, the total shows as negative (e.g. −1h 30m) so you can see exactly where you stand.</p>
+    </details>
+  </section>
+
+  <p class="note">Add / subtract durations · time between clock times · 100% local — your data never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---- Mode pills ----
+  var pillAdd = document.getElementById('pillAdd');
+  var pillBetween = document.getElementById('pillBetween');
+  var paneAdd = document.getElementById('paneAdd');
+  var paneBetween = document.getElementById('paneBetween');
+
+  function setMode(which) {
+    var isAdd = which === 'add';
+    pillAdd.classList.toggle('active', isAdd);
+    pillBetween.classList.toggle('active', !isAdd);
+    pillAdd.setAttribute('aria-selected', isAdd ? 'true' : 'false');
+    pillBetween.setAttribute('aria-selected', !isAdd ? 'true' : 'false');
+    paneAdd.classList.toggle('active', isAdd);
+    paneBetween.classList.toggle('active', !isAdd);
+  }
+  pillAdd.addEventListener('click', function () { setMode('add'); });
+  pillBetween.addEventListener('click', function () { setMode('between'); });
+
+  // ---- Mode 1: add / subtract durations ----
+  var durRows = document.getElementById('durRows');
+  var addRowBtn = document.getElementById('addRowBtn');
+  var clearRowsBtn = document.getElementById('clearRowsBtn');
+  var sumBig = document.getElementById('sumBig');
+  var sumSub = document.getElementById('sumSub');
+  var sumError = document.getElementById('sumError');
+
+  // Parse "H:MM", "HH:MM" or bare minutes -> total minutes, or null if invalid.
+  function parseDuration(raw) {
+    var s = String(raw).trim();
+    if (s === '') return 0; // empty row counts as zero, not an error
+    var m = /^(\d{1,3}):([0-5]\d)$/.exec(s);
+    if (m) return parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
+    if (/^\d{1,5}$/.test(s)) return parseInt(s, 10); // bare minutes
+    return null;
+  }
+
+  function fmtSigned(totalMin) {
+    var sign = totalMin < 0 ? '−' : '';
+    var a = Math.abs(totalMin);
+    var h = Math.floor(a / 60);
+    var m = a % 60;
+    return sign + h + 'h ' + (m < 10 ? '0' : '') + m + 'm';
+  }
+
+  function showSumError(msg) {
+    sumError.textContent = msg;
+    sumError.classList.add('show');
+  }
+  function hideSumError() {
+    sumError.textContent = '';
+    sumError.classList.remove('show');
+  }
+
+  function refreshRemoveButtons() {
+    var rows = durRows.querySelectorAll('.drow');
+    var btns = durRows.querySelectorAll('.rm-row');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].disabled = rows.length <= 1;
+    }
+  }
+
+  function liveSum() {
+    var rows = durRows.querySelectorAll('.drow');
+    var total = 0;
+    var bad = null;
+    for (var i = 0; i < rows.length; i++) {
+      var inp = rows[i].querySelector('.dur-in');
+      var op = rows[i].querySelector('.op-sel').value;
+      var v = parseDuration(inp.value);
+      if (v === null) {
+        bad = 'Row ' + (i + 1) + ' looks off — use H:MM like 2:30, or just minutes like 90.';
+        break;
+      }
+      total += (op === '-' ? -v : v);
+    }
+    if (bad) {
+      showSumError(bad);
+    } else {
+      hideSumError();
+    }
+    sumBig.textContent = fmtSigned(total);
+    sumSub.textContent = total + ' minutes';
+  }
+
+  function addRow() {
+    var row = document.createElement('div');
+    row.className = 'drow';
+
+    var op = document.createElement('select');
+    op.className = 'op-sel';
+    op.setAttribute('aria-label', 'Add or subtract this duration');
+    var optPlus = document.createElement('option');
+    optPlus.value = '+';
+    optPlus.textContent = '+';
+    var optMinus = document.createElement('option');
+    optMinus.value = '-';
+    optMinus.textContent = '−';
+    op.appendChild(optPlus);
+    op.appendChild(optMinus);
+
+    var inp = document.createElement('input');
+    inp.className = 'dur-in';
+    inp.type = 'text';
+    inp.inputMode = 'numeric';
+    inp.placeholder = 'HH:MM';
+    inp.setAttribute('aria-label', 'Duration in hours and minutes');
+    inp.setAttribute('autocomplete', 'off');
+    inp.setAttribute('spellcheck', 'false');
+
+    var rm = document.createElement('button');
+    rm.className = 'rm-row';
+    rm.type = 'button';
+    rm.textContent = '×';
+    rm.setAttribute('aria-label', 'Remove this row');
+
+    row.appendChild(op);
+    row.appendChild(inp);
+    row.appendChild(rm);
+    durRows.appendChild(row);
+
+    if (durRows.children.length === 1) {
+      op.disabled = true; // first row is always added
+    }
+
+    op.addEventListener('change', liveSum);
+    inp.addEventListener('input', liveSum);
+    rm.addEventListener('click', function () {
+      if (durRows.children.length <= 1) return;
+      durRows.removeChild(row);
+      refreshRemoveButtons();
+      liveSum();
+    });
+
+    refreshRemoveButtons();
+    liveSum();
+    return row;
+  }
+
+  addRowBtn.addEventListener('click', function () {
+    var row = addRow();
+    var inp = row.querySelector('.dur-in');
+    if (inp) inp.focus();
+  });
+  clearRowsBtn.addEventListener('click', function () {
+    while (durRows.firstChild) durRows.removeChild(durRows.firstChild);
+    addRow();
+  });
+
+  // Seed two example rows so the tool shows working totals right away.
+  addRow();
+  addRow();
+  durRows.children[0].querySelector('.dur-in').value = '2:30';
+  durRows.children[1].querySelector('.dur-in').value = '1:45';
+  liveSum();
+
+  // ---- Mode 2: time between two clock times ----
+  var startTime = document.getElementById('startTime');
+  var endTime = document.getElementById('endTime');
+  var diffBig = document.getElementById('diffBig');
+  var diffSub = document.getElementById('diffSub');
+  var diffError = document.getElementById('diffError');
+
+  function showDiffError(msg) {
+    diffError.textContent = msg;
+    diffError.classList.add('show');
+  }
+  function hideDiffError() {
+    diffError.textContent = '';
+    diffError.classList.remove('show');
+  }
+
+  function clockToMin(s) {
+    var m = /^(\d{2}):(\d{2})/.exec(String(s).trim());
+    if (!m) return null;
+    var h = parseInt(m[1], 10), mm = parseInt(m[2], 10);
+    if (h > 23 || mm > 59) return null;
+    return h * 60 + mm;
+  }
+
+  function liveDiff() {
+    var a = clockToMin(startTime.value);
+    var b = clockToMin(endTime.value);
+    if (a === null || b === null) {
+      showDiffError('Please enter valid start and end times (e.g. 09:00).');
+      return;
+    }
+    hideDiffError();
+    var delta = b - a;
+    if (delta < 0) delta += 24 * 60; // crosses midnight -> next day
+    diffBig.textContent = fmtSigned(delta);
+    diffSub.textContent = delta + ' minutes';
+  }
+
+  startTime.addEventListener('input', liveDiff);
+  endTime.addEventListener('input', liveDiff);
+  endTime.addEventListener('change', liveDiff);
+  startTime.addEventListener('change', liveDiff);
+  liveDiff();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF to PNG Converter · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Convert every page of a PDF to high-quality PNG images (150, 200 or 300 DPI) right in your browser. Free, private, no uploads.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="PDF to PNG Converter · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Convert every page of a PDF to high-quality PNG images (150, 200 or 300 DPI) right in your browser. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/pdf-to-png/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/pdf-to-png/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.dropzone{
+  border:1.5px dashed rgba(124,58,237,.35);border-radius:20px;
+  background:rgba(255,255,255,.45);
+  padding:clamp(26px,5vw,40px) 20px;text-align:center;cursor:pointer;
+  transition:border-color .15s,background .15s,box-shadow .15s;
+}
+.dropzone:hover,.dropzone.drag{background:rgba(255,255,255,.75);border-color:var(--vio);
+  box-shadow:0 0 0 4px rgba(124,58,237,.10)}
+.dropzone .ico{width:52px;height:52px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio)}
+.dropzone .ico svg{width:26px;height:26px}
+.dropzone .dz-t{font-weight:700;font-size:1.02rem}
+.dropzone .dz-s{font-size:.85rem;color:var(--mut);margin-top:6px}
+.dropzone .dz-file{display:none;margin-top:12px;font-size:.88rem;font-weight:600;color:#4C1D95;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;padding:8px 18px}
+.dropzone.has-file .dz-file{display:inline-block}
+.dpi-row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;align-items:center}
+.dpi-lab{font-size:.85rem;font-weight:600;color:var(--mut)}
+.dpi-pills{display:flex;gap:8px;flex-wrap:wrap}
+.dpi-pill{
+  font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
+  min-height:44px;padding:10px 20px;border-radius:999px;
+  border:1.5px solid rgba(124,58,237,.22);background:rgba(255,255,255,.65);color:var(--ink);
+  transition:all .15s;
+}
+.dpi-pill:hover{background:#fff}
+.dpi-pill.active{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border-color:transparent;
+  box-shadow:0 6px 18px rgba(124,58,237,.35)}
+.btn-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.progress{display:none;margin-top:16px;font-size:.88rem;color:var(--mut);font-weight:500}
+.progress.show{display:block}
+.progress .bar{height:10px;border-radius:999px;background:rgba(124,58,237,.12);overflow:hidden;margin-top:8px}
+.progress .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--vio),var(--cyn));
+  border-radius:999px;transition:width .2s}
+.error{
+  display:none;margin-bottom:18px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{display:block;margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.pages{margin-bottom:18px;display:grid;gap:14px}
+.page-card{opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;
+  padding:16px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.page-card.show{opacity:1;transform:none}
+.thumb{flex:0 0 96px;width:96px;height:120px;border-radius:12px;object-fit:cover;background:#fff;
+  border:1px solid var(--line);box-shadow:0 4px 14px rgba(31,41,55,.08)}
+.page-info{flex:1 1 160px;min-width:0}
+.page-info .pt{font-weight:700;font-size:.95rem}
+.page-info .ps{font-size:.8rem;color:var(--mut);margin-top:4px}
+.dl-btn{
+  font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;
+  padding:8px 20px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);
+  transition:background .15s,transform .15s;
+}
+.dl-btn:hover{background:#fff}
+.dl-btn:active{transform:scale(.96)}
+.dl-btn.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PDF to PNG Converter — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/pdf-to-png/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="PDF upload and options">
+    <span class="lab" id="dzLabel">Your PDF</span>
+    <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-labelledby="dzLabel" aria-describedby="dzDesc">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15l3-3 3 3"/></svg></span>
+      <div class="dz-t">Drop your PDF here</div>
+      <div class="dz-s" id="dzDesc">or tap to choose a file · only one PDF at a time</div>
+      <span class="dz-file" id="dzFile">No file selected</span>
+      <input type="file" id="fileInput" accept="application/pdf,.pdf" hidden>
+    </div>
+    <div class="dpi-row">
+      <span class="dpi-lab">Quality (DPI):</span>
+      <div class="dpi-pills" role="group" aria-label="PNG resolution">
+        <button type="button" class="dpi-pill" data-dpi="150">150 DPI</button>
+        <button type="button" class="dpi-pill active" data-dpi="200">200 DPI</button>
+        <button type="button" class="dpi-pill" data-dpi="300">300 DPI</button>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-p" id="convertBtn" type="button" disabled>Convert to PNG</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="progress" id="progressBox"><span id="progressText">Loading…</span><div class="bar"><i id="progressBar"></i></div></div>
+    <div class="meta">
+      <span class="pill" id="infoNote">1 PDF · every page becomes a PNG</span>
+      <span>Conversion runs locally in your browser — nothing is uploaded.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>PDF to PNG Converter <span class="plain">— Free Online Tool</span></h1>
+    <p>Turn every page of a PDF into a crisp PNG image at 150, 200 or 300 DPI. Preview each page, download individually, or grab them all as a ZIP.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+    Your converted PNG pages will appear here after you click <b>Convert to PNG</b>.
+  </div>
+
+  <div class="btn-row" id="zipRow" style="display:none;margin:0 0 18px">
+    <button class="btn btn-p" id="zipBtn" type="button">Download all as ZIP</button>
+  </div>
+
+  <div class="pages" id="pagesList" aria-live="polite"></div>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Drop a PDF</b> into the box above and pick a DPI quality.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Press Convert to PNG</b> — every page renders into a crisp PNG.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Download each page</b> individually, or all pages together as a ZIP.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is my PDF uploaded to a server?</summary>
+      <p>No. Conversion happens entirely in your browser using PDF.js, so your PDF never leaves this page — nothing is uploaded or stored anywhere.</p>
+    </details>
+    <details>
+      <summary>What DPI should I choose?</summary>
+      <p>150 DPI is great for quick previews and sharing, 200 DPI is the balanced default, and 300 DPI gives print-quality PNGs (larger files).</p>
+    </details>
+    <details>
+      <summary>Can I convert password-protected or very large PDFs?</summary>
+      <p>Password-protected PDFs are not supported — the browser cannot open them without the password. Very large PDFs (many pages at 300 DPI) may use a lot of memory; try 150 DPI if your device struggles.</p>
+    </details>
+  </section>
+
+  <p class="note">PDF.js rendering · 150 / 200 / 300 DPI · 100% local — your PDF never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // CDN fallback chain: cdnjs -> jsdelivr -> unpkg (all verified HTTP 200)
+  var PDF_BASES = [
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174',
+    'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build',
+    'https://unpkg.com/pdfjs-dist@3.11.174/build'
+  ];
+  var ZIP_BASES = [
+    'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+    'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js',
+    'https://unpkg.com/jszip@3.10.1/dist/jszip.min.js'
+  ];
+
+  var dropzone = document.getElementById('dropzone');
+  var fileInput = document.getElementById('fileInput');
+  var dzFile = document.getElementById('dzFile');
+  var convertBtn = document.getElementById('convertBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var errorBox = document.getElementById('errorBox');
+  var emptyState = document.getElementById('emptyState');
+  var pagesList = document.getElementById('pagesList');
+  var zipRow = document.getElementById('zipRow');
+  var zipBtn = document.getElementById('zipBtn');
+  var progressBox = document.getElementById('progressBox');
+  var progressText = document.getElementById('progressText');
+  var progressBar = document.getElementById('progressBar');
+  var dpiPills = Array.prototype.slice.call(document.querySelectorAll('.dpi-pill'));
+
+  var selectedFile = null;
+  var selectedDpi = 200;
+  var pageItems = []; // { blob, url, width, height, name }
+  var baseName = 'document';
+  var busy = false;
+  var pdfJsReady = false;
+  var pdfJsBase = null;
+  var zipReady = false;
+
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = function () { resolve(); };
+      s.onerror = function () { reject(new Error('failed: ' + src)); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function ensurePdfJs() {
+    if (pdfJsReady) return Promise.resolve();
+    var i = 0;
+    function next() {
+      if (i >= PDF_BASES.length) return Promise.reject(new Error('PDF library failed to load from every CDN. Check your connection and try again.'));
+      return loadScript(PDF_BASES[i] + '/pdf.min.js').then(function () {
+        pdfJsBase = PDF_BASES[i];
+        if (window.pdfjsLib) {
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc = pdfJsBase + '/pdf.worker.min.js';
+        }
+        pdfJsReady = true;
+      }).catch(function () { i++; return next(); });
+    }
+    return next();
+  }
+
+  function ensureZip() {
+    if (zipReady) return Promise.resolve();
+    var i = 0;
+    function next() {
+      if (i >= ZIP_BASES.length) return Promise.reject(new Error('ZIP library failed to load from every CDN. Check your connection and try again.'));
+      return loadScript(ZIP_BASES[i]).then(function () {
+        if (window.JSZip) { zipReady = true; }
+        else { i++; return next(); }
+      }).catch(function () { i++; return next(); });
+    }
+    return next();
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function setProgress(frac, text) {
+    progressBox.classList.add('show');
+    progressText.textContent = text;
+    progressBar.style.width = Math.round(frac * 100) + '%';
+  }
+
+  function hideProgress() {
+    progressBox.classList.remove('show');
+    progressBar.style.width = '0';
+  }
+
+  function fmtMB(bytes) {
+    return (bytes / 1048576).toFixed(1) + ' MB';
+  }
+
+  function setFile(file) {
+    hideError();
+    if (!file) return;
+    var isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+    if (!isPdf) {
+      showError('That file does not look like a PDF. Please choose a file ending in .pdf.');
+      return;
+    }
+    selectedFile = file;
+    baseName = file.name.replace(/\.pdf$/i, '') || 'document';
+    dzFile.textContent = file.name + ' · ' + fmtMB(file.size);
+    dropzone.classList.add('has-file');
+    convertBtn.disabled = false;
+  }
+
+  dpiPills.forEach(function (pill) {
+    pill.addEventListener('click', function () {
+      dpiPills.forEach(function (p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      selectedDpi = parseInt(pill.getAttribute('data-dpi'), 10) || 200;
+    });
+  });
+
+  dropzone.addEventListener('click', function () { fileInput.click(); });
+  dropzone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+  });
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files && fileInput.files.length) setFile(fileInput.files[0]);
+  });
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.add('drag'); });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.remove('drag'); });
+  });
+  dropzone.addEventListener('drop', function (e) {
+    var files = e.dataTransfer && e.dataTransfer.files;
+    if (files && files.length) setFile(files[0]);
+  });
+
+  function canvasToBlob(canvas) {
+    return new Promise(function (resolve, reject) {
+      if (canvas.toBlob) {
+        canvas.toBlob(function (blob) {
+          if (blob) resolve(blob); else reject(new Error('PNG encode failed'));
+        }, 'image/png');
+      } else {
+        reject(new Error('Canvas is not supported in this browser'));
+      }
+    });
+  }
+
+  function downloadUrl(url, filename) {
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  function clearPages() {
+    pageItems.forEach(function (it) { URL.revokeObjectURL(it.url); });
+    pageItems = [];
+    pagesList.innerHTML = '';
+    zipRow.style.display = 'none';
+    emptyState.style.display = '';
+  }
+
+  function makePageCard(index, url, width, height, sizeMB) {
+    var card = document.createElement('section');
+    card.className = 'card page-card';
+    card.setAttribute('aria-label', 'Page ' + (index + 1) + ' preview');
+
+    var img = document.createElement('img');
+    img.className = 'thumb';
+    img.src = url;
+    img.alt = 'Preview of page ' + (index + 1);
+    card.appendChild(img);
+
+    var info = document.createElement('div');
+    info.className = 'page-info';
+    var title = document.createElement('div');
+    title.className = 'pt';
+    title.textContent = 'Page ' + (index + 1);
+    var sub = document.createElement('div');
+    sub.className = 'ps';
+    sub.textContent = width + ' × ' + height + ' px · ' + sizeMB + ' · PNG';
+    info.appendChild(title);
+    info.appendChild(sub);
+    card.appendChild(info);
+
+    var dl = document.createElement('button');
+    dl.type = 'button';
+    dl.className = 'dl-btn';
+    dl.textContent = 'Download';
+    dl.setAttribute('aria-label', 'Download page ' + (index + 1) + ' as PNG');
+    dl.addEventListener('click', function () {
+      var it = pageItems[index];
+      if (!it) return;
+      downloadUrl(it.url, it.name);
+      dl.classList.add('ok');
+      dl.textContent = 'Saved ✓';
+      setTimeout(function () { dl.classList.remove('ok'); dl.textContent = 'Download'; }, 1600);
+    });
+    card.appendChild(dl);
+    return card;
+  }
+
+  function convert() {
+    if (busy || !selectedFile) return;
+    hideError();
+    clearPages();
+    busy = true;
+    convertBtn.disabled = true;
+    convertBtn.textContent = 'Working…';
+    var dpi = selectedDpi;
+
+    setProgress(0, 'Loading conversion engine…');
+    ensurePdfJs()
+      .then(function () {
+        setProgress(0.05, 'Reading PDF…');
+        return selectedFile.arrayBuffer();
+      })
+      .then(function (buf) {
+        return window.pdfjsLib.getDocument({ data: buf }).promise;
+      })
+      .then(function (pdf) {
+        var total = pdf.numPages;
+        var seq = Promise.resolve();
+        for (var i = 1; i <= total; i++) {
+          (function (pageNum) {
+            seq = seq.then(function () {
+              setProgress(0.05 + 0.9 * (pageNum - 1) / total, 'Rendering page ' + pageNum + ' of ' + total + '…');
+              return pdf.getPage(pageNum).then(function (page) {
+                var scale = dpi / 72;
+                var viewport = page.getViewport({ scale: scale });
+                var canvas = document.createElement('canvas');
+                canvas.width = Math.floor(viewport.width);
+                canvas.height = Math.floor(viewport.height);
+                var ctx = canvas.getContext('2d');
+                return page.render({ canvasContext: ctx, viewport: viewport }).promise.then(function () {
+                  return canvasToBlob(canvas);
+                }).then(function (blob) {
+                  var url = URL.createObjectURL(blob);
+                  var name = baseName + '-page' + pageNum + '.png';
+                  pageItems.push({ blob: blob, url: url, width: canvas.width, height: canvas.height, name: name });
+                  var sizeMB = fmtMB(blob.size);
+                  var card = makePageCard(pageNum - 1, url, canvas.width, canvas.height, sizeMB);
+                  pagesList.appendChild(card);
+                  setTimeout(function () { card.classList.add('show'); }, 40);
+                });
+              });
+            });
+          })(i);
+        }
+        return seq;
+      })
+      .then(function () {
+        setProgress(1, 'Done — ' + pageItems.length + ' page' + (pageItems.length === 1 ? '' : 's') + ' converted.');
+        emptyState.style.display = 'none';
+        if (pageItems.length > 1) zipRow.style.display = '';
+        setTimeout(hideProgress, 2500);
+      })
+      .catch(function (e) {
+        hideProgress();
+        var msg = (e && e.message) ? e.message : String(e);
+        if (/password/i.test(msg) || (e && e.name === 'PasswordException')) {
+          msg = 'This PDF is password-protected and cannot be converted here.';
+        } else if (/invalid|format/i.test(msg)) {
+          msg = 'Could not read this file as a PDF. It may be corrupted.';
+        }
+        showError(msg);
+        clearPages();
+      })
+      .then(function () {
+        busy = false;
+        convertBtn.disabled = false;
+        convertBtn.textContent = 'Convert to PNG';
+      });
+  }
+
+  function downloadZip() {
+    if (busy || pageItems.length === 0) return;
+    hideError();
+    busy = true;
+    zipBtn.disabled = true;
+    zipBtn.textContent = 'Preparing ZIP…';
+    setProgress(0.2, 'Loading ZIP engine…');
+    ensureZip()
+      .then(function () {
+        setProgress(0.4, 'Packing ' + pageItems.length + ' PNGs…');
+        var zip = new window.JSZip();
+        pageItems.forEach(function (it) { zip.file(it.name, it.blob); });
+        return zip.generateAsync({ type: 'blob' });
+      })
+      .then(function (blob) {
+        var url = URL.createObjectURL(blob);
+        downloadUrl(url, baseName + '-png.zip');
+        setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
+        setProgress(1, 'ZIP downloaded.');
+        setTimeout(hideProgress, 2500);
+      })
+      .catch(function (e) {
+        hideProgress();
+        showError((e && e.message) ? e.message : String(e));
+      })
+      .then(function () {
+        busy = false;
+        zipBtn.disabled = false;
+        zipBtn.textContent = 'Download all as ZIP';
+      });
+  }
+
+  function clearAll() {
+    selectedFile = null;
+    fileInput.value = '';
+    dzFile.textContent = 'No file selected';
+    dropzone.classList.remove('has-file');
+    convertBtn.disabled = true;
+    hideError();
+    hideProgress();
+    clearPages();
+  }
+
+  convertBtn.addEventListener('click', convert);
+  clearBtn.addEventListener('click', clearAll);
+  zipBtn.addEventListener('click', downloadZip);
+})();
+</script>
+</body>
+</html>

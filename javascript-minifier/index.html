@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Minifier · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Minify JavaScript online for free — shrink JS file size instantly in your browser with Terser. Private, no uploads, no sign-up.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="JavaScript Minifier · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Minify JavaScript online for free — shrink JS file size instantly in your browser with Terser. Private, no uploads, no sign-up.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/javascript-minifier/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/javascript-minifier/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+textarea#jsInput{
+  width:100%;min-height:150px;resize:vertical;font-family:var(--mono);font-size:.88rem;
+  color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;
+  line-height:1.6;white-space:pre;overflow:auto;
+}
+textarea#jsInput:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+textarea#jsInput::placeholder{color:#9CA3AF}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.meta .pill.simple{
+  background:linear-gradient(135deg,#FEF3C7,#FDE68A);color:#92400E;
+}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.result-card{margin-bottom:18px;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+.result-card.show{opacity:1;transform:none}
+.res-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.algo{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1.02rem}
+.algo .tag{
+  font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:#fff;
+  background:linear-gradient(135deg,var(--vio),#6D28D9);
+}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.stat{
+  background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:14px;
+  padding:10px 16px;font-size:.85rem;
+}
+.stat b{display:block;font-size:1.05rem;font-weight:700}
+.stat span{color:var(--mut);font-size:.75rem;font-weight:500}
+.stat.saved b{color:#059669}
+.code-box{
+  font-family:var(--mono);font-size:.82rem;line-height:1.7;word-break:break-all;
+  background:rgba(31,41,55,.93);color:#D1FAE5;border-radius:14px;
+  padding:16px 18px;max-height:280px;overflow:auto;white-space:pre-wrap;
+}
+.copy-btn{
+  font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;
+  padding:8px 20px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);
+  transition:background .15s,transform .15s;
+}
+.copy-btn:hover{background:#fff}
+.copy-btn:active{transform:scale(.96)}
+.copy-btn.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+.error{
+  display:none;margin-bottom:18px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.warn{
+  display:none;margin-top:12px;padding:12px 16px;border-radius:14px;
+  background:rgba(254,243,199,.9);border:1px solid #FCD34D;color:#92400E;
+  font-size:.85rem;font-weight:500;
+}
+.warn.show{display:block}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{display:block;margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .res-head{align-items:flex-start}
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "JavaScript Minifier — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/javascript-minifier/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="JavaScript input">
+    <label class="lab" for="jsInput">Your JavaScript</label>
+    <textarea id="jsInput" placeholder="// Paste your JavaScript here…&#10;function greet(name) {&#10;  console.log('Hello, ' + name);&#10;}&#10;greet('World');" spellcheck="false" aria-label="JavaScript to minify"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-p" id="minifyBtn" type="button">Minify</button>
+      <button class="btn btn-g" id="sampleBtn" type="button">Load sample</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="meta">
+      <span class="pill" id="engineNote">checking engine…</span>
+      <span class="pill" id="lenNote">0 characters · 0 bytes</span>
+      <span>Minification runs locally in your browser — nothing is uploaded.</span>
+    </div>
+    <div class="warn" id="warnBox" role="status"></div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>JavaScript Minifier <span class="plain">— Free Online Tool</span></h1>
+    <p>Shrink your JavaScript instantly — remove comments and whitespace, compress syntax and mangle variable names. Faster loads, smaller files.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+    Your minified JavaScript will appear here after you click <b>Minify</b>.
+  </div>
+
+  <section class="card result-card" id="resultCard" hidden aria-label="Minified result">
+    <div class="res-head">
+      <div class="algo"><span class="tag">Minified</span><span id="resultEngine" style="font-size:.78rem;color:var(--mut);font-weight:500"></span></div>
+      <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy minified JavaScript">Copy</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="beforeBytes">0</b><span>before</span></div>
+      <div class="stat"><b id="afterBytes">0</b><span>after</span></div>
+      <div class="stat saved"><b id="savedPct">0%</b><span>saved</span></div>
+    </div>
+    <div class="code-box" id="outBox"></div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>100% private — no uploads</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Paste your JavaScript</b> into the box above (or load the sample).</span></div>
+      <div class="step"><span class="n">2</span><span><b>Press Minify</b> — Terser compresses and mangles it in your browser.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Copy the result</b> with one tap and check how many bytes you saved.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>How does the minification work?</summary>
+      <p>This tool uses Terser — the industry-standard JavaScript minifier — loaded in your browser. It removes comments and whitespace, compresses syntax and shortens variable names, so your file stays functionally identical but much smaller.</p>
+    </details>
+    <details>
+      <summary>What does "simple minifier (no Terser)" mean?</summary>
+      <p>If the Terser library cannot be loaded (for example you are offline or the CDN is blocked), the page automatically falls back to a built-in simple minifier and says so honestly. The simple minifier only strips comments and collapses whitespace — it does not compress syntax or mangle variable names, so the savings are smaller. Reconnect and reload the page for full Terser minification.</p>
+    </details>
+    <details>
+      <summary>Is my code uploaded to a server?</summary>
+      <p>No. Everything runs locally in your browser — the minification engine itself is a JavaScript library executed on this page, so your code never leaves your device.</p>
+    </details>
+  </section>
+
+  <p class="note">Terser-powered minification · ES6+ safe · 100% local — your code never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/terser@5.31.6/dist/bundle.min.js" onerror="window.__terserFailed=true"></script>
+<script>
+(function () {
+  'use strict';
+
+  var jsInput = document.getElementById('jsInput');
+  var minifyBtn = document.getElementById('minifyBtn');
+  var sampleBtn = document.getElementById('sampleBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var engineNote = document.getElementById('engineNote');
+  var lenNote = document.getElementById('lenNote');
+  var errorBox = document.getElementById('errorBox');
+  var warnBox = document.getElementById('warnBox');
+  var emptyState = document.getElementById('emptyState');
+  var resultCard = document.getElementById('resultCard');
+  var resultEngine = document.getElementById('resultEngine');
+  var outBox = document.getElementById('outBox');
+  var copyBtn = document.getElementById('copyBtn');
+  var beforeBytes = document.getElementById('beforeBytes');
+  var afterBytes = document.getElementById('afterBytes');
+  var savedPct = document.getElementById('savedPct');
+
+  function byteLen(s) {
+    return new TextEncoder().encode(s).length;
+  }
+
+  function formatBytes(n) {
+    return n.toLocaleString('en-US') + ' bytes';
+  }
+
+  function terserReady() {
+    return !window.__terserFailed &&
+           typeof window.Terser !== 'undefined' &&
+           typeof window.Terser.minify === 'function';
+  }
+
+  function updateEngineNote() {
+    if (terserReady()) {
+      engineNote.textContent = 'Terser engine';
+      engineNote.classList.remove('simple');
+    } else {
+      engineNote.textContent = 'simple minifier (no Terser)';
+      engineNote.classList.add('simple');
+    }
+  }
+
+  function updateLength() {
+    var code = jsInput.value;
+    lenNote.textContent = code.length + ' characters · ' + byteLen(code).toLocaleString('en-US') + ' bytes';
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function showWarn(msg) {
+    warnBox.textContent = msg;
+    warnBox.classList.add('show');
+  }
+
+  function hideWarn() {
+    warnBox.textContent = '';
+    warnBox.classList.remove('show');
+  }
+
+  /* ------------------------------------------------------------------
+   * Simple fallback minifier (used honestly when Terser is unavailable).
+   * Tokenizes the input so it is string-aware: strips // and /* *\/ comments,
+   * keeps string/template-literal contents intact (incl. ${} interpolation),
+   * and collapses whitespace — keeping a single space only where required
+   * between identifier characters. Does NOT mangle or compress syntax.
+   * ------------------------------------------------------------------ */
+  function simpleMinify(code) {
+    var out = [];
+    var last = '';
+    var i = 0;
+    var n = code.length;
+    var stack = [{ type: 'code' }];
+    var pendingSpace = false;
+
+    function isIdChar(c) { return /[$\w]/.test(c); }
+
+    function flushSpace(next) {
+      if (pendingSpace) {
+        if (isIdChar(last) && isIdChar(next)) out.push(' ');
+        pendingSpace = false;
+      }
+    }
+
+    function emit(ch) { out.push(ch); last = ch; }
+
+    function regexAllowed() {
+      // Heuristic: a '/' starts a regex literal (not division) when the
+      // previous meaningful output token is one of these, or at the start.
+      if (last === '') return true;
+      if (/[(,=:[!&|?{};+\-*~%^<>]/.test(last)) return true;
+      return /\b(return|typeof|in|of|instanceof|new|delete|void|throw|else|do|case)$/.test(out.join(''));
+    }
+
+    while (i < n) {
+      var f = stack[stack.length - 1];
+      var c = code[i];
+      var nx = code[i + 1];
+
+      if (f.type === 'line') {
+        if (c === '\n' || c === '\r') { stack.pop(); pendingSpace = true; }
+        i++;
+        continue;
+      }
+
+      if (f.type === 'block') {
+        if (c === '*' && nx === '/') { stack.pop(); i += 2; pendingSpace = true; }
+        else { i++; }
+        continue;
+      }
+
+      if (f.esc) { f.esc = false; emit(c); i++; continue; }
+      if (c === '\\') { f.esc = true; emit(c); i++; continue; }
+
+      if (f.type === 'sq' || f.type === 'dq' || f.type === 'tpl') {
+        var close = f.type === 'sq' ? "'" : (f.type === 'dq' ? '"' : '`');
+        if (c === close) { stack.pop(); emit(c); i++; continue; }
+        if (f.type === 'tpl' && c === '$' && nx === '{') {
+          flushSpace(c);
+          emit('$'); emit('{');
+          stack.push({ type: 'code', interp: true });
+          i += 2;
+          continue;
+        }
+        emit(c); i++;
+        continue;
+      }
+
+      // code state
+      if (f.interp && c === '}') { stack.pop(); emit(c); i++; continue; }
+      if (c === '/' && nx === '/') { stack.push({ type: 'line' }); i += 2; continue; }
+      if (c === '/' && nx === '*') { stack.push({ type: 'block' }); i += 2; continue; }
+      if (c === "'") { flushSpace(c); emit(c); stack.push({ type: 'sq' }); i++; continue; }
+      if (c === '"') { flushSpace(c); emit(c); stack.push({ type: 'dq' }); i++; continue; }
+      if (c === '`') { flushSpace(c); emit(c); stack.push({ type: 'tpl' }); i++; continue; }
+      if (c === '/' && regexAllowed()) {
+        flushSpace(c);
+        emit('/'); i++;
+        var inClass = false;
+        while (i < n) {
+          var rc = code[i];
+          emit(rc);
+          if (rc === '\\') {
+            if (i + 1 < n) { emit(code[i + 1]); i += 2; }
+            else { i++; }
+            continue;
+          }
+          if (rc === '[') { inClass = true; }
+          else if (rc === ']') { inClass = false; }
+          else if (rc === '/' && !inClass) { i++; break; }
+          else if (rc === '\n' || rc === '\r') { break; }
+          i++;
+        }
+        continue;
+      }
+      if (/\s/.test(c)) { pendingSpace = true; i++; continue; }
+      flushSpace(c);
+      emit(c);
+      i++;
+    }
+    return out.join('');
+  }
+
+  async function minify() {
+    hideError();
+    hideWarn();
+    var code = jsInput.value;
+    if (!code.trim()) {
+      showError('Please paste some JavaScript first.');
+      return;
+    }
+    minifyBtn.disabled = true;
+    minifyBtn.textContent = 'Minifying…';
+    var usedTerser = terserReady();
+    var min = null;
+    try {
+      if (usedTerser) {
+        var res = await window.Terser.minify(code, {
+          compress: true,
+          mangle: true,
+          format: { comments: false }
+        });
+        if (!res || typeof res.code !== 'string') throw new Error('Terser returned no code');
+        min = res.code;
+      } else {
+        min = simpleMinify(code);
+      }
+    } catch (e) {
+      if (usedTerser) {
+        // Honest fallback: Terser failed at runtime, use the simple minifier.
+        try {
+          min = simpleMinify(code);
+          usedTerser = false;
+          showWarn('Terser could not process this code (' + (e && e.message ? e.message : e) + ') — the simple minifier was used instead.');
+        } catch (e2) {
+          showError('Could not minify this code: ' + (e2 && e2.message ? e2.message : e2));
+        }
+      } else {
+        showError('Could not minify this code: ' + (e && e.message ? e.message : e));
+      }
+    }
+    minifyBtn.disabled = false;
+    minifyBtn.textContent = 'Minify';
+    if (min === null) return;
+
+    var b = byteLen(code);
+    var a = byteLen(min);
+    var pct = b > 0 ? Math.max(0, Math.round((1 - a / b) * 1000) / 10) : 0;
+
+    beforeBytes.textContent = formatBytes(b);
+    afterBytes.textContent = formatBytes(a);
+    savedPct.textContent = pct + '%';
+    resultEngine.textContent = usedTerser ? '· Terser engine' : '· simple minifier (no Terser)';
+    outBox.textContent = min;
+    emptyState.style.display = 'none';
+    resultCard.hidden = false;
+    requestAnimationFrame(function () { resultCard.classList.add('show'); });
+  }
+
+  var SAMPLE = [
+    '// Sample: a tiny greeting helper',
+    'function greet(name) {',
+    '  // build the message',
+    '  var message = "Hello, " + name + "!";',
+    '  console.log(message);',
+    '  return message;',
+    '}',
+    '',
+    'greet("World"); // call it'
+  ].join('\n');
+
+  function loadSample() {
+    jsInput.value = SAMPLE;
+    hideError();
+    hideWarn();
+    updateLength();
+    jsInput.focus();
+  }
+
+  function clearAll() {
+    jsInput.value = '';
+    hideError();
+    hideWarn();
+    resultCard.classList.remove('show');
+    resultCard.hidden = true;
+    outBox.textContent = '';
+    emptyState.style.display = '';
+    updateLength();
+    jsInput.focus();
+  }
+
+  function copyFeedback(ok) {
+    var original = copyBtn.textContent;
+    copyBtn.textContent = ok ? 'Copied ✓' : 'Copy failed';
+    copyBtn.classList.add('ok');
+    setTimeout(function () {
+      copyBtn.textContent = original;
+      copyBtn.classList.remove('ok');
+    }, 1600);
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    copyFeedback(ok);
+  }
+
+  copyBtn.addEventListener('click', function () {
+    var text = outBox.textContent;
+    if (!text) return;
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      navigator.clipboard.writeText(text).then(
+        function () { copyFeedback(true); },
+        function () { fallbackCopy(text); }
+      );
+    } else {
+      fallbackCopy(text);
+    }
+  });
+
+  minifyBtn.addEventListener('click', minify);
+  sampleBtn.addEventListener('click', loadSample);
+  clearBtn.addEventListener('click', clearAll);
+  jsInput.addEventListener('input', updateLength);
+
+  updateEngineNote();
+  updateLength();
+})();
+</script>
+</body>
+</html>

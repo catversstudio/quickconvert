@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading Time Calculator · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Calculate reading time, speaking time, word count and character count of any text instantly. Adjustable WPM, free, private, no uploads.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Reading Time Calculator · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Calculate reading time, speaking time, word count and character count of any text instantly. Adjustable WPM, free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/reading-time-calculator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/reading-time-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+textarea#rtInput{
+  width:100%;min-height:160px;resize:vertical;font-family:inherit;font-size:.98rem;
+  color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;
+}
+textarea#rtInput:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+textarea#rtInput::placeholder{color:#9CA3AF}
+.slider-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+@media(max-width:560px){.slider-row{grid-template-columns:1fr}}
+.slider-block{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.slider-block label{font-size:.82rem;font-weight:600;color:var(--mut);letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:8px}
+.slider-block .val{font-weight:700;color:var(--vio);font-size:.95rem;margin-left:6px;letter-spacing:0;text-transform:none}
+input[type=range]{width:100%;height:44px;accent-color:var(--vio);cursor:pointer}
+.btn-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+/* results */
+.result-card{margin-bottom:18px}
+.big-time{text-align:center;margin-bottom:20px}
+.big-time .cap{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.big-time .time{
+  font-size:clamp(2.6rem,8vw,3.6rem);font-weight:700;letter-spacing:-1px;line-height:1.1;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.big-time .sub{font-size:.85rem;color:var(--mut);margin-top:6px}
+.stat-pills{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:560px){.stat-pills{grid-template-columns:1fr 1fr}}
+.pill-item{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:16px;
+  padding:14px 12px;text-align:center}
+.pill-item .n{font-weight:700;font-size:1.25rem;color:var(--ink);line-height:1.2}
+.pill-item .l{font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-top:4px}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{display:block;margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Reading Time Calculator — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/reading-time-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Text input">
+    <label for="rtInput" style="display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px">Your text</label>
+    <textarea id="rtInput" placeholder="Type or paste your article, essay or speech here…" aria-label="Text to analyze"></textarea>
+    <div class="slider-row">
+      <div class="slider-block">
+        <label for="readWpm">Reading speed<span class="val" id="readWpmVal">200 WPM</span></label>
+        <input type="range" id="readWpm" min="100" max="400" step="5" value="200" aria-label="Reading words per minute">
+      </div>
+      <div class="slider-block">
+        <label for="speakWpm">Speaking speed<span class="val" id="speakWpmVal">130 WPM</span></label>
+        <input type="range" id="speakWpm" min="100" max="400" step="5" value="130" aria-label="Speaking words per minute">
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+      <button class="btn btn-g" id="sampleBtn" type="button">Try sample text</button>
+    </div>
+  </section>
+
+  <div class="hero">
+    <h1>Reading Time Calculator <span class="plain">— Free Online Tool</span></h1>
+    <p>Find out how long it takes to read or speak your text, with live word and character counts.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+    Start typing above to see your reading and speaking times instantly.
+  </div>
+
+  <section class="card result-card" id="resultCard" hidden aria-label="Reading time results">
+    <div class="big-time">
+      <div class="cap">Reading time</div>
+      <div class="time" id="bigTime">0 sec</div>
+      <div class="sub" id="speakTimeSub">Speaking time: 0 sec · at <span id="speakWpmEcho">130</span> WPM</div>
+    </div>
+    <div class="stat-pills">
+      <div class="pill-item"><div class="n" id="wordCount">0</div><div class="l">Words</div></div>
+      <div class="pill-item"><div class="n" id="charCount">0</div><div class="l">Characters</div></div>
+      <div class="pill-item"><div class="n" id="sentenceCount">0</div><div class="l">Sentences</div></div>
+    </div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant live results</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Paste your text</b> into the box at the top of this page.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Adjust the sliders</b> to match your reading and speaking speed in words per minute.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Read your times</b> — reading time, speaking time, words, characters and sentences update live.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>How is reading time calculated?</summary>
+      <p>Your total word count is divided by your reading speed in words per minute (WPM). For example, a 600-word article at 200 WPM takes 3 minutes to read.</p>
+    </details>
+    <details>
+      <summary>What is a good reading speed in WPM?</summary>
+      <p>The average adult reads at 200–250 WPM, while casual reading can be 150 WPM and fast readers reach 300–400 WPM. Speaking is slower — about 120–150 WPM — which is why the default speaking speed here is 130 WPM.</p>
+    </details>
+    <details>
+      <summary>Is my text uploaded anywhere?</summary>
+      <p>No. All calculations happen locally in your browser with JavaScript. Your text never leaves this page — nothing is uploaded or stored.</p>
+    </details>
+  </section>
+
+  <p class="note">Words per minute · live calculation · 100% local — your text never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var input = document.getElementById('rtInput');
+  var readWpm = document.getElementById('readWpm');
+  var speakWpm = document.getElementById('speakWpm');
+  var readWpmVal = document.getElementById('readWpmVal');
+  var speakWpmVal = document.getElementById('speakWpmVal');
+  var clearBtn = document.getElementById('clearBtn');
+  var sampleBtn = document.getElementById('sampleBtn');
+  var emptyState = document.getElementById('emptyState');
+  var resultCard = document.getElementById('resultCard');
+  var bigTime = document.getElementById('bigTime');
+  var speakTimeSub = document.getElementById('speakTimeSub');
+  var speakWpmEcho = document.getElementById('speakWpmEcho');
+  var wordCount = document.getElementById('wordCount');
+  var charCount = document.getElementById('charCount');
+  var sentenceCount = document.getElementById('sentenceCount');
+
+  var SAMPLE = 'The art of writing begins with a single sentence. Every great book, article and speech you have ever admired started as a rough draft. ' +
+    'Writers do not wait for inspiration to strike like lightning. They sit down, put words on the page, and trust the process. ' +
+    'Reading your work aloud is one of the best ways to hear where it stumbles. Your ears catch what your eyes miss. ' +
+    'Whether you are preparing a presentation, a blog post or an essay, knowing how long your text takes to read helps you respect your audience\u2019s time.';
+
+  function countWords(text) {
+    var trimmed = text.trim();
+    if (!trimmed) return 0;
+    var words = trimmed.split(/\s+/).filter(function (w) { return /[^\s]/.test(w); });
+    return words.length;
+  }
+
+  function countSentences(text) {
+    var trimmed = text.trim();
+    if (!trimmed) return 0;
+    var parts = trimmed.split(/[.!?\u2026]+/);
+    var n = 0;
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].trim().length > 0) n++;
+    }
+    return n;
+  }
+
+  function formatTime(totalSeconds) {
+    totalSeconds = Math.round(totalSeconds);
+    var hours = Math.floor(totalSeconds / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+    var parts = [];
+    if (hours > 0) parts.push(hours + (hours === 1 ? ' hour' : ' hours'));
+    if (minutes > 0 || hours > 0) parts.push(minutes + ' min');
+    if (seconds > 0 || totalSeconds === 0) parts.push(seconds + ' sec');
+    return parts.join(' ');
+  }
+
+  function formatNumber(n) {
+    return n.toLocaleString('en-US');
+  }
+
+  function update() {
+    var text = input.value;
+    var words = countWords(text);
+    var chars = text.length;
+    var sentences = countSentences(text);
+    var rw = parseInt(readWpm.value, 10) || 200;
+    var sw = parseInt(speakWpm.value, 10) || 130;
+
+    readWpmVal.textContent = rw + ' WPM';
+    speakWpmVal.textContent = sw + ' WPM';
+
+    if (!words) {
+      emptyState.style.display = '';
+      resultCard.hidden = true;
+      return;
+    }
+
+    emptyState.style.display = 'none';
+    resultCard.hidden = false;
+
+    var readSeconds = (words / rw) * 60;
+    var speakSeconds = (words / sw) * 60;
+
+    bigTime.textContent = formatTime(readSeconds);
+    speakWpmEcho.textContent = String(sw);
+    speakTimeSub.firstChild.nodeValue = 'Speaking time: ' + formatTime(speakSeconds) + ' · at ';
+    wordCount.textContent = formatNumber(words);
+    charCount.textContent = formatNumber(chars);
+    sentenceCount.textContent = formatNumber(sentences);
+  }
+
+  function clearAll() {
+    input.value = '';
+    update();
+    input.focus();
+  }
+
+  input.addEventListener('input', update);
+  readWpm.addEventListener('input', update);
+  speakWpm.addEventListener('input', update);
+  clearBtn.addEventListener('click', clearAll);
+  sampleBtn.addEventListener('click', function () {
+    input.value = SAMPLE;
+    update();
+    input.focus();
+  });
+  update();
+})();
+</script>
+</body>
+</html>

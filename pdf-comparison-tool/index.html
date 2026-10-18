@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare Two PDFs (Text Diff) · Free Tool | QuickConvert</title>
+<meta name="description" content="Compare two PDFs online — extracts the text from each page and shows a highlighted side-by-side line diff per page. Free, private, runs 100% in your browser.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Compare Two PDFs (Text Diff) · Free Tool | QuickConvert">
+<meta property="og:description" content="Compare two PDFs online — extracts the text from each page and shows a highlighted side-by-side line diff per page. Free, private, runs 100% in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/pdf-comparison-tool/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/pdf-comparison-tool/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.55);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));color:#fff;
+  box-shadow:0 6px 18px rgba(124,58,237,.35)}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);padding:10px 18px;
+  border-radius:999px;backdrop-filter:blur(10px);transition:transform .15s,box-shadow .15s;
+  min-height:44px;display:inline-flex;align-items:center}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px)}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;
+  text-transform:uppercase;margin:0 2px 8px}
+.dropzone{border:1.5px dashed rgba(124,58,237,.35);border-radius:20px;
+  background:rgba(255,255,255,.45);padding:clamp(26px,5vw,40px) 20px;text-align:center;
+  cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s}
+.dropzone:hover,.dropzone.drag{background:rgba(255,255,255,.75);border-color:var(--vio);
+  box-shadow:0 0 0 4px rgba(124,58,237,.10)}
+.dropzone .ico{width:52px;height:52px;border-radius:50%;margin:0 auto 12px;display:grid;
+  place-items:center;background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio)}
+.dropzone .ico svg{width:26px;height:26px}
+.dropzone .dz-t{font-weight:700;font-size:1.02rem}
+.dropzone .dz-s{font-size:.85rem;color:var(--mut);margin-top:6px}
+.dropzone .dz-file{display:none;margin-top:12px;font-size:.88rem;font-weight:600;color:#4C1D95;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;padding:8px 18px;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dropzone.has-file .dz-file{display:inline-block}
+.sets{margin-top:16px;display:grid;gap:14px}
+.set{display:grid;gap:8px}
+.set .slab{font-size:.82rem;font-weight:600;color:var(--mut)}
+.pickrow{display:flex;gap:8px;flex-wrap:wrap}
+.pick{font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;min-height:44px;
+  padding:10px 20px;border-radius:999px;border:1.5px solid rgba(124,58,237,.22);
+  background:rgba(255,255,255,.65);color:var(--ink);transition:all .15s}
+.pick:hover{background:#fff}
+.pick.on{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border-color:transparent;
+  box-shadow:0 6px 18px rgba(124,58,237,.35)}
+.posgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:420px}
+.posbtn{font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;min-height:48px;
+  border-radius:14px;border:1.5px solid rgba(124,58,237,.22);background:rgba(255,255,255,.65);
+  color:var(--ink);transition:all .15s}
+.posbtn:hover{background:#fff}
+.posbtn.on{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border-color:transparent;
+  box-shadow:0 6px 18px rgba(124,58,237,.35)}
+.sldrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+input[type=range]{accent-color:var(--vio);width:min(220px,60vw);height:32px}
+.sldval{font-family:var(--mono);font-size:.85rem;font-weight:700;color:#4C1D95;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);padding:6px 14px;border-radius:999px;
+  min-width:76px;text-align:center}
+.txtin{width:100%;font-family:inherit;font-size:.95rem;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);
+  border-radius:14px;padding:12px 16px;min-height:48px;outline:none;transition:border-color .15s,box-shadow .15s}
+.txtin:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.txtin::placeholder{color:#9CA3AF}
+textarea.txtin{min-height:80px;resize:vertical}
+input[type=color].csw{width:52px;height:48px;border:1px solid var(--line);border-radius:14px;
+  background:rgba(255,255,255,.6);padding:4px;cursor:pointer}
+.btn-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.btn{font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;padding:12px 28px;
+  min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;display:inline-flex;
+  align-items:center;justify-content:center}
+.btn:active{transform:scale(.97)}
+.btn-p{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35)}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-g{background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px)}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;
+  align-items:center;flex-wrap:wrap}
+.meta .pill{background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95}
+.progress{display:none;margin-top:16px;font-size:.88rem;color:var(--mut);font-weight:500}
+.progress.show{display:block}
+.progress .bar{height:10px;border-radius:999px;background:rgba(124,58,237,.12);
+  overflow:hidden;margin-top:8px}
+.progress .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--vio),var(--cyn));
+  border-radius:999px;transition:width .2s}
+.error{display:none;margin-bottom:18px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500}
+.error.show{display:block}
+.empty-state{text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35)}
+.empty-state .ico{display:grid;place-items:center;margin:0 auto 10px;width:44px;height:44px;
+  border-radius:50%;background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio)}
+.empty-state .ico svg{width:24px;height:24px}
+.result-card{margin-bottom:18px;display:none}
+.result-card.show{display:block}
+.result-line{display:flex;justify-content:space-between;gap:10px;font-size:.9rem;
+  padding:8px 0;border-bottom:1px dashed rgba(124,58,237,.15);flex-wrap:wrap}
+.result-line:last-child{border-bottom:none}
+.result-line b{color:var(--ink)}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;
+  margin-bottom:18px}
+.thcard{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);
+  border-radius:16px;padding:10px;box-shadow:0 6px 18px rgba(31,41,55,.06)}
+.thcard img{width:100%;border-radius:10px;border:1px solid var(--line);background:#fff;display:block}
+.thcard .tn{font-size:.78rem;font-weight:600;color:var(--mut);margin:8px 2px;text-align:center}
+.thcard .tbtns{display:flex;gap:6px}
+.tbtn{flex:1;font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;min-height:44px;
+  border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.8);color:var(--ink)}
+.tbtn:hover{background:#fff}
+.tbtn:disabled{opacity:.3;cursor:default}
+.dlbtnrow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.pagetabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.diffwrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.diffwrap{grid-template-columns:1fr}}
+.dcol{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:14px;
+  padding:12px;min-width:0;max-height:520px;overflow:auto}
+.dcol h3{font-size:.85rem;margin-bottom:8px;position:sticky;top:0;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(6px);padding:4px 0;z-index:1}
+.dline{font-family:var(--mono);font-size:.76rem;line-height:1.55;padding:3px 8px;border-radius:6px;
+  white-space:pre-wrap;word-break:break-word;margin-bottom:2px}
+.dline.same{color:var(--mut)}
+.dline.add{background:#D1FAE5;color:#065F46}
+.dline.del{background:#FEE2E2;color:#991B1B}
+.dline.gap{background:transparent;color:transparent;user-select:none}
+.legend{display:flex;gap:8px;flex-wrap:wrap;font-size:.78rem;color:var(--mut);margin-bottom:10px}
+.legend span{padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.7);
+  border:1px solid var(--line)}
+.meta-grid{display:grid;gap:12px}
+.ro-line{font-size:.82rem;color:var(--mut);background:rgba(255,255,255,.5);
+  border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);
+  font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);
+  border-radius:20px;padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;font-weight:700;
+  font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);
+  border-radius:16px;margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;
+  align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"-"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;
+  flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){.btn{flex:1;min-width:140px}.trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Compare Two PDFs (Text Diff) · Free Tool | QuickConvert",
+  "url": "https://quickconvert.freedev.app/pdf-comparison-tool/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+<main>
+  <section class="card input-card" aria-label="Upload two PDFs to compare">
+<span class="lab">First PDF (A)</span>
+<div class="dropzone" id="dzA" role="button" tabindex="0" aria-label="PDF upload dropzone">
+<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15l3-3 3 3"/></svg></span>
+<div class="dz-t">Drop your PDF here</div>
+<div class="dz-s">or tap to choose a file</div>
+<span class="dz-file" id="dzFileA">No file selected</span>
+<input type="file" id="fileInputA" accept="application/pdf,.pdf" hidden>
+</div>
+<div style="height:14px"></div>
+<span class="lab">Second PDF (B)</span>
+<div class="dropzone" id="dzB" role="button" tabindex="0" aria-label="PDF upload dropzone">
+<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15l3-3 3 3"/></svg></span>
+<div class="dz-t">Drop your PDF here</div>
+<div class="dz-s">or tap to choose a file</div>
+<span class="dz-file" id="dzFileB">No file selected</span>
+<input type="file" id="fileInputB" accept="application/pdf,.pdf" hidden>
+</div>
+<div class="btn-row">
+<button class="btn btn-p" id="goBtn" type="button" disabled>Compare PDFs</button>
+<button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+</div>
+    <div class="progress" id="progressBox"><span id="progressText">Loading…</span><div class="bar"><i id="progressBar"></i></div></div>
+    <div class="meta">
+      <span class="pill" id="infoNote">2 PDFs · text comparison, page by page</span>
+      <span>Processing runs locally in your browser — nothing is uploaded.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Compare Two PDFs <span class="plain">— Free Online Tool</span></h1>
+    <p>Upload two PDFs and see what changed. Text is extracted page-by-page and shown side-by-side with additions and deletions highlighted.</p>
+  </div>
+
+<div class="empty-state" id="emptyState">
+<span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+Drop two PDFs above and press <b>Compare PDFs</b> — the text diff appears here, page by page.
+</div>
+<div id="outBox" style="display:none">
+<div class="pagetabs" id="pageTabs" role="group" aria-label="Pages"></div>
+<div class="legend" aria-hidden="true"><span style="background:#D1FAE5">Added in B</span><span style="background:#FEE2E2">Removed from A</span><span>Unchanged</span></div>
+<div class="diffwrap" id="diffWrap"></div>
+</div>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><span>Text comparison, page by page</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Drop two PDFs</b> — A (original) and B (the new version).</span></div>
+      <div class="step"><span class="n">2</span><span><b>Press Compare PDFs</b> — text is extracted from every page of both files.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Flip through the pages</b> and read the highlighted side-by-side text diff.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is this a pixel-by-pixel visual comparison?</summary>
+      <p>No — this is a <b>text</b> comparison. The tool extracts the text content of each page and highlights added/removed lines. Layout, fonts, colors and images are not compared.</p>
+    </details>
+    <details>
+      <summary>What if the two PDFs have different page counts?</summary>
+      <p>Pages that exist in only one PDF are shown in full, labeled "Only in A" or "Only in B", so nothing is silently skipped.</p>
+    </details>
+    <details>
+      <summary>Why does the diff look odd on a scanned PDF?</summary>
+      <p>Scanned pages are images, not text — there is nothing to extract, so those pages show no text lines. This tool cannot read text from scanned images.</p>
+    </details>
+  </section>
+
+  <p class="note">Text extraction via PDF.js · line diff computed locally · 100% local — your PDFs never leave this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+
+var PDFLIB_URLS=[
+ 'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js',
+ 'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js',
+ 'https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js'
+];
+var JSZIP_URLS=[
+ 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+ 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js',
+ 'https://unpkg.com/jszip@3.10.1/dist/jszip.min.js'
+];
+var PDFJS_BASES=[
+ {js:'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',worker:'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'},
+ {js:'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js',worker:'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js'},
+ {js:'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js',worker:'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js'}
+];
+function $(id){return document.getElementById(id);}
+function loadScript(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=function(){res();};s.onerror=function(){rej(new Error('load failed: '+src));};document.head.appendChild(s);});}
+function chainLoad(urls,check){var i=0;function next(){if(i>=urls.length)return Promise.reject(new Error('The processing library could not be loaded. Please check your connection and try again.'));return loadScript(urls[i]).then(function(){if(check())return;i++;return next();}).catch(function(){i++;return next();});}return next();}
+var pdfLibReady=false,zipReady=false,pdfJsReady=false;
+function ensurePdfLib(){if(pdfLibReady)return Promise.resolve();return chainLoad(PDFLIB_URLS,function(){return !!window.PDFLib;}).then(function(){pdfLibReady=true;});}
+function ensureZip(){if(zipReady)return Promise.resolve();return chainLoad(JSZIP_URLS,function(){return !!window.JSZip;}).then(function(){zipReady=true;});}
+function ensurePdfJs(){if(pdfJsReady)return Promise.resolve();var i=0;function next(){if(i>=PDFJS_BASES.length)return Promise.reject(new Error('The PDF reader could not be loaded. Please check your connection and try again.'));return loadScript(PDFJS_BASES[i].js).then(function(){if(window.pdfjsLib){window.pdfjsLib.GlobalWorkerOptions.workerSrc=PDFJS_BASES[i].worker;pdfJsReady=true;return;}i++;return next();}).catch(function(){i++;return next();});}return next();}
+function showError(m){var b=$('errorBox');b.textContent=m;b.classList.add('show');}
+function hideError(){var b=$('errorBox');b.textContent='';b.classList.remove('show');}
+function setProgress(f,t){$('progressBox').classList.add('show');$('progressText').textContent=t;$('progressBar').style.width=Math.round(f*100)+'%';}
+function hideProgress(){$('progressBox').classList.remove('show');$('progressBar').style.width='0';}
+function fmtMB(b){return (b/1048576).toFixed(1)+' MB';}
+function downloadUrl(url,name){var a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);}
+function validPdf(f){return f&&(f.type==='application/pdf'||/\.pdf$/i.test(f.name));}
+function wireDropzone(dz,fi,inp,onFile){var D=$(dz),F=$(fi),I=$(inp);
+ D.addEventListener('click',function(){I.click();});
+ D.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();I.click();}});
+ I.addEventListener('change',function(){if(I.files&&I.files.length)onFile(I.files[0]);});
+ ['dragenter','dragover'].forEach(function(ev){D.addEventListener(ev,function(e){e.preventDefault();D.classList.add('drag');});});
+ ['dragleave','drop'].forEach(function(ev){D.addEventListener(ev,function(e){e.preventDefault();D.classList.remove('drag');});});
+ D.addEventListener('drop',function(e){var f=e.dataTransfer&&e.dataTransfer.files;if(f&&f.length)onFile(f[0]);});}
+function friendly(e){var m=(e&&e.message)?e.message:String(e);if(/password/i.test(m))return 'This PDF is password-protected and cannot be processed here.';if(/invalid|format|header/i.test(m))return 'Could not read this file as a PDF. It may be corrupted.';return m;}
+function pillGroup(id,cb){var btns=Array.prototype.slice.call(document.querySelectorAll('#'+id+' .pick'));btns.forEach(function(b){b.addEventListener('click',function(){btns.forEach(function(x){x.classList.remove('on');});b.classList.add('on');cb(b.getAttribute('data-v'));});});}
+function sliderPair(rid,vid,fmt,cb){var r=$(rid),v=$(vid);function u(){v.textContent=fmt(r.value);cb(parseFloat(r.value));}r.addEventListener('input',u);u();}
+
+(function(){
+'use strict';
+var st={fileA:null,fileB:null,textA:[],textB:[],busy:false,diffs:[],curPage:0};
+function updGo(){$('goBtn').disabled=!(st.fileA&&st.fileB)||st.busy;}
+function setFile(which){return function(file){hideError();
+ if(!validPdf(file)){showError('That file does not look like a PDF. Please choose a file ending in .pdf.');return;}
+ st['file'+which]=file;
+ $('dzFile'+which).textContent=file.name+' \u00b7 '+fmtMB(file.size);
+ $('dz'+which).classList.add('has-file');updGo();};}
+wireDropzone('dzA','dzFileA','fileInputA',setFile('A'));
+wireDropzone('dzB','dzFileB','fileInputB',setFile('B'));
+function textLines(items){
+ var raw=[],cur=null,lastY=null;
+ items.forEach(function(it){
+   var s=it.str;if(s===undefined||s===null)return;
+   var y=it.transform?it.transform[5]:0;
+   if(cur===null||Math.abs(y-lastY)>4){cur={y:y,parts:[]};raw.push(cur);lastY=y;}
+   cur.parts.push({x:it.transform?it.transform[4]:0,s:s});
+ });
+ raw.sort(function(a,b){return b.y-a.y;});
+ var out=[];
+ raw.forEach(function(L){
+   L.parts.sort(function(a,b){return a.x-b.x;});
+   var line=L.parts.map(function(p){return p.s;}).join(' ').replace(/\s+/g,' ').trim();
+   if(line.length)out.push(line);
+ });
+ return out;
+}
+function extractText(file){
+ return file.arrayBuffer().then(function(buf){
+   return window.pdfjsLib.getDocument({data:buf}).promise;
+ }).then(function(pdf){
+   var total=pdf.numPages,pages=[],seq=Promise.resolve();
+   for(var p=1;p<=total;p++){seq=seq.then(getPage(p,total,pdf,pages));}
+   return seq.then(function(){return pages;});
+ });
+ function getPage(pageNum,total,pdf,pages){return function(){
+   setProgress(0.1+0.8*(pageNum/total),'Extracting text \u2014 page '+pageNum+' of '+total+'\u2026');
+   return pdf.getPage(pageNum).then(function(page){
+     return page.getTextContent().then(function(tc){pages.push(textLines(tc.items));});
+   });
+ };}
+}
+function diffLines(a,b){
+ var n=Math.min(a.length,800),m=Math.min(b.length,800);
+ a=a.slice(0,n);b=b.slice(0,m);n=a.length;m=b.length;
+ var dp=[],i,j;
+ for(i=0;i<=n;i++){dp.push(new Array(m+1).fill(0));}
+ for(i=n-1;i>=0;i--)for(j=m-1;j>=0;j--){dp[i][j]=(a[i]===b[j])?dp[i+1][j+1]+1:Math.max(dp[i+1][j],dp[i][j+1]);}
+ var res=[];i=0;j=0;
+ while(i<n&&j<m){
+   if(a[i]===b[j]){res.push({t:'same',s:a[i]});i++;j++;}
+   else if(dp[i+1][j]>=dp[i][j+1]){res.push({t:'del',s:a[i]});i++;}
+   else{res.push({t:'add',s:b[j]});j++;}
+ }
+ while(i<n){res.push({t:'del',s:a[i]});i++;}
+ while(j<m){res.push({t:'add',s:b[j]});j++;}
+ return res;
+}
+function renderPage(idx){
+ st.curPage=idx;
+ var tabs=$('pageTabs'),wrap=$('diffWrap');
+ tabs.innerHTML='';wrap.innerHTML='';
+ var olds=wrap.parentNode.querySelectorAll('.diffsum');
+ for(var oi=0;oi<olds.length;oi++)olds[oi].parentNode.removeChild(olds[oi]);
+ var maxP=Math.max(st.textA.length,st.textB.length);
+ for(var p=0;p<maxP;p++){
+   (function(pn){
+     var b=document.createElement('button');b.type='button';b.className='pick'+(pn===idx?' on':'');
+     b.textContent='Page '+(pn+1);b.setAttribute('aria-label','Show diff for page '+(pn+1));
+     b.addEventListener('click',function(){renderPage(pn);});
+     tabs.appendChild(b);
+   })(p);
+ }
+ var inA=idx<st.textA.length,inB=idx<st.textB.length;
+ var colA=document.createElement('div');colA.className='dcol';
+ var colB=document.createElement('div');colB.className='dcol';
+ var hA=document.createElement('h3');hA.textContent=inA?'PDF A \u2014 page '+(idx+1):'PDF A \u2014 (no page '+(idx+1)+')';
+ var hB=document.createElement('h3');hB.textContent=inB?'PDF B \u2014 page '+(idx+1):'PDF B \u2014 (no page '+(idx+1)+')';
+ colA.appendChild(hA);colB.appendChild(hB);
+ var adds=0,dels=0;
+ if(inA&&inB){
+   var d=diffLines(st.textA[idx],st.textB[idx]);
+   d.forEach(function(e){
+     var lA=document.createElement('div'),lB=document.createElement('div');
+     if(e.t==='same'){lA.className='dline same';lB.className='dline same';lA.textContent=e.s;lB.textContent=e.s;}
+     else if(e.t==='del'){dels++;lA.className='dline del';lA.textContent='\u2212 '+e.s;lB.className='dline gap';lB.textContent='\u00a0';}
+     else{adds++;lB.className='dline add';lB.textContent='+ '+e.s;lA.className='dline gap';lA.textContent='\u00a0';}
+     colA.appendChild(lA);colB.appendChild(lB);
+   });
+   if(!d.length){var e0=document.createElement('div');e0.className='dline same';e0.textContent='(no extractable text on this page in either PDF)';colA.appendChild(e0);colB.appendChild(e0.cloneNode(true));}
+ }else{
+   var only=inA?st.textA[idx]:st.textB[idx],col=inA?colA:colB;
+   var note=document.createElement('div');note.className='dline '+(inA?'del':'add');
+   note.textContent=(inA?'This page exists only in PDF A.':'This page exists only in PDF B.');
+   col.appendChild(note);
+   only.forEach(function(s){var l=document.createElement('div');l.className='dline same';l.textContent=s;col.appendChild(l);});
+   if(!only.length){var e1=document.createElement('div');e1.className='dline same';e1.textContent='(no extractable text)';col.appendChild(e1);}
+ }
+ wrap.appendChild(colA);wrap.appendChild(colB);
+ var sum=document.createElement('div');sum.className='meta diffsum';sum.style.margin='0 0 12px';
+ sum.innerHTML='<span class="pill">'+(adds+dels===0?'Pages identical':'Page '+(idx+1)+': '+adds+' added, '+dels+' removed')+'</span><span>Text comparison \u2014 layout, images and formatting are not compared.</span>';
+ wrap.parentNode.insertBefore(sum,wrap);
+ tabs.scrollIntoView({block:'nearest'});
+}
+$('goBtn').addEventListener('click',function(){
+ if(st.busy||!st.fileA||!st.fileB)return;hideError();st.busy=true;updGo();
+ $('goBtn').textContent='Working\u2026';
+ $('outBox').style.display='none';$('emptyState').style.display='none';
+ setProgress(0.03,'Loading PDF reader\u2026');
+ ensurePdfJs()
+ .then(function(){setProgress(0.06,'Reading PDF A\u2026');return extractText(st.fileA);})
+ .then(function(tA){st.textA=tA;setProgress(0.5,'Reading PDF B\u2026');return extractText(st.fileB);})
+ .then(function(tB){
+   st.textB=tB;
+   setProgress(1,'Done \u2014 comparison ready.');
+   $('outBox').style.display='';
+   renderPage(0);
+   setTimeout(hideProgress,2000);
+ })
+ .catch(function(e){hideProgress();$('emptyState').style.display='';showError(friendly(e));})
+ .then(function(){st.busy=false;$('goBtn').textContent='Compare PDFs';updGo();});
+});
+$('clearBtn').addEventListener('click',function(){
+ st.fileA=null;st.fileB=null;st.textA=[];st.textB=[];st.diffs=[];
+ $('fileInputA').value='';$('fileInputB').value='';
+ $('dzFileA').textContent='No file selected';$('dzFileB').textContent='No file selected';
+ $('dzA').classList.remove('has-file');$('dzB').classList.remove('has-file');
+ $('outBox').style.display='none';$('emptyState').style.display='';
+ hideError();hideProgress();updGo();
+});
+})();
+
+</script>
+</body>
+</html>

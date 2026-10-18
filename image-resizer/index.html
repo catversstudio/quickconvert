@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Resizer · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Resize images online for free — scale by percentage or set an exact width, aspect ratio locked. Runs in your browser, no sign-up, 100% private.">
+<meta name="theme-color" content="#7C3AED">
+<meta property="og:title" content="Image Resizer — Free Online Tool | QuickConvert">
+<meta property="og:description" content="Resize images online for free — scale by percentage or set an exact width, aspect ratio locked. Runs in your browser, no sign-up, 100% private.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/image-resizer/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/image-resizer/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23g)'/%3E%3Cpath d='M37 8 19 37h11l-3 19 18-29H34z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2937; --mut:#6B7280;
+    --vio:#7C3AED; --cyn:#06B6D4; --pnk:#EC4899; --amb:#F59E0B; --grn:#10B981;
+    --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Poppins',system-ui,sans-serif;color:var(--ink);min-height:100vh;
+    background:
+      radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+      radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+      radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+      linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 20px 40px}
+  .sitehead{position:sticky;top:0;z-index:60;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;margin-bottom:16px;background:rgba(255,247,237,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:22px;letter-spacing:.2px}
+  .logo small{display:block;font-size:11px;font-weight:600;color:var(--mut);letter-spacing:1.5px;text-transform:uppercase}
+  .mark{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:#fff;font-size:22px;
+    background:linear-gradient(135deg,var(--vio),var(--cyn));box-shadow:0 8px 20px #7c3aed44}
+  .hright{display:flex;align-items:center;gap:10px}
+  .back{font-size:13px;font-weight:600;color:var(--mut);text-decoration:none;background:var(--card);
+    border:1px solid var(--line);padding:8px 16px;border-radius:999px;backdrop-filter:blur(12px);transition:.2s}
+  .back:hover{color:var(--vio);background:#fff}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);backdrop-filter:blur(12px);
+    border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--mut)}
+  .pill .dot{width:9px;height:9px;border-radius:50%;background:#10B981;box-shadow:0 0 0 4px #10b98122;animation:blink 2s infinite}
+  @keyframes blink{50%{opacity:.5}}
+  .hidden{display:none!important}
+
+  .card{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);
+    border-radius:24px;padding:28px;box-shadow:0 14px 34px #7c3aed10;margin-bottom:22px}
+  .card h3.ct{font-size:18px;font-weight:800;margin-bottom:16px}
+
+  .drop{border:2px dashed #c4b5fd;border-radius:18px;padding:44px 20px;text-align:center;
+    cursor:pointer;transition:.2s;background:#ffffff66}
+  .drop:hover,.drop.over{border-color:var(--vio);background:#7c3aed0d;transform:scale(1.005)}
+  .drop .big{font-size:52px;margin-bottom:10px}
+  .drop h2{font-size:22px;font-weight:700;margin-bottom:6px}
+  .drop p{color:var(--mut);font-size:14px;margin-bottom:18px}
+  .msg{margin-top:14px;font-size:14px;font-weight:600;border-radius:12px;padding:12px 16px;display:none}
+  .msg.warn{display:block;background:#FEF3C7;color:#92400E;border:1px solid #fcd34d}
+  .msg.ok{display:block;background:#D1FAE5;color:#065F46;border:1px solid #6ee7b7}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:inherit;
+    font-weight:700;font-size:15px;padding:13px 26px;border-radius:999px;text-decoration:none;transition:.2s}
+  .btn-p{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 10px 24px #7c3aed55}
+  .btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 30px #7c3aed66}
+  .btn-g{background:#ffffffaa;border:1px solid var(--line);color:var(--ink)}
+  .btn-g:hover{background:#fff}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+  .setrow{margin-bottom:20px}
+  .setrow:last-child{margin-bottom:0}
+  .setrow>label.lbl{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14px;margin-bottom:10px}
+  .qval{color:var(--vio);font-weight:800;background:#7c3aed14;border-radius:999px;padding:2px 12px;font-size:13px}
+  input[type=range]{width:100%;accent-color:var(--vio);height:28px}
+  input[type=number]{font-family:inherit;font-size:15px;font-weight:600;padding:10px 14px;border-radius:12px;
+    border:1px solid #d8cdf5;background:#ffffffaa;width:200px;color:var(--ink)}
+  input[type=number]:focus{outline:2px solid var(--vio);border-color:var(--vio)}
+  .hint{font-size:12px;color:var(--mut);margin-top:6px}
+  .pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .pillopt{padding:10px 22px;border-radius:999px;border:1px solid var(--line);background:#ffffff88;
+    font-weight:600;font-size:14px;cursor:pointer;transition:.2s;font-family:inherit;color:var(--ink)}
+  .pillopt:hover{border-color:var(--vio)}
+  .pillopt.on{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border-color:transparent;box-shadow:0 8px 18px #7c3aed44}
+
+  .ptext{font-size:13px;color:var(--mut);margin:4px 0 8px;display:none;font-weight:600}
+  .progress{height:10px;background:#e9e4f5;border-radius:999px;overflow:hidden;margin:0 0 16px;display:none}
+  .progress .fill{height:100%;width:0;background:linear-gradient(90deg,var(--vio),var(--cyn));border-radius:999px;transition:width .25s}
+
+  .workhead{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .workhead h3{font-size:18px;font-weight:800}
+  .count{background:var(--ink);color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:3px 12px}
+  .worklist{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-bottom:18px}
+  .wcard{position:relative}
+  .selbox{position:absolute;top:10px;left:10px;z-index:2;background:#ffffffee;border:1px solid var(--line);border-radius:10px;padding:5px 6px;cursor:pointer;box-shadow:0 4px 10px #00000018}
+  .selbox input{width:18px;height:18px;accent-color:#7C3AED;cursor:pointer;display:block;margin:0}
+  .wcard{background:#ffffffaa;border:1px solid var(--line);border-radius:18px;padding:14px;
+    display:flex;gap:12px;align-items:center}
+  .wcard img.thumb{width:70px;height:70px;object-fit:cover;border-radius:12px;background:#f3f4f6;flex:none}
+  .winfo{flex:1;min-width:0}
+  .winfo .fname{font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .winfo .fmeta{font-size:12px;color:var(--mut);margin:4px 0}
+  .dimbadge{display:inline-block;font-size:11px;font-weight:800;background:#06b6d414;color:#0E7490;
+    border:1px solid #06b6d43e;border-radius:999px;padding:3px 10px}
+  .wait{font-size:12px;color:var(--mut);font-style:italic}
+  .dlbtn{flex:none;width:42px;height:42px;border-radius:12px;border:none;cursor:pointer;font-size:18px;
+    background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 6px 14px #7c3aed44;transition:.2s}
+  .dlbtn:hover{transform:translateY(-2px)}
+  .actionrow{display:flex;gap:12px;flex-wrap:wrap}
+
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;
+    background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);
+    border-radius:28px;padding:44px 40px;margin-bottom:34px;box-shadow:0 20px 50px #7c3aed14}
+  .kicker{display:inline-block;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--vio);
+    background:#7c3aed14;border:1px solid #7c3aed2e;border-radius:999px;padding:6px 14px;margin-bottom:16px}
+  .hero h1{font-size:clamp(28px,4.5vw,44px);font-weight:800;line-height:1.15;margin-bottom:14px}
+  .hero h1 .grad{background:linear-gradient(120deg,var(--vio),var(--pnk),var(--cyn));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--mut);font-size:16px;line-height:1.7;max-width:44ch}
+  .stage{position:relative;height:280px}
+  .fcard{position:absolute;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:20px;box-shadow:0 14px 34px #00000014;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    font-size:13px;font-weight:600;color:var(--mut);animation:float 5s ease-in-out infinite}
+  .fcard .e{font-size:38px}
+  .f1{width:150px;height:150px;top:6px;left:8%}
+  .f2{width:130px;height:130px;top:90px;right:6%;animation-delay:1.2s}
+  .f3{width:120px;height:120px;bottom:0;left:34%;animation-delay:2.1s}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-14px) rotate(2deg)}}
+
+  .sec-title{display:flex;align-items:center;gap:12px;margin:6px 2px 18px}
+  .sec-title h2{font-size:22px;font-weight:800}
+  .strip3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:36px}
+  .step{background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px;padding:22px}
+  .step .n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,var(--vio),var(--cyn));color:#fff;font-weight:800;margin-bottom:10px}
+  .step h3{font-size:16px;margin-bottom:6px}
+  .step p{font-size:13px;color:var(--mut);line-height:1.6}
+  .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:36px}
+  .feat{background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px;
+    padding:18px;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600}
+  .feat .e{font-size:26px}
+
+  footer{text-align:center;color:var(--mut);font-size:14px;padding:18px 0 6px}
+  footer a{color:var(--vio);font-weight:700;text-decoration:none}
+  footer a:hover{text-decoration:underline}
+
+  /* ---------- REDESIGN v1 ---------- */
+  :focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+  .logo .mark{width:44px;height:44px;border-radius:14px}
+  .btn{min-height:44px}
+  .btn svg{width:18px;height:18px;flex:none}
+  .dlbtn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center}
+  .dlbtn svg{width:18px;height:18px}
+  .pillopt{min-height:44px}
+  .feat svg{width:24px;height:24px;color:var(--vio);flex:none}
+  .fcard svg{width:36px;height:36px;color:var(--vio)}
+  .truststrip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 20px}
+  .truststrip>div{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 10px;font-size:13px;font-weight:600;backdrop-filter:blur(12px);text-align:center}
+  .truststrip svg{width:20px;height:20px;color:var(--vio);flex:none}
+  .faq{margin:6px 0 8px}
+  .faq h2{font-size:20px;font-weight:800;margin:0 2px 14px}
+  .faq details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;backdrop-filter:blur(12px)}
+  .faq summary{cursor:pointer;font-weight:700;font-size:14.5px;padding:15px 18px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-size:20px;color:var(--vio);font-weight:800;flex:none;line-height:1}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{padding:0 18px 16px;font-size:13.5px;color:var(--mut);line-height:1.65}
+  .sitefoot{text-align:center;color:var(--mut);font-size:14px;padding:20px 0 6px;border-top:1px solid var(--line);margin-top:26px}
+  .sitefoot a{color:var(--vio);font-weight:700;text-decoration:none}
+  .sitefoot a:hover{text-decoration:underline}
+  .sitefoot .fine{font-size:12.5px;margin-top:6px}
+  .sitefoot .footnav{margin-top:10px;font-size:12.5px}
+  .sitefoot .footnav span{margin:0 8px;opacity:.5}
+
+  @media(max-width:760px){
+    .hero{grid-template-columns:1fr;padding:32px 24px}
+    .stage{height:230px}
+    header{margin-bottom:16px}
+    .logo{font-size:19px}
+    .card{padding:20px}
+    .truststrip{grid-template-columns:1fr}
+  }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Image Resizer","url":"https://quickconvert.freedev.app/image-resizer/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":0,"priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="sitehead">
+    <div class="logo">
+      <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+      <span>QuickConvert<small>Free Online Tools</small></span>
+    </div>
+    <div class="hright">
+      <a class="back" href="/">← All tools</a>
+    </div>
+  </header>
+
+  <section class="card" id="uploadCard">
+    <div class="drop" id="dropzone" tabindex="0" role="button" aria-label="Choose image files">
+      <div class="big"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      <h2>Drop your images here</h2>
+      <p>or click to browse — JPG, PNG, WebP &amp; more</p>
+      <button class="btn btn-p" type="button" id="browseBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Choose images</button>
+    </div>
+    <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
+    <div class="msg" id="uploadMsg"></div>
+  </section>
+
+  <section class="card hidden" id="settingsCard">
+    <h3 class="ct">Resize settings</h3>
+    <div class="pills" id="modePills">
+      <button type="button" class="pillopt on" data-v="percent">By percentage</button>
+      <button type="button" class="pillopt" data-v="exact">Exact width</button>
+    </div>
+    <div class="setrow" id="pctRow">
+      <label class="lbl" for="pctRange">Scale <span class="qval" id="pctVal">50%</span></label>
+      <input type="range" id="pctRange" min="10" max="100" value="50">
+      <div class="hint">Every image is scaled to this percentage of its original size.</div>
+    </div>
+    <div class="setrow hidden" id="wRow">
+      <label class="lbl" for="exactW">Width (px)</label>
+      <input type="number" id="exactW" min="1" placeholder="e.g. 800">
+      <div class="hint">Height adjusts automatically — aspect ratio stays locked. Original format is kept.</div>
+    </div>
+  </section>
+
+  <section class="card hidden" id="workPanel">
+    <div class="workhead"><h3>Your images</h3><span class="count" id="wcount">0</span></div>
+    <div class="ptext" id="ptext"></div>
+    <div class="progress" id="progress"><div class="fill" id="pfill"></div></div>
+    <div class="worklist" id="workList"></div>
+    <div class="actionrow">
+      <button class="btn btn-p" type="button" id="goBtn">Resize</button>
+      <button class="btn btn-g" type="button" id="addBtn">+ Add more</button>
+      <button class="btn btn-p" type="button" id="zipBtn" disabled>Download Selected</button>
+      <button class="btn btn-g" type="button" id="selAllBtn">Select all</button>
+      <button class="btn btn-g" type="button" id="selNoneBtn">Clear</button>
+    </div>
+  </section>
+
+  <section class="truststrip" aria-label="Why trust QuickConvert">
+    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>100% private — files never leave your device</div>
+    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M17 8l5 5M22 8l-5 5"/></svg>No sign-up needed</div>
+    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Free forever</div>
+  </section>
+
+  <div class="sec-title"><h2>How it works</h2></div>
+  <section class="strip3">
+    <div class="step"><span class="n">1</span><h3>Choose images</h3><p>Drag &amp; drop or browse — add as many images as you like.</p></div>
+    <div class="step"><span class="n">2</span><h3>Choose a size</h3><p>Scale by percentage, or type an exact width in pixels.</p></div>
+    <div class="step"><span class="n">3</span><h3>Download</h3><p>Grab each image separately, or everything together as one ZIP.</p></div>
+  </section>
+
+  <section class="hero">
+    <div>
+      <span class="kicker">Image Resizer · Free tool</span>
+      <h1>Image Resizer <span class="grad">— Free Online Tool</span></h1>
+      <p>Scale images by percentage or set an exact width — the aspect ratio always stays locked. No sign-up, no watermark, and your files never leave your device.</p>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="fcard f1"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>1920 px</div>
+      <div class="fcard f2"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Resize</div>
+      <div class="fcard f3"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 9.4 7.55 4.24M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.29 7 12 12l8.71-5M12 22V12"/></svg>960 px</div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="feat"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Private by design</div>
+    <div class="feat"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Runs in your browser</div>
+    <div class="feat"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.4"/></svg>100% free, forever</div>
+    <div class="feat"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Aspect ratio locked</div>
+  </section>
+
+  <section class="faq">
+    <h2>Frequently asked questions</h2>
+    <details><summary>Are my images uploaded to a server?</summary><p>No. Resizing happens entirely in your browser — your images never leave your device, and nothing is stored.</p></details>
+    <details><summary>Will my image look stretched?</summary><p>Never. The aspect ratio is always locked — when you set a width or a percentage, the height adjusts automatically.</p></details>
+    <details><summary>Does resizing change the image format?</summary><p>No, each image keeps its original format: JPG stays JPG, PNG stays PNG, WebP stays WebP.</p></details>
+  </section>
+
+  <footer class="sitefoot">
+    <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+    <p class="fine">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</p>
+    <nav class="footnav" aria-label="More tools"><a href="/">All tools</a><span aria-hidden="true">·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span aria-hidden="true">·</span><a href="/image-compressor/">Image Compressor</a><span aria-hidden="true">·</span><a href="/qr-code-generator/">QR Generator</a></nav>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  function fmtBytes(b){
+    if(b === 0) return '0 B';
+    var u = ['B','KB','MB','GB'], i = 0;
+    while(b >= 1024 && i < u.length - 1){ b /= 1024; i++; }
+    return (b >= 100 ? Math.round(b) : b.toFixed(1)) + ' ' + u[i];
+  }
+
+  function isImageFile(f){
+    if(f.type && f.type.indexOf('image/') === 0) return true;
+    return /\.(png|jpe?g|webp|gif|bmp|svg|avif|tiff?)$/i.test(f.name);
+  }
+
+  function loadImage(file){
+    return new Promise(function(res, rej){
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function(){ res({img:img, w:img.naturalWidth, h:img.naturalHeight, url:url}); };
+      img.onerror = function(){ URL.revokeObjectURL(url); rej(new Error('decode')); };
+      img.src = url;
+    });
+  }
+
+  function canvasToBlob(canvas, mime, quality){
+    return new Promise(function(res){ canvas.toBlob(function(b){ res(b); }, mime, quality); });
+  }
+
+  function downloadURL(url, name){
+    var a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  function baseName(name){ var i = name.lastIndexOf('.'); return i > 0 ? name.slice(0, i) : name; }
+  function extOf(name){ var i = name.lastIndexOf('.'); return i > 0 ? name.slice(i + 1) : ''; }
+
+  var jszipPromise = null;
+  function ensureJSZip(){
+    if(window.JSZip) return Promise.resolve();
+    if(!jszipPromise){
+      jszipPromise = new Promise(function(res, rej){
+        var s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+        s.onload = function(){ res(); };
+        s.onerror = function(){ rej(new Error('zip')); };
+        document.head.appendChild(s);
+      });
+    }
+    return jszipPromise;
+  }
+
+  var items = [];   // {file, url, w, h, out:null|{blob,url,name,size,nw,nh}}
+  var mode = 'percent';
+
+  var drop = $('dropzone'), input = $('fileInput');
+
+  function showMsg(text, kind){
+    var m = $('uploadMsg');
+    m.textContent = text;
+    m.className = 'msg ' + kind;
+    clearTimeout(m._t);
+    m._t = setTimeout(function(){ m.className = 'msg'; }, 6000);
+  }
+
+  function openPicker(){ input.click(); }
+  drop.addEventListener('click', function(e){ if(e.target.id !== 'browseBtn') openPicker(); });
+  $('browseBtn').addEventListener('click', function(e){ e.stopPropagation(); openPicker(); });
+  $('addBtn').addEventListener('click', openPicker);
+  drop.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openPicker(); } });
+  drop.addEventListener('dragover', function(e){ e.preventDefault(); drop.classList.add('over'); });
+  drop.addEventListener('dragleave', function(){ drop.classList.remove('over'); });
+  drop.addEventListener('drop', function(e){ e.preventDefault(); drop.classList.remove('over'); addFiles(e.dataTransfer.files); });
+  input.addEventListener('change', function(){ addFiles(input.files); input.value = ''; });
+
+  function addFiles(list){
+    var skipped = [];
+    var jobs = [];
+    for(var i = 0; i < list.length; i++){
+      (function(f){
+        if(!isImageFile(f)){ skipped.push(f.name); return; }
+        jobs.push(loadImage(f).then(function(r){
+          items.push({file:f, url:r.url, w:r.w, h:r.h, img:r.img, out:null, sel:true});
+        }).catch(function(){ skipped.push(f.name); }));
+      })(list[i]);
+    }
+    Promise.all(jobs).then(function(){
+      if(skipped.length){
+        showMsg('Skipped ' + skipped.length + ' non-image file(s): ' +
+          skipped.slice(0, 3).join(', ') + (skipped.length > 3 ? '…' : ''), 'warn');
+      }
+      renderWork();
+    });
+  }
+
+  (function(){
+    var box = $('modePills');
+    var btns = box.querySelectorAll('.pillopt');
+    for(var i = 0; i < btns.length; i++){
+      btns[i].addEventListener('click', function(){
+        for(var j = 0; j < btns.length; j++) btns[j].classList.remove('on');
+        this.classList.add('on');
+        mode = this.getAttribute('data-v');
+        $('pctRow').classList.toggle('hidden', mode !== 'percent');
+        $('wRow').classList.toggle('hidden', mode !== 'exact');
+        items.forEach(function(it){ it.out = null; });
+        renderWork();
+      });
+    }
+  })();
+
+  $('pctRange').addEventListener('input', function(){
+    $('pctVal').textContent = this.value + '%';
+    items.forEach(function(it){ it.out = null; });
+    renderWork();
+  });
+  $('exactW').addEventListener('input', function(){
+    items.forEach(function(it){ it.out = null; });
+    renderWork();
+  });
+
+  function setProgress(frac, text){
+    var p = $('progress'), t = $('ptext');
+    if(frac === null){ p.style.display = 'none'; t.style.display = 'none'; return; }
+    p.style.display = 'block'; t.style.display = 'block';
+    $('pfill').style.width = Math.round(frac * 100) + '%';
+    t.textContent = text || '';
+  }
+
+  function setBusy(busy){
+    $('goBtn').disabled = busy;
+    $('goBtn').textContent = busy ? 'Working…' : 'Resize';
+    if(busy){ $('zipBtn').disabled = true; } else { refreshZip(); }
+    $('addBtn').disabled = busy;
+  }
+
+  function renderWork(){
+    var has = items.length > 0;
+    $('workPanel').classList.toggle('hidden', !has);
+    $('settingsCard').classList.toggle('hidden', !has);
+    if(!has) return;
+    $('wcount').textContent = items.length;
+    var list = $('workList');
+    list.innerHTML = '';
+    items.forEach(function(it, idx){
+      var card = document.createElement('div');
+      card.className = 'wcard';
+      var meta, badge = '', right;
+      if(it.out){
+        meta = fmtBytes(it.file.size) + ' → ' + fmtBytes(it.out.size);
+        badge = ' <span class="dimbadge">' + it.w + '×' + it.h + ' → ' + it.out.nw + '×' + it.out.nh + '</span>';
+        right = '<button type="button" class="dlbtn" data-i="' + idx + '" title="Download" aria-label="Download"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>';
+      } else {
+        meta = fmtBytes(it.file.size) + ' · ' + it.w + '×' + it.h + ' px';
+        right = '<span class="wait">not resized yet</span>';
+      }
+      card.innerHTML =
+        '<label class="selbox" title="Select for ZIP"><input type="checkbox" class="selcheck" aria-label="Select for ZIP" data-i="' + idx + '"' + (it.sel === false ? '' : ' checked') + '></label>' +
+        '<img class="thumb" src="' + it.url + '" alt="">' +
+        '<div class="winfo"><div class="fname" title="' + esc(it.file.name) + '">' + esc(it.file.name) + '</div>' +
+        '<div class="fmeta">' + meta + '</div>' + badge + '</div>' + right;
+      list.appendChild(card);
+    });
+    var btns = list.querySelectorAll('.dlbtn');
+    for(var i = 0; i < btns.length; i++){
+      btns[i].addEventListener('click', function(){
+        var it = items[+this.getAttribute('data-i')];
+        if(it && it.out) downloadURL(it.out.url, it.out.name);
+      });
+    }
+    refreshZip();
+  }
+
+  function keepFormat(origType){
+    if(origType === 'image/jpeg') return {mime:'image/jpeg', ext:'jpg', q:0.92};
+    if(origType === 'image/webp') return {mime:'image/webp', ext:'webp', q:0.92};
+    if(origType === 'image/png') return {mime:'image/png', ext:'png', q:1};
+    return {mime:'image/png', ext:'png', q:1}; // gif/bmp/svg/avif → png
+  }
+
+  function selectedReady(){
+    var out = [];
+    var checks = document.querySelectorAll('.selcheck');
+    for(var k = 0; k < checks.length; k++){
+      if(checks[k].checked){
+        var it = items[+checks[k].getAttribute('data-i')];
+        if(it && it.out) out.push(it);
+      }
+    }
+    return out;
+  }
+  function refreshZip(){
+    var n = selectedReady().length;
+    $('zipBtn').disabled = (n === 0);
+    $('zipBtn').textContent = n ? 'Download Selected (' + n + ')' : 'Download Selected';
+  }
+  $('selAllBtn').addEventListener('click', function(){
+    document.querySelectorAll('.selcheck').forEach(function(c){ c.checked = true; var itm = items[+c.getAttribute('data-i')]; if(itm) itm.sel = true; });
+    refreshZip();
+  });
+  $('selNoneBtn').addEventListener('click', function(){
+    document.querySelectorAll('.selcheck').forEach(function(c){ c.checked = false; var itm = items[+c.getAttribute('data-i')]; if(itm) itm.sel = false; });
+    refreshZip();
+  });
+  $('workList').addEventListener('change', function(e){
+    if(e.target && e.target.classList && e.target.classList.contains('selcheck')){
+      var itm = items[+e.target.getAttribute('data-i')];
+      if(itm) itm.sel = e.target.checked;
+      refreshZip();
+    }
+  });
+
+  $('goBtn').addEventListener('click', function(){
+    if(!items.length){ showMsg('Please add some images first.', 'warn'); return; }
+    var pct = Math.min(100, Math.max(10, parseInt($('pctRange').value, 10) || 50));
+    var exactW = parseInt($('exactW').value, 10) || 0;
+    if(mode === 'exact' && exactW <= 0){ showMsg('Please enter a width in pixels.', 'warn'); return; }
+    setBusy(true);
+    var done = 0, okCount = 0;
+    var jobs = items.map(function(it){
+      return (function(){
+        try{
+          var nw, nh;
+          if(mode === 'percent'){ nw = Math.max(1, Math.round(it.w * pct / 100)); nh = Math.max(1, Math.round(it.h * pct / 100)); }
+          else { nw = exactW; nh = Math.max(1, Math.round(it.h * exactW / it.w)); }
+          var f = keepFormat(it.file.type);
+          var c = document.createElement('canvas');
+          c.width = nw; c.height = nh;
+          var ctx = c.getContext('2d');
+          if(f.mime === 'image/jpeg'){ ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, nw, nh); }
+          ctx.drawImage(it.img, 0, 0, nw, nh);
+          return canvasToBlob(c, f.mime, f.q).then(function(blob){
+            if(!blob) throw new Error('encode');
+            if(it.out) URL.revokeObjectURL(it.out.url);
+            var url = URL.createObjectURL(blob);
+            it.out = {blob:blob, url:url, name:baseName(it.file.name) + '-resized.' + f.ext, size:blob.size, nw:nw, nh:nh};
+            okCount++;
+          }).catch(function(){ it.out = null; }).then(function(){
+            done++;
+            setProgress(done / items.length, 'Resizing ' + done + ' of ' + items.length + '…');
+          });
+        }catch(e){
+          it.out = null;
+          done++;
+          setProgress(done / items.length, 'Resizing ' + done + ' of ' + items.length + '…');
+          return Promise.resolve();
+        }
+      })();
+    });
+    Promise.all(jobs).then(function(){
+      setProgress(null);
+      setBusy(false);
+      renderWork();
+      showMsg(okCount + ' of ' + items.length + ' image(s) resized.', okCount ? 'ok' : 'warn');
+    });
+  });
+
+  $('zipBtn').addEventListener('click', function(){
+    var ready = selectedReady();
+    if(!ready.length){ showMsg('Tick at least one image to include it in the ZIP.', 'warn'); return; }
+    setBusy(true);
+    setProgress(0, 'Preparing ZIP…');
+    ensureJSZip().then(function(){
+      var zip = new JSZip();
+      var used = {};
+      ready.forEach(function(it){
+        var n = it.out.name, k = 1;
+        while(used[n]){ k++; n = baseName(it.out.name) + '-' + k + '.' + extOf(it.out.name); }
+        used[n] = 1;
+        zip.file(n, it.out.blob);
+      });
+      return zip.generateAsync({type:'blob'}, function(m){
+        setProgress(m.percent / 100, 'Preparing ZIP… ' + Math.round(m.percent) + '%');
+      });
+    }).then(function(blob){
+      downloadURL(URL.createObjectURL(blob), 'quickconvert-resized.zip');
+      showMsg('ZIP downloaded.', 'ok');
+    }).catch(function(){
+      showMsg('Could not create the ZIP. Please download images one by one.', 'warn');
+    }).then(function(){
+      setProgress(null);
+      setBusy(false);
+      renderWork();
+    });
+  });
+})();
+</script>
+</body>
+</html>

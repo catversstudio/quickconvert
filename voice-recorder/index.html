@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice Recorder · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Record your voice right in the browser, play it back and download it as an audio file. Free, private, no uploads — 100% local.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Voice Recorder · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Record your voice right in the browser, play it back and download it as an audio file. Free, private, no uploads — 100% local.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/voice-recorder/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/voice-recorder/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px;text-align:center}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 16px}
+.rec-zone{display:flex;flex-direction:column;align-items:center;gap:14px}
+.rec-btn{
+  font-family:inherit;font-weight:700;font-size:1.05rem;cursor:pointer;color:#fff;
+  width:132px;height:132px;border-radius:50%;border:4px solid rgba(255,255,255,.9);
+  background:linear-gradient(135deg,var(--vio),#9333EA);
+  box-shadow:0 10px 30px rgba(124,58,237,.4),0 2px 8px rgba(0,0,0,.08);
+  display:inline-flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;
+  transition:transform .15s,box-shadow .15s,background .2s;
+  min-height:44px;position:relative;
+}
+.rec-btn svg{width:40px;height:40px}
+.rec-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(124,58,237,.45)}
+.rec-btn:active{transform:scale(.96)}
+.rec-btn.recording{
+  background:linear-gradient(135deg,#EF4444,#DC2626);
+  box-shadow:0 10px 30px rgba(239,68,68,.45);
+  animation:pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 10px 30px rgba(239,68,68,.45),0 0 0 0 rgba(239,68,68,.35)}
+  50%{box-shadow:0 10px 30px rgba(239,68,68,.45),0 0 0 22px rgba(239,68,68,0)}
+}
+.rec-label{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase}
+.timer{
+  font-family:var(--mono);font-size:1.6rem;font-weight:600;color:var(--ink);
+  min-height:44px;display:flex;align-items:center;gap:10px;justify-content:center;
+}
+.rec-dot{
+  display:none;width:12px;height:12px;border-radius:50%;background:#EF4444;
+  animation:blink 1s steps(2,start) infinite;
+}
+.rec-dot.on{display:inline-block}
+@keyframes blink{to{visibility:hidden}}
+#levelCanvas{
+  width:100%;max-width:420px;height:64px;border-radius:14px;
+  background:rgba(31,41,55,.06);display:block;
+}
+.status{font-size:.88rem;color:var(--mut);min-height:22px}
+.meta{
+  margin-top:4px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.error{
+  display:none;margin-top:16px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;text-align:left;
+}
+.error.show{display:block}
+.result-card{margin-bottom:18px;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+.result-card.show{opacity:1;transform:none}
+.res-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.res-title{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1.02rem}
+.res-title .tag{
+  font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:#fff;
+  background:linear-gradient(135deg,var(--vio),#6D28D9);
+}
+.res-bits{font-size:.78rem;color:var(--mut);font-weight:500}
+audio#audioPlayer{width:100%;min-height:44px;border-radius:14px;background:rgba(255,255,255,.8)}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .res-head{align-items:flex-start}
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Voice Recorder — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/voice-recorder/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Voice recorder">
+    <span class="lab">Microphone</span>
+    <div class="rec-zone">
+      <button class="rec-btn" id="recBtn" type="button" aria-label="Start recording">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
+        <span class="rec-label" id="recBtnLabel">Record</span>
+      </button>
+      <div class="timer"><span class="rec-dot" id="recDot" aria-hidden="true"></span><span id="timerText">00:00</span></div>
+      <canvas id="levelCanvas" width="420" height="64" aria-hidden="true"></canvas>
+      <p class="status" id="statusText">Press the button and allow microphone access to start recording.</p>
+    </div>
+    <div class="meta">
+      <span class="pill" id="formatNote">format: auto</span>
+      <span>Recording happens 100% in your browser — nothing is uploaded.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Voice Recorder <span class="plain">— Free Online Tool</span></h1>
+    <p>Record your voice right here in the browser, listen back instantly and download it as an audio file. Great for quick memos, notes and practice.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/><path d="M8 21h8"/></svg></span>
+    Your recording will appear here with playback, duration and a download button.
+  </div>
+
+  <section class="card result-card" id="resultCard" hidden aria-label="Recording result">
+    <div class="res-head">
+      <div class="res-title"><span class="tag">Your recording</span><span class="res-bits" id="resBits"></span></div>
+    </div>
+    <audio id="audioPlayer" controls preload="metadata"></audio>
+    <div class="btn-row">
+      <a class="btn btn-p" id="downloadBtn" href="#" download>Download</a>
+      <button class="btn btn-g" id="againBtn" type="button">Record again</button>
+    </div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant recording — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Press Record</b> and allow microphone access when your browser asks — speak into your mic.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Press Stop</b> when you're done — your recording appears with a play button.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Play it back</b> and hit <b>Download</b> to save it as an audio file.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is my voice uploaded anywhere?</summary>
+      <p>No. Recording happens entirely in your browser using the MediaRecorder API. Your audio never leaves your device — nothing is uploaded, stored or shared.</p>
+    </details>
+    <details>
+      <summary>Why does the browser ask for microphone permission?</summary>
+      <p>Your browser must ask for microphone access before any site can record audio — this is a built-in privacy protection. This tool only uses the microphone while you're recording; the mic is released as soon as you press Stop.</p>
+    </details>
+    <details>
+      <summary>What audio format does it record in?</summary>
+      <p>The tool picks the best format your browser supports — usually WebM with Opus audio (Safari uses MP4/AAC). The format is shown next to the recording.</p>
+    </details>
+  </section>
+
+  <p class="note">MediaRecorder API · 100% local — your voice never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var recBtn = document.getElementById('recBtn');
+  var recBtnLabel = document.getElementById('recBtnLabel');
+  var recDot = document.getElementById('recDot');
+  var timerText = document.getElementById('timerText');
+  var statusText = document.getElementById('statusText');
+  var formatNote = document.getElementById('formatNote');
+  var errorBox = document.getElementById('errorBox');
+  var emptyState = document.getElementById('emptyState');
+  var resultCard = document.getElementById('resultCard');
+  var audioPlayer = document.getElementById('audioPlayer');
+  var resBits = document.getElementById('resBits');
+  var downloadBtn = document.getElementById('downloadBtn');
+  var againBtn = document.getElementById('againBtn');
+  var levelCanvas = document.getElementById('levelCanvas');
+  var levelCtx = levelCanvas.getContext('2d');
+
+  var mediaRecorder = null;
+  var stream = null;
+  var audioCtx = null;
+  var analyser = null;
+  var rafId = null;
+  var timerId = null;
+  var startTime = 0;
+  var chunks = [];
+  var chosenMime = '';
+  var blobUrl = null;
+  var state = 'idle'; // idle | recording | done
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function setStatus(msg) {
+    statusText.textContent = msg;
+  }
+
+  function mediaSupported() {
+    return typeof window.MediaRecorder !== 'undefined' &&
+           !!(navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function');
+  }
+
+  function pickMime() {
+    var candidates = [
+      'audio/webm;codecs=opus',
+      'audio/webm',
+      'audio/ogg;codecs=opus',
+      'audio/mp4'
+    ];
+    for (var i = 0; i < candidates.length; i++) {
+      try {
+        if (MediaRecorder.isTypeSupported(candidates[i])) return candidates[i];
+      } catch (e) { /* ignore */ }
+    }
+    return '';
+  }
+
+  function extForMime(mime) {
+    if (mime.indexOf('mp4') !== -1) return 'm4a';
+    if (mime.indexOf('ogg') !== -1) return 'ogg';
+    return 'webm';
+  }
+
+  function formatTime(ms) {
+    var total = Math.floor(ms / 1000);
+    var h = Math.floor(total / 3600);
+    var m = Math.floor((total % 3600) / 60);
+    var s = total % 60;
+    var parts = h > 0 ? [h, m, s] : [m, s];
+    return parts.map(function (n) { return (n < 10 ? '0' : '') + n; }).join(':');
+  }
+
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function startTimer() {
+    startTime = Date.now();
+    timerText.textContent = '00:00';
+    timerId = setInterval(function () {
+      timerText.textContent = formatTime(Date.now() - startTime);
+    }, 250);
+  }
+
+  function stopTimer() {
+    if (timerId) { clearInterval(timerId); timerId = null; }
+  }
+
+  function startLevelMeter() {
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var src = audioCtx.createMediaStreamSource(stream);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 256;
+      src.connect(analyser);
+    } catch (e) {
+      analyser = null;
+    }
+    var bars = new Uint8Array(analyser ? analyser.frequencyBinCount : 0);
+    var grad = levelCtx.createLinearGradient(0, 0, levelCanvas.width, 0);
+    grad.addColorStop(0, '#7C3AED');
+    grad.addColorStop(0.6, '#EC4899');
+    grad.addColorStop(1, '#06B6D4');
+    var idleT = 0;
+    function draw() {
+      rafId = requestAnimationFrame(draw);
+      var w = levelCanvas.width, h = levelCanvas.height;
+      levelCtx.clearRect(0, 0, w, h);
+      var n = 42, bw = w / n;
+      if (analyser) {
+        analyser.getByteFrequencyData(bars);
+        for (var i = 0; i < n; i++) {
+          var v = bars[Math.floor(i * bars.length / n)] / 255;
+          var bh = Math.max(4, v * (h - 8));
+          var x = i * bw + bw * 0.2, y = (h - bh) / 2;
+          levelCtx.fillStyle = grad;
+          levelCtx.beginPath();
+          if (typeof levelCtx.roundRect === 'function') {
+            levelCtx.roundRect(x, y, bw * 0.6, bh, 3);
+          } else {
+            levelCtx.rect(x, y, bw * 0.6, bh);
+          }
+          levelCtx.fill();
+        }
+      } else {
+        idleT += 0.12;
+        for (var j = 0; j < n; j++) {
+          var wave = 0.5 + 0.5 * Math.sin(idleT - j * 0.45);
+          var hh = 6 + wave * (h - 24);
+          levelCtx.fillStyle = grad;
+          levelCtx.fillRect(j * bw + bw * 0.25, (h - hh) / 2, bw * 0.5, hh);
+        }
+      }
+    }
+    draw();
+  }
+
+  function stopLevelMeter() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    if (audioCtx) {
+      try { audioCtx.close(); } catch (e) { /* ignore */ }
+      audioCtx = null;
+    }
+    analyser = null;
+    levelCtx.clearRect(0, 0, levelCanvas.width, levelCanvas.height);
+  }
+
+  function setRecordingUI(on) {
+    recBtn.classList.toggle('recording', on);
+    recBtn.setAttribute('aria-label', on ? 'Stop recording' : 'Start recording');
+    recBtnLabel.textContent = on ? 'Stop' : 'Record';
+    recDot.classList.toggle('on', on);
+  }
+
+  async function startRecording() {
+    hideError();
+    if (state === 'recording') return;
+    if (!mediaSupported()) {
+      showError('Sorry — audio recording is not supported in this browser. Please try a recent version of Chrome, Edge, Firefox or Safari.');
+      return;
+    }
+    setStatus('Requesting microphone access…');
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (e) {
+      var reason = 'Could not access the microphone.';
+      if (e && e.name === 'NotAllowedError') {
+        reason = 'Microphone access was denied. Please allow microphone access in the browser site settings and try again.';
+      } else if (e && e.name === 'NotFoundError') {
+        reason = 'No microphone was found on this device. Please connect a microphone and try again.';
+      } else if (e && e.name === 'NotReadableError') {
+        reason = 'The microphone is busy or unavailable. Please close other apps using it and try again.';
+      }
+      showError(reason);
+      setStatus('Press the button and allow microphone access to start recording.');
+      return;
+    }
+    chosenMime = pickMime();
+    formatNote.textContent = 'format: ' + (chosenMime || 'browser default');
+    try {
+      mediaRecorder = chosenMime
+        ? new MediaRecorder(stream, { mimeType: chosenMime })
+        : new MediaRecorder(stream);
+    } catch (e) {
+      stopStream();
+      showError('Could not start the recorder: ' + (e && e.message ? e.message : e));
+      setStatus('Press the button and allow microphone access to start recording.');
+      return;
+    }
+    chunks = [];
+    mediaRecorder.ondataavailable = function (ev) {
+      if (ev.data && ev.data.size > 0) chunks.push(ev.data);
+    };
+    mediaRecorder.onstop = finishRecording;
+    mediaRecorder.onerror = function () {
+      showError('An error occurred while recording.');
+    };
+    mediaRecorder.start();
+    state = 'recording';
+    setRecordingUI(true);
+    startTimer();
+    startLevelMeter();
+    setStatus('Recording… speak into your microphone.');
+  }
+
+  function stopRecording() {
+    if (state !== 'recording' || !mediaRecorder) return;
+    setStatus('Stopping…');
+    try {
+      mediaRecorder.stop();
+    } catch (e) {
+      showError('Could not stop the recorder: ' + (e && e.message ? e.message : e));
+    }
+  }
+
+  function stopStream() {
+    if (stream) {
+      stream.getTracks().forEach(function (t) { try { t.stop(); } catch (e) { /* ignore */ } });
+      stream = null;
+    }
+  }
+
+  function finishRecording() {
+    state = 'done';
+    setRecordingUI(false);
+    stopTimer();
+    stopLevelMeter();
+    stopStream();
+    var durationMs = Date.now() - startTime;
+    var type = (mediaRecorder && mediaRecorder.mimeType) || chosenMime || 'audio/webm';
+    var blob = new Blob(chunks, { type: type });
+    chunks = [];
+    if (blobUrl) {
+      try { URL.revokeObjectURL(blobUrl); } catch (e) { /* ignore */ }
+    }
+    blobUrl = URL.createObjectURL(blob);
+    audioPlayer.src = blobUrl;
+    resBits.textContent = formatTime(durationMs) + ' · ' + formatSize(blob.size) + ' · ' + type.split(';')[0];
+    var ext = extForMime(type);
+    var d = new Date();
+    var stamp = d.getFullYear() +
+      ('0' + (d.getMonth() + 1)).slice(-2) +
+      ('0' + d.getDate()).slice(-2) + '-' +
+      ('0' + d.getHours()).slice(-2) +
+      ('0' + d.getMinutes()).slice(-2);
+    downloadBtn.href = blobUrl;
+    downloadBtn.setAttribute('download', 'quickconvert-recording-' + stamp + '.' + ext);
+    emptyState.style.display = 'none';
+    resultCard.hidden = false;
+    requestAnimationFrame(function () { resultCard.classList.add('show'); });
+    setStatus('Recording finished — play it back or download it below.');
+  }
+
+  function resetAll() {
+    if (state === 'recording') {
+      stopRecording();
+      return;
+    }
+    hideError();
+    state = 'idle';
+    if (blobUrl) {
+      try { URL.revokeObjectURL(blobUrl); } catch (e) { /* ignore */ }
+      blobUrl = null;
+    }
+    audioPlayer.removeAttribute('src');
+    audioPlayer.load();
+    resultCard.classList.remove('show');
+    resultCard.hidden = true;
+    emptyState.style.display = '';
+    timerText.textContent = '00:00';
+    setRecordingUI(false);
+    setStatus('Press the button and allow microphone access to start recording.');
+  }
+
+  recBtn.addEventListener('click', function () {
+    if (state === 'recording') { stopRecording(); }
+    else { startRecording(); }
+  });
+  againBtn.addEventListener('click', resetAll);
+  if (!mediaSupported()) {
+    setStatus('Audio recording is not supported in this browser.');
+  }
+})();
+</script>
+</body>
+</html>

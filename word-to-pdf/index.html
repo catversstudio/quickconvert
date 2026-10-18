@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word to PDF Converter · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Convert .docx Word documents to PDF instantly in your browser. Free, private, no uploads — print to PDF right from this page.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Word to PDF Converter · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Convert .docx Word documents to PDF instantly in your browser. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/word-to-pdf/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/word-to-pdf/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.dropzone{
+  width:100%;min-height:150px;border:1.5px dashed rgba(124,58,237,.35);border-radius:20px;
+  background:rgba(255,255,255,.55);cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  padding:28px 20px;text-align:center;transition:border-color .15s,background .15s,transform .15s;
+}
+.dropzone:hover{border-color:var(--vio);background:rgba(255,255,255,.8)}
+.dropzone.drag{border-color:var(--vio);background:#EDE9FE;transform:scale(1.01)}
+.dropzone .ico{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio)}
+.dropzone .ico svg{width:26px;height:26px}
+.dropzone .dz-t{font-weight:600;font-size:1rem}
+.dropzone .dz-s{font-size:.85rem;color:var(--mut)}
+.dropzone .dz-file{font-size:.85rem;font-weight:600;color:var(--vio);word-break:break-all}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.preview-card{margin-bottom:18px;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+.preview-card.show{opacity:1;transform:none}
+.doc-paper{
+  background:#fff;border-radius:14px;border:1px solid #E5E7EB;
+  padding:clamp(22px,5vw,48px);box-shadow:0 4px 18px rgba(31,41,55,.06);
+  font-family:Georgia,'Times New Roman',serif;color:#111827;line-height:1.65;font-size:.95rem;
+  word-wrap:break-word;overflow-wrap:break-word;
+}
+.doc-paper h1,.doc-paper h2,.doc-paper h3{font-family:'Poppins',sans-serif;line-height:1.3;margin:1.1em 0 .5em}
+.doc-paper h1{font-size:1.6rem}.doc-paper h2{font-size:1.3rem}.doc-paper h3{font-size:1.1rem}
+.doc-paper p{margin:0 0 .9em}
+.doc-paper img{max-width:100%;height:auto;border-radius:8px}
+.doc-paper table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.85rem}
+.doc-paper th,.doc-paper td{border:1px solid #D1D5DB;padding:8px 10px;text-align:left}
+.doc-paper th{background:#F3F4F6}
+.doc-paper ul,.doc-paper ol{margin:0 0 .9em 1.5em}
+.doc-paper a{color:var(--vio)}
+.doc-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.doc-head .fname{font-weight:700;font-size:1rem;word-break:break-all}
+.doc-head .pgs{font-size:.8rem;color:var(--mut);font-weight:500}
+.error{
+  display:none;margin-bottom:18px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.spinner{
+  display:none;align-items:center;gap:10px;margin-top:14px;font-size:.9rem;color:var(--mut);font-weight:500;
+}
+.spinner.show{display:flex}
+.spinner .ring{width:22px;height:22px;border-radius:50%;border:3px solid rgba(124,58,237,.2);
+  border-top-color:var(--vio);animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+/* ---------- print: only the document prints ---------- */
+@media print{
+  @page{margin:16mm}
+  header.top,.input-card,.hero,.trust,.how,.faq,.note,footer,.empty-state,.doc-head,.preview-actions{display:none !important}
+  main{max-width:none;padding:0;margin:0}
+  .card{background:none;border:none;box-shadow:none;backdrop-filter:none;padding:0;margin:0}
+  .doc-paper{border:none;box-shadow:none;padding:0}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Word to PDF Converter — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/word-to-pdf/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Document input">
+    <span class="lab" id="dzLabel">Your Word document</span>
+    <div class="dropzone" id="dropZone" role="button" tabindex="0" aria-labelledby="dzLabel"
+         aria-label="Drop a .docx file here or press Enter to choose one">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg></span>
+      <span class="dz-t" id="dzTitle">Drop your .docx file here</span>
+      <span class="dz-s" id="dzHint">or click to choose from your device — one file only</span>
+      <span class="dz-file" id="dzFile"></span>
+    </div>
+    <input type="file" id="fileInput" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden aria-label="Choose a .docx file">
+    <div class="spinner" id="spinner" role="status"><span class="ring" aria-hidden="true"></span><span>Converting document…</span></div>
+    <div class="btn-row preview-actions">
+      <button class="btn btn-p" id="convertBtn" type="button" disabled>Convert to PDF</button>
+      <button class="btn btn-p" id="printBtn" type="button" hidden>🖨 Print / Save as PDF</button>
+      <button class="btn btn-g" id="resetBtn" type="button">Reset</button>
+    </div>
+    <div class="meta">
+      <span class="pill" id="statusPill">No file selected</span>
+      <span>Everything runs locally in your browser — your document is never uploaded.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Word to PDF Converter <span class="plain">— Free Online Tool</span></h1>
+    <p>Drop a .docx file, preview your document, then save it as a PDF — right from this page, with no sign-up and no uploads.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+    Your converted document preview will appear here after you choose a <b>.docx</b> file.
+  </div>
+
+  <section class="card preview-card" id="previewSection" hidden aria-label="Document preview">
+    <div class="doc-head">
+      <span class="fname" id="docTitle"></span>
+      <span class="pgs" id="docMeta"></span>
+    </div>
+    <div class="doc-paper" id="docPreview"></div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant conversion — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>100% private — files stay on-device</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Drop a .docx file</b> into the box above or click to choose one.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Preview your document</b> — it renders as a clean, print-ready page.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Print / Save as PDF</b> — pick "Save as PDF" in the print dialog and done.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>How does the Word to PDF conversion actually work?</summary>
+      <p>Honestly: this tool converts your .docx to a print-ready page in the browser using the open-source mammoth.js library, then uses your browser's built-in <b>print-to-PDF</b> (the "Print / Save as PDF" button just opens the print dialog — choose "Save as PDF" as the destination). There's no server-side conversion and no PDF file is generated by us.</p>
+    </details>
+    <details>
+      <summary>Which Word formats are supported?</summary>
+      <p>Modern <b>.docx</b> files only (Word 2007 and later). The older .doc format, .rtf, .odt and password-protected files are not supported. Complex layouts may render slightly differently than in Microsoft Word — headings, paragraphs, lists, tables and images are preserved, but exact page fidelity isn't guaranteed.</p>
+    </details>
+    <details>
+      <summary>Is my document uploaded anywhere?</summary>
+      <p>No. The whole conversion happens locally in your browser with mammoth.js loaded from a public CDN. Your file never leaves your device — nothing is uploaded, stored or shared.</p>
+    </details>
+  </section>
+
+  <p class="note">.docx → print-ready page → PDF · 100% local — your document never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var MAMMOTH_FALLBACKS = [
+    'https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js',
+    'https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js'
+  ];
+
+  var dropZone = document.getElementById('dropZone');
+  var fileInput = document.getElementById('fileInput');
+  var dzTitle = document.getElementById('dzTitle');
+  var dzHint = document.getElementById('dzHint');
+  var dzFile = document.getElementById('dzFile');
+  var convertBtn = document.getElementById('convertBtn');
+  var printBtn = document.getElementById('printBtn');
+  var resetBtn = document.getElementById('resetBtn');
+  var statusPill = document.getElementById('statusPill');
+  var errorBox = document.getElementById('errorBox');
+  var spinner = document.getElementById('spinner');
+  var emptyState = document.getElementById('emptyState');
+  var previewSection = document.getElementById('previewSection');
+  var docTitle = document.getElementById('docTitle');
+  var docMeta = document.getElementById('docMeta');
+  var docPreview = document.getElementById('docPreview');
+
+  var selectedFile = null;
+  var mammothReady = typeof window.mammoth !== 'undefined';
+  var mammothFailed = false;
+
+  function loadMammothFallback(idx) {
+    if (idx >= MAMMOTH_FALLBACKS.length) {
+      mammothFailed = true;
+      showError('Could not load the document engine (mammoth.js) from any CDN. Please check your internet connection and reload the page.');
+      return;
+    }
+    var s = document.createElement('script');
+    s.src = MAMMOTH_FALLBACKS[idx];
+    s.onload = function () {
+      if (typeof window.mammoth !== 'undefined') {
+        mammothReady = true;
+        hideError();
+      } else {
+        loadMammothFallback(idx + 1);
+      }
+    };
+    s.onerror = function () { loadMammothFallback(idx + 1); };
+    document.head.appendChild(s);
+  }
+
+  if (!mammothReady) {
+    loadMammothFallback(0);
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function isDocx(file) {
+    var name = (file.name || '').toLowerCase();
+    return name.slice(-5) === '.docx' ||
+      file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+  }
+
+  function setFile(file) {
+    hideError();
+    if (!file) return;
+    if (!isDocx(file)) {
+      showError('Only .docx files are supported. Please choose a Word document saved in the modern .docx format.');
+      return;
+    }
+    if (file.size > 25 * 1024 * 1024) {
+      showError('This file is too large (over 25 MB). Please use a smaller document.');
+      return;
+    }
+    selectedFile = file;
+    dzTitle.textContent = 'File ready';
+    dzHint.textContent = 'Drop another file or click to replace it';
+    dzFile.textContent = file.name + ' (' + formatBytes(file.size) + ')';
+    statusPill.textContent = '1 .docx file · ' + formatBytes(file.size);
+    convertBtn.disabled = false;
+  }
+
+  function readArrayBuffer(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () { resolve(reader.result); };
+      reader.onerror = function () { reject(new Error('Could not read the file.')); };
+      reader.readAsArrayBuffer(file);
+    });
+  }
+
+  function mammothImageToDataUri(image) {
+    return image.readAsBase64String().then(function (base64) {
+      return { src: 'data:' + image.contentType + ';base64,' + base64 };
+    });
+  }
+
+  async function convert() {
+    hideError();
+    if (!selectedFile) {
+      showError('Please choose a .docx file first.');
+      return;
+    }
+    if (mammothFailed) {
+      showError('The document engine failed to load. Please reload the page and try again.');
+      return;
+    }
+    if (!mammothReady || typeof window.mammoth === 'undefined') {
+      showError('The document engine is still loading — please wait a moment and try again.');
+      return;
+    }
+    spinner.classList.add('show');
+    convertBtn.disabled = true;
+    convertBtn.textContent = 'Converting…';
+    try {
+      var buffer = await readArrayBuffer(selectedFile);
+      var result = await window.mammoth.convertToHtml(
+        { arrayBuffer: buffer },
+        { convertImage: window.mammoth.images.imgElement(mammothImageToDataUri) }
+      );
+      var html = (result.value || '').trim();
+      if (!html) {
+        throw new Error('No readable content was found in this document.');
+      }
+      docPreview.innerHTML = html;
+      docTitle.textContent = selectedFile.name;
+      var words = docPreview.textContent.trim().split(/\s+/).filter(Boolean).length;
+      docMeta.textContent = '~' + words.toLocaleString('en-US') + ' words';
+      emptyState.style.display = 'none';
+      previewSection.hidden = false;
+      requestAnimationFrame(function () { previewSection.classList.add('show'); });
+      convertBtn.hidden = true;
+      printBtn.hidden = false;
+      statusPill.textContent = 'Converted — ready to save as PDF';
+      previewSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (result.messages && result.messages.length) {
+        console.info('mammoth messages:', result.messages);
+      }
+    } catch (e) {
+      showError('Could not convert this file: ' + (e && e.message ? e.message : e));
+    } finally {
+      spinner.classList.remove('show');
+      convertBtn.disabled = false;
+      convertBtn.textContent = 'Convert to PDF';
+    }
+  }
+
+  function reset() {
+    selectedFile = null;
+    fileInput.value = '';
+    hideError();
+    dzTitle.textContent = 'Drop your .docx file here';
+    dzHint.textContent = 'or click to choose from your device — one file only';
+    dzFile.textContent = '';
+    statusPill.textContent = 'No file selected';
+    convertBtn.disabled = true;
+    convertBtn.hidden = false;
+    printBtn.hidden = true;
+    previewSection.classList.remove('show');
+    previewSection.hidden = true;
+    docPreview.innerHTML = '';
+    docTitle.textContent = '';
+    docMeta.textContent = '';
+    emptyState.style.display = '';
+  }
+
+  function printDoc() {
+    document.title = selectedFile ? selectedFile.name.replace(/\.docx$/i, '') : 'Document';
+    window.print();
+  }
+
+  dropZone.addEventListener('click', function () { fileInput.click(); });
+  dropZone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files && fileInput.files.length > 0) {
+      setFile(fileInput.files[0]);
+    }
+  });
+  ['dragenter', 'dragover'].forEach(function (evt) {
+    dropZone.addEventListener(evt, function (e) {
+      e.preventDefault();
+      dropZone.classList.add('drag');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (evt) {
+    dropZone.addEventListener(evt, function (e) {
+      e.preventDefault();
+      dropZone.classList.remove('drag');
+    });
+  });
+  dropZone.addEventListener('drop', function (e) {
+    var files = e.dataTransfer && e.dataTransfer.files;
+    if (files && files.length > 0) {
+      setFile(files[0]);
+    }
+  });
+
+  convertBtn.addEventListener('click', convert);
+  printBtn.addEventListener('click', printDoc);
+  resetBtn.addEventListener('click', reset);
+})();
+</script>
+</body>
+</html>

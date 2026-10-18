@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Rotator · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Rotate PDF pages by 90°, 180° or 270° — all pages or a custom range. Free, private, works entirely in your browser.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="PDF Rotator · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Rotate PDF pages by 90°, 180° or 270° — all pages or a custom range. Free, private, works entirely in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/pdf-rotator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/pdf-rotator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+/* dropzone */
+.dropzone{
+  border:1.5px dashed rgba(124,58,237,.35);border-radius:20px;
+  background:rgba(255,255,255,.55);
+  padding:30px 20px;text-align:center;cursor:pointer;
+  transition:border-color .15s,background .15s,box-shadow .15s;
+  min-height:44px;
+}
+.dropzone:hover,.dropzone.drag{border-color:var(--vio);background:rgba(255,255,255,.85);
+  box-shadow:0 0 0 4px rgba(124,58,237,.10)}
+.dropzone .dz-ico{width:52px;height:52px;margin:0 auto 10px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.dropzone .dz-ico svg{width:28px;height:28px}
+.dropzone .dz-t{font-weight:600;font-size:1rem}
+.dropzone .dz-s{font-size:.82rem;color:var(--mut);margin-top:4px}
+.file-info{
+  display:none;align-items:center;gap:12px;justify-content:center;flex-wrap:wrap;
+  margin-top:14px;font-size:.9rem;
+}
+.file-info.show{display:flex}
+.file-info .fname{font-weight:600;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-info .fpages{background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 14px;font-weight:600;color:#4C1D95;font-size:.83rem}
+.file-info .fchange{font-size:.83rem;color:var(--vio);font-weight:600;cursor:pointer;
+  background:none;border:none;font-family:inherit;padding:10px;min-height:44px}
+/* option groups */
+.opt-label{display:block;font-size:.8rem;font-weight:600;color:var(--mut);
+  letter-spacing:.06em;text-transform:uppercase;margin:20px 2px 8px}
+.pills{display:flex;gap:10px;flex-wrap:wrap}
+.pill-btn{
+  font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;min-height:44px;
+  padding:10px 22px;border-radius:999px;border:1.5px solid rgba(124,58,237,.22);
+  background:rgba(255,255,255,.7);color:var(--ink);
+  transition:background .15s,border-color .15s,color .15s,transform .15s;
+}
+.pill-btn:hover{border-color:var(--vio)}
+.pill-btn:active{transform:scale(.96)}
+.pill-btn.active{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  border-color:transparent;box-shadow:0 6px 18px rgba(124,58,237,.30)}
+.range-row{display:none;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.range-row.show{display:flex}
+.range-row input{
+  font-family:inherit;font-size:.95rem;color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:12px;
+  padding:12px 14px;min-height:44px;width:130px;outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+.range-row input:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.range-row input::placeholder{color:#9CA3AF}
+.range-row .rhint{font-size:.8rem;color:var(--mut)}
+.dir-note{margin-top:10px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.dir-note svg{width:18px;height:18px;color:var(--vio);flex:0 0 18px}
+.btn-row{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.error{
+  display:none;margin-top:16px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.success{
+  display:none;margin-top:16px;padding:14px 18px;border-radius:16px;
+  background:rgba(209,250,229,.85);border:1px solid #6EE7B7;color:#065F46;
+  font-size:.9rem;font-weight:500;
+}
+.success.show{display:block}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PDF Rotator — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/pdf-rotator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="PDF input">
+    <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Drop a PDF file or click to choose one">
+      <span class="dz-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3-3 3 3"/></svg></span>
+      <div class="dz-t">Drop your PDF here</div>
+      <div class="dz-s">or click to browse · one file at a time · max ~50 MB</div>
+      <input type="file" id="fileInput" accept="application/pdf,.pdf" hidden>
+    </div>
+    <div class="file-info" id="fileInfo">
+      <span class="fname" id="fileName"></span>
+      <span class="fpages" id="filePages"></span>
+      <button class="fchange" id="changeBtn" type="button">Choose a different file</button>
+    </div>
+
+    <label class="opt-label" for="rangeRow">Pages to rotate</label>
+    <div class="pills" id="scopePills" role="group" aria-label="Pages to rotate">
+      <button class="pill-btn active" type="button" data-scope="all">All pages</button>
+      <button class="pill-btn" type="button" data-scope="range">Page range</button>
+    </div>
+    <div class="range-row" id="rangeRow">
+      <input type="text" id="rangeInput" inputmode="text" placeholder="e.g. 2-5" aria-label="Page range, for example 2-5">
+      <span class="rhint">Format: <b>2-5</b> or a single page like <b>3</b></span>
+    </div>
+
+    <label class="opt-label" for="anglePills">Rotation angle</label>
+    <div class="pills" id="anglePills" role="group" aria-label="Rotation angle">
+      <button class="pill-btn active" type="button" data-angle="90">90°</button>
+      <button class="pill-btn" type="button" data-angle="180">180°</button>
+      <button class="pill-btn" type="button" data-angle="270">270°</button>
+    </div>
+    <div class="dir-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+      <span>All rotations are <b>clockwise</b> — so 90° turns a page on its right side, 270° on its left.</span>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-p" id="rotateBtn" type="button">Rotate &amp; Download</button>
+      <button class="btn btn-g" id="resetBtn" type="button">Reset</button>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+    <div class="success" id="successBox" role="status"></div>
+  </section>
+
+  <div class="hero">
+    <h1>PDF Rotator <span class="plain">— Free Online Tool</span></h1>
+    <p>Fix sideways scans, photos and upside-down pages. Rotate every page or just a range, then download — all in seconds.</p>
+  </div>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Drop a PDF</b> into the box above — it never leaves your device.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Pick the pages and angle</b> — all pages or a range like 2-5, rotated clockwise.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Press Rotate &amp; Download</b> — your rotated PDF saves instantly.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is my PDF uploaded to a server?</summary>
+      <p>No. The rotation happens with the pdf-lib library running locally in your browser, so your file never leaves this page — nothing is uploaded or stored anywhere.</p>
+    </details>
+    <details>
+      <summary>Does rotating reduce the quality of my PDF?</summary>
+      <p>No. Rotation only changes each page's rotation flag — the text, images and layout are untouched, so there is zero quality loss and the file stays a searchable PDF.</p>
+    </details>
+    <details>
+      <summary>Can I rotate only some pages?</summary>
+      <p>Yes. Choose "Page range" and enter something like <b>2-5</b> (or a single page like <b>3</b>). Page numbers start at 1. Picking "All pages" rotates the whole document.</p>
+    </details>
+  </section>
+
+  <p class="note">pdf-lib powered · lossless page rotation · 100% local — your PDF never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var dropzone = document.getElementById('dropzone');
+  var fileInput = document.getElementById('fileInput');
+  var fileInfo = document.getElementById('fileInfo');
+  var fileName = document.getElementById('fileName');
+  var filePages = document.getElementById('filePages');
+  var changeBtn = document.getElementById('changeBtn');
+  var scopePills = document.getElementById('scopePills');
+  var rangeRow = document.getElementById('rangeRow');
+  var rangeInput = document.getElementById('rangeInput');
+  var anglePills = document.getElementById('anglePills');
+  var rotateBtn = document.getElementById('rotateBtn');
+  var resetBtn = document.getElementById('resetBtn');
+  var errorBox = document.getElementById('errorBox');
+  var successBox = document.getElementById('successBox');
+
+  var pdfBytes = null;      // original file bytes
+  var pdfDoc = null;        // loaded PDFDocument (for page count)
+  var originalName = '';
+  var pageCount = 0;
+  var scope = 'all';        // 'all' | 'range'
+  var angle = 90;           // 90 | 180 | 270
+
+  var CDN_URLS = [
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js',
+    'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js',
+    'https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js'
+  ];
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+    successBox.classList.remove('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function showSuccess(msg) {
+    successBox.textContent = msg;
+    successBox.classList.add('show');
+  }
+
+  function hideSuccess() {
+    successBox.textContent = '';
+    successBox.classList.remove('show');
+  }
+
+  // Sequential fallback: try loading pdf-lib from each CDN until one works.
+  function ensurePdfLib() {
+    return new Promise(function (resolve, reject) {
+      if (typeof window.PDFLib !== 'undefined') {
+        resolve();
+        return;
+      }
+      var idx = 0;
+      function tryNext() {
+        if (idx >= CDN_URLS.length) {
+          reject(new Error('Could not load the PDF library. Please check your internet connection and try again.'));
+          return;
+        }
+        var s = document.createElement('script');
+        s.src = CDN_URLS[idx++];
+        s.onload = function () { resolve(); };
+        s.onerror = function () { s.remove(); tryNext(); };
+        document.head.appendChild(s);
+      }
+      tryNext();
+    });
+  }
+
+  function isPdfFile(file) {
+    if (!file) return false;
+    var name = (file.name || '').toLowerCase();
+    return file.type === 'application/pdf' || name.slice(-4) === '.pdf';
+  }
+
+  function parseRange(text, total) {
+    // Accepts "3" or "2-5". Returns array of 1-based page numbers, or null.
+    var t = (text || '').trim().replace(/\s+/g, '');
+    var single = /^(\d+)$/.exec(t);
+    if (single) {
+      var p = parseInt(single[1], 10);
+      if (p < 1 || p > total) return null;
+      return [p];
+    }
+    var m = /^(\d+)-(\d+)$/.exec(t);
+    if (!m) return null;
+    var a = parseInt(m[1], 10);
+    var b = parseInt(m[2], 10);
+    if (a < 1 || b > total || a > b) return null;
+    var pages = [];
+    for (var i = a; i <= b; i++) pages.push(i);
+    return pages;
+  }
+
+  async function handleFile(file) {
+    hideError();
+    hideSuccess();
+    if (!isPdfFile(file)) {
+      showError('That doesn\'t look like a PDF file. Please choose a file ending in .pdf.');
+      return;
+    }
+    if (file.size > 50 * 1024 * 1024) {
+      showError('That file is bigger than 50 MB. Please choose a smaller PDF.');
+      return;
+    }
+    var bytes;
+    try {
+      bytes = new Uint8Array(await file.arrayBuffer());
+    } catch (e) {
+      showError('Could not read that file. Please try again.');
+      return;
+    }
+    try {
+      await ensurePdfLib();
+      var doc = await window.PDFLib.PDFDocument.load(bytes);
+      pdfBytes = bytes;
+      pdfDoc = doc;
+      originalName = file.name.replace(/\.pdf$/i, '');
+      pageCount = doc.getPageCount();
+      fileName.textContent = file.name;
+      filePages.textContent = pageCount + (pageCount === 1 ? ' page' : ' pages');
+      fileInfo.classList.add('show');
+    } catch (e) {
+      pdfBytes = null;
+      pdfDoc = null;
+      pageCount = 0;
+      showError('That file couldn\'t be opened as a PDF. It may be damaged or password-protected.');
+    }
+  }
+
+  async function rotate() {
+    hideError();
+    hideSuccess();
+    if (!pdfBytes) {
+      showError('Please drop a PDF file first.');
+      return;
+    }
+    var pages;
+    if (scope === 'range') {
+      pages = parseRange(rangeInput.value, pageCount);
+      if (!pages) {
+        showError('Please enter a valid page range like 2-5 (pages 1 to ' + pageCount + ').');
+        rangeInput.focus();
+        return;
+      }
+    } else {
+      pages = [];
+      for (var i = 1; i <= pageCount; i++) pages.push(i);
+    }
+
+    rotateBtn.disabled = true;
+    rotateBtn.textContent = 'Rotating…';
+    try {
+      await ensurePdfLib();
+      var doc = await window.PDFLib.PDFDocument.load(pdfBytes);
+      var rotation = window.PDFLib.degrees(angle);
+      pages.forEach(function (p) {
+        var page = doc.getPage(p - 1);
+        // Add to existing rotation so re-rotating behaves predictably
+        var current = page.getRotation().angle;
+        page.setRotation(window.PDFLib.degrees((current + angle) % 360));
+      });
+      var out = await doc.save();
+      var blob = new Blob([out], { type: 'application/pdf' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = originalName + '-rotated-' + angle + 'deg.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
+      showSuccess('Done! Rotated ' + (pages.length === pageCount ? 'all ' + pageCount : pages.length) +
+        (pages.length === 1 ? ' page' : ' pages') + ' by ' + angle + '° clockwise — your download has started.');
+    } catch (e) {
+      showError('Could not rotate the PDF: ' + (e && e.message ? e.message : e));
+    } finally {
+      rotateBtn.disabled = false;
+      rotateBtn.textContent = 'Rotate & Download';
+    }
+  }
+
+  function resetAll() {
+    pdfBytes = null;
+    pdfDoc = null;
+    originalName = '';
+    pageCount = 0;
+    fileInput.value = '';
+    fileName.textContent = '';
+    filePages.textContent = '';
+    fileInfo.classList.remove('show');
+    rangeInput.value = '';
+    hideError();
+    hideSuccess();
+    selectScope('all');
+    selectAngle(90);
+    dropzone.focus();
+  }
+
+  function selectScope(value) {
+    scope = value;
+    var btns = scopePills.querySelectorAll('.pill-btn');
+    btns.forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-scope') === value);
+    });
+    var show = value === 'range';
+    rangeRow.classList.toggle('show', show);
+    if (show) rangeInput.focus();
+  }
+
+  function selectAngle(value) {
+    angle = value;
+    var btns = anglePills.querySelectorAll('.pill-btn');
+    btns.forEach(function (b) {
+      b.classList.toggle('active', parseInt(b.getAttribute('data-angle'), 10) === value);
+    });
+  }
+
+  // --- file picking events ---
+  dropzone.addEventListener('click', function () { fileInput.click(); });
+  dropzone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files && fileInput.files[0]) handleFile(fileInput.files[0]);
+  });
+  changeBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    fileInput.click();
+  });
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropzone.classList.add('drag');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropzone.classList.remove('drag');
+    });
+  });
+  dropzone.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  // --- option pill events ---
+  scopePills.addEventListener('click', function (e) {
+    var btn = e.target.closest('.pill-btn');
+    if (btn) selectScope(btn.getAttribute('data-scope'));
+  });
+  anglePills.addEventListener('click', function (e) {
+    var btn = e.target.closest('.pill-btn');
+    if (btn) selectAngle(parseInt(btn.getAttribute('data-angle'), 10));
+  });
+
+  rotateBtn.addEventListener('click', rotate);
+  resetBtn.addEventListener('click', resetAll);
+})();
+</script>
+</body>
+</html>

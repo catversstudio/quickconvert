@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profit &amp; Loss Calculator — Margin on Cost Price | QuickConvert</title>
+<meta name="description" content="Compute profit or loss amount and percentage on cost price from CP and SP, or find the selling price for a target profit/loss percent. Free, private, works fully in your browser.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M14 46 L26 34 L34 40 L50 20' stroke='%23fff' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M40 20 H50 V30' stroke='%23fff' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta property="og:title" content="Profit & Loss Calculator — Margin on Cost Price | QuickConvert">
+<meta property="og:description" content="Compute profit or loss amount and percentage on cost price from CP and SP, or find the selling price for a target profit/loss percent. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/profit-loss-calculator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/profit-loss-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.inp{width:100%;font-family:inherit;font-size:.98rem;color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:12px 16px;outline:none;transition:border-color .15s,box-shadow .15s;min-height:48px}
+.inp:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+select.inp{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237C3AED' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;background-size:18px;padding-right:40px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:560px){.frow{grid-template-columns:1fr}}
+.err{display:none;margin-top:12px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.35);color:#B91C1C;border-radius:14px;padding:12px 16px;font-size:.88rem;line-height:1.55}
+.err.show{display:block}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.35)}
+.btn-p:hover{box-shadow:0 10px 24px rgba(124,58,237,.45);transform:translateY(-1px)}
+.btn-g{background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);backdrop-filter:blur(10px)}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+.result-card{margin-bottom:18px}
+.result-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.result-title{font-weight:700;font-size:1.02rem;display:inline-flex;align-items:center;gap:8px}
+.result-title .tag{font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--vio),#6D28D9)}
+.big-pl{font-size:clamp(1.9rem,7vw,2.7rem);font-weight:700;text-align:center;padding:18px 10px;line-height:1.4;word-break:break-all}
+.big-pl .kind{font-size:1rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px}
+.big-pl.profit .kind{color:#059669}
+.big-pl.loss .kind{color:#DC2626}
+.big-pl.flat .kind{color:var(--mut)}
+.big-pl .dim{color:#9CA3AF;font-weight:400;font-size:1rem;display:block;margin-top:6px}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}
+.res-cell{background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:16px;padding:14px 16px;text-align:center}
+.res-cell .v{font-size:1.25rem;font-weight:700;font-family:var(--mono);color:var(--ink)}
+.res-cell .l{font-size:.75rem;color:var(--mut);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-top:4px}
+.formula{margin-top:14px;background:rgba(31,41,55,.93);color:#A5F3FC;border-radius:14px;
+  padding:14px 18px;font-family:var(--mono);font-size:.92rem;line-height:1.7}
+.formula .dim{color:#6B7280}
+.mode-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.mode-pill{font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
+  padding:10px 22px;min-height:44px;border-radius:999px;
+  border:1.5px solid rgba(124,58,237,.25);background:rgba(255,255,255,.6);color:var(--mut);transition:all .15s}
+.mode-pill.on{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--vio),#9333EA);box-shadow:0 6px 16px rgba(124,58,237,.3)}
+.modepane{display:none}
+.modepane.on{display:block}
+.sec-title{font-size:1.02rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-title .tag{font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--vio),#6D28D9)}
+@media(max-width:560px){
+  .result-head{align-items:flex-start}
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Profit & Loss Calculator — Margin on Cost Price",
+  "url": "https://quickconvert.freedev.app/profit-loss-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Profit and loss input">
+    <div class="mode-pills" role="group" aria-label="Calculator mode">
+      <button class="mode-pill on" data-mode="pl" type="button" aria-pressed="true">Profit / loss on sale</button>
+      <button class="mode-pill" data-mode="sp" type="button" aria-pressed="false">Find selling price</button>
+    </div>
+
+    <div class="modepane on" id="pane-pl">
+      <div class="sec-title"><span class="tag">Sale</span> Cost price vs selling price</div>
+      <div class="frow">
+        <div><label class="lab" for="cpInput">Cost price (CP)</label><input class="inp" id="cpInput" type="text" inputmode="decimal" placeholder="e.g. 100" autocomplete="off"></div>
+        <div><label class="lab" for="spInput">Selling price (SP)</label><input class="inp" id="spInput" type="text" inputmode="decimal" placeholder="e.g. 150" autocomplete="off"></div>
+      </div>
+    </div>
+
+    <div class="modepane" id="pane-sp">
+      <div class="sec-title"><span class="tag">Target</span> Selling price for X% profit / loss</div>
+      <div class="frow">
+        <div><label class="lab" for="tcpInput">Cost price (CP)</label><input class="inp" id="tcpInput" type="text" inputmode="decimal" placeholder="e.g. 100" autocomplete="off"></div>
+        <div><label class="lab" for="pctInput">Target percent (%)</label><input class="inp" id="pctInput" type="text" inputmode="decimal" placeholder="e.g. 20" autocomplete="off"></div>
+      </div>
+      <div><label class="lab" for="kindSelect">I want to make a…</label>
+        <select class="inp" id="kindSelect">
+          <option value="profit">Profit of X%</option>
+          <option value="loss">Loss of X%</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-p" id="plCalcBtn" type="button">Calculate</button>
+      <button class="btn btn-g" id="plClearBtn" type="button">Clear</button>
+    </div>
+    <div class="err" id="plErr" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Profit &amp; Loss Calculator <span class="plain">— Free Online Tool</span></h1>
+    <p>Find the profit or loss on a sale as an amount and a percentage on cost price — or work backwards to the selling price you need for a target margin.</p>
+  </div>
+
+  <section class="card result-card" aria-label="Profit and loss result">
+    <div class="result-head">
+      <div class="result-title"><span class="tag">Result</span><span id="plModeLabel">profit / loss on sale</span></div>
+      <button class="btn btn-g" id="copyResBtn" type="button">Copy result</button>
+    </div>
+    <div class="big-pl" id="plOut" aria-live="polite"><span class="dim">enter values above and press Calculate</span></div>
+    <div class="res-grid" id="plGrid"></div>
+    <div class="formula" id="plFormula">Profit/loss % = (SP − CP) ÷ CP × 100 <span class="dim">— always computed on the cost price</span></div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>CP-based margins</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Choose a mode</b> — analyse a completed sale, or find the selling price for a target margin.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Enter your numbers</b> — cost price, and selling price or target percent.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Press Calculate</b> — every percentage is clearly labelled as "on cost price".</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is the percentage calculated on cost price or selling price?</summary>
+      <p>On the cost price — the standard convention for profit/loss percent. Profit % = (SP − CP) ÷ CP × 100. A ₹100 item sold for ₹150 is a 50% profit on cost (not 33%, which would be the margin on the selling price).</p>
+    </details>
+    <details>
+      <summary>How do I find the selling price for a 20% profit?</summary>
+      <p>Switch to "Find selling price" mode, enter the cost price and 20. The tool computes SP = CP × (1 + 20/100). For CP = 100, the answer is 120.</p>
+    </details>
+    <details>
+      <summary>What if the selling price equals the cost price?</summary>
+      <p>Then there is no profit and no loss — the tool shows an amount of 0 and 0% with a "No profit, no loss" label.</p>
+    </details>
+  </section>
+
+  <p class="note">% always on cost price · Sale analysis · Target-price finder · 100% local — your numbers never leave this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+/*CORE-START*/
+function profitLoss(cp, sp) {
+  if (!isFinite(cp) || !isFinite(sp) || cp <= 0 || sp < 0) return null;
+  var amt = sp - cp, pct = amt / cp * 100;
+  return { amount: amt, percent: pct, kind: amt > 0 ? 'Profit' : (amt < 0 ? 'Loss' : 'No profit, no loss') };
+}
+function targetSP(cp, pct, kind) {
+  if (!isFinite(cp) || !isFinite(pct) || cp <= 0 || pct < 0) return null;
+  if (kind === 'loss') return cp * (1 - pct / 100);
+  return cp * (1 + pct / 100);
+}
+/*CORE-END*/
+
+  var mode = 'pl';
+  var pills = Array.prototype.slice.call(document.querySelectorAll('.mode-pill'));
+  var panePl = document.getElementById('pane-pl');
+  var paneSp = document.getElementById('pane-sp');
+  var cpInput = document.getElementById('cpInput');
+  var spInput = document.getElementById('spInput');
+  var tcpInput = document.getElementById('tcpInput');
+  var pctInput = document.getElementById('pctInput');
+  var kindSelect = document.getElementById('kindSelect');
+  var plCalcBtn = document.getElementById('plCalcBtn');
+  var plClearBtn = document.getElementById('plClearBtn');
+  var plErr = document.getElementById('plErr');
+  var plOut = document.getElementById('plOut');
+  var plGrid = document.getElementById('plGrid');
+  var plModeLabel = document.getElementById('plModeLabel');
+  var plFormula = document.getElementById('plFormula');
+
+  function showErr(msg) {
+    if (msg) { plErr.textContent = msg; plErr.classList.add('show'); }
+    else { plErr.textContent = ''; plErr.classList.remove('show'); }
+  }
+
+  function parseNum(s) {
+    var t = String(s).trim();
+    if (t === '') return null;
+    var n = Number(t);
+    return isFinite(n) ? n : null;
+  }
+
+  function money(n) {
+    return (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  }
+
+  function resetOut() {
+    plOut.className = 'big-pl';
+    plOut.innerHTML = '<span class="dim">enter values above and press Calculate</span>';
+    plGrid.innerHTML = '';
+  }
+
+  function setMode(m) {
+    mode = m;
+    pills.forEach(function (p) {
+      var on = p.getAttribute('data-mode') === m;
+      p.classList.toggle('on', on);
+      p.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    panePl.classList.toggle('on', m === 'pl');
+    paneSp.classList.toggle('on', m === 'sp');
+    plModeLabel.textContent = m === 'pl' ? 'profit / loss on sale' : 'selling price for target margin';
+    plFormula.innerHTML = m === 'pl'
+      ? 'Profit/loss % = (SP − CP) ÷ CP × 100 <span class="dim">— always computed on the cost price</span>'
+      : 'SP = CP × (1 ± percent ÷ 100) <span class="dim">— plus for profit, minus for loss</span>';
+    showErr('');
+    resetOut();
+  }
+
+  function calc() {
+    if (mode === 'pl') {
+      var cp = parseNum(cpInput.value), sp = parseNum(spInput.value);
+      if (cp === null || sp === null) { showErr('Please enter valid numbers for cost price and selling price.'); return; }
+      var res = profitLoss(cp, sp);
+      if (!res) { showErr('Cost price must be above 0 and selling price cannot be negative.'); return; }
+      showErr('');
+      var cls = res.kind === 'Profit' ? 'profit' : (res.kind === 'Loss' ? 'loss' : 'flat');
+      plOut.className = 'big-pl ' + cls;
+      plOut.innerHTML = '<span class="kind">' + res.kind + '</span>' + (res.kind === 'No profit, no loss' ? '0' : money(Math.abs(res.amount))) +
+        '<span class="dim">' + Math.abs(Math.round(res.percent * 100) / 100) + '% ' + (res.kind === 'No profit, no loss' ? '— breakeven' : res.kind.toLowerCase() + ' on cost price') + '</span>';
+      plGrid.innerHTML =
+        '<div class="res-cell"><div class="v">' + money(Math.abs(res.amount)) + '</div><div class="l">' + (res.kind === 'No profit, no loss' ? 'Amount' : res.kind + ' amount') + '</div></div>' +
+        '<div class="res-cell"><div class="v">' + Math.abs(Math.round(res.percent * 100) / 100) + '%</div><div class="l">On cost price</div></div>' +
+        '<div class="res-cell"><div class="v">' + money(cp) + ' → ' + money(sp) + '</div><div class="l">CP → SP</div></div>';
+    } else {
+      var tcp = parseNum(tcpInput.value), pct = parseNum(pctInput.value);
+      if (tcp === null || pct === null) { showErr('Please enter valid numbers for cost price and target percent.'); return; }
+      var kind = kindSelect.value;
+      var sp2 = targetSP(tcp, pct, kind);
+      if (sp2 === null) { showErr('Cost price must be above 0 and the percent cannot be negative.'); return; }
+      showErr('');
+      plOut.className = 'big-pl profit';
+      plOut.innerHTML = '<span class="kind">Required selling price</span>' + money(sp2) +
+        '<span class="dim">for a ' + (Math.round(pct * 100) / 100) + '% ' + kind + ' on CP ' + money(tcp) + '</span>';
+      plGrid.innerHTML =
+        '<div class="res-cell"><div class="v">' + money(sp2) + '</div><div class="l">Selling price</div></div>' +
+        '<div class="res-cell"><div class="v">' + money(tcp) + '</div><div class="l">Cost price</div></div>' +
+        '<div class="res-cell"><div class="v">' + (Math.round(pct * 100) / 100) + '% ' + kind + '</div><div class="l">Target margin</div></div>';
+    }
+  }
+
+  pills.forEach(function (p) {
+    p.addEventListener('click', function () { setMode(p.getAttribute('data-mode')); });
+  });
+  plCalcBtn.addEventListener('click', calc);
+  plClearBtn.addEventListener('click', function () {
+    cpInput.value = ''; spInput.value = ''; tcpInput.value = ''; pctInput.value = '';
+    showErr(''); resetOut();
+  });
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('copyResBtn');
+  if(!b)return;
+  b.addEventListener('click',function(){
+    var card=b.closest('.result-card');
+    var txt=card?card.innerText.replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim():'';
+    if(!txt)return;
+    function done(ok){b.textContent=ok?'Copied \u2713':'Copy failed';setTimeout(function(){b.textContent='Copy result';},1500);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true);},function(){done(false);});}
+    else{var ta=document.createElement('textarea');ta.value=txt;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='-9999px';document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){ok=false;}document.body.removeChild(ta);done(ok);}
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume Builder · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Build a professional resume in your browser — free resume builder with live preview. Print or save as PDF. No sign-up, 100% private.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Resume Builder · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Build a professional resume in your browser — free resume builder with live preview. Print or save as PDF. No sign-up, 100% private.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/resume-builder/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/resume-builder/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.sec-label{font-size:.8rem;font-weight:700;color:var(--vio);letter-spacing:.08em;text-transform:uppercase;
+  margin:20px 2px 10px}
+.sec-label:first-of-type{margin-top:0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fld{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.fld.full{grid-column:1/-1}
+.fld>label{font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.03em}
+.fld .hint{font-weight:400}
+input[type=text],input[type=email],input[type=tel],textarea.field{
+  width:100%;font-family:inherit;font-size:.95rem;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);
+  border-radius:14px;padding:12px 14px;outline:none;min-height:44px;
+  transition:border-color .15s,box-shadow .15s;
+}
+input[type=text]:focus,input[type=email]:focus,input[type=tel]:focus,textarea.field:focus{
+  border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+input::placeholder,textarea::placeholder{color:#9CA3AF}
+textarea.field{resize:vertical}
+.dyn-entry{
+  background:rgba(255,255,255,.45);border:1px dashed rgba(124,58,237,.25);
+  border-radius:18px;padding:16px;margin-bottom:12px;
+}
+.entry-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.entry-title{font-size:.85rem;font-weight:700;color:var(--ink)}
+.rm-btn{
+  font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;color:#B91C1C;
+  background:rgba(254,226,226,.8);border:1px solid #FCA5A5;border-radius:999px;
+  padding:8px 16px;min-height:44px;
+}
+.rm-btn:hover{background:#FECACA}
+.add-btn{
+  font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;color:var(--vio);
+  background:rgba(237,233,254,.7);border:1.5px dashed rgba(124,58,237,.45);border-radius:14px;
+  padding:10px 18px;min-height:44px;width:100%;transition:background .15s;
+}
+.add-btn:hover{background:#EDE9FE}
+.btn-row{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+/* resume preview */
+.preview-card{margin-bottom:18px}
+.resume-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.resume-head h2{font-size:1.02rem}
+.print-top{
+  font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;
+  padding:8px 20px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);transition:background .15s,transform .15s;
+}
+.print-top:hover{background:#fff}
+.print-top:active{transform:scale(.96)}
+.resume-sheet{
+  background:#fff;border-radius:16px;padding:clamp(28px,5vw,48px);color:#1F2937;
+  box-shadow:0 6px 24px rgba(31,41,55,.08);font-size:.92rem;line-height:1.65;
+}
+.rs-name{font-family:Georgia,'Times New Roman',serif;font-size:2rem;font-weight:700;
+  text-align:center;letter-spacing:.3px;margin-bottom:2px}
+.rs-title{text-align:center;font-weight:600;color:#7C3AED;font-size:1.02rem;margin-bottom:6px}
+.rs-contact{text-align:center;font-size:.83rem;color:#6B7280;margin-bottom:20px}
+.rs-contact.ghost{color:#B9C0CC}
+.rs-sec{margin-bottom:18px}
+.rs-sec h3{
+  font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#7C3AED;
+  border-bottom:2px solid #EDE9FE;padding-bottom:6px;margin-bottom:10px;
+}
+.rs-summary{white-space:pre-line}
+.rs-chips{display:flex;flex-wrap:wrap;gap:8px}
+.rs-chip{background:#F3F0FE;border:1px solid #DDD6FE;border-radius:999px;
+  padding:4px 14px;font-size:.83rem;font-weight:500;color:#4C1D95}
+.rs-job{margin-bottom:14px}
+.rs-job-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.rs-role{font-weight:700}
+.rs-years{font-size:.82rem;color:#6B7280;white-space:nowrap}
+.rs-company{color:#7C3AED;font-weight:500;font-size:.88rem}
+.rs-point{font-size:.88rem;padding-left:14px;position:relative;margin-top:3px}
+.rs-point::before{content:"•";position:absolute;left:2px;color:#7C3AED;font-weight:700}
+.rs-edu-line{margin-bottom:8px}
+.rs-edu-line .rs-years{margin-left:8px}
+.rs-ghost{color:#B9C0CC;font-style:italic;font-size:.88rem}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}
+  .rs-name{font-size:1.6rem}
+}
+@media print{
+  @page{margin:14mm}
+  header.top,.input-card,.hero,.trust,.how,.faq,.note,footer,.resume-head{display:none !important}
+  body{background:#fff;display:block}
+  main{max-width:none;margin:0;padding:0}
+  .preview-card{background:none;border:none;box-shadow:none;backdrop-filter:none;padding:0;margin:0}
+  .resume-sheet{box-shadow:none;border-radius:0;padding:0}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Resume Builder — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/resume-builder/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Form first: above any hero text, per design -->
+  <section class="card input-card" id="formCard" aria-label="Resume details form">
+
+    <div class="sec-label">Personal details</div>
+    <div class="fgrid">
+      <div class="fld full">
+        <label for="inName">Full name</label>
+        <input type="text" id="inName" placeholder="e.g. Aarav Sharma" autocomplete="name">
+      </div>
+      <div class="fld full">
+        <label for="inTitle">Job title</label>
+        <input type="text" id="inTitle" placeholder="e.g. Front-End Developer">
+      </div>
+      <div class="fld">
+        <label for="inEmail">Email</label>
+        <input type="email" id="inEmail" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="fld">
+        <label for="inPhone">Phone</label>
+        <input type="tel" id="inPhone" placeholder="+91 98765 43210" autocomplete="tel">
+      </div>
+      <div class="fld full">
+        <label for="inLocation">Location</label>
+        <input type="text" id="inLocation" placeholder="e.g. Bhubaneswar, Odisha">
+      </div>
+      <div class="fld full">
+        <label for="inSummary">Professional summary</label>
+        <textarea class="field" id="inSummary" rows="3" placeholder="2–3 lines about who you are and what you bring…"></textarea>
+      </div>
+      <div class="fld full">
+        <label for="inSkills">Skills <span class="hint">(comma-separated)</span></label>
+        <input type="text" id="inSkills" placeholder="e.g. JavaScript, HTML, Communication, Teamwork">
+      </div>
+    </div>
+
+    <div class="sec-label">Experience</div>
+    <div id="expList"></div>
+    <button class="add-btn" id="addExpBtn" type="button">+ Add experience</button>
+
+    <div class="sec-label">Education</div>
+    <div id="eduList"></div>
+    <button class="add-btn" id="addEduBtn" type="button">+ Add education</button>
+
+    <div class="btn-row">
+      <button class="btn btn-p" id="printBtn" type="button">🖨 Print / Save as PDF</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+  </section>
+
+  <div class="hero">
+    <h1>Resume Builder <span class="plain">— Free Online Tool</span></h1>
+    <p>Create a clean, professional resume in seconds. Fill the form, watch the live preview update as you type, then print or save it as a PDF.</p>
+  </div>
+
+  <section class="card preview-card" aria-label="Live resume preview">
+    <div class="resume-head">
+      <h2>Live preview</h2>
+      <button class="print-top" id="printBtnTop" type="button">🖨 Print / PDF</button>
+    </div>
+    <div class="resume-sheet" id="resumePreview"></div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Live preview — updates as you type</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>100% private — data never leaves your browser</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever — no sign-up needed</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Fill the form</b> above with your name, experience, education and skills.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Watch the live preview</b> — it updates on every keystroke.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Print or save as PDF</b> — one tap gives a clean, print-ready resume.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is my resume data uploaded anywhere?</summary>
+      <p>No. Everything you type stays in your browser on this page — nothing is uploaded, sent or stored on any server.</p>
+    </details>
+    <details>
+      <summary>How do I save my resume as a PDF?</summary>
+      <p>Press “Print / Save as PDF”, then choose “Save as PDF” as the printer destination in the print dialog. Only the resume itself is printed — the website's header, form and menus are hidden automatically.</p>
+    </details>
+    <details>
+      <summary>Can I add more than one job or degree?</summary>
+      <p>Yes. Use the “+ Add experience” and “+ Add education” buttons to add as many entries as you need, and the Remove button on any entry to delete it.</p>
+    </details>
+  </section>
+
+  <p class="note">Print-friendly A4 layout · Works offline after first load · 100% local — your data never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var formCard = document.getElementById('formCard');
+  var expList = document.getElementById('expList');
+  var eduList = document.getElementById('eduList');
+  var addExpBtn = document.getElementById('addExpBtn');
+  var addEduBtn = document.getElementById('addEduBtn');
+  var printBtn = document.getElementById('printBtn');
+  var printBtnTop = document.getElementById('printBtnTop');
+  var clearBtn = document.getElementById('clearBtn');
+  var resumePreview = document.getElementById('resumePreview');
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  function expEntryHTML() {
+    return '<div class="exp-entry dyn-entry">' +
+      '<div class="entry-head"><span class="entry-title">Experience</span>' +
+      '<button type="button" class="rm-btn">Remove</button></div>' +
+      '<div class="fgrid">' +
+      '<div class="fld"><label>Job role</label><input type="text" class="e-role" placeholder="e.g. Sales Associate"></div>' +
+      '<div class="fld"><label>Company</label><input type="text" class="e-company" placeholder="e.g. ABC Retail"></div>' +
+      '<div class="fld full"><label>Years</label><input type="text" class="e-years" placeholder="e.g. 2023 – Present"></div>' +
+      '<div class="fld full"><label>Description <span class="hint">(one point per line)</span></label>' +
+      '<textarea class="e-desc field" rows="2" placeholder="e.g. Grew store sales by 20%"></textarea></div>' +
+      '</div></div>';
+  }
+
+  function eduEntryHTML() {
+    return '<div class="edu-entry dyn-entry">' +
+      '<div class="entry-head"><span class="entry-title">Education</span>' +
+      '<button type="button" class="rm-btn">Remove</button></div>' +
+      '<div class="fgrid">' +
+      '<div class="fld"><label>Degree</label><input type="text" class="d-degree" placeholder="e.g. B.Sc. Mathematics"></div>' +
+      '<div class="fld"><label>College / School</label><input type="text" class="d-college" placeholder="e.g. City College"></div>' +
+      '<div class="fld full"><label>Year</label><input type="text" class="d-year" placeholder="e.g. 2024 – 2027"></div>' +
+      '</div></div>';
+  }
+
+  function q(root, sel) {
+    return root.querySelector(sel);
+  }
+
+  function field(root, sel) {
+    var el = root.querySelector(sel);
+    return el ? el.value.trim() : '';
+  }
+
+  function collectEntries(list, cls) {
+    var out = [];
+    var nodes = list.querySelectorAll('.' + cls);
+    for (var i = 0; i < nodes.length; i++) {
+      out.push(nodes[i]);
+    }
+    return out;
+  }
+
+  function render() {
+    var html = '';
+
+    var name = val('inName') || 'Your Full Name';
+    var title = val('inTitle') || 'Job Title';
+    var email = val('inEmail');
+    var phone = val('inPhone');
+    var loc = val('inLocation');
+    var contactParts = [email, phone, loc].filter(function (p) { return p.length > 0; });
+
+    html += '<div class="rs-name">' + esc(name) + '</div>';
+    html += '<div class="rs-title">' + esc(title) + '</div>';
+    if (contactParts.length) {
+      html += '<div class="rs-contact">' + contactParts.map(esc).join(' &nbsp;·&nbsp; ') + '</div>';
+    } else {
+      html += '<div class="rs-contact ghost">email · phone · location</div>';
+    }
+
+    var summary = val('inSummary');
+    html += '<div class="rs-sec"><h3>Summary</h3>';
+    if (summary) {
+      html += '<div class="rs-summary">' + esc(summary).replace(/\n/g, '<br>') + '</div>';
+    } else {
+      html += '<div class="rs-ghost">A short professional summary will appear here.</div>';
+    }
+    html += '</div>';
+
+    var skills = val('inSkills').split(',').map(function (s) { return s.trim(); })
+      .filter(function (s) { return s.length > 0; });
+    html += '<div class="rs-sec"><h3>Skills</h3>';
+    if (skills.length) {
+      html += '<div class="rs-chips">' + skills.map(function (s) {
+        return '<span class="rs-chip">' + esc(s) + '</span>';
+      }).join('') + '</div>';
+    } else {
+      html += '<div class="rs-ghost">Your skills will appear here.</div>';
+    }
+    html += '</div>';
+
+    var jobs = collectEntries(expList, 'exp-entry');
+    html += '<div class="rs-sec"><h3>Experience</h3>';
+    var jobCount = 0;
+    jobs.forEach(function (job) {
+      var role = field(job, '.e-role');
+      var company = field(job, '.e-company');
+      var years = field(job, '.e-years');
+      var desc = field(job, '.e-desc');
+      if (!role && !company && !years && !desc) return;
+      jobCount++;
+      html += '<div class="rs-job"><div class="rs-job-head">' +
+        '<span class="rs-role">' + esc(role || 'Role') + '</span>' +
+        (years ? '<span class="rs-years">' + esc(years) + '</span>' : '') +
+        '</div>' +
+        (company ? '<div class="rs-company">' + esc(company) + '</div>' : '');
+      if (desc) {
+        desc.split('\n').forEach(function (line) {
+          var t = line.trim().replace(/^[•\-\*]\s*/, '');
+          if (t) html += '<div class="rs-point">' + esc(t) + '</div>';
+        });
+      }
+      html += '</div>';
+    });
+    if (!jobCount) {
+      html += '<div class="rs-ghost">Your experience entries will appear here.</div>';
+    }
+    html += '</div>';
+
+    var edus = collectEntries(eduList, 'edu-entry');
+    html += '<div class="rs-sec"><h3>Education</h3>';
+    var eduCount = 0;
+    edus.forEach(function (edu) {
+      var degree = field(edu, '.d-degree');
+      var college = field(edu, '.d-college');
+      var year = field(edu, '.d-year');
+      if (!degree && !college && !year) return;
+      eduCount++;
+      html += '<div class="rs-edu-line"><strong>' + esc(degree || 'Degree') + '</strong>' +
+        (college ? ' — ' + esc(college) : '') +
+        (year ? '<span class="rs-years">' + esc(year) + '</span>' : '') +
+        '</div>';
+    });
+    if (!eduCount) {
+      html += '<div class="rs-ghost">Your education entries will appear here.</div>';
+    }
+    html += '</div>';
+
+    resumePreview.innerHTML = html;
+  }
+
+  function resetEntryInputs(entry) {
+    var inputs = entry.querySelectorAll('input, textarea');
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].value = '';
+    }
+  }
+
+  function handleRemove(list, entryClass, target) {
+    var entry = target.closest('.' + entryClass);
+    if (!entry) return;
+    var entries = list.querySelectorAll('.' + entryClass);
+    if (entries.length > 1) {
+      entry.remove();
+    } else {
+      resetEntryInputs(entry);
+    }
+    render();
+  }
+
+  expList.addEventListener('click', function (e) {
+    if (e.target && e.target.classList && e.target.classList.contains('rm-btn')) {
+      handleRemove(expList, 'exp-entry', e.target);
+    }
+  });
+
+  eduList.addEventListener('click', function (e) {
+    if (e.target && e.target.classList && e.target.classList.contains('rm-btn')) {
+      handleRemove(eduList, 'edu-entry', e.target);
+    }
+  });
+
+  addExpBtn.addEventListener('click', function () {
+    expList.insertAdjacentHTML('beforeend', expEntryHTML());
+  });
+
+  addEduBtn.addEventListener('click', function () {
+    eduList.insertAdjacentHTML('beforeend', eduEntryHTML());
+  });
+
+  function doPrint() {
+    window.print();
+  }
+
+  printBtn.addEventListener('click', doPrint);
+  printBtnTop.addEventListener('click', doPrint);
+
+  function clearAll() {
+    ['inName', 'inTitle', 'inEmail', 'inPhone', 'inLocation', 'inSummary', 'inSkills'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    var expEntries = expList.querySelectorAll('.exp-entry');
+    for (var i = expEntries.length - 1; i > 0; i--) {
+      expEntries[i].remove();
+    }
+    if (expEntries.length) resetEntryInputs(expEntries[0]);
+    var eduEntries = eduList.querySelectorAll('.edu-entry');
+    for (var j = eduEntries.length - 1; j > 0; j--) {
+      eduEntries[j].remove();
+    }
+    if (eduEntries.length) resetEntryInputs(eduEntries[0]);
+    render();
+  }
+
+  clearBtn.addEventListener('click', clearAll);
+
+  formCard.addEventListener('input', render);
+  formCard.addEventListener('change', render);
+
+  // Seed one entry per list, then render initial preview
+  expList.insertAdjacentHTML('beforeend', expEntryHTML());
+  eduList.insertAdjacentHTML('beforeend', eduEntryHTML());
+  render();
+})();
+</script>
+</body>
+</html>

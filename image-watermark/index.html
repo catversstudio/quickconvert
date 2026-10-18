@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Watermark Tool · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Add a text watermark to any image online for free. Live preview, 9 positions, opacity and size control, PNG/JPG export at full resolution. 100% private.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Image Watermark Tool · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Add a text watermark to any image online for free. Live preview, 9 positions, opacity and size control, PNG/JPG export at full resolution. 100% private.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/image-watermark/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/image-watermark/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;
+  text-transform:uppercase;margin:0 2px 8px}
+/* dropzone */
+.dropzone{
+  border:1.5px dashed rgba(124,58,237,.35);border-radius:20px;
+  background:rgba(255,255,255,.45);padding:30px 20px;text-align:center;cursor:pointer;
+  transition:border-color .15s,background .15s,box-shadow .15s;min-height:44px;
+}
+.dropzone:hover,.dropzone.drag{border-color:var(--vio);background:rgba(255,255,255,.8);
+  box-shadow:0 0 0 4px rgba(124,58,237,.10)}
+.dropzone .dz-ico{width:48px;height:48px;border-radius:50%;margin:0 auto 10px;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.dropzone .dz-ico svg{width:24px;height:24px}
+.dropzone .dz-title{font-weight:600;font-size:1rem}
+.dropzone .dz-sub{font-size:.85rem;color:var(--mut);margin-top:4px}
+.dropzone input[type=file]{display:none}
+/* preview */
+.preview-wrap{margin:18px 0 6px;display:none}
+.preview-wrap.show{display:block}
+.preview-wrap canvas{
+  width:100%;height:auto;display:block;border-radius:16px;border:1px solid var(--line);
+  box-shadow:0 8px 26px rgba(31,41,55,.10);background:#fff;
+}
+/* text input */
+.txt-in{
+  width:100%;font-family:inherit;font-size:.98rem;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);
+  border-radius:16px;padding:13px 16px;outline:none;
+  transition:border-color .15s,box-shadow .15s;min-height:44px;
+}
+.txt-in:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.txt-in::placeholder{color:#9CA3AF}
+/* control rows */
+.ctl{margin-top:16px}
+.ctl .row-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ctl .val{font-size:.85rem;font-weight:600;color:var(--vio);
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;padding:3px 12px}
+/* range sliders */
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer;
+}
+input[type=range]::-webkit-slider-runnable-track{
+  height:8px;border-radius:999px;background:linear-gradient(90deg,var(--vio),var(--cyn));
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;
+  background:#fff;border:2.5px solid var(--vio);box-shadow:0 3px 10px rgba(124,58,237,.35);
+}
+input[type=range]::-moz-range-track{
+  height:8px;border-radius:999px;background:linear-gradient(90deg,var(--vio),var(--cyn));
+}
+input[type=range]::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;background:#fff;border:2.5px solid var(--vio);
+  box-shadow:0 3px 10px rgba(124,58,237,.35);
+}
+/* 9-position pill grid */
+.pos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:280px}
+.pos-pill{
+  font-family:inherit;font-weight:600;font-size:.82rem;cursor:pointer;color:var(--mut);
+  background:rgba(255,255,255,.65);border:1.5px solid var(--line);border-radius:12px;
+  min-height:44px;padding:8px 4px;transition:all .15s;backdrop-filter:blur(10px);
+}
+.pos-pill:hover{background:#fff}
+.pos-pill.sel{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border-color:transparent;
+  box-shadow:0 6px 16px rgba(124,58,237,.35);
+}
+/* color segmented */
+.seg{display:inline-flex;background:rgba(255,255,255,.6);border:1px solid var(--line);
+  border-radius:999px;padding:4px;gap:4px;backdrop-filter:blur(10px)}
+.seg button{
+  font-family:inherit;font-weight:600;font-size:.88rem;cursor:pointer;border:none;background:transparent;
+  color:var(--mut);border-radius:999px;padding:10px 22px;min-height:44px;min-width:88px;
+  transition:all .15s;display:inline-flex;align-items:center;gap:8px;
+}
+.seg button .sw{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.2);flex:0 0 16px}
+.seg button.sel{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 6px 16px rgba(124,58,237,.35)}
+/* buttons */
+.btn-row{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.error{
+  display:none;margin-top:16px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* hero */
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .pos-grid{max-width:100%}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Image Watermark Tool — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/image-watermark/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: dropzone above any hero text, per design -->
+  <section class="card input-card" aria-label="Image watermark controls">
+    <label class="lab" for="dropzone">Your image</label>
+    <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Drop an image or click to choose one">
+      <span class="dz-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></span>
+      <div class="dz-title">Drop your image here</div>
+      <div class="dz-sub">or click to browse · one image · JPG / PNG / WebP</div>
+      <input type="file" id="fileInput" accept="image/*" aria-hidden="true" tabindex="-1">
+    </div>
+
+    <div class="preview-wrap" id="previewWrap">
+      <label class="lab">Live preview</label>
+      <canvas id="previewCanvas" aria-label="Watermarked image preview"></canvas>
+    </div>
+
+    <div class="ctl">
+      <label class="lab" for="wmText">Watermark text</label>
+      <input class="txt-in" type="text" id="wmText" value="© Your Brand" maxlength="80" placeholder="Type your watermark text…" aria-label="Watermark text">
+    </div>
+
+    <div class="ctl">
+      <div class="row-head"><span class="lab" style="margin:0">Position</span></div>
+      <div class="pos-grid" id="posGrid" role="group" aria-label="Watermark position">
+        <button class="pos-pill" type="button" data-pos="tl">↖ Top</button>
+        <button class="pos-pill" type="button" data-pos="tc">↑ Center</button>
+        <button class="pos-pill" type="button" data-pos="tr">↗ Top</button>
+        <button class="pos-pill" type="button" data-pos="ml">← Mid</button>
+        <button class="pos-pill" type="button" data-pos="mc">● Center</button>
+        <button class="pos-pill" type="button" data-pos="mr">Mid →</button>
+        <button class="pos-pill" type="button" data-pos="bl">↙ Low</button>
+        <button class="pos-pill sel" type="button" data-pos="bc">↓ Bottom</button>
+        <button class="pos-pill" type="button" data-pos="br">↘ Low</button>
+      </div>
+    </div>
+
+    <div class="ctl">
+      <div class="row-head"><label class="lab" style="margin:0" for="opacityRange">Opacity</label><span class="val" id="opacityVal">60%</span></div>
+      <input type="range" id="opacityRange" min="10" max="100" value="60" aria-label="Watermark opacity">
+    </div>
+
+    <div class="ctl">
+      <div class="row-head"><label class="lab" style="margin:0" for="sizeRange">Size</label><span class="val" id="sizeVal">8% of width</span></div>
+      <input type="range" id="sizeRange" min="2" max="20" value="8" aria-label="Watermark size relative to image width">
+    </div>
+
+    <div class="ctl">
+      <div class="row-head"><span class="lab" style="margin:0">Color</span></div>
+      <div class="seg" role="group" aria-label="Watermark color">
+        <button class="sel" type="button" id="colorWhite"><span class="sw" style="background:#fff"></span>White</button>
+        <button type="button" id="colorBlack"><span class="sw" style="background:#111"></span>Black</button>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-p" id="downloadPng" type="button" disabled>Download PNG</button>
+      <button class="btn btn-g" id="downloadJpg" type="button" disabled>Download JPG</button>
+      <button class="btn btn-g" id="removeBtn" type="button" disabled>Remove image</button>
+    </div>
+    <div class="meta">
+      <span class="pill" id="fileInfo">No image selected</span>
+      <span>Everything runs locally in your browser — your image never leaves this page.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Image Watermark Tool <span class="plain">— Free Online Tool</span></h1>
+    <p>Stamp your photos and graphics with a custom text watermark. Pick a position, tune the opacity and size, preview it live, then export at full resolution.</p>
+  </div>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant live preview</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Drop an image</b> into the box above, or click to browse your files.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Type your watermark</b>, pick a position, and tune opacity, size and color — the preview updates live.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Download</b> as PNG or JPG at your image's full original resolution.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is my image uploaded to a server?</summary>
+      <p>No. Your image is drawn onto a canvas right here in your browser, so it never leaves your device. There is no upload, no account and nothing stored anywhere.</p>
+    </details>
+    <details>
+      <summary>What resolution is the download?</summary>
+      <p>Full resolution — the export is rendered on a canvas at your image's original pixel dimensions, so the watermarked file is exactly as sharp as the file you uploaded.</p>
+    </details>
+    <details>
+      <summary>Which formats can I upload and download?</summary>
+      <p>You can upload JPG, PNG, WebP and any other image format your browser can open. Downloads are exported as PNG (keeps transparency) or JPG (smaller file size, with a white background).</p>
+    </details>
+  </section>
+
+  <p class="note">Canvas rendering · Full-resolution export · 100% local — your image never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var dropzone = document.getElementById('dropzone');
+  var fileInput = document.getElementById('fileInput');
+  var previewWrap = document.getElementById('previewWrap');
+  var previewCanvas = document.getElementById('previewCanvas');
+  var wmText = document.getElementById('wmText');
+  var posGrid = document.getElementById('posGrid');
+  var opacityRange = document.getElementById('opacityRange');
+  var opacityVal = document.getElementById('opacityVal');
+  var sizeRange = document.getElementById('sizeRange');
+  var sizeVal = document.getElementById('sizeVal');
+  var colorWhite = document.getElementById('colorWhite');
+  var colorBlack = document.getElementById('colorBlack');
+  var downloadPng = document.getElementById('downloadPng');
+  var downloadJpg = document.getElementById('downloadJpg');
+  var removeBtn = document.getElementById('removeBtn');
+  var fileInfo = document.getElementById('fileInfo');
+  var errorBox = document.getElementById('errorBox');
+
+  var img = null;          // loaded HTMLImageElement
+  var imgName = '';        // original file name (for download)
+  var objectUrl = null;
+
+  var settings = {
+    text: '© Your Brand',
+    pos: 'bc',
+    opacity: 0.60,
+    sizePct: 8,
+    color: '#ffffff'
+  };
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function fmtBytes(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+    return (n / 1048576).toFixed(1) + ' MB';
+  }
+
+  // Position key -> text alignment + fractional anchor + edge padding
+  var POS = {
+    tl: { ax: 0,   ay: 0,   padX: 1, padY: 1 },
+    tc: { ax: 0.5, ay: 0,   padX: 0, padY: 1 },
+    tr: { ax: 1,   ay: 0,   padX: -1, padY: 1 },
+    ml: { ax: 0,   ay: 0.5, padX: 1, padY: 0 },
+    mc: { ax: 0.5, ay: 0.5, padX: 0, padY: 0 },
+    mr: { ax: 1,   ay: 0.5, padX: -1, padY: 0 },
+    bl: { ax: 0,   ay: 1,   padX: 1, padY: -1 },
+    bc: { ax: 0.5, ay: 1,   padX: 0, padY: -1 },
+    br: { ax: 1,   ay: 1,   padX: -1, padY: -1 }
+  };
+
+  function drawWatermarked(ctx, w, h) {
+    ctx.clearRect(0, 0, w, h);
+    ctx.drawImage(img, 0, 0, w, h);
+
+    var text = settings.text.trim();
+    if (!text) return;
+
+    var p = POS[settings.pos] || POS.bc;
+    var fontPx = Math.max(8, Math.round((settings.sizePct / 100) * w));
+    var pad = Math.round(fontPx * 0.9);
+
+    ctx.save();
+    ctx.globalAlpha = settings.opacity;
+    ctx.font = '700 ' + fontPx + 'px Poppins, Arial, sans-serif';
+    ctx.fillStyle = settings.color;
+    ctx.textAlign = p.ax === 0 ? 'left' : (p.ax === 1 ? 'right' : 'center');
+    ctx.textBaseline = p.ay === 0 ? 'top' : (p.ay === 1 ? 'bottom' : 'middle');
+    // subtle outline so the text stays readable on any background
+    ctx.shadowColor = settings.color === '#ffffff' ? 'rgba(0,0,0,.45)' : 'rgba(255,255,255,.45)';
+    ctx.shadowBlur = Math.max(2, fontPx * 0.12);
+
+    var x = p.ax * w + p.padX * pad;
+    var y = p.ay * h + p.padY * pad;
+    var maxWidth = w * 0.94;
+    ctx.fillText(text, x, y, maxWidth);
+    ctx.restore();
+  }
+
+  function renderPreview() {
+    if (!img) return;
+    // downscale for a fast live preview (full res happens at export)
+    var scale = Math.min(1, 900 / Math.max(img.naturalWidth, img.naturalHeight));
+    var w = Math.max(1, Math.round(img.naturalWidth * scale));
+    var h = Math.max(1, Math.round(img.naturalHeight * scale));
+    previewCanvas.width = w;
+    previewCanvas.height = h;
+    var ctx = previewCanvas.getContext('2d');
+    drawWatermarked(ctx, w, h);
+  }
+
+  function setLoadedState(on) {
+    downloadPng.disabled = !on;
+    downloadJpg.disabled = !on;
+    removeBtn.disabled = !on;
+    previewWrap.classList.toggle('show', on);
+  }
+
+  function loadFile(file) {
+    hideError();
+    if (!file) return;
+    if (!file.type || file.type.indexOf('image/') !== 0) {
+      showError('That file is not an image. Please choose a JPG, PNG or WebP file.');
+      return;
+    }
+    if (objectUrl) {
+      URL.revokeObjectURL(objectUrl);
+      objectUrl = null;
+    }
+    imgName = file.name || 'image';
+    objectUrl = URL.createObjectURL(file);
+    var el = new Image();
+    el.onload = function () {
+      img = el;
+      fileInfo.textContent = imgName + ' · ' + img.naturalWidth + '×' + img.naturalHeight + ' · ' + fmtBytes(file.size);
+      setLoadedState(true);
+      renderPreview();
+    };
+    el.onerror = function () {
+      img = null;
+      showError('Could not read that image file. Please try a different one.');
+      setLoadedState(false);
+    };
+    el.src = objectUrl;
+  }
+
+  function clearImage() {
+    if (objectUrl) {
+      URL.revokeObjectURL(objectUrl);
+      objectUrl = null;
+    }
+    img = null;
+    imgName = '';
+    fileInfo.textContent = 'No image selected';
+    setLoadedState(false);
+    hideError();
+    fileInput.value = '';
+  }
+
+  function exportImage(format) {
+    if (!img) {
+      showError('Please add an image first.');
+      return;
+    }
+    hideError();
+    var w = img.naturalWidth;
+    var h = img.naturalHeight;
+    var canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    var ctx = canvas.getContext('2d');
+    if (format === 'jpeg') {
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, w, h);
+    }
+    drawWatermarked(ctx, w, h);
+
+    var mime = format === 'jpeg' ? 'image/jpeg' : 'image/png';
+    var ext = format === 'jpeg' ? 'jpg' : 'png';
+    var base = imgName.replace(/\.[a-z0-9]+$/i, '') || 'watermarked';
+    var url = canvas.toDataURL(mime, format === 'jpeg' ? 0.92 : undefined);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = base + '-watermarked.' + ext;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  // ---- events ----
+  dropzone.addEventListener('click', function () { fileInput.click(); });
+  dropzone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]);
+  });
+  ['dragenter', 'dragover'].forEach(function (evt) {
+    dropzone.addEventListener(evt, function (e) {
+      e.preventDefault();
+      dropzone.classList.add('drag');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (evt) {
+    dropzone.addEventListener(evt, function (e) {
+      e.preventDefault();
+      dropzone.classList.remove('drag');
+    });
+  });
+  dropzone.addEventListener('drop', function (e) {
+    var dt = e.dataTransfer;
+    if (dt && dt.files && dt.files[0]) loadFile(dt.files[0]);
+  });
+
+  wmText.addEventListener('input', function () {
+    settings.text = wmText.value;
+    renderPreview();
+  });
+
+  posGrid.addEventListener('click', function (e) {
+    var btn = e.target.closest ? e.target.closest('.pos-pill') : null;
+    if (!btn) return;
+    settings.pos = btn.getAttribute('data-pos');
+    var pills = posGrid.querySelectorAll('.pos-pill');
+    for (var i = 0; i < pills.length; i++) pills[i].classList.remove('sel');
+    btn.classList.add('sel');
+    renderPreview();
+  });
+
+  opacityRange.addEventListener('input', function () {
+    settings.opacity = parseInt(opacityRange.value, 10) / 100;
+    opacityVal.textContent = opacityRange.value + '%';
+    renderPreview();
+  });
+
+  sizeRange.addEventListener('input', function () {
+    settings.sizePct = parseInt(sizeRange.value, 10);
+    sizeVal.textContent = sizeRange.value + '% of width';
+    renderPreview();
+  });
+
+  colorWhite.addEventListener('click', function () {
+    settings.color = '#ffffff';
+    colorWhite.classList.add('sel');
+    colorBlack.classList.remove('sel');
+    renderPreview();
+  });
+  colorBlack.addEventListener('click', function () {
+    settings.color = '#111111';
+    colorBlack.classList.add('sel');
+    colorWhite.classList.remove('sel');
+    renderPreview();
+  });
+
+  downloadPng.addEventListener('click', function () { exportImage('png'); });
+  downloadJpg.addEventListener('click', function () { exportImage('jpeg'); });
+  removeBtn.addEventListener('click', clearImage);
+})();
+</script>
+</body>
+</html>

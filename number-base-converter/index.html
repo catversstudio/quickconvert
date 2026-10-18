@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Base Converter — Binary, Octal, Decimal, Hex | QuickConvert</title>
+<meta name="description" content="Convert integers between binary, octal, decimal and hexadecimal with strict per-base digit validation, up to Number.MAX_SAFE_INTEGER. Free, private, works fully in your browser.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-size='22' text-anchor='middle' fill='%23fff' font-family='Arial' font-weight='bold'%3E01%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="Number Base Converter — Binary, Octal, Decimal, Hex | QuickConvert">
+<meta property="og:description" content="Convert integers between binary, octal, decimal and hexadecimal with strict per-base digit validation, up to Number.MAX_SAFE_INTEGER. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/number-base-converter/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/number-base-converter/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.inp{width:100%;font-family:var(--mono);font-size:1.05rem;color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;min-height:48px;letter-spacing:.03em}
+.inp:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.err{display:none;margin-top:12px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.35);color:#B91C1C;border-radius:14px;padding:12px 16px;font-size:.88rem;line-height:1.55}
+.err.show{display:block}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.35)}
+.btn-p:hover{box-shadow:0 10px 24px rgba(124,58,237,.45);transform:translateY(-1px)}
+.btn-g{background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);backdrop-filter:blur(10px)}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+.result-card{margin-bottom:18px}
+.result-title{font-weight:700;font-size:1.02rem;display:inline-flex;align-items:center;gap:8px;margin-bottom:14px}
+.result-title .tag{font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--vio),#6D28D9)}
+.mode-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.mode-pill{font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
+  padding:10px 22px;min-height:44px;border-radius:999px;
+  border:1.5px solid rgba(124,58,237,.25);background:rgba(255,255,255,.6);color:var(--mut);transition:all .15s}
+.mode-pill.on{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--vio),#9333EA);box-shadow:0 6px 16px rgba(124,58,237,.3)}
+.base-cells{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.base-cell{background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:16px;padding:14px 16px;min-width:0}
+.base-cell .l{font-size:.75rem;color:var(--mut);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.base-cell .v{font-family:var(--mono);font-size:1.05rem;font-weight:700;color:var(--ink);word-break:break-all;margin:6px 0 10px;line-height:1.6}
+.mini-copy{font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;
+  padding:8px 18px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);transition:background .15s}
+.mini-copy:hover{background:#fff}
+.mini-copy.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+.placeholder{grid-column:span 2;text-align:center;color:#9CA3AF;font-size:.9rem;padding:24px 0}
+@media(max-width:560px){
+  .base-cells{grid-template-columns:1fr}
+  .placeholder{grid-column:span 1}
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Number Base Converter — Binary, Octal, Decimal, Hex",
+  "url": "https://quickconvert.freedev.app/number-base-converter/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Number input">
+    <label class="lab">This number is in…</label>
+    <div class="mode-pills" role="group" aria-label="Input base">
+      <button class="mode-pill on" data-base="10" type="button" aria-pressed="true">Decimal</button>
+      <button class="mode-pill" data-base="2" type="button" aria-pressed="false">Binary</button>
+      <button class="mode-pill" data-base="8" type="button" aria-pressed="false">Octal</button>
+      <button class="mode-pill" data-base="16" type="button" aria-pressed="false">Hexadecimal</button>
+    </div>
+    <label class="lab" for="baseInput">Your number (non-negative integer)</label>
+    <input class="inp" id="baseInput" type="text" inputmode="text" placeholder="e.g. 255" autocomplete="off" spellcheck="false" aria-label="Number to convert">
+    <div class="btn-row">
+      <button class="btn btn-p" id="baseCalcBtn" type="button">Convert</button>
+      <button class="btn btn-g" id="baseClearBtn" type="button">Clear</button>
+    </div>
+    <div class="err" id="baseErr" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Number Base Converter <span class="plain">— Free Online Tool</span></h1>
+    <p>Type one integer, tell us which base it is in, and see it converted to binary, octal, decimal and hexadecimal — with strict digit validation.</p>
+  </div>
+
+  <section class="card result-card" aria-label="Conversion result">
+    <div class="result-title"><span class="tag">Converted</span><span>all four bases</span></div>
+    <div class="base-cells" id="baseCells" aria-live="polite">
+      <div class="placeholder">your conversions will appear here</div>
+    </div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Live conversion</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Type a non-negative integer</b> — letters are fine for hexadecimal.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Pick its base</b> — decimal, binary, octal or hexadecimal.</span></div>
+      <div class="step"><span class="n">3</span><span><b>See all four bases</b> update live; invalid digits are flagged clearly.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>What is the largest number I can convert?</summary>
+      <p>Up to 9,007,199,254,740,991 (Number.MAX_SAFE_INTEGER, or FFFFFFFFFFFF in hex) — the largest integer JavaScript can represent exactly. Larger inputs are rejected rather than silently rounded, so you always get exact digits.</p>
+    </details>
+    <details>
+      <summary>Why does it reject my input?</summary>
+      <p>Each base has strict digit rules: binary accepts only 0 and 1, octal 0–7, decimal 0–9, and hexadecimal 0–9 plus A–F. If you type "2" while Binary is selected, you'll see: "2" is not a valid binary digit. Negative numbers, decimals and fractions are not supported — this converter handles non-negative integers only.</p>
+    </details>
+    <details>
+      <summary>Why non-negative integers only?</summary>
+      <p>Base conversion of negative numbers and fractions needs extra conventions (two's complement, sign-magnitude, fractional digit positions) that differ between contexts. Keeping this tool to non-negative integers means every result is unambiguous and exact — the safest choice for a general-purpose converter.</p>
+    </details>
+  </section>
+
+  <p class="note">Binary · Octal · Decimal · Hex · Exact up to 2⁵³−1 · 100% local — your numbers never leave this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+/*CORE-START*/
+var MAXS = 9007199254740991;
+var BASE_RE = { 2: /^[01]+$/, 8: /^[0-7]+$/, 10: /^[0-9]+$/, 16: /^[0-9a-fA-F]+$/ };
+var BASE_CH_RE = { 2: /^[01]$/, 8: /^[0-7]$/, 10: /^[0-9]$/, 16: /^[0-9a-fA-F]$/ };
+var BASE_NAME = { 2: 'binary', 8: 'octal', 10: 'decimal', 16: 'hexadecimal' };
+function firstBadDigit(s, base) {
+  var chRe = BASE_CH_RE[base];
+  for (var i = 0; i < s.length; i++) {
+    if (!chRe.test(s[i])) return s[i];
+  }
+  return null;
+}
+function parseBase(str, base) {
+  var s = String(str).trim();
+  if (s === '') return { error: 'Please enter a number.' };
+  if (!BASE_RE[base].test(s)) {
+    var bad = firstBadDigit(s, base);
+    if (bad !== null) return { error: '"' + bad + '" is not a valid ' + BASE_NAME[base] + ' digit.' };
+    return { error: '"' + s + '" is not a valid ' + BASE_NAME[base] + ' number.' };
+  }
+  var n = parseInt(s, base);
+  if (n > MAXS) return { error: 'That number exceeds the maximum supported value (9,007,199,254,740,991). Please enter a smaller number.' };
+  return { value: n };
+}
+function convertAll(str, base) {
+  var p = parseBase(str, base);
+  if (p.error) return { error: p.error };
+  var n = p.value;
+  return {
+    binary: n.toString(2),
+    octal: n.toString(8),
+    decimal: n.toString(10),
+    hexadecimal: n.toString(16).toUpperCase()
+  };
+}
+/*CORE-END*/
+
+  var fromBase = 10;
+  var pills = Array.prototype.slice.call(document.querySelectorAll('.mode-pill'));
+  var baseInput = document.getElementById('baseInput');
+  var baseCalcBtn = document.getElementById('baseCalcBtn');
+  var baseClearBtn = document.getElementById('baseClearBtn');
+  var baseErr = document.getElementById('baseErr');
+  var baseCells = document.getElementById('baseCells');
+
+  function showErr(msg) {
+    if (msg) { baseErr.textContent = msg; baseErr.classList.add('show'); }
+    else { baseErr.textContent = ''; baseErr.classList.remove('show'); }
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function cell(label, value) {
+    return '<div class="base-cell"><div class="l">' + label + '</div><div class="v">' + esc(value) +
+      '</div><button class="mini-copy" type="button" data-copy="' + esc(value) + '">Copy</button></div>';
+  }
+
+  function convert() {
+    var raw = baseInput.value;
+    if (raw.trim() === '') {
+      showErr('');
+      baseCells.innerHTML = '<div class="placeholder">your conversions will appear here</div>';
+      return;
+    }
+    var res = convertAll(raw, fromBase);
+    if (res.error) {
+      showErr(res.error);
+      baseCells.innerHTML = '<div class="placeholder">fix the input above to see conversions</div>';
+      return;
+    }
+    showErr('');
+    baseCells.innerHTML =
+      cell('Binary (base 2)', res.binary) +
+      cell('Octal (base 8)', res.octal) +
+      cell('Decimal (base 10)', res.decimal) +
+      cell('Hexadecimal (base 16)', res.hexadecimal);
+    var btns = baseCells.querySelectorAll('.mini-copy');
+    for (var i = 0; i < btns.length; i++) {
+      (function (btn) {
+        btn.addEventListener('click', function () {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(btn.getAttribute('data-copy')).then(function () {
+              btn.textContent = 'Copied ✓'; btn.classList.add('ok');
+              setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1600);
+            });
+          }
+        });
+      })(btns[i]);
+    }
+  }
+
+  pills.forEach(function (p) {
+    p.addEventListener('click', function () {
+      fromBase = parseInt(p.getAttribute('data-base'), 10);
+      pills.forEach(function (q) {
+        var on = q === p;
+        q.classList.toggle('on', on);
+        q.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      baseInput.placeholder = fromBase === 2 ? 'e.g. 11111111' : fromBase === 8 ? 'e.g. 377' : fromBase === 16 ? 'e.g. FF' : 'e.g. 255';
+      convert();
+    });
+  });
+
+  baseCalcBtn.addEventListener('click', convert);
+  baseInput.addEventListener('input', convert);
+  baseClearBtn.addEventListener('click', function () {
+    baseInput.value = '';
+    showErr('');
+    baseCells.innerHTML = '<div class="placeholder">your conversions will appear here</div>';
+    baseInput.focus();
+  });
+})();
+</script>
+</body>
+</html>

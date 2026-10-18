@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XML Formatter · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Pretty-print messy XML with 2-space indentation or minify it to a single line, instantly in your browser. Free, private, no uploads.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="XML Formatter · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Pretty-print messy XML with 2-space indentation or minify it to a single line, instantly in your browser. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/xml-formatter/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/xml-formatter/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+textarea#xmlInput{
+  width:100%;min-height:180px;resize:vertical;font-family:var(--mono);font-size:.86rem;line-height:1.6;
+  color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;
+}
+textarea#xmlInput:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+textarea#xmlInput::placeholder{color:#9CA3AF;font-family:inherit}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.result-card{margin-bottom:18px;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+.result-card.show{opacity:1;transform:none}
+.res-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.res-title{
+  display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1.02rem;
+}
+.res-title .tag{
+  font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:#fff;
+}
+.tag.fmt{background:linear-gradient(135deg,var(--vio),#6D28D9)}
+.tag.min{background:linear-gradient(135deg,var(--cyn),#0284C7)}
+.res-bits{font-size:.78rem;color:var(--mut);font-weight:500}
+.res-box{
+  font-family:var(--mono);font-size:.82rem;line-height:1.7;
+  background:rgba(31,41,55,.93);color:#D1FAE5;border-radius:14px;
+  padding:16px 18px;max-height:320px;overflow:auto;white-space:pre;
+}
+.copy-btn{
+  font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;
+  padding:8px 20px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);
+  transition:background .15s,transform .15s;
+}
+.copy-btn:hover{background:#fff}
+.copy-btn:active{transform:scale(.96)}
+.copy-btn.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+.error{
+  display:none;margin-bottom:18px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.error b{display:block;margin-bottom:4px;font-size:.95rem}
+.error .emsg{font-family:var(--mono);font-size:.8rem;word-break:break-word;opacity:.9}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{display:block;margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .res-head{align-items:flex-start}
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "XML Formatter — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/xml-formatter/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="XML input">
+    <label class="lab" for="xmlInput" style="display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px">Your XML</label>
+    <textarea id="xmlInput" placeholder="Paste your XML here…" spellcheck="false" aria-label="XML to format or minify"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-p" id="formatBtn" type="button">Format</button>
+      <button class="btn btn-g" id="minifyBtn" type="button">Minify</button>
+      <button class="btn btn-g" id="sampleBtn" type="button">Load sample</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="meta">
+      <span class="pill" id="lenNote">0 characters</span>
+      <span>Formatting happens locally in your browser — nothing is uploaded.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>XML Formatter <span class="plain">— Free Online Tool</span></h1>
+    <p>Pretty-print messy XML with clean 2-space indentation, or minify it to a single line. Paste, click, copy — done.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+    Your formatted XML will appear here after you click <b>Format</b> or <b>Minify</b>.
+  </div>
+
+  <section class="card result-card" id="resultCard" hidden aria-label="Formatted XML result">
+    <div class="res-head">
+      <div class="res-title"><span class="tag fmt" id="modeTag">Formatted</span><span class="res-bits" id="resBits"></span></div>
+      <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy result">Copy</button>
+    </div>
+    <div class="res-box" id="xmlOutput" tabindex="0" aria-label="Formatted XML output"></div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Paste your XML</b> into the box above — or try the sample.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Press Format</b> for a clean indented view, or <b>Minify</b> for a single line.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Copy the result</b> with one tap and use it wherever you need it.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is my XML uploaded to a server?</summary>
+      <p>No. Parsing and formatting run entirely with your browser's built-in DOMParser — your XML never leaves this page, and nothing is uploaded or stored anywhere.</p>
+    </details>
+    <details>
+      <summary>What happens if my XML is invalid?</summary>
+      <p>You get a friendly error box showing exactly what went wrong, taken from the parser's own message — usually an unclosed tag or a bad character — so you can fix it and try again.</p>
+    </details>
+    <details>
+      <summary>Does minifying change my XML's meaning?</summary>
+      <p>No. Minify only removes whitespace-only text between tags, so the document structure and all real text content stay exactly the same — just more compact.</p>
+    </details>
+  </section>
+
+  <p class="note">DOMParser-based · 2-space indentation · 100% local — your XML never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var input = document.getElementById('xmlInput');
+  var formatBtn = document.getElementById('formatBtn');
+  var minifyBtn = document.getElementById('minifyBtn');
+  var sampleBtn = document.getElementById('sampleBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var lenNote = document.getElementById('lenNote');
+  var errorBox = document.getElementById('errorBox');
+  var emptyState = document.getElementById('emptyState');
+  var resultCard = document.getElementById('resultCard');
+  var xmlOutput = document.getElementById('xmlOutput');
+  var copyBtn = document.getElementById('copyBtn');
+  var modeTag = document.getElementById('modeTag');
+  var resBits = document.getElementById('resBits');
+
+  var SAMPLE = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<catalog><book id="bk101"><author>Gambardella, Matthew</author><title>XML Developer\'s Guide</title><price>44.95</price></book>' +
+    '<book id="bk102"><author>Ralls, Kim</author><title>Midnight Rain</title><price>5.95</price></book></catalog>';
+
+  function escapeXml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function escapeAttr(s) {
+    return escapeXml(s).replace(/"/g, '&quot;');
+  }
+
+  function updateLength() {
+    var n = input.value.length;
+    lenNote.textContent = n + (n === 1 ? ' character' : ' characters');
+  }
+
+  function showError(title, detail) {
+    errorBox.innerHTML = '';
+    var b = document.createElement('b');
+    b.textContent = title;
+    errorBox.appendChild(b);
+    if (detail) {
+      var d = document.createElement('div');
+      d.className = 'emsg';
+      d.textContent = detail;
+      errorBox.appendChild(d);
+    }
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.innerHTML = '';
+    errorBox.classList.remove('show');
+  }
+
+  // Parse XML; returns { doc: Document, declaration: string|null } or { error: string }
+  function parseXml(text) {
+    var parser = new DOMParser();
+    var doc;
+    try {
+      doc = parser.parseFromString(text, 'text/xml');
+    } catch (e) {
+      return { error: e && e.message ? e.message : String(e) };
+    }
+    var errs = doc.getElementsByTagName('parsererror');
+    if (errs.length > 0) {
+      var msg = errs[0].textContent || 'Unknown XML parsing error.';
+      // Clean up Firefox-style messages which include location info
+      msg = msg.replace(/\s+/g, ' ').trim();
+      return { error: msg };
+    }
+    var decl = null;
+    var m = text.match(/^\s*(<\?xml[^?]*\?>)/);
+    if (m) decl = m[1];
+    return { doc: doc, declaration: decl };
+  }
+
+  function attributesString(el) {
+    var parts = [];
+    for (var i = 0; i < el.attributes.length; i++) {
+      var a = el.attributes[i];
+      parts.push(a.name + '="' + escapeAttr(a.value) + '"');
+    }
+    return parts.length ? ' ' + parts.join(' ') : '';
+  }
+
+  // Pretty-print a node with 2-space indentation
+  function prettyNode(node, level) {
+    var pad = '  '.repeat(level);
+    var out = '';
+    var i, child;
+
+    switch (node.nodeType) {
+      case 9: // Document
+        for (i = 0; i < node.childNodes.length; i++) {
+          out += prettyNode(node.childNodes[i], level);
+        }
+        break;
+      case 1: // Element
+        var name = node.tagName;
+        var attrs = attributesString(node);
+        var kids = [];
+        for (i = 0; i < node.childNodes.length; i++) {
+          child = node.childNodes[i];
+          if (child.nodeType === 3 && child.nodeValue.trim() === '') continue; // skip layout whitespace
+          kids.push(child);
+        }
+        if (kids.length === 0) {
+          out += pad + '<' + name + attrs + '/>\n';
+        } else if (kids.length === 1 && kids[0].nodeType === 3) {
+          out += pad + '<' + name + attrs + '>' + escapeXml(kids[0].nodeValue) + '</' + name + '>\n';
+        } else {
+          out += pad + '<' + name + attrs + '>\n';
+          for (i = 0; i < kids.length; i++) {
+            out += prettyNode(kids[i], level + 1);
+          }
+          out += pad + '</' + name + '>\n';
+        }
+        break;
+      case 3: // Text
+        if (node.nodeValue.trim() !== '') {
+          out += pad + escapeXml(node.nodeValue.trim()) + '\n';
+        }
+        break;
+      case 4: // CDATA
+        out += pad + '<![CDATA[' + node.nodeValue + ']]>\n';
+        break;
+      case 8: // Comment
+        out += pad + '<!--' + node.nodeValue + '-->\n';
+        break;
+      case 7: // Processing instruction
+        out += pad + '<?' + node.target + (node.data ? ' ' + node.data : '') + '?>\n';
+        break;
+      default:
+        break;
+    }
+    return out;
+  }
+
+  // Minify: collapse to one line, dropping whitespace-only text between tags
+  function minifyNode(node) {
+    var out = '';
+    var i, child;
+    switch (node.nodeType) {
+      case 9: // Document
+        for (i = 0; i < node.childNodes.length; i++) {
+          out += minifyNode(node.childNodes[i]);
+        }
+        break;
+      case 1: // Element
+        var name = node.tagName;
+        var attrs = attributesString(node);
+        var kids = [];
+        for (i = 0; i < node.childNodes.length; i++) {
+          child = node.childNodes[i];
+          if (child.nodeType === 3 && child.nodeValue.trim() === '') continue;
+          kids.push(child);
+        }
+        if (kids.length === 0) {
+          out += '<' + name + attrs + '/>';
+        } else {
+          out += '<' + name + attrs + '>';
+          for (i = 0; i < kids.length; i++) {
+            out += minifyNode(kids[i]);
+          }
+          out += '</' + name + '>';
+        }
+        break;
+      case 3: // Text
+        out += escapeXml(node.nodeValue);
+        break;
+      case 4: // CDATA
+        out += '<![CDATA[' + node.nodeValue + ']]>';
+        break;
+      case 8: // Comment
+        out += '<!--' + node.nodeValue + '-->';
+        break;
+      case 7: // Processing instruction
+        out += '<?' + node.target + (node.data ? ' ' + node.data : '') + '?>';
+        break;
+      default:
+        break;
+    }
+    return out;
+  }
+
+  function showResult(text, mode) {
+    xmlOutput.textContent = text;
+    modeTag.textContent = mode;
+    modeTag.className = 'tag ' + (mode === 'Formatted' ? 'fmt' : 'min');
+    var lines = mode === 'Formatted' ? text.split('\n').length : 1;
+    resBits.textContent = lines + (lines === 1 ? ' line' : ' lines') + ' · ' + text.length + ' characters';
+    emptyState.style.display = 'none';
+    resultCard.hidden = false;
+    // re-trigger the fade/slide animation
+    resultCard.classList.remove('show');
+    setTimeout(function () { resultCard.classList.add('show'); }, 40);
+    resetCopyBtn();
+  }
+
+  function doFormat() {
+    hideError();
+    var text = input.value;
+    if (!text.trim()) {
+      showError('Nothing to format — paste some XML first.');
+      return;
+    }
+    var parsed = parseXml(text);
+    if (parsed.error) {
+      showError('Invalid XML — please fix the error below and try again.', parsed.error);
+      return;
+    }
+    var pretty = prettyNode(parsed.doc, 0).replace(/\n$/, '');
+    if (parsed.declaration) pretty = parsed.declaration + '\n' + pretty;
+    showResult(pretty, 'Formatted');
+  }
+
+  function doMinify() {
+    hideError();
+    var text = input.value;
+    if (!text.trim()) {
+      showError('Nothing to minify — paste some XML first.');
+      return;
+    }
+    var parsed = parseXml(text);
+    if (parsed.error) {
+      showError('Invalid XML — please fix the error below and try again.', parsed.error);
+      return;
+    }
+    var min = minifyNode(parsed.doc);
+    if (parsed.declaration) min = parsed.declaration + min;
+    showResult(min, 'Minified');
+  }
+
+  function clearAll() {
+    input.value = '';
+    hideError();
+    xmlOutput.textContent = '';
+    resultCard.classList.remove('show');
+    resultCard.hidden = true;
+    emptyState.style.display = '';
+    resetCopyBtn();
+    updateLength();
+    input.focus();
+  }
+
+  function loadSample() {
+    input.value = SAMPLE;
+    hideError();
+    updateLength();
+    doFormat();
+    input.focus();
+  }
+
+  function resetCopyBtn() {
+    copyBtn.textContent = 'Copy';
+    copyBtn.classList.remove('ok');
+  }
+
+  function copyFeedback(ok) {
+    copyBtn.textContent = ok ? 'Copied ✓' : 'Copy failed';
+    copyBtn.classList.add('ok');
+    setTimeout(resetCopyBtn, 1600);
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    copyFeedback(ok);
+  }
+
+  function copyResult() {
+    var text = xmlOutput.textContent;
+    if (!text) return;
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      navigator.clipboard.writeText(text).then(
+        function () { copyFeedback(true); },
+        function () { fallbackCopy(text); }
+      );
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  formatBtn.addEventListener('click', doFormat);
+  minifyBtn.addEventListener('click', doMinify);
+  sampleBtn.addEventListener('click', loadSample);
+  clearBtn.addEventListener('click', clearAll);
+  copyBtn.addEventListener('click', copyResult);
+  input.addEventListener('input', function () {
+    updateLength();
+    hideError();
+  });
+  updateLength();
+})();
+</script>
+</body>
+</html>

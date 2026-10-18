@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speed Distance Time Calculator with Unit Conversion | QuickConvert</title>
+<meta name="description" content="Solve for speed, distance or time with km/h, m/s and mph/miles unit conversion and clear formulas (v = d/t). Free, private, works fully in your browser.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M32 12 a18 18 0 1 0 0.01 0' stroke='%23fff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M32 32 L44 22' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Speed Distance Time Calculator with Unit Conversion | QuickConvert">
+<meta property="og:description" content="Solve for speed, distance or time with km/h, m/s and mph/miles unit conversion and clear formulas (v = d/t). Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/speed-distance-time-calculator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/speed-distance-time-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.inp{width:100%;font-family:inherit;font-size:.98rem;color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:12px 16px;outline:none;transition:border-color .15s,box-shadow .15s;min-height:48px}
+.inp:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+select.inp{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237C3AED' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;background-size:18px;padding-right:40px}
+.unit-row{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;margin-bottom:12px}
+.err{display:none;margin-top:12px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.35);color:#B91C1C;border-radius:14px;padding:12px 16px;font-size:.88rem;line-height:1.55}
+.err.show{display:block}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.35)}
+.btn-p:hover{box-shadow:0 10px 24px rgba(124,58,237,.45);transform:translateY(-1px)}
+.btn-g{background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);backdrop-filter:blur(10px)}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+.result-card{margin-bottom:18px}
+.result-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.result-title{font-weight:700;font-size:1.02rem;display:inline-flex;align-items:center;gap:8px}
+.result-title .tag{font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--vio),#6D28D9)}
+.big-v{font-family:var(--mono);font-size:clamp(2rem,8vw,3rem);font-weight:700;text-align:center;
+  background:linear-gradient(135deg,var(--vio),var(--pnk));-webkit-background-clip:text;background-clip:text;color:transparent;
+  padding:18px 10px;line-height:1.3;word-break:break-all}
+.big-v .dim{color:#9CA3AF;font-weight:400;font-size:1rem;display:block;margin-top:6px}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}
+.res-cell{background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:16px;padding:14px 16px;text-align:center}
+.res-cell .v{font-size:1.2rem;font-weight:700;font-family:var(--mono);color:var(--ink)}
+.res-cell .l{font-size:.75rem;color:var(--mut);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-top:4px}
+.formula{margin-top:14px;background:rgba(31,41,55,.93);color:#A5F3FC;border-radius:14px;
+  padding:14px 18px;font-family:var(--mono);font-size:.95rem;line-height:1.7}
+.mode-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.mode-pill{font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
+  padding:10px 22px;min-height:44px;border-radius:999px;
+  border:1.5px solid rgba(124,58,237,.25);background:rgba(255,255,255,.6);color:var(--mut);transition:all .15s}
+.mode-pill.on{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--vio),#9333EA);box-shadow:0 6px 16px rgba(124,58,237,.3)}
+.modepane{display:none}
+.modepane.on{display:block}
+.out-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;align-items:end}
+@media(max-width:560px){
+  .unit-row{grid-template-columns:1fr}
+  .out-row{grid-template-columns:1fr}
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Speed Distance Time Calculator with Unit Conversion",
+  "url": "https://quickconvert.freedev.app/speed-distance-time-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Speed distance time input">
+    <div class="mode-pills" role="group" aria-label="Solve for">
+      <button class="mode-pill on" data-mode="speed" type="button" aria-pressed="true">Solve for speed</button>
+      <button class="mode-pill" data-mode="distance" type="button" aria-pressed="false">Solve for distance</button>
+      <button class="mode-pill" data-mode="time" type="button" aria-pressed="false">Solve for time</button>
+    </div>
+
+    <div class="modepane on" id="pane-speed">
+      <div class="unit-row">
+        <div><label class="lab" for="sdInput">Distance</label><input class="inp" id="sdInput" type="text" inputmode="decimal" placeholder="e.g. 100" autocomplete="off"></div>
+        <div><label class="lab" for="sdUnit">Distance unit</label><select class="inp" id="sdUnit"><option value="km">km</option><option value="m">m</option><option value="miles">miles</option></select></div>
+      </div>
+      <div class="unit-row">
+        <div><label class="lab" for="stInput">Time</label><input class="inp" id="stInput" type="text" inputmode="decimal" placeholder="e.g. 2" autocomplete="off"></div>
+        <div><label class="lab" for="stUnit">Time unit</label><select class="inp" id="stUnit"><option value="h">hours</option><option value="min">minutes</option><option value="s">seconds</option></select></div>
+      </div>
+      <div class="out-row">
+        <div><label class="lab" for="svOutUnit">Show speed in</label><select class="inp" id="svOutUnit"><option value="km/h">km/h</option><option value="m/s">m/s</option><option value="mph">mph</option></select></div>
+      </div>
+    </div>
+
+    <div class="modepane" id="pane-distance">
+      <div class="unit-row">
+        <div><label class="lab" for="dvInput">Speed</label><input class="inp" id="dvInput" type="text" inputmode="decimal" placeholder="e.g. 60" autocomplete="off"></div>
+        <div><label class="lab" for="dvUnit">Speed unit</label><select class="inp" id="dvUnit"><option value="km/h">km/h</option><option value="m/s">m/s</option><option value="mph">mph</option></select></div>
+      </div>
+      <div class="unit-row">
+        <div><label class="lab" for="dtInput">Time</label><input class="inp" id="dtInput" type="text" inputmode="decimal" placeholder="e.g. 1.5" autocomplete="off"></div>
+        <div><label class="lab" for="dtUnit">Time unit</label><select class="inp" id="dtUnit"><option value="h">hours</option><option value="min">minutes</option><option value="s">seconds</option></select></div>
+      </div>
+      <div class="out-row">
+        <div><label class="lab" for="ddOutUnit">Show distance in</label><select class="inp" id="ddOutUnit"><option value="km">km</option><option value="m">m</option><option value="miles">miles</option></select></div>
+      </div>
+    </div>
+
+    <div class="modepane" id="pane-time">
+      <div class="unit-row">
+        <div><label class="lab" for="tdInput">Distance</label><input class="inp" id="tdInput" type="text" inputmode="decimal" placeholder="e.g. 100" autocomplete="off"></div>
+        <div><label class="lab" for="tdUnit">Distance unit</label><select class="inp" id="tdUnit"><option value="km">km</option><option value="m" selected>m</option><option value="miles">miles</option></select></div>
+      </div>
+      <div class="unit-row">
+        <div><label class="lab" for="tvInput">Speed</label><input class="inp" id="tvInput" type="text" inputmode="decimal" placeholder="e.g. 10" autocomplete="off"></div>
+        <div><label class="lab" for="tvUnit">Speed unit</label><select class="inp" id="tvUnit"><option value="km/h">km/h</option><option value="m/s" selected>m/s</option><option value="mph">mph</option></select></div>
+      </div>
+      <div class="out-row">
+        <div><label class="lab" for="ttOutUnit">Show time in</label><select class="inp" id="ttOutUnit"><option value="h">hours</option><option value="min">minutes</option><option value="s" selected>seconds</option></select></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-p" id="vdtCalcBtn" type="button">Calculate</button>
+      <button class="btn btn-g" id="vdtClearBtn" type="button">Clear</button>
+    </div>
+    <div class="err" id="vdtErr" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Speed Distance Time Calculator <span class="plain">— Free Online Tool</span></h1>
+    <p>Solve for any one of speed, distance or time — with km/h, m/s and mph/miles unit conversion handled for you, instantly in your browser.</p>
+  </div>
+
+  <section class="card result-card" aria-label="Speed distance time result">
+    <div class="result-head">
+      <div class="result-title"><span class="tag" id="vdtTag">Speed</span><span id="vdtResultLabel">answer</span></div>
+      <button class="btn btn-g" id="copyResBtn" type="button">Copy result</button>
+    </div>
+    <div class="big-v" id="vdtOut" aria-live="polite"><span class="dim">enter values above and press Calculate</span></div>
+    <div class="res-grid" id="vdtGrid"></div>
+    <div class="formula" id="vdtFormula">v = d ÷ t</div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>km/h · m/s · mph</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Pick what to solve</b> — speed, distance or time.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Enter the other two</b> with their units — mixing km and miles is fine.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Press Calculate</b> — the answer appears in your chosen unit, plus all others.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>What formulas does this tool use?</summary>
+      <p>The classic trio: speed = distance ÷ time, distance = speed × time, and time = distance ÷ speed. Every calculation is done in SI units internally and then converted to your chosen output unit.</p>
+    </details>
+    <details>
+      <summary>How do I convert 50 km/h to m/s?</summary>
+      <p>Divide by 3.6: 50 km/h = 13.89 m/s. Solve-for-speed mode shows your answer in km/h, m/s and mph automatically. Conversely, multiply m/s by 3.6 to get km/h.</p>
+    </details>
+    <details>
+      <summary>Can I mix miles with hours, or metres with seconds?</summary>
+      <p>Yes — every input and the output has its own unit selector. 1 mile = 1609.344 metres exactly, and the tool converts consistently before applying the formula.</p>
+    </details>
+  </section>
+
+  <p class="note">v = d/t · km/h · m/s · mph/miles · 100% local — your numbers never leave this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+/*CORE-START*/
+var LEN = { 'm': 1, 'km': 1000, 'miles': 1609.344 };
+var SPD = { 'm/s': 1, 'km/h': 1000 / 3600, 'mph': 1609.344 / 3600 };
+var TIM = { 's': 1, 'min': 60, 'h': 3600 };
+function solveSpeed(d, dU, t, tU, outU) {
+  var v = (d * LEN[dU]) / (t * TIM[tU]);
+  return v / SPD[outU];
+}
+function solveDistance(v, vU, t, tU, outU) {
+  var d = (v * SPD[vU]) * (t * TIM[tU]);
+  return d / LEN[outU];
+}
+function solveTime(d, dU, v, vU, outU) {
+  var s = (d * LEN[dU]) / (v * SPD[vU]);
+  return s / TIM[outU];
+}
+/*CORE-END*/
+
+  var mode = 'speed';
+  var pills = Array.prototype.slice.call(document.querySelectorAll('.mode-pill'));
+  var panes = {
+    speed: document.getElementById('pane-speed'),
+    distance: document.getElementById('pane-distance'),
+    time: document.getElementById('pane-time')
+  };
+  var vdtCalcBtn = document.getElementById('vdtCalcBtn');
+  var vdtClearBtn = document.getElementById('vdtClearBtn');
+  var vdtErr = document.getElementById('vdtErr');
+  var vdtOut = document.getElementById('vdtOut');
+  var vdtGrid = document.getElementById('vdtGrid');
+  var vdtTag = document.getElementById('vdtTag');
+  var vdtResultLabel = document.getElementById('vdtResultLabel');
+  var vdtFormula = document.getElementById('vdtFormula');
+
+  var FORMULAS = { speed: 'v = d ÷ t', distance: 'd = v × t', time: 't = d ÷ v' };
+  var LABELS = { speed: 'Speed', distance: 'Distance', time: 'Time' };
+
+  function gi(id) { return document.getElementById(id); }
+
+  function showErr(msg) {
+    if (msg) { vdtErr.textContent = msg; vdtErr.classList.add('show'); }
+    else { vdtErr.textContent = ''; vdtErr.classList.remove('show'); }
+  }
+
+  function parseNum(s) {
+    var t = String(s).trim();
+    if (t === '') return null;
+    var n = Number(t);
+    return isFinite(n) ? n : null;
+  }
+
+  function fmt(n) {
+    if (!isFinite(n)) return '—';
+    return String(Math.round(n * 10000) / 10000);
+  }
+
+  function resetOut() {
+    vdtOut.innerHTML = '<span class="dim">enter values above and press Calculate</span>';
+    vdtGrid.innerHTML = '';
+  }
+
+  function setMode(m) {
+    mode = m;
+    pills.forEach(function (p) {
+      var on = p.getAttribute('data-mode') === m;
+      p.classList.toggle('on', on);
+      p.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    Object.keys(panes).forEach(function (k) { panes[k].classList.toggle('on', k === m); });
+    vdtTag.textContent = LABELS[m];
+    vdtResultLabel.textContent = 'answer';
+    vdtFormula.textContent = FORMULAS[m];
+    showErr('');
+    resetOut();
+  }
+
+  function calc() {
+    var x, xU, y, yU, outU, ans, mainLabel;
+    if (mode === 'speed') {
+      x = parseNum(gi('sdInput').value); xU = gi('sdUnit').value;
+      y = parseNum(gi('stInput').value); yU = gi('stUnit').value;
+      outU = gi('svOutUnit').value;
+      if (x === null || y === null) { showErr('Please enter valid numbers for distance and time.'); return; }
+      if (x < 0 || y < 0) { showErr('Distance and time must be non-negative.'); return; }
+      if (y === 0) { showErr('Time cannot be 0 — speed = distance ÷ time would be undefined.'); return; }
+      ans = solveSpeed(x, xU, y, yU, outU);
+      mainLabel = 'speed';
+      vdtOut.innerHTML = fmt(ans) + ' ' + outU + '<span class="dim">speed</span>';
+      vdtGrid.innerHTML =
+        '<div class="res-cell"><div class="v">' + fmt(solveSpeed(x, xU, y, yU, 'km/h')) + ' km/h</div><div class="l">Speed</div></div>' +
+        '<div class="res-cell"><div class="v">' + fmt(solveSpeed(x, xU, y, yU, 'm/s')) + ' m/s</div><div class="l">Speed</div></div>' +
+        '<div class="res-cell"><div class="v">' + fmt(solveSpeed(x, xU, y, yU, 'mph')) + ' mph</div><div class="l">Speed</div></div>';
+    } else if (mode === 'distance') {
+      x = parseNum(gi('dvInput').value); xU = gi('dvUnit').value;
+      y = parseNum(gi('dtInput').value); yU = gi('dtUnit').value;
+      outU = gi('ddOutUnit').value;
+      if (x === null || y === null) { showErr('Please enter valid numbers for speed and time.'); return; }
+      if (x < 0 || y < 0) { showErr('Speed and time must be non-negative.'); return; }
+      ans = solveDistance(x, xU, y, yU, outU);
+      vdtOut.innerHTML = fmt(ans) + ' ' + outU + '<span class="dim">distance</span>';
+      vdtGrid.innerHTML =
+        '<div class="res-cell"><div class="v">' + fmt(solveDistance(x, xU, y, yU, 'km')) + ' km</div><div class="l">Distance</div></div>' +
+        '<div class="res-cell"><div class="v">' + fmt(solveDistance(x, xU, y, yU, 'm')) + ' m</div><div class="l">Distance</div></div>' +
+        '<div class="res-cell"><div class="v">' + fmt(solveDistance(x, xU, y, yU, 'miles')) + ' miles</div><div class="l">Distance</div></div>';
+    } else {
+      x = parseNum(gi('tdInput').value); xU = gi('tdUnit').value;
+      y = parseNum(gi('tvInput').value); yU = gi('tvUnit').value;
+      outU = gi('ttOutUnit').value;
+      if (x === null || y === null) { showErr('Please enter valid numbers for distance and speed.'); return; }
+      if (x < 0 || y < 0) { showErr('Distance and speed must be non-negative.'); return; }
+      if (y === 0) { showErr('Speed cannot be 0 — time = distance ÷ speed would be undefined.'); return; }
+      ans = solveTime(x, xU, y, yU, outU);
+      vdtOut.innerHTML = fmt(ans) + ' ' + (outU === 'h' ? 'hours' : outU === 'min' ? 'minutes' : 'seconds') + '<span class="dim">time</span>';
+      vdtGrid.innerHTML =
+        '<div class="res-cell"><div class="v">' + fmt(solveTime(x, xU, y, yU, 'h')) + ' h</div><div class="l">Time</div></div>' +
+        '<div class="res-cell"><div class="v">' + fmt(solveTime(x, xU, y, yU, 'min')) + ' min</div><div class="l">Time</div></div>' +
+        '<div class="res-cell"><div class="v">' + fmt(solveTime(x, xU, y, yU, 's')) + ' s</div><div class="l">Time</div></div>';
+    }
+    showErr('');
+    void mainLabel;
+  }
+
+  pills.forEach(function (p) {
+    p.addEventListener('click', function () { setMode(p.getAttribute('data-mode')); });
+  });
+  vdtCalcBtn.addEventListener('click', calc);
+  vdtClearBtn.addEventListener('click', function () {
+    ['sdInput','stInput','dvInput','dtInput','tdInput','tvInput'].forEach(function (id) { gi(id).value = ''; });
+    showErr(''); resetOut();
+  });
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('copyResBtn');
+  if(!b)return;
+  b.addEventListener('click',function(){
+    var card=b.closest('.result-card');
+    var txt=card?card.innerText.replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim():'';
+    if(!txt)return;
+    function done(ok){b.textContent=ok?'Copied \u2713':'Copy failed';setTimeout(function(){b.textContent='Copy result';},1500);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true);},function(){done(false);});}
+    else{var ta=document.createElement('textarea');ta.value=txt;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='-9999px';document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){ok=false;}document.body.removeChild(ta);done(ok);}
+  });
+})();
+</script>
+</body>
+</html>

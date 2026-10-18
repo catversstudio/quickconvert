@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Picker — Free Online Tool | QuickConvert</title>
+<meta name="description" content="Pick any color, copy HEX, RGB and HSL codes, explore tints & shades, and track recent colors. Free online tool — 100% local.">
+<meta name="theme-color" content="#7C3AED">
+<meta property="og:title" content="Color Picker — Free Online Tool | QuickConvert">
+<meta property="og:description" content="Pick any color, copy HEX, RGB and HSL codes, explore tints & shades, and track recent colors. Free online tool — 100% local.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/color-picker/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/color-picker/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M36 10 20 36h12l-4 18 20-28H36z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280;
+  --vio:#7C3AED; --cyn:#06B6D4; --pnk:#EC4899; --amb:#F59E0B;
+  --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --sh:0 12px 36px -12px rgba(31,41,55,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+body{
+  font-family:'Poppins',system-ui,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;
+  display:flex;flex-direction:column;
+}
+/* ---------- unified header ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px clamp(14px,4vw,40px);
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.9);
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex-shrink:0;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));color:#fff;
+  box-shadow:0 8px 20px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand-text{display:flex;flex-direction:column;line-height:1.15}
+.brand-name{font-weight:800;font-size:1.12rem;letter-spacing:-.3px}
+.brand-sub{font-size:.6rem;font-weight:700;letter-spacing:2.4px;color:var(--mut)}
+.all-tools{
+  display:inline-flex;align-items:center;gap:6px;min-height:44px;
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.9rem;
+  background:rgba(255,255,255,.6);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(8px);
+  transition:box-shadow .15s ease, transform .15s ease;
+}
+.all-tools:hover{box-shadow:0 6px 16px rgba(124,58,237,.18);transform:translateY(-1px)}
+main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:20px 18px 40px}
+/* ---------- h1 intro ---------- */
+.intro{text-align:center;margin:22px 0 6px}
+.intro h1{font-size:1.9rem;font-weight:800;letter-spacing:-.3px}
+.intro h1 .grad{background:linear-gradient(135deg,var(--vio),var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);text-align:center;font-size:.92rem;margin-bottom:18px;line-height:1.7;max-width:520px;margin-left:auto;margin-right:auto}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;box-shadow:var(--sh);
+  padding:22px;margin-bottom:16px;
+}
+/* HERO */
+.hero{display:flex;flex-direction:column;align-items:center;gap:14px;padding:28px 22px}
+.picker-wrap{
+  position:relative;width:190px;height:190px;border-radius:40px;overflow:hidden;
+  box-shadow:0 18px 44px -12px rgba(31,41,55,.28), inset 0 0 0 6px rgba(255,255,255,.65);
+  cursor:pointer;transition:transform .15s ease;
+}
+.picker-wrap:hover{transform:scale(1.03)}
+.picker-wrap:active{transform:scale(.98)}
+#colorInput{
+  position:absolute;inset:-20px;width:230px;height:230px;border:none;cursor:pointer;background:none;
+}
+.hex-big{font-size:1.6rem;font-weight:800;letter-spacing:1px}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border:none;
+  border-radius:999px;padding:12px 30px;min-height:44px;
+  font-family:inherit;font-weight:700;font-size:1rem;
+  cursor:pointer;box-shadow:0 10px 24px -8px rgba(124,58,237,.6);transition:transform .15s;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-p:hover{transform:translateY(-2px)}
+.btn-p:active{transform:scale(.97)}
+.btn-p svg{width:20px;height:20px}
+/* READOUTS */
+.readouts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:520px){.readouts{grid-template-columns:1fr}}
+.readout{
+  background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:18px;
+  padding:16px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.readout .lbl{font-size:.72rem;font-weight:700;letter-spacing:2px;color:var(--mut)}
+.readout code{
+  font-family:'Poppins',monospace;font-weight:700;font-size:1.02rem;
+  background:#1F2937;color:#fff;padding:8px 14px;border-radius:10px;word-break:break-all;text-align:center;
+}
+.btn-g{
+  background:rgba(255,255,255,.85);border:1px solid var(--line);color:var(--ink);
+  border-radius:999px;padding:8px 20px;min-height:44px;
+  font-family:inherit;font-weight:600;font-size:.85rem;
+  cursor:pointer;transition:all .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn-g:hover{background:#fff;box-shadow:0 6px 16px -6px rgba(31,41,55,.2)}
+.btn-g.ok{background:#ECFDF5;border-color:#A7F3D0;color:#047857}
+.sec-title{font-size:1.05rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-title svg{width:22px;height:22px;color:var(--vio)}
+/* PALETTE */
+.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:520px){.palette{grid-template-columns:repeat(2,1fr)}}
+.swatch{
+  border-radius:16px;height:86px;cursor:pointer;position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.8);box-shadow:0 6px 16px -6px rgba(31,41,55,.18);
+  transition:transform .15s;
+}
+.swatch:hover{transform:translateY(-3px) scale(1.02)}
+.swatch span{
+  position:absolute;bottom:0;left:0;right:0;font-size:.68rem;font-weight:700;
+  padding:4px;text-align:center;background:rgba(255,255,255,.75);letter-spacing:.5px;
+}
+/* RECENT */
+.recent{display:flex;flex-wrap:wrap;gap:10px}
+.recent .rswatch{
+  width:52px;height:52px;border-radius:14px;cursor:pointer;
+  border:2px solid rgba(255,255,255,.9);box-shadow:0 4px 12px -4px rgba(31,41,55,.25);
+  transition:transform .15s;
+}
+.recent .rswatch:hover{transform:scale(1.12)}
+.recent-empty{color:var(--mut);font-size:.9rem}
+/* ---------- trust strip ---------- */
+.trust-strip{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 22px}
+.trust-item{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:999px;
+  padding:9px 16px;font-size:13px;font-weight:600;color:var(--ink);
+}
+.trust-item svg{width:18px;height:18px;color:var(--vio);flex-shrink:0}
+/* ---------- how it works ---------- */
+.how h2,.faq h2{font-size:1.05rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.how h2 svg,.faq h2 svg{width:22px;height:22px;color:var(--vio);flex-shrink:0}
+.steps{list-style:none;display:grid;gap:10px}
+@media(min-width:600px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps li{
+  background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:16px;
+  padding:14px 16px;display:flex;gap:12px;align-items:flex-start;
+  font-size:13.5px;color:var(--mut);line-height:1.55;
+}
+.step-num{
+  width:30px;height:30px;flex-shrink:0;border-radius:999px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;font-weight:700;font-size:14px;
+}
+.steps b{color:var(--ink)}
+/* ---------- faq ---------- */
+.faq details{
+  background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;margin-bottom:10px;
+}
+.faq summary{font-weight:600;font-size:14.5px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{width:18px;height:18px;color:var(--vio);flex-shrink:0}
+.faq details p{margin-top:10px;font-size:13.5px;color:var(--mut);line-height:1.7}
+/* ---------- footer ---------- */
+.site-footer{text-align:center;padding:28px 18px 34px;font-size:.85rem;color:var(--mut);line-height:1.7}
+.site-footer a{color:var(--vio);font-weight:600;text-decoration:none}
+.site-footer a:hover{text-decoration:underline}
+.privacy-line{font-size:12.5px;margin-top:6px}
+.foot-nav{margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:13px}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Color Picker — QuickConvert",
+  "url": "https://quickconvert.freedev.app/color-picker/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="QuickConvert home">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg></span>
+    <span class="brand-text"><span class="brand-name">QuickConvert</span><span class="brand-sub">FREE ONLINE TOOLS</span></span>
+  </a>
+  <a class="all-tools" href="/">← All tools</a>
+</header>
+
+<main>
+  <section class="card hero">
+    <div class="picker-wrap" id="pickerWrap" title="Click to pick a color">
+      <input type="color" id="colorInput" value="#7C3AED" aria-label="Pick a color">
+    </div>
+    <div class="hex-big" id="hexBig">#7C3AED</div>
+    <button class="btn-p" id="randomBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>Random</button>
+  </section>
+
+  <section class="trust-strip" aria-label="Why trust QuickConvert">
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg><span>Instant results — no waiting</span></div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg><span>No sign-up needed</span></div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4.5-4-7-4a4 4 0 1 0 0 8c2.5 0 5-1.5 7-4zm0 0c2 2.5 4.5 4 7 4a4 4 0 1 0 0-8c-2.5 0-5 1.5-7 4z"/></svg><span>Free forever</span></div>
+  </section>
+
+  <div class="intro">
+    <h1>Color <span class="grad">Picker</span> — Free Online Tool</h1>
+  </div>
+  <p class="sub">Pick a color, copy its codes, explore shades. Everything runs locally in your browser.</p>
+
+  <section class="card" aria-label="Color codes">
+    <div class="readouts">
+      <div class="readout">
+        <div class="lbl">HEX</div>
+        <code id="hexVal">#7C3AED</code>
+        <button class="btn-g" id="copyHex">Copy</button>
+      </div>
+      <div class="readout">
+        <div class="lbl">RGB</div>
+        <code id="rgbVal">rgb(124, 58, 237)</code>
+        <button class="btn-g" id="copyRgb">Copy</button>
+      </div>
+      <div class="readout">
+        <div class="lbl">HSL</div>
+        <code id="hslVal">hsl(262, 83%, 58%)</code>
+        <button class="btn-g" id="copyHsl">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" aria-label="Harmonious shades">
+    <div class="sec-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 1.4-2.2-.7-1.4.1-3.3 2-3.3H17a4.5 4.5 0 0 0 4.5-4.5C21.4 6.4 17 3 12 3z"/><circle cx="7.5" cy="11.5" r="1.1"/><circle cx="10.8" cy="7.4" r="1.1"/><circle cx="15.8" cy="8.6" r="1.1"/></svg>Harmonious Shades</div>
+    <div class="palette" id="palette"></div>
+  </section>
+
+  <section class="card" aria-label="Recent colors">
+    <div class="sec-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>Recent Colors</div>
+    <div class="recent" id="recent"></div>
+  </section>
+
+  <section class="card how" aria-label="How it works">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1.9-1.1 1.8"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>How it works</h2>
+    <ol class="steps">
+      <li><span class="step-num">1</span><span><b>Tap the color disc</b> to open your device's native color picker.</span></li>
+      <li><span class="step-num">2</span><span><b>Copy HEX, RGB or HSL</b> with one tap — or try a random color.</span></li>
+      <li><span class="step-num">3</span><span><b>Explore tints &amp; shades</b> — tap any swatch to select it.</span></li>
+    </ol>
+  </section>
+
+  <section class="card faq" aria-label="Frequently asked questions">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/><path d="M9.5 12h.01M12.5 12h.01M15.5 12h.01"/></svg>Frequently asked questions</h2>
+    <details>
+      <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/></svg>Is my color history saved or uploaded?</summary>
+      <p>Neither. Your recent colors live only in the page's memory while it's open — nothing is uploaded, stored on a server, or shared.</p>
+    </details>
+    <details>
+      <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/></svg>Which color formats are supported?</summary>
+      <p>HEX, RGB and HSL, each with a one-tap copy button. The shades section gives you 4 lighter tints and 4 darker shades of any color you pick.</p>
+    </details>
+    <details>
+      <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/></svg>Can I use this on my phone?</summary>
+      <p>Yes. Tapping the color disc opens your phone's native color picker, and copy buttons work in mobile browsers.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></p>
+  <p class="privacy-line">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</p>
+  <nav class="foot-nav" aria-label="Footer">
+    <a href="/">All tools</a><span aria-hidden="true">·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span aria-hidden="true">·</span><a href="/image-compressor/">Image Compressor</a><span aria-hidden="true">·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+const colorInput = document.getElementById('colorInput');
+const pickerWrap  = document.getElementById('pickerWrap');
+const hexBig      = document.getElementById('hexBig');
+const hexVal      = document.getElementById('hexVal');
+const rgbVal      = document.getElementById('rgbVal');
+const hslVal      = document.getElementById('hslVal');
+const paletteEl   = document.getElementById('palette');
+const recentEl    = document.getElementById('recent');
+
+const recent = [];
+
+function hexToRgb(hex){
+  hex = hex.replace('#','');
+  if(hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  const n = parseInt(hex, 16);
+  return { r:(n >> 16) & 255, g:(n >> 8) & 255, b:n & 255 };
+}
+
+function rgbToHsl(r, g, b){
+  r/=255; g/=255; b/=255;
+  const max = Math.max(r,g,b), min = Math.min(r,g,b);
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
+  if(max !== min){
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch(max){
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      default: h = (r - g) / d + 4;
+    }
+    h *= 60;
+  }
+  return { h:Math.round(h), s:Math.round(s*100), l:Math.round(l*100) };
+}
+
+function rgbToHex(r, g, b){
+  return '#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('').toUpperCase();
+}
+
+function mix(hex, target, amt){
+  const c = hexToRgb(hex), t = hexToRgb(target);
+  const r = Math.round(c.r + (t.r - c.r) * amt);
+  const g = Math.round(c.g + (t.g - c.g) * amt);
+  const b = Math.round(c.b + (t.b - c.b) * amt);
+  return rgbToHex(r, g, b);
+}
+
+function render(hex){
+  hex = hex.toUpperCase();
+  const {r, g, b} = hexToRgb(hex);
+  const hsl = rgbToHsl(r, g, b);
+
+  hexBig.textContent = hex;
+  hexVal.textContent = hex;
+  rgbVal.textContent = `rgb(${r}, ${g}, ${b})`;
+  hslVal.textContent = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+
+  // 4 lighter tints + 4 darker shades
+  const shades = [];
+  [0.85, 0.65, 0.45, 0.25].forEach(a => shades.push(mix(hex, '#FFFFFF', a)));
+  [0.20, 0.40, 0.60, 0.80].forEach(a => shades.push(mix(hex, '#000000', a)));
+
+  paletteEl.innerHTML = '';
+  shades.forEach(sh => {
+    const d = document.createElement('div');
+    d.className = 'swatch';
+    d.style.background = sh;
+    d.title = sh;
+    d.innerHTML = '<span>' + sh + '</span>';
+    d.addEventListener('click', () => selectColor(sh));
+    paletteEl.appendChild(d);
+  });
+}
+
+function renderRecent(){
+  recentEl.innerHTML = '';
+  if(!recent.length){
+    recentEl.innerHTML = '<div class="recent-empty">Pick colors and they will appear here.</div>';
+    return;
+  }
+  recent.forEach(hex => {
+    const d = document.createElement('div');
+    d.className = 'rswatch';
+    d.style.background = hex;
+    d.title = hex;
+    d.addEventListener('click', () => selectColor(hex));
+    recentEl.appendChild(d);
+  });
+}
+
+function pushRecent(hex){
+  hex = hex.toUpperCase();
+  const i = recent.indexOf(hex);
+  if(i !== -1) recent.splice(i, 1);
+  recent.unshift(hex);
+  if(recent.length > 10) recent.length = 10;
+  renderRecent();
+}
+
+function selectColor(hex, fromUser){
+  hex = hex.toUpperCase();
+  colorInput.value = hex;
+  render(hex);
+  pushRecent(hex);
+}
+
+function copyText(text, btn){
+  const done = () => {
+    const old = btn.textContent;
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = old; btn.classList.remove('ok'); }, 1500);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+
+function fallbackCopy(text, done){
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try{ document.execCommand('copy'); done(); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+colorInput.addEventListener('input', e => selectColor(e.target.value, true));
+
+document.getElementById('randomBtn').addEventListener('click', () => {
+  const r = Math.floor(Math.random()*256), g = Math.floor(Math.random()*256), b = Math.floor(Math.random()*256);
+  selectColor(rgbToHex(r, g, b), true);
+});
+
+document.getElementById('copyHex').addEventListener('click', e => copyText(hexVal.textContent, e.currentTarget));
+document.getElementById('copyRgb').addEventListener('click', e => copyText(rgbVal.textContent, e.currentTarget));
+document.getElementById('copyHsl').addEventListener('click', e => copyText(hslVal.textContent, e.currentTarget));
+
+// init
+render(colorInput.value);
+pushRecent(colorInput.value);
+</script>
+</body>
+</html>

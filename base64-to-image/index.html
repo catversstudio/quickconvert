@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 to Image Converter · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Decode any base64 string back into an image instantly in your browser. Paste base64, preview, and download as PNG or JPG. Free, private, no uploads.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Base64 to Image Converter · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Decode any base64 string back into an image instantly in your browser. Paste base64, preview, and download as PNG or JPG. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/base64-to-image/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/base64-to-image/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+textarea#b64Input{
+  width:100%;min-height:140px;resize:vertical;font-family:var(--mono);font-size:.85rem;line-height:1.6;
+  color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;word-break:break-all;
+}
+textarea#b64Input:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+textarea#b64Input::placeholder{color:#9CA3AF;font-family:'Poppins',system-ui,sans-serif}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.error{
+  display:none;margin-bottom:18px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.preview-card{margin-bottom:18px;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+.preview-card.show{opacity:1;transform:none}
+.preview-wrap{
+  display:grid;grid-template-columns:1fr;gap:18px;align-items:start;
+}
+.img-holder{
+  background:repeating-conic-gradient(#f3f4f6 0% 25%, #ffffff 0% 50%) 0 0/28px 28px;
+  border:1px solid var(--line);border-radius:16px;padding:14px;
+  display:grid;place-items:center;min-height:180px;
+}
+.img-holder img{max-width:100%;max-height:380px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.stat-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.stat{
+  background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:14px;
+  padding:10px 12px;text-align:center;
+}
+.stat .k{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.stat .v{font-size:.95rem;font-weight:700;color:var(--ink);margin-top:2px;word-break:break-all}
+.dl-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .stat-list{grid-template-columns:1fr 1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Base64 to Image Converter — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/base64-to-image/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Base64 input">
+    <label class="lab" for="b64Input">Base64 string</label>
+    <textarea id="b64Input" placeholder="Paste a base64 string here — with or without the data:image/…;base64, prefix…" aria-label="Base64 string to decode" spellcheck="false" autocomplete="off"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-p" id="pasteBtn" type="button">📋 Paste from clipboard</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="meta">
+      <span class="pill" id="lenNote">0 characters</span>
+      <span>Decoding happens live as you type — nothing is uploaded, everything stays in your browser.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Base64 to Image Converter <span class="plain">— Free Online Tool</span></h1>
+    <p>Paste any base64 image string and get a live preview with dimensions and file size, then download it as PNG or JPG — all offline in your browser.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+    Your decoded image will preview here as soon as you paste a valid base64 string.
+  </div>
+
+  <section class="card preview-card" id="previewCard" hidden aria-label="Image preview">
+    <div class="img-holder"><img id="previewImg" alt="Decoded image preview"></div>
+    <div class="stat-list">
+      <div class="stat"><div class="k">Format</div><div class="v" id="statType">PNG</div></div>
+      <div class="stat"><div class="k">Dimensions</div><div class="v" id="statDims">–</div></div>
+      <div class="stat"><div class="k">File size</div><div class="v" id="statSize">–</div></div>
+    </div>
+    <div class="dl-row">
+      <button class="btn btn-p" id="dlPngBtn" type="button">⬇ Download PNG</button>
+      <button class="btn btn-g" id="dlJpgBtn" type="button">⬇ Download JPG</button>
+    </div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Paste your base64 string</b> into the box above — data URL prefix optional.</span></div>
+      <div class="step"><span class="n">2</span><span><b>See the live preview</b> — format, dimensions and file size appear instantly.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Download as PNG or JPG</b> with a single tap.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Do I need to include the data:image/…;base64, prefix?</summary>
+      <p>No — the tool accepts both. If your string has a data URL prefix, the image format is read from it; without one, the format is sniffed from the file's magic bytes, defaulting to PNG.</p>
+    </details>
+    <details>
+      <summary>Is my base64 string uploaded anywhere?</summary>
+      <p>Never. Decoding, previewing and conversion all happen with your browser's built-in APIs (atob, Blob, Canvas), so your data never leaves this page.</p>
+    </details>
+    <details>
+      <summary>What happens to transparency when downloading JPG?</summary>
+      <p>JPG doesn't support transparency, so any transparent areas are flattened onto a white background. Download as PNG instead to keep transparency.</p>
+    </details>
+  </section>
+
+  <p class="note">100% local decoding · PNG / JPEG / GIF / WebP support · your data never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var input = document.getElementById('b64Input');
+  var pasteBtn = document.getElementById('pasteBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var lenNote = document.getElementById('lenNote');
+  var errorBox = document.getElementById('errorBox');
+  var emptyState = document.getElementById('emptyState');
+  var previewCard = document.getElementById('previewCard');
+  var previewImg = document.getElementById('previewImg');
+  var statType = document.getElementById('statType');
+  var statDims = document.getElementById('statDims');
+  var statSize = document.getElementById('statSize');
+  var dlPngBtn = document.getElementById('dlPngBtn');
+  var dlJpgBtn = document.getElementById('dlJpgBtn');
+
+  var objectUrl = null;    // blob URL for the current preview
+  var rawBytes = null;     // Uint8Array of decoded bytes
+  var mimeType = 'image/png';
+  var extName = 'png';
+  var debounceTimer = null;
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function revokeObjectUrl() {
+    if (objectUrl) {
+      URL.revokeObjectURL(objectUrl);
+      objectUrl = null;
+    }
+  }
+
+  function hidePreview() {
+    previewCard.classList.remove('show');
+    previewCard.hidden = true;
+    previewImg.removeAttribute('src');
+    revokeObjectUrl();
+    rawBytes = null;
+    emptyState.style.display = '';
+  }
+
+  function updateLength() {
+    var n = input.value.length;
+    lenNote.textContent = n.toLocaleString('en-US') + (n === 1 ? ' character' : ' characters');
+  }
+
+  function formatBytes(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+    return (n / 1048576).toFixed(2) + ' MB';
+  }
+
+  // Split an optional data-URL prefix from the payload
+  function splitPrefix(s) {
+    var m = s.match(/^\s*data:([a-zA-Z0-9.+-]+\/[a-zA-Z0-9.+-]+)?;base64,/);
+    if (m) {
+      return { mime: m[1] || null, body: s.slice(m[0].length) };
+    }
+    return { mime: null, body: s };
+  }
+
+  // Sniff common image formats from magic bytes
+  function sniffMime(bytes) {
+    if (bytes.length >= 8 &&
+        bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4E && bytes[3] === 0x47) {
+      return 'image/png';
+    }
+    if (bytes.length >= 3 && bytes[0] === 0xFF && bytes[1] === 0xD8 && bytes[2] === 0xFF) {
+      return 'image/jpeg';
+    }
+    if (bytes.length >= 6 &&
+        bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46) {
+      return 'image/gif';
+    }
+    if (bytes.length >= 12 &&
+        bytes[0] === 0x52 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x46 &&
+        bytes[8] === 0x57 && bytes[9] === 0x45 && bytes[10] === 0x42 && bytes[11] === 0x50) {
+      return 'image/webp';
+    }
+    return null;
+  }
+
+  function extForMime(mime) {
+    switch (mime) {
+      case 'image/jpeg': return 'jpg';
+      case 'image/gif': return 'gif';
+      case 'image/webp': return 'webp';
+      default: return 'png';
+    }
+  }
+
+  function labelForMime(mime) {
+    switch (mime) {
+      case 'image/jpeg': return 'JPEG';
+      case 'image/gif': return 'GIF';
+      case 'image/webp': return 'WebP';
+      default: return 'PNG';
+    }
+  }
+
+  function decodeLive() {
+    hideError();
+    var raw = input.value;
+    if (!raw.trim()) {
+      hidePreview();
+      return;
+    }
+
+    var parts = splitPrefix(raw);
+    var clean = parts.body.replace(/\s+/g, '');
+
+    if (clean.length < 20 || !/^[A-Za-z0-9+/]*={0,2}$/.test(clean) || clean.length % 4 !== 0) {
+      hidePreview();
+      showError('That doesn\u2019t look like valid base64 — it should only contain A–Z, a–z, 0–9, + and / (with up to two = padding characters at the end). Please check your string and try again.');
+      return;
+    }
+
+    var binary;
+    try {
+      binary = atob(clean);
+    } catch (e) {
+      hidePreview();
+      showError('That doesn\u2019t look like valid base64 — the browser couldn\u2019t decode it. Please check your string and try again.');
+      return;
+    }
+
+    var bytes = new Uint8Array(binary.length);
+    for (var i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+
+    var mime = parts.mime || sniffMime(bytes) || 'image/png';
+    mimeType = mime;
+    extName = extForMime(mime);
+
+    revokeObjectUrl();
+    var blob = new Blob([bytes], { type: mime });
+    objectUrl = URL.createObjectURL(blob);
+    rawBytes = bytes;
+
+    previewImg.onload = function () {
+      statType.textContent = labelForMime(mime);
+      statDims.textContent = previewImg.naturalWidth + ' × ' + previewImg.naturalHeight + ' px';
+      statSize.textContent = formatBytes(bytes.length);
+      emptyState.style.display = 'none';
+      previewCard.hidden = false;
+      requestAnimationFrame(function () { previewCard.classList.add('show'); });
+    };
+    previewImg.onerror = function () {
+      revokeObjectUrl();
+      rawBytes = null;
+      hidePreview();
+      showError('The base64 decoded fine, but it doesn\u2019t contain a readable image (' + labelForMime(mime) + ' was detected). Make sure your string really is image data.');
+    };
+    previewImg.src = objectUrl;
+  }
+
+  function downloadFile(url, filename) {
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  function downloadPng() {
+    if (!rawBytes) return;
+    var blob = new Blob([rawBytes], { type: mimeType });
+    var url = URL.createObjectURL(blob);
+    downloadFile(url, 'image.' + (mimeType === 'image/png' ? 'png' : extName));
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+  }
+
+  function downloadJpg() {
+    if (!rawBytes || !previewImg.naturalWidth) return;
+    var canvas = document.createElement('canvas');
+    canvas.width = previewImg.naturalWidth;
+    canvas.height = previewImg.naturalHeight;
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(previewImg, 0, 0);
+    var jpgUrl = canvas.toDataURL('image/jpeg', 0.92);
+    downloadFile(jpgUrl, 'image.jpg');
+  }
+
+  function scheduleDecode() {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(decodeLive, 350);
+  }
+
+  function pasteFromClipboard() {
+    if (!navigator.clipboard || typeof navigator.clipboard.readText !== 'function') {
+      showError('Clipboard access isn\u2019t available in this browser — please paste with Ctrl+V / Cmd+V instead.');
+      return;
+    }
+    navigator.clipboard.readText().then(function (text) {
+      if (!text) {
+        showError('Your clipboard is empty — copy a base64 string first.');
+        return;
+      }
+      input.value = text;
+      updateLength();
+      hideError();
+      decodeLive();
+    }).catch(function () {
+      showError('Couldn\u2019t read the clipboard — your browser may need permission. Please paste with Ctrl+V / Cmd+V instead.');
+    });
+  }
+
+  function clearAll() {
+    input.value = '';
+    hideError();
+    hidePreview();
+    updateLength();
+    input.focus();
+  }
+
+  pasteBtn.addEventListener('click', pasteFromClipboard);
+  clearBtn.addEventListener('click', clearAll);
+  dlPngBtn.addEventListener('click', downloadPng);
+  dlJpgBtn.addEventListener('click', downloadJpg);
+  input.addEventListener('input', function () {
+    updateLength();
+    scheduleDecode();
+  });
+  updateLength();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Metadata Viewer · Free Online Tool | QuickConvert</title>
+<meta name="description" content="View EXIF metadata of any photo: camera make & model, date taken, exposure, ISO, focal length, GPS and more — instantly in your browser. Free, private, no uploads.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Image Metadata Viewer · Free Online Tool | QuickConvert">
+<meta property="og:description" content="View EXIF metadata of any photo: camera make & model, date taken, exposure, ISO, focal length, GPS and more — instantly in your browser. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/image-metadata-viewer/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/image-metadata-viewer/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.dropzone{
+  border:2px dashed rgba(124,58,237,.35);border-radius:20px;background:rgba(255,255,255,.5);
+  padding:clamp(24px,5vw,40px) 20px;text-align:center;cursor:pointer;
+  transition:border-color .15s,background .15s,box-shadow .15s;
+}
+.dropzone:hover,.dropzone.drag{border-color:var(--vio);background:rgba(255,255,255,.85);
+  box-shadow:0 0 0 4px rgba(124,58,237,.10)}
+.dropzone .dz-ico{display:grid;place-items:center;margin:0 auto 12px;width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio)}
+.dropzone .dz-ico svg{width:26px;height:26px}
+.dropzone p{font-weight:600;font-size:.98rem;margin-bottom:6px}
+.dropzone small{color:var(--mut);font-size:.83rem}
+.dropzone input[type="file"]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.result-card{margin-bottom:18px;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+.result-card.show{opacity:1;transform:none}
+.thumb-wrap{text-align:center;margin-bottom:16px}
+.thumb-wrap img{max-width:100%;max-height:260px;border-radius:16px;box-shadow:0 8px 24px rgba(31,41,55,.12)}
+.meta-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.meta-table caption{text-align:left;font-weight:700;font-size:1rem;margin-bottom:10px}
+.meta-table th,.meta-table td{padding:9px 12px;text-align:left;border-bottom:1px solid rgba(124,58,237,.10);vertical-align:top}
+.meta-table th{width:38%;color:var(--mut);font-weight:500}
+.meta-table td{font-weight:600;word-break:break-word}
+.meta-table td .mono{font-family:var(--mono);font-size:.83rem;font-weight:500}
+.meta-table tr:last-child th,.meta-table tr:last-child td{border-bottom:none}
+.gps-note{
+  display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px 16px;border-radius:14px;
+  background:rgba(254,243,199,.85);border:1px solid #FCD34D;color:#92400E;font-size:.83rem;line-height:1.6;
+}
+.gps-note svg{flex:0 0 20px;width:20px;height:20px;margin-top:2px}
+.error{
+  display:none;margin-top:14px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{display:grid;place-items:center;margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio)}
+.empty-state .ico svg{width:24px;height:24px}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .meta-table th{width:42%}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Image Metadata Viewer — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/image-metadata-viewer/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Image input">
+    <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Drop an image file or click to browse">
+      <span class="dz-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+      <p>Drop an image here, or click to browse</p>
+      <small>One image · JPEG / TIFF work best for EXIF · max 25 MB</small>
+      <input type="file" id="fileInput" accept="image/*" aria-label="Choose an image file">
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-g" id="clearBtn" type="button" hidden>Remove Image</button>
+    </div>
+    <div class="meta">
+      <span class="pill" id="statusNote">Waiting for an image…</span>
+      <span>Metadata is read locally in your browser — your photo is never uploaded.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Image Metadata Viewer <span class="plain">— Free Online Tool</span></h1>
+    <p>Reveal the hidden EXIF data in any photo: camera make &amp; model, date taken, exposure, ISO, focal length, GPS location and more.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+    Your image's metadata will appear here after you drop or choose a photo above.
+  </div>
+
+  <section class="card result-card" id="fileCard" hidden aria-label="File information">
+    <div class="thumb-wrap"><img id="thumb" alt="Uploaded image preview"></div>
+    <table class="meta-table" id="fileTable">
+      <caption>File information</caption>
+      <tbody id="fileBody"></tbody>
+    </table>
+  </section>
+
+  <section class="card result-card" id="exifCard" hidden aria-label="EXIF metadata">
+    <table class="meta-table" id="exifTable">
+      <caption>EXIF metadata</caption>
+      <tbody id="exifBody"></tbody>
+    </table>
+    <div class="gps-note" id="gpsNote" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="2.5"/></svg>
+      <span><b>Privacy note:</b> this photo contains GPS coordinates that reveal the exact location where it was taken. Think twice before sharing the original file with others.</span>
+    </div>
+  </section>
+
+  <section class="card result-card" id="noExifCard" hidden aria-label="No metadata found">
+    <div class="empty-state" style="margin-bottom:0">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+      <b>No metadata found in this image.</b><br>
+      This is common for PNGs, screenshots, downloaded memes and images that were re-saved or edited — many apps strip EXIF data. Try a photo straight from your camera for richer results.
+    </div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Drop or choose</b> one image — photos from a camera (JPEG/TIFF) carry the most EXIF data.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Metadata reads instantly</b> in your browser using the exif-js library — nothing is uploaded.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Browse the table</b> — camera, exposure, date, GPS and more, with file details alongside.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is my photo uploaded anywhere?</summary>
+      <p>No. EXIF metadata is read entirely inside your browser with JavaScript — your photo never leaves this page, is never uploaded and is never stored.</p>
+    </details>
+    <details>
+      <summary>Why does my image show "No metadata found"?</summary>
+      <p>PNGs, screenshots, memes and images re-saved or edited by many apps contain no EXIF data, or have it stripped. JPEG and TIFF photos taken directly by a camera or phone almost always include it.</p>
+    </details>
+    <details>
+      <summary>Why should I be careful with GPS metadata?</summary>
+      <p>Photos with location data reveal the exact spot where they were taken. Social networks usually strip this automatically, but files shared directly (e.g. via messaging or email) keep it — check the GPS row above before sharing.</p>
+    </details>
+  </section>
+
+  <p class="note">EXIF read via exif-js · 100% local — your photo never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var dropzone = document.getElementById('dropzone');
+  var fileInput = document.getElementById('fileInput');
+  var clearBtn = document.getElementById('clearBtn');
+  var statusNote = document.getElementById('statusNote');
+  var errorBox = document.getElementById('errorBox');
+  var emptyState = document.getElementById('emptyState');
+  var fileCard = document.getElementById('fileCard');
+  var exifCard = document.getElementById('exifCard');
+  var noExifCard = document.getElementById('noExifCard');
+  var thumb = document.getElementById('thumb');
+  var fileBody = document.getElementById('fileBody');
+  var exifBody = document.getElementById('exifBody');
+  var gpsNote = document.getElementById('gpsNote');
+
+  var MAX_SIZE = 25 * 1024 * 1024;
+  var objectUrl = null;
+
+  // Fallback loader: cdnjs (primary, already tried) -> jsdelivr -> unpkg
+  var CDN_FALLBACKS = [
+    'https://cdn.jsdelivr.net/npm/exif-js@2.3.0/exif.min.js',
+    'https://unpkg.com/exif-js@2.3.0/exif.js'
+  ];
+
+  function exifAvailable() {
+    return typeof window.EXIF !== 'undefined' && typeof window.EXIF.getData === 'function';
+  }
+
+  function loadFallback(idx, onDone) {
+    if (idx >= CDN_FALLBACKS.length) { onDone(); return; }
+    var s = document.createElement('script');
+    s.src = CDN_FALLBACKS[idx];
+    s.onload = function () { onDone(); };
+    s.onerror = function () { loadFallback(idx + 1, onDone); };
+    document.head.appendChild(s);
+  }
+
+  function ensureExif(onDone) {
+    if (exifAvailable()) { onDone(); return; }
+    loadFallback(0, onDone);
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function formatBytes(n) {
+    if (n < 1024) return n + ' bytes';
+    var units = ['KB', 'MB', 'GB'];
+    var v = n / 1024;
+    var u = 0;
+    while (v >= 1024 && u < units.length - 1) { v /= 1024; u++; }
+    return (Math.round(v * 10) / 10) + ' ' + units[u];
+  }
+
+  function formatFraction(val) {
+    // ExposureTime comes through as a number or a rational-ish string
+    if (typeof val === 'number' && val > 0 && val < 1) {
+      var denom = Math.round(1 / val);
+      if (Math.abs(1 / denom - val) < val * 0.05) return '1/' + denom + ' s';
+      return val.toFixed(4) + ' s';
+    }
+    return String(val) + (typeof val === 'number' ? ' s' : '');
+  }
+
+  function formatFNumber(val) {
+    return 'f/' + val;
+  }
+
+  function formatFocal(val) {
+    return val + ' mm';
+  }
+
+  function formatIso(val) {
+    return 'ISO ' + val;
+  }
+
+  function formatExposureBias(val) {
+    return (val > 0 ? '+' : '') + val + ' EV';
+  }
+
+  function formatDate(val) {
+    if (!val || typeof val !== 'string') return String(val);
+    // EXIF format "2024:05:06 12:30:00" -> readable
+    return val.replace(/^(\d{4}):(\d{2}):(\d{2})/, '$1-$2-$3');
+  }
+
+  function formatOrientation(val) {
+    var map = {
+      1: 'Normal', 2: 'Mirrored horizontally', 3: 'Rotated 180°',
+      4: 'Mirrored vertically', 5: 'Mirrored then rotated 90° CCW',
+      6: 'Rotated 90° CW', 7: 'Mirrored then rotated 90° CW', 8: 'Rotated 90° CCW'
+    };
+    return map[val] || val;
+  }
+
+  function formatFlash(val) {
+    if (typeof val !== 'number') return String(val);
+    return (val & 1) ? 'Fired' : 'Did not fire';
+  }
+
+  function formatWhiteBalance(val) {
+    return val === 0 ? 'Auto' : val === 1 ? 'Manual' : String(val);
+  }
+
+  function formatResolution(val) {
+    return typeof val === 'number' ? Math.round(val) + ' dpi' : String(val);
+  }
+
+  function gpsToDecimal(coord, ref) {
+    if (!coord || !Array.isArray(coord) || coord.length < 3) return null;
+    var dec = coord[0] + coord[1] / 60 + coord[2] / 3600;
+    if (ref === 'S' || ref === 'W') dec = -dec;
+    return dec;
+  }
+
+  function formatLatLon(dec, isLat) {
+    var dir = isLat ? (dec >= 0 ? 'N' : 'S') : (dec >= 0 ? 'E' : 'W');
+    return Math.abs(dec).toFixed(6) + '° ' + dir;
+  }
+
+  function row(label, value, mono) {
+    var tr = document.createElement('tr');
+    var th = document.createElement('th');
+    th.textContent = label;
+    var td = document.createElement('td');
+    if (mono) {
+      var span = document.createElement('span');
+      span.className = 'mono';
+      span.textContent = value;
+      td.appendChild(span);
+    } else {
+      td.textContent = value;
+    }
+    tr.appendChild(th);
+    tr.appendChild(td);
+    return tr;
+  }
+
+  function reveal(card) {
+    card.hidden = false;
+    // force reflow so the transition plays
+    void card.offsetWidth;
+    card.classList.add('show');
+  }
+
+  function resetResults() {
+    [fileCard, exifCard, noExifCard].forEach(function (c) {
+      c.classList.remove('show');
+      c.hidden = true;
+    });
+    gpsNote.hidden = true;
+    emptyState.style.display = '';
+  }
+
+  function renderFileInfo(file, img) {
+    fileBody.innerHTML = '';
+    thumb.src = objectUrl;
+    thumb.alt = 'Preview of ' + file.name;
+    fileBody.appendChild(row('File name', file.name, true));
+    fileBody.appendChild(row('File size', formatBytes(file.size) + ' (' + file.size.toLocaleString('en-US') + ' bytes)'));
+    fileBody.appendChild(row('File type', file.type || 'Unknown'));
+    fileBody.appendChild(row('Dimensions', img.naturalWidth + ' × ' + img.naturalHeight + ' px (' +
+      (img.naturalWidth * img.naturalHeight / 1000000).toFixed(1) + ' MP)'));
+    statusNote.textContent = 'Reading metadata…';
+  }
+
+  function renderExif(img, file) {
+    var tags = {};
+    try { tags = window.EXIF.getAllTags(img) || {}; } catch (e) { tags = {}; }
+
+    exifBody.innerHTML = '';
+    var count = 0;
+    var hasGps = false;
+
+    function add(tagName, label, fmt) {
+      var v = tags[tagName];
+      if (v === undefined || v === null || v === '') return;
+      exifBody.appendChild(row(label, fmt ? fmt(v) : String(v), false));
+      count++;
+    }
+
+    add('Make', 'Camera make');
+    add('Model', 'Camera model');
+    add('LensModel', 'Lens');
+    add('DateTimeOriginal', 'Date taken', formatDate);
+    add('DateTime', 'File date', formatDate);
+    add('ExposureTime', 'Exposure', formatFraction);
+    add('FNumber', 'Aperture', formatFNumber);
+    add('ISOSpeedRatings', 'ISO', formatIso);
+    add('FocalLength', 'Focal length', formatFocal);
+    add('FocalLengthIn35mmFilm', 'Focal length (35mm equiv.)', formatFocal);
+    add('ExposureBiasValue', 'Exposure bias', formatExposureBias);
+    add('ExposureMode', 'Exposure mode');
+    add('MeteringMode', 'Metering mode');
+    add('Flash', 'Flash', formatFlash);
+    add('WhiteBalance', 'White balance', formatWhiteBalance);
+    add('Orientation', 'Orientation', formatOrientation);
+    add('XResolution', 'X resolution', formatResolution);
+    add('YResolution', 'Y resolution', formatResolution);
+    add('Software', 'Software');
+    add('Artist', 'Artist');
+    add('Copyright', 'Copyright');
+    add('ImageDescription', 'Description');
+
+    var lat = gpsToDecimal(tags['GPSLatitude'], tags['GPSLatitudeRef']);
+    var lon = gpsToDecimal(tags['GPSLongitude'], tags['GPSLongitudeRef']);
+    if (lat !== null && lon !== null) {
+      hasGps = true;
+      exifBody.appendChild(row('GPS latitude', formatLatLon(lat, true), true));
+      exifBody.appendChild(row('GPS longitude', formatLatLon(lon, false), true));
+      count += 2;
+    }
+    if (tags['GPSAltitude'] !== undefined && tags['GPSAltitude'] !== null) {
+      var altRef = tags['GPSAltitudeRef'] === 1 ? 'below' : 'above';
+      exifBody.appendChild(row('GPS altitude', Math.round(tags['GPSAltitude']) + ' m ' + altRef + ' sea level'));
+      count++;
+    }
+    if (tags['GPSDateStamp'] || tags['GPSTimeStamp']) {
+      var t = [tags['GPSDateStamp'], tags['GPSTimeStamp']].filter(Boolean).join(' ');
+      exifBody.appendChild(row('GPS timestamp', String(t)));
+      count++;
+    }
+
+    // Pixel dimensions from EXIF when present
+    var px = tags['PixelXDimension'];
+    var py = tags['PixelYDimension'];
+    if (px && py) {
+      exifBody.appendChild(row('EXIF dimensions', px + ' × ' + py + ' px'));
+      count++;
+    }
+
+    if (count === 0) {
+      reveal(noExifCard);
+      statusNote.textContent = 'No EXIF data in "' + file.name + '"';
+    } else {
+      gpsNote.hidden = !hasGps;
+      reveal(exifCard);
+      statusNote.textContent = count + ' EXIF tags found in "' + file.name + '"';
+    }
+  }
+
+  function handleFile(file) {
+    hideError();
+    if (!file) return;
+    if (!file.type || file.type.indexOf('image/') !== 0) {
+      showError('That does not look like an image file. Please choose a JPEG, PNG, TIFF, WebP or similar image.');
+      return;
+    }
+    if (file.size > MAX_SIZE) {
+      showError('The image is too large (max 25 MB). Please choose a smaller file.');
+      return;
+    }
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
+    objectUrl = URL.createObjectURL(file);
+    resetResults();
+
+    var img = new Image();
+    img.onload = function () {
+      renderFileInfo(file, img);
+      reveal(fileCard);
+      emptyState.style.display = 'none';
+      clearBtn.hidden = false;
+      ensureExif(function () {
+        if (!exifAvailable()) {
+          showError('Could not load the metadata library. Check your internet connection and try again.');
+          statusNote.textContent = 'Metadata library failed to load';
+          return;
+        }
+        window.EXIF.getData(img, function () {
+          renderExif(img, file);
+        });
+      });
+    };
+    img.onerror = function () {
+      showError('Could not read that image. The file may be corrupted — please try another one.');
+    };
+    img.src = objectUrl;
+  }
+
+  function clearAll() {
+    if (objectUrl) { URL.revokeObjectURL(objectUrl); objectUrl = null; }
+    fileInput.value = '';
+    hideError();
+    resetResults();
+    thumb.src = '';
+    clearBtn.hidden = true;
+    statusNote.textContent = 'Waiting for an image…';
+  }
+
+  dropzone.addEventListener('click', function () { fileInput.click(); });
+  dropzone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+  });
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files && fileInput.files.length) handleFile(fileInput.files[0]);
+  });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.add('drag'); });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.remove('drag'); });
+  });
+  dropzone.addEventListener('drop', function (e) {
+    var files = e.dataTransfer && e.dataTransfer.files;
+    if (files && files.length) handleFile(files[0]);
+  });
+
+  clearBtn.addEventListener('click', clearAll);
+})();
+</script>
+</body>
+</html>

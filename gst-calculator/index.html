@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GST Calculator (India) · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Calculate GST in India instantly — add or remove GST at 5%, 12%, 18% or 28% with a live CGST/SGST split. Free, private, no sign-up.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="GST Calculator (India) · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Calculate GST in India instantly — add or remove GST at 5%, 12%, 18% or 28% with a live CGST/SGST split. Free, private, no sign-up.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/gst-calculator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/gst-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.amount-wrap{position:relative}
+.amount-wrap .cur{
+  position:absolute;left:16px;top:50%;transform:translateY(-50%);
+  font-weight:700;color:var(--vio);font-size:1.15rem;pointer-events:none;
+}
+input#amountInput{
+  width:100%;font-family:inherit;font-size:1.35rem;font-weight:600;
+  color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:14px 16px 14px 44px;outline:none;transition:border-color .15s,box-shadow .15s;
+  min-height:56px;
+}
+input#amountInput:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+input#amountInput::placeholder{color:#9CA3AF;font-weight:400}
+input#amountInput::-webkit-outer-spin-button,
+input#amountInput::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input#amountInput[type=number]{-moz-appearance:textfield}
+.pill-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.rate-pill{
+  font-family:inherit;font-size:.92rem;font-weight:600;cursor:pointer;
+  padding:10px 22px;min-height:44px;border-radius:999px;
+  border:1.5px solid rgba(124,58,237,.18);background:rgba(255,255,255,.7);color:var(--ink);
+  transition:transform .15s,box-shadow .15s,background .15s,color .15s,border-color .15s;
+}
+.rate-pill:hover{background:#fff;transform:translateY(-1px)}
+.rate-pill:active{transform:scale(.96)}
+.rate-pill.active{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border-color:transparent;
+  box-shadow:0 8px 22px rgba(124,58,237,.35);
+}
+.seg{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;
+  background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:18px;padding:8px;
+}
+.seg-btn{
+  font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;
+  padding:12px 8px;min-height:48px;border-radius:12px;border:1px solid transparent;
+  background:transparent;color:var(--mut);
+  transition:background .15s,color .15s,box-shadow .15s;
+}
+.seg-btn.active{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 22px rgba(124,58,237,.3);
+}
+.seg-hint{margin-top:10px;font-size:.82rem;color:var(--mut)}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.error{
+  display:none;margin-top:14px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.empty-state{
+  text-align:center;color:var(--mut);font-size:.92rem;padding:34px 20px;
+  border:1.5px dashed rgba(124,58,237,.25);border-radius:20px;margin-bottom:18px;
+  background:rgba(255,255,255,.35);
+}
+.empty-state .ico{display:block;margin:0 auto 10px;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio);display:grid;place-items:center}
+.empty-state .ico svg{width:24px;height:24px}
+.res-card{margin-bottom:18px;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.res-hero{
+  text-align:center;padding:18px 12px 20px;margin-bottom:8px;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:18px;
+}
+.res-label{font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
+.res-value{
+  font-size:clamp(1.9rem,6vw,2.6rem);font-weight:700;letter-spacing:-.5px;margin-top:4px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.res-rows{display:grid;gap:4px;margin-top:8px}
+.row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 6px;border-bottom:1px solid rgba(124,58,237,.08);
+  font-size:.94rem;
+}
+.row:last-child{border-bottom:none}
+.row dt{color:var(--mut);font-weight:500}
+.row dd{font-weight:700;font-variant-numeric:tabular-nums}
+.row.sub dt,.row.sub dd{font-size:.87rem;color:var(--mut);font-weight:500}
+.row.hl dd{color:var(--vio)}
+.res-note{margin-top:12px;font-size:.8rem;color:var(--mut);line-height:1.7;text-align:center}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "GST Calculator (India) — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/gst-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="GST inputs">
+    <label class="lab" for="amountInput">Amount</label>
+    <div class="amount-wrap">
+      <span class="cur" aria-hidden="true">₹</span>
+      <input id="amountInput" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 1000" aria-label="Amount in rupees" autocomplete="off">
+    </div>
+
+    <label class="lab" id="rateLabel" style="margin-top:16px">GST rate</label>
+    <div class="pill-row" role="group" aria-labelledby="rateLabel">
+      <button type="button" class="rate-pill" data-rate="5" aria-pressed="false">5%</button>
+      <button type="button" class="rate-pill" data-rate="12" aria-pressed="false">12%</button>
+      <button type="button" class="rate-pill active" data-rate="18" aria-pressed="true">18%</button>
+      <button type="button" class="rate-pill" data-rate="28" aria-pressed="false">28%</button>
+    </div>
+
+    <label class="lab" id="modeLabel" style="margin-top:16px">Calculation mode</label>
+    <div class="seg" role="group" aria-labelledby="modeLabel">
+      <button type="button" id="modeAdd" class="seg-btn active" aria-pressed="true">Add GST</button>
+      <button type="button" id="modeRemove" class="seg-btn" aria-pressed="false">Remove GST</button>
+    </div>
+    <p class="seg-hint" id="modeHint">Amount is exclusive of GST — GST is added on top.</p>
+
+    <div class="meta">
+      <span class="pill" id="formulaNote">GST = amount × rate ÷ 100</span>
+      <span>Everything computes live in your browser — nothing is uploaded.</span>
+    </div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>GST Calculator <span class="plain">— Free Online Tool</span></h1>
+    <p>Add or remove Goods &amp; Services Tax at India's 5%, 12%, 18% and 28% slabs, with an instant CGST/SGST split.</p>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+    Enter an <b>amount</b> above to see the live GST breakdown.
+  </div>
+
+  <section class="card res-card" id="resultsBox" hidden aria-label="GST results" aria-live="polite">
+    <div class="res-hero">
+      <div class="res-label" id="rHeadLabel">Total incl. GST</div>
+      <div class="res-value" id="rHeadValue">₹0.00</div>
+    </div>
+    <dl class="res-rows">
+      <div class="row"><dt>Base amount (excl. GST)</dt><dd id="rBase">₹0.00</dd></div>
+      <div class="row hl"><dt>GST amount (<span id="rGstRate">18%</span>)</dt><dd id="rGst">₹0.00</dd></div>
+      <div class="row hl"><dt>Total amount (incl. GST)</dt><dd id="rTotal">₹0.00</dd></div>
+      <div class="row sub"><dt>CGST (50%)</dt><dd id="rCgst">₹0.00</dd></div>
+      <div class="row sub"><dt>SGST (50%)</dt><dd id="rSgst">₹0.00</dd></div>
+    </dl>
+    <p class="res-note">CGST and SGST are shown for information — on intra-state sales, GST is shared equally between the Centre and the State.</p>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant results — no waiting</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Enter the amount</b> in rupees in the box above.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Pick a GST slab</b> (5%, 12%, 18% or 28%) and choose <b>Add</b> or <b>Remove</b> GST.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Read the live breakdown</b> — GST amount, total/base and the CGST + SGST split.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>What are CGST and SGST?</summary>
+      <p>On a sale within a single Indian state, GST is split equally between the Central Government (CGST) and the State Government (SGST) — each is half of the total GST shown above.</p>
+    </details>
+    <details>
+      <summary>How is GST removed from a GST-inclusive price?</summary>
+      <p>Choose "Remove GST": the base amount is calculated as price ÷ (1 + rate/100), and the GST amount is the difference. For example, at 18% GST, a ₹118 inclusive price breaks down to ₹100 base + ₹18 GST.</p>
+    </details>
+    <details>
+      <summary>Is my data private?</summary>
+      <p>Yes. Every calculation runs entirely in your browser — the amount you type is never uploaded, stored or sent anywhere.</p>
+    </details>
+  </section>
+
+  <p class="note">India's GST slabs: 5% · 12% · 18% · 28% — 100% local, nothing leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your data never leaves your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/hash-generator/">Hash Generator</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+<script>
+(function () {
+  'use strict';
+
+  var amountInput = document.getElementById('amountInput');
+  var resultsBox = document.getElementById('resultsBox');
+  var emptyState = document.getElementById('emptyState');
+  var errorBox = document.getElementById('errorBox');
+  var modeAdd = document.getElementById('modeAdd');
+  var modeRemove = document.getElementById('modeRemove');
+  var modeHint = document.getElementById('modeHint');
+  var formulaNote = document.getElementById('formulaNote');
+  var ratePills = document.querySelectorAll('.rate-pill');
+
+  var rHeadLabel = document.getElementById('rHeadLabel');
+  var rHeadValue = document.getElementById('rHeadValue');
+  var rBase = document.getElementById('rBase');
+  var rGst = document.getElementById('rGst');
+  var rGstRate = document.getElementById('rGstRate');
+  var rTotal = document.getElementById('rTotal');
+  var rCgst = document.getElementById('rCgst');
+  var rSgst = document.getElementById('rSgst');
+
+  var rate = 18;      // default GST slab
+  var mode = 'add';   // 'add' (exclusive) or 'remove' (inclusive)
+
+  function fmt(n) {
+    return '₹' + n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function round2(n) {
+    return Math.round((n + Number.EPSILON) * 100) / 100;
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+
+  function hideError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function recalc() {
+    var raw = amountInput.value.trim();
+    var amount = parseFloat(raw);
+    if (raw === '' || isNaN(amount)) {
+      hideError();
+      resultsBox.hidden = true;
+      emptyState.style.display = '';
+      return;
+    }
+    if (amount < 0) {
+      showError('Please enter a positive amount.');
+      resultsBox.hidden = true;
+      emptyState.style.display = '';
+      return;
+    }
+    hideError();
+
+    var base, gst, total;
+    if (mode === 'add') {
+      base = amount;
+      gst = round2(base * rate / 100);
+      total = round2(base + gst);
+    } else {
+      total = amount;
+      base = round2(total / (1 + rate / 100));
+      gst = round2(total - base);
+    }
+    var half = round2(gst / 2);
+
+    rGstRate.textContent = rate + '%';
+    rBase.textContent = fmt(base);
+    rGst.textContent = fmt(gst);
+    rTotal.textContent = fmt(total);
+    rCgst.textContent = fmt(half);
+    rSgst.textContent = fmt(half);
+
+    if (mode === 'add') {
+      rHeadLabel.textContent = 'Total incl. GST';
+      rHeadValue.textContent = fmt(total);
+    } else {
+      rHeadLabel.textContent = 'Base amount excl. GST';
+      rHeadValue.textContent = fmt(base);
+    }
+
+    emptyState.style.display = 'none';
+    resultsBox.hidden = false;
+  }
+
+  function setRate(newRate) {
+    rate = newRate;
+    ratePills.forEach(function (pill) {
+      var isActive = parseInt(pill.getAttribute('data-rate'), 10) === rate;
+      pill.classList.toggle('active', isActive);
+      pill.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+    formulaNote.textContent = (mode === 'add')
+      ? 'GST = amount × ' + rate + ' ÷ 100'
+      : 'Base = price ÷ (1 + ' + rate + ' ÷ 100)';
+    recalc();
+  }
+
+  function setMode(newMode) {
+    mode = newMode;
+    var isAdd = mode === 'add';
+    modeAdd.classList.toggle('active', isAdd);
+    modeAdd.setAttribute('aria-pressed', isAdd ? 'true' : 'false');
+    modeRemove.classList.toggle('active', !isAdd);
+    modeRemove.setAttribute('aria-pressed', !isAdd ? 'true' : 'false');
+    modeHint.textContent = isAdd
+      ? 'Amount is exclusive of GST — GST is added on top.'
+      : 'Amount is inclusive of GST — GST is backed out of it.';
+    formulaNote.textContent = isAdd
+      ? 'GST = amount × ' + rate + ' ÷ 100'
+      : 'Base = price ÷ (1 + ' + rate + ' ÷ 100)';
+    recalc();
+  }
+
+  amountInput.addEventListener('input', recalc);
+  ratePills.forEach(function (pill) {
+    pill.addEventListener('click', function () {
+      setRate(parseInt(pill.getAttribute('data-rate'), 10));
+    });
+  });
+  modeAdd.addEventListener('click', function () { setMode('add'); });
+  modeRemove.addEventListener('click', function () { setMode('remove'); });
+
+  recalc();
+})();
+</script>
+</body>
+</html>

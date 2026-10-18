@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Favicon Generator · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Generate a complete favicon package from one image: multi-size .ico, 180px Apple touch icon, 192px and 512px PNGs, plus ready-to-paste HTML. Free, private, no uploads.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 7-7 7-7-7zM12 10v11'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:title" content="Favicon Generator · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Generate a complete favicon package from one image: multi-size .ico, 180px Apple touch icon, 192px and 512px PNGs, plus ready-to-paste HTML. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/favicon-generator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/favicon-generator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.dropzone{
+  border:1.5px dashed rgba(124,58,237,.35);border-radius:20px;
+  background:rgba(255,255,255,.45);
+  padding:clamp(26px,5vw,40px) 20px;text-align:center;cursor:pointer;
+  transition:border-color .15s,background .15s,box-shadow .15s;
+}
+.dropzone:hover,.dropzone.drag{background:rgba(255,255,255,.75);border-color:var(--vio);
+  box-shadow:0 0 0 4px rgba(124,58,237,.10)}
+.dropzone .ico{width:52px;height:52px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);color:var(--vio)}
+.dropzone .ico svg{width:26px;height:26px}
+.dropzone .dz-t{font-weight:700;font-size:1.02rem}
+.dropzone .dz-s{font-size:.85rem;color:var(--mut);margin-top:6px}
+.dropzone .dz-file{display:none;margin-top:12px;font-size:.88rem;font-weight:600;color:#4C1D95;
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;padding:8px 18px}
+.dropzone.has-file .dz-file{display:inline-block}
+.check-row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;align-items:center}
+.check-lab{font-size:.85rem;font-weight:600;color:var(--mut)}
+.check-pills{display:flex;gap:8px;flex-wrap:wrap}
+.check-pill{
+  font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
+  min-height:44px;padding:10px 20px;border-radius:999px;
+  border:1.5px solid rgba(124,58,237,.22);background:rgba(255,255,255,.65);color:var(--ink);
+  transition:all .15s;display:inline-flex;align-items:center;gap:8px;
+}
+.check-pill .tick{width:18px;height:18px;border-radius:6px;border:1.5px solid rgba(124,58,237,.4);
+  display:grid;place-items:center;color:transparent;font-size:.75rem;font-weight:800}
+.check-pill.on{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;border-color:transparent;
+  box-shadow:0 6px 18px rgba(124,58,237,.35)}
+.check-pill.on .tick{background:rgba(255,255,255,.25);border-color:#fff;color:#fff}
+.btn-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{
+  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
+  box-shadow:0 8px 24px rgba(124,58,237,.35);
+}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.btn-g:disabled{opacity:.55;cursor:not-allowed}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.progress{display:none;margin-top:16px;font-size:.88rem;color:var(--mut);font-weight:500}
+.progress.show{display:block}
+.progress .bar{height:10px;border-radius:999px;background:rgba(124,58,237,.12);overflow:hidden;margin-top:8px}
+.progress .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--vio),var(--cyn));
+  border-radius:999px;transition:width .2s}
+.error{
+  display:none;margin-top:16px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+.preview-wrap{margin:0 0 20px}
+.preview-card{padding:16px;text-align:center}
+canvas.prev,img.prev{
+  max-width:100%;border-radius:14px;border:1px solid var(--line);
+  box-shadow:0 4px 14px rgba(31,41,55,.08);background:#fff;
+}
+img.prev{display:none;margin:0 auto;max-height:320px}
+img.prev.show{display:block}
+canvas.prev{display:none;margin:0 auto;max-height:420px;width:auto}
+canvas.prev.show{display:block}
+.out-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.out-title{font-weight:700;font-size:1.02rem}
+.dl-btn{
+  font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;
+  padding:8px 20px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);
+  transition:background .15s,transform .15s;
+}
+.dl-btn:hover{background:#fff}
+.dl-btn:active{transform:scale(.96)}
+.dl-btn.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+.slider-row{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
+.slider-row label{font-size:.85rem;font-weight:600;color:var(--mut);min-width:150px}
+.slider-row output{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--vio);min-width:64px}
+input[type=range]{flex:1;min-width:180px;min-height:44px;accent-color:var(--vio)}
+input[type=text],input[type=number],textarea.ta{
+  width:100%;font-family:inherit;font-size:.95rem;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);
+  border-radius:16px;padding:12px 16px;outline:none;min-height:44px;
+  transition:border-color .15s,box-shadow .15s;
+}
+input[type=text]:focus,input[type=number]:focus,textarea.ta:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+textarea.ta{min-height:140px;resize:vertical;font-family:var(--mono);font-size:.82rem;line-height:1.6}
+.field{margin-top:16px}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+
+
+.files-list{display:flex;flex-direction:column;gap:10px;margin-bottom:6px}
+.file-row{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.6);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;padding:10px 16px}
+.file-thumb{width:44px;height:44px;object-fit:contain;border-radius:10px;background:#fff;
+  border:1px solid var(--line);flex:0 0 44px}
+.file-txt{display:flex;flex-direction:column;font-size:.88rem;flex:1;min-width:0}
+.file-txt b{font-size:.92rem;font-family:var(--mono)}
+.file-txt span{color:var(--mut);font-size:.8rem}
+.snippet{font-family:var(--mono);font-size:.78rem;line-height:1.7;background:rgba(31,41,55,.93);
+  color:#D1FAE5;border-radius:14px;padding:16px 18px;overflow-x:auto;white-space:pre;margin-bottom:4px}
+.copy-btn{
+  font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;
+  padding:8px 20px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);transition:background .15s,transform .15s;
+}
+.copy-btn:hover{background:#fff}
+.copy-btn:active{transform:scale(.96)}
+.copy-btn.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Favicon Generator — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/favicon-generator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Logo upload">
+
+    <span class="lab" id="dzLabel">Your logo / image</span>
+    <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-labelledby="dzLabel">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+      <div class="dz-t">Drop your logo here</div>
+      <div class="dz-s">or tap to choose · any image format</div>
+      <span class="dz-file" id="dzFile">No file selected</span>
+      <input type="file" id="fileInput" accept="image/*" hidden>
+    </div><div class="btn-row">
+      <button class="btn btn-p" id="generateBtn" type="button" disabled>Generate favicons</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="progress" id="progressBox"><span id="progressText">Working…</span><div class="bar"><i id="progressBar"></i></div></div>
+    <div class="error" id="errorBox" role="alert"></div>
+  </section>
+
+  <div class="hero">
+    <h1>Favicon Generator <span class="plain">— Free Online Tool</span></h1>
+    <p>One image in, a complete favicon set out — multi-size .ico, Apple touch icon, PWA PNGs and the HTML snippet to paste into your site.</p>
+  </div>
+
+
+  <section class="card preview-wrap" id="outCard" style="display:none" aria-label="Favicon files">
+    <div class="out-head">
+      <div class="out-title">Your favicon package</div>
+      <button class="dl-btn" id="zipBtn" type="button">Download all as ZIP</button>
+    </div>
+    <div id="filesList" class="files-list"></div>
+    <div class="field">
+      <span class="lab">Paste this into your page's &lt;head&gt;</span>
+      <pre class="snippet" id="snippet"></pre>
+      <div class="btn-row"><button class="copy-btn" id="copyBtn" type="button" style="margin-top:0">Copy snippet</button></div>
+    </div>
+  </section>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>Valid multi-size .ico</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>iOS + PWA sizes</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>100% private</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Drop</b> your logo or any image into the box above.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Generate</b> — the .ico (16/32/48), 180 px Apple icon and 192/512 px PNGs are rendered.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Download</b> each file or the whole set as a ZIP, then paste the HTML snippet.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Where do I put these files?</summary>
+      <p>Upload them to your website's root folder (next to index.html), then paste the snippet into your page's <head>. The snippet already uses the standard filenames, so no edits are needed.</p>
+    </details>
+    <details>
+      <summary>Why include so many sizes?</summary>
+      <p>Browsers pick .ico entries automatically, iOS home-screen icons need 180 px, and Android/PWA installs use 192 and 512 px. Covering all four means your icon looks sharp everywhere.</p>
+    </details>
+    <details>
+      <summary>Is the .ico a real icon file?</summary>
+      <p>Yes — a genuine ICO container with PNG-compressed 16, 32 and 48 px entries, built with correct headers in your browser.</p>
+    </details>
+  </section>
+
+  <p class="note">Complete favicon set · copy-paste HTML · 100% local.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/image-to-png/">Image to PNG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/image-resizer/">Image Resizer</a>
+  </nav>
+</footer>
+
+<script>/* ico-lib.js — pure JS ICO container builder/parser + BMP-entry decoder.
+   Single source: node-tested here, then embedded verbatim into the
+   image-to-ico, ico-to-png and favicon-generator pages.
+   Works in both node (with Buffer-less code) and the browser. */
+(function (root) {
+  'use strict';
+
+  var PNG_SIG = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
+
+  function isPng(bytes, offset) {
+    for (var i = 0; i < 8; i++) {
+      if (bytes[offset + i] !== PNG_SIG[i]) return false;
+    }
+    return true;
+  }
+
+  function getU16(bytes, o) { return bytes[o] | (bytes[o + 1] << 8); }
+  function getU32(bytes, o) {
+    return (bytes[o] | (bytes[o + 1] << 8) | (bytes[o + 2] << 16) | (bytes[o + 3] << 24)) >>> 0;
+  }
+  function getI32(bytes, o) {
+    var u = getU32(bytes, o);
+    return u >= 0x80000000 ? u - 0x100000000 : u;
+  }
+  function setU16(bytes, o, v) { bytes[o] = v & 0xFF; bytes[o + 1] = (v >>> 8) & 0xFF; }
+  function setU32(bytes, o, v) {
+    bytes[o] = v & 0xFF; bytes[o + 1] = (v >>> 8) & 0xFF;
+    bytes[o + 2] = (v >>> 16) & 0xFF; bytes[o + 3] = (v >>> 24) & 0xFF;
+  }
+
+  // images: [{ size: 16|32|48|..., png: Uint8Array }] — PNG bytes per size.
+  // Returns Uint8Array with a valid .ico container.
+  function buildIco(images) {
+    if (!images || images.length === 0) throw new Error('No images supplied');
+    var list = images.slice().sort(function (a, b) { return b.size - a.size; }); // largest first (common convention)
+    var count = list.length;
+    var headerSize = 6 + 16 * count;
+    var total = headerSize;
+    for (var i = 0; i < count; i++) total += list[i].png.length;
+    var out = new Uint8Array(total);
+    setU16(out, 0, 0); // reserved
+    setU16(out, 2, 1); // type: icon
+    setU16(out, 4, count);
+    var offset = headerSize;
+    for (var j = 0; j < count; j++) {
+      var img = list[j];
+      var e = 6 + 16 * j;
+      var w = img.size >= 256 ? 0 : img.size; // ICO: 0 means 256
+      out[e] = w;
+      out[e + 1] = w;
+      out[e + 2] = 0; // color count
+      out[e + 3] = 0; // reserved
+      setU16(out, e + 4, 1);  // planes
+      setU16(out, e + 6, 32); // bit count
+      setU32(out, e + 8, img.png.length);
+      setU32(out, e + 12, offset);
+      out.set(img.png, offset);
+      offset += img.png.length;
+    }
+    return out;
+  }
+
+  // Parse an ICO file's bytes. Returns { count, entries: [{index, width, height, bytesInRes, offset, format:'png'|'bmp'|'unknown'}] }
+  // width/height: real values (0 in header decoded to 256). Throws on invalid input.
+  function parseIco(bytes) {
+    if (!bytes || bytes.length < 6) throw new Error('File too small to be an icon');
+    if (getU16(bytes, 0) !== 0) throw new Error('Not a valid icon file (bad reserved field)');
+    if (getU16(bytes, 2) !== 1) throw new Error('Not a valid icon file (bad type field)');
+    var count = getU16(bytes, 4);
+    if (count === 0) throw new Error('Icon file contains no images');
+    if (bytes.length < 6 + 16 * count) throw new Error('Icon file is truncated');
+    var entries = [];
+    for (var i = 0; i < count; i++) {
+      var e = 6 + 16 * i;
+      var w = bytes[e] === 0 ? 256 : bytes[e];
+      var h = bytes[e + 1] === 0 ? 256 : bytes[e + 1];
+      var bytesInRes = getU32(bytes, e + 8);
+      var off = getU32(bytes, e + 12);
+      if (off + bytesInRes > bytes.length) throw new Error('Icon entry ' + (i + 1) + ' is truncated');
+      var format = 'unknown';
+      if (bytesInRes >= 8 && isPng(bytes, off)) format = 'png';
+      else if (bytesInRes >= 40 && getU32(bytes, off) >= 40) format = 'bmp';
+      entries.push({ index: i, width: w, height: h, bytesInRes: bytesInRes, offset: off, format: format });
+    }
+    return { count: count, entries: entries };
+  }
+
+  // Decode a BMP-format ICO entry (entry.bytes → entry bytes slice).
+  // Supports 32-bit and 24-bit truecolor. Layout: BITMAPINFOHEADER (40+ bytes)
+  // followed by XOR color bitmap (height = 2 * icon height, bottom-up) and AND mask.
+  // Returns { width, height, rgba: Uint8Array (width*height*4, top-down) }.
+  function decodeBmpIconEntry(entryBytes, width, height) {
+    if (entryBytes.length < 40) throw new Error('BMP entry too small');
+    var headerSize = getU32(entryBytes, 0);
+    if (headerSize < 40) throw new Error('Unsupported BMP header size');
+    var bmpW = getI32(entryBytes, 4);
+    var bmpH = getI32(entryBytes, 8); // includes color bitmap + mask
+    var planes = getU16(entryBytes, 12);
+    var bpp = getU16(entryBytes, 14);
+    if (bpp !== 32 && bpp !== 24) throw new Error('Only 32-bit and 24-bit BMP icon entries are supported (this one is ' + bpp + '-bit)');
+    if (bmpW !== width) throw new Error('BMP width mismatch');
+    var colorH = height; // color bitmap rows; mask rows follow
+    var rowBytes = Math.floor((bmpW * bpp + 31) / 32) * 4; // DWORD-aligned
+    var need = headerSize + rowBytes * colorH;
+    if (entryBytes.length < need) throw new Error('BMP entry truncated');
+    var rgba = new Uint8Array(bmpW * colorH * 4);
+    var base = headerSize;
+    for (var y = 0; y < colorH; y++) {
+      var srcY = colorH - 1 - y; // BMP stores bottom-up
+      var srcRow = base + srcY * rowBytes;
+      for (var x = 0; x < bmpW; x++) {
+        var p = srcRow + x * (bpp / 8);
+        var d = (y * bmpW + x) * 4;
+        rgba[d] = entryBytes[p + 2];
+        rgba[d + 1] = entryBytes[p + 1];
+        rgba[d + 2] = entryBytes[p];
+        rgba[d + 3] = bpp === 32 ? entryBytes[p + 3] : 255;
+      }
+    }
+    return { width: bmpW, height: colorH, rgba: rgba };
+  }
+
+  var api = {
+    buildIco: buildIco,
+    parseIco: parseIco,
+    decodeBmpIconEntry: decodeBmpIconEntry,
+    isPngBytes: isPng
+  };
+
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.IcoLib = api;
+})(typeof self !== 'undefined' ? self : (typeof window !== 'undefined' ? window : this));
+</script>
+<script>
+  var ZIP_BASES = [
+    'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+    'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js',
+    'https://unpkg.com/jszip@3.10.1/dist/jszip.min.js'
+  ];
+  var __zipReady = false;
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = function () { resolve(); };
+      s.onerror = function () { reject(new Error('failed: ' + src)); };
+      document.head.appendChild(s);
+    });
+  }
+  function ensureZip() {
+    if (__zipReady) return Promise.resolve();
+    var i = 0;
+    function next() {
+      if (i >= ZIP_BASES.length) return Promise.reject(new Error('ZIP library failed to load from every CDN. Check your connection and try again.'));
+      return loadScript(ZIP_BASES[i]).then(function () {
+        if (window.JSZip) { __zipReady = true; }
+        else { i++; return next(); }
+      }).catch(function () { i++; return next(); });
+    }
+    return next();
+  }</script><script>(function scriptFaviconGenerator() {
+  var dropzone = document.getElementById('dropzone');
+  var fileInput = document.getElementById('fileInput');
+  var dzFile = document.getElementById('dzFile');
+  var generateBtn = document.getElementById('generateBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var errorBox = document.getElementById('errorBox');
+  var progressBox = document.getElementById('progressBox');
+  var progressText = document.getElementById('progressText');
+  var progressBar = document.getElementById('progressBar');
+  var outCard = document.getElementById('outCard');
+  var filesList = document.getElementById('filesList');
+  var zipBtn = document.getElementById('zipBtn');
+  var snippet = document.getElementById('snippet');
+  var copyBtn = document.getElementById('copyBtn');
+
+  var selectedFile = null;
+  var busy = false;
+  var items = []; // {name, blob, url}
+  var baseName = 'favicon';
+
+  var SNIPPET =
+    '<link rel="icon" type="image/x-icon" href="/favicon.ico">\n' +
+    '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n' +
+    '<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">\n' +
+    '<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">';
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function hideError() { errorBox.classList.remove('show'); errorBox.textContent = ''; }
+  function setProgress(f, t) {
+    progressBox.classList.add('show'); progressText.textContent = t;
+    progressBar.style.width = Math.round(f * 100) + '%';
+  }
+  function hideProgress() { progressBox.classList.remove('show'); progressBar.style.width = '0'; }
+
+  function setFile(file) {
+    hideError();
+    if (!file) return;
+    if (!/^image\//i.test(file.type)) {
+      showError('Please choose an image file (got "' + file.name + '").');
+      return;
+    }
+    selectedFile = file;
+    dzFile.textContent = file.name + ' · ' + Math.round(file.size / 1024) + ' KB';
+    dropzone.classList.add('has-file');
+    generateBtn.disabled = false;
+  }
+
+  dropzone.addEventListener('click', function () { fileInput.click(); });
+  dropzone.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+  });
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files && fileInput.files.length) setFile(fileInput.files[0]);
+  });
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.add('drag'); });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.remove('drag'); });
+  });
+  dropzone.addEventListener('drop', function (e) {
+    var files = e.dataTransfer && e.dataTransfer.files;
+    if (files && files.length) setFile(files[0]);
+  });
+
+  function loadImage(file) {
+    return new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () { URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('Could not read this image file.')); };
+      img.src = url;
+    });
+  }
+
+  function renderPng(img, size) {
+    return new Promise(function (resolve, reject) {
+      var c = document.createElement('canvas');
+      c.width = size; c.height = size;
+      var ctx = c.getContext('2d');
+      var s = Math.max(size / img.naturalWidth, size / img.naturalHeight);
+      var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+      ctx.drawImage(img, (size - dw) / 2, (size - dh) / 2, dw, dh);
+      c.toBlob(function (blob) {
+        if (!blob) { reject(new Error('PNG encoding failed for ' + size + 'px')); return; }
+        var fr = new FileReader();
+        fr.onload = function () { resolve({ size: size, blob: blob, bytes: new Uint8Array(fr.result) }); };
+        fr.onerror = function () { reject(new Error('Could not read PNG data')); };
+        fr.readAsArrayBuffer(blob);
+      }, 'image/png');
+    });
+  }
+
+  function clearItems() {
+    items.forEach(function (it) { URL.revokeObjectURL(it.url); });
+    items = [];
+    filesList.innerHTML = '';
+  }
+
+  function addRow(name, blob, note) {
+    var url = URL.createObjectURL(blob);
+    items.push({ name: name, blob: blob, url: url });
+    var row = document.createElement('div');
+    row.className = 'file-row';
+    var img = document.createElement('img');
+    img.src = url; img.alt = name + ' preview'; img.className = 'file-thumb';
+    row.appendChild(img);
+    var txt = document.createElement('div');
+    txt.className = 'file-txt';
+    var b = document.createElement('b'); b.textContent = name;
+    var s = document.createElement('span'); s.textContent = note + ' · ' + Math.round(blob.size / 1024) + ' KB';
+    txt.appendChild(b); txt.appendChild(s);
+    row.appendChild(txt);
+    var dl = document.createElement('button');
+    dl.type = 'button'; dl.className = 'dl-btn'; dl.textContent = 'Download';
+    dl.setAttribute('aria-label', 'Download ' + name);
+    dl.addEventListener('click', function () {
+      var a = document.createElement('a');
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      dl.classList.add('ok'); dl.textContent = 'Saved ✓';
+      setTimeout(function () { dl.classList.remove('ok'); dl.textContent = 'Download'; }, 1600);
+    });
+    row.appendChild(dl);
+    filesList.appendChild(row);
+  }
+
+  function generate() {
+    if (busy || !selectedFile) return;
+    hideError();
+    clearItems();
+    outCard.style.display = 'none';
+    busy = true;
+    generateBtn.disabled = true;
+    generateBtn.textContent = 'Working…';
+    setProgress(0.05, 'Loading image…');
+
+    loadImage(selectedFile)
+      .then(function (img) {
+        var sizes = [16, 32, 48, 180, 192, 512];
+        var seq = Promise.resolve([]);
+        sizes.forEach(function (size, i) {
+          seq = seq.then(function (arr) {
+            setProgress(0.05 + 0.8 * i / sizes.length, 'Rendering ' + size + '×' + size + '…');
+            return renderPng(img, size).then(function (r) { arr.push(r); return arr; });
+          });
+        });
+        return seq;
+      })
+      .then(function (renders) {
+        setProgress(0.9, 'Packing ICO + assembling files…');
+        var icoSizes = renders.filter(function (r) { return r.size === 16 || r.size === 32 || r.size === 48; });
+        var icoBytes = window.IcoLib.buildIco(icoSizes.map(function (r) { return { size: r.size, png: r.bytes }; }));
+        var bySize = {};
+        renders.forEach(function (r) { bySize[r.size] = r; });
+        addRow('favicon.ico', new Blob([icoBytes], { type: 'image/x-icon' }), 'Multi-size 16/32/48 — main favicon');
+        addRow('apple-touch-icon.png', bySize[180].blob, '180×180 — iOS home screen');
+        addRow('favicon-192x192.png', bySize[192].blob, '192×192 — Android / PWA');
+        addRow('favicon-512x512.png', bySize[512].blob, '512×512 — PWA splash / maskable base');
+        snippet.textContent = SNIPPET;
+        outCard.style.display = '';
+        setProgress(1, 'Done — 4 files ready.');
+        setTimeout(hideProgress, 2000);
+      })
+      .catch(function (e) {
+        hideProgress();
+        showError((e && e.message) ? e.message : String(e));
+      })
+      .then(function () {
+        busy = false;
+        generateBtn.disabled = false;
+        generateBtn.textContent = 'Generate favicons';
+      });
+  }
+
+  zipBtn.addEventListener('click', function () {
+    if (busy || !items.length) return;
+    busy = true;
+    zipBtn.disabled = true;
+    zipBtn.textContent = 'Preparing ZIP…';
+    setProgress(0.3, 'Loading ZIP engine…');
+    ensureZip()
+      .then(function () {
+        var zip = new window.JSZip();
+        items.forEach(function (it) { zip.file(it.name, it.blob); });
+        setProgress(0.6, 'Packing ' + items.length + ' files…');
+        return zip.generateAsync({ type: 'blob' });
+      })
+      .then(function (blob) {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = baseName + '-package.zip';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
+        setProgress(1, 'ZIP downloaded.');
+        setTimeout(hideProgress, 2500);
+      })
+      .catch(function (e) {
+        hideProgress();
+        showError((e && e.message) ? e.message : String(e));
+      })
+      .then(function () {
+        busy = false;
+        zipBtn.disabled = false;
+        zipBtn.textContent = 'Download all as ZIP';
+      });
+  });
+
+  copyBtn.addEventListener('click', function () {
+    function done(ok) {
+      copyBtn.textContent = ok ? 'Copied ✓' : 'Copy failed';
+      copyBtn.classList.add('ok');
+      setTimeout(function () { copyBtn.textContent = 'Copy snippet'; copyBtn.classList.remove('ok'); }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(SNIPPET).then(function () { done(true); }, function () { done(false); });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = SNIPPET;
+      ta.style.position = 'fixed'; ta.style.top = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      done(ok);
+    }
+  });
+
+  clearBtn.addEventListener('click', function () {
+    selectedFile = null; fileInput.value = '';
+    dzFile.textContent = 'No file selected';
+    dropzone.classList.remove('has-file');
+    generateBtn.disabled = true;
+    clearItems();
+    outCard.style.display = 'none';
+    hideError(); hideProgress();
+  });
+
+  generateBtn.addEventListener('click', generate);
+})()</script>
+</body>
+</html>

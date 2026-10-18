@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Calculator · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Calculate your attendance percentage instantly and see how many classes you must attend (or can skip) to stay above the 75% requirement. Free, private, no sign-up.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Attendance Calculator · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Calculate your attendance percentage instantly and see how many classes you must attend (or can skip) to stay above the 75% requirement. Free, private, no sign-up.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/attendance-calculator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/attendance-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.field input{
+  width:100%;font-family:inherit;font-size:1.05rem;font-weight:600;
+  color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:12px 16px;min-height:48px;outline:none;transition:border-color .15s,box-shadow .15s;
+}
+.field input:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.field input::placeholder{color:#9CA3AF;font-weight:400}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.error{
+  display:none;margin-top:16px;padding:14px 18px;border-radius:16px;
+  background:rgba(254,226,226,.85);border:1px solid #FCA5A5;color:#991B1B;
+  font-size:.9rem;font-weight:500;
+}
+.error.show{display:block}
+/* live result */
+.result{
+  margin-top:20px;padding:22px 20px;border-radius:20px;text-align:center;
+  background:rgba(255,255,255,.55);border:1px solid var(--line);
+}
+.result .pct{
+  font-size:clamp(2.6rem,9vw,3.6rem);font-weight:700;letter-spacing:-1px;line-height:1.1;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.result .cap{font-size:.85rem;color:var(--mut);font-weight:500;margin-bottom:10px}
+.status-pill{
+  display:inline-flex;align-items:center;gap:8px;margin-top:10px;
+  font-size:.85rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  padding:8px 20px;border-radius:999px;color:#fff;
+}
+.status-pill.safe{background:linear-gradient(135deg,#10B981,#059669)}
+.status-pill.risk{background:linear-gradient(135deg,#F59E0B,#D97706)}
+.status-pill.crit{background:linear-gradient(135deg,#EF4444,#DC2626)}
+.guidance{
+  margin-top:14px;font-size:.95rem;line-height:1.7;color:var(--ink);
+  background:rgba(255,255,255,.7);border-radius:14px;padding:12px 16px;
+}
+.guidance b{color:var(--vio)}
+.guidance.idle{color:var(--mut);font-size:.9rem;background:transparent;padding:6px 0 0}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .fields{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Attendance Calculator — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/attendance-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Attendance input">
+    <div class="fields">
+      <div class="field">
+        <label for="heldInput">Total classes held</label>
+        <input type="number" id="heldInput" inputmode="numeric" min="0" step="1" placeholder="e.g. 40" aria-label="Total classes held">
+      </div>
+      <div class="field">
+        <label for="attendedInput">Classes attended</label>
+        <input type="number" id="attendedInput" inputmode="numeric" min="0" step="1" placeholder="e.g. 32" aria-label="Classes attended">
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="error" id="errBox" role="alert"></div>
+    <div class="result" id="resultWrap" aria-live="polite">
+      <div class="cap">Your attendance</div>
+      <div class="pct" id="pctDisplay">—</div>
+      <div><span class="status-pill" id="statusPill" hidden></span></div>
+      <div class="guidance idle" id="guidanceText">Enter the numbers above to see your attendance percentage.</div>
+    </div>
+  </section>
+
+  <div class="hero">
+    <h1>Attendance Calculator <span class="plain">— Free Online Tool</span></h1>
+    <p>Check your attendance percentage instantly and find out exactly how many classes you must attend in a row — or can safely miss — to stay above the 75% requirement.</p>
+  </div>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant live results</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Enter</b> the total classes held and how many you attended.</span></div>
+      <div class="step"><span class="n">2</span><span><b>See live</b> your percentage and your Safe / At risk / Critical status.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Follow the plan</b> — the tool tells you exactly how many classes to attend or how many you can miss.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>What is the minimum attendance required?</summary>
+      <p>Most colleges and universities in India require at least <b>75% attendance</b> to be eligible for examinations, so this calculator uses 75% as the threshold for the Safe zone.</p>
+    </details>
+    <details>
+      <summary>How do the Safe, At risk and Critical statuses work?</summary>
+      <p><b>Safe</b> means your attendance is 75% or higher. <b>At risk</b> covers 60–74% — you need to attend several classes in a row to recover. <b>Critical</b> is below 60% — you should attend every class from now on to climb back above 75%.</p>
+    </details>
+    <details>
+      <summary>Is my data uploaded anywhere?</summary>
+      <p>No. The calculation happens entirely in your browser with plain JavaScript — nothing is uploaded, stored or tracked. The page also works fully offline once loaded.</p>
+    </details>
+  </section>
+
+  <p class="note">75% minimum threshold · 100% local — your numbers never leave this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var THRESHOLD = 0.75; // 75% minimum attendance
+
+  var heldInput = document.getElementById('heldInput');
+  var attendedInput = document.getElementById('attendedInput');
+  var clearBtn = document.getElementById('clearBtn');
+  var errBox = document.getElementById('errBox');
+  var pctDisplay = document.getElementById('pctDisplay');
+  var statusPill = document.getElementById('statusPill');
+  var guidanceText = document.getElementById('guidanceText');
+
+  function showError(msg) {
+    errBox.textContent = msg;
+    errBox.classList.add('show');
+  }
+
+  function hideError() {
+    errBox.textContent = '';
+    errBox.classList.remove('show');
+  }
+
+  function plural(n, word) {
+    return n + ' ' + word + (n === 1 ? '' : 's');
+  }
+
+  // Solve (attended + x) / (held + x) >= 0.75 for the smallest integer x
+  function classesNeededToReach(held, attended) {
+    // x >= (0.75 * held - attended) / 0.25
+    var x = Math.ceil((THRESHOLD * held - attended) / (1 - THRESHOLD));
+    return Math.max(x, 0);
+  }
+
+  // Largest integer n such that attended / (held + n) >= 0.75
+  function classesYouCanMiss(held, attended) {
+    // n <= attended / 0.75 - held
+    var n = Math.floor(attended / THRESHOLD - held);
+    return Math.max(n, 0);
+  }
+
+  function resetResult() {
+    pctDisplay.textContent = '—';
+    statusPill.hidden = true;
+    statusPill.className = 'status-pill';
+    statusPill.textContent = '';
+    guidanceText.className = 'guidance idle';
+    guidanceText.textContent = 'Enter the numbers above to see your attendance percentage.';
+  }
+
+  function update() {
+    hideError();
+    var heldRaw = heldInput.value.trim();
+    var attendedRaw = attendedInput.value.trim();
+
+    if (heldRaw === '' || attendedRaw === '') {
+      resetResult();
+      return;
+    }
+
+    var held = Number(heldRaw);
+    var attended = Number(attendedRaw);
+
+    if (!Number.isFinite(held) || !Number.isFinite(attended) || held < 0 || attended < 0) {
+      showError('Please enter valid non-negative numbers.');
+      resetResult();
+      return;
+    }
+    if (held === 0) {
+      showError('Total classes held must be greater than 0.');
+      resetResult();
+      return;
+    }
+    if (attended > held) {
+      showError('Classes attended cannot be more than total classes held.');
+      resetResult();
+      return;
+    }
+
+    var pct = (attended / held) * 100;
+    var pctRounded = Math.round(pct * 10) / 10;
+    pctDisplay.textContent = pctRounded + '%';
+
+    guidanceText.className = 'guidance';
+    statusPill.hidden = false;
+
+    if (pctRounded >= 75) {
+      statusPill.className = 'status-pill safe';
+      statusPill.textContent = 'Safe';
+      var canMiss = classesYouCanMiss(held, attended);
+      if (canMiss > 0) {
+        guidanceText.innerHTML = 'You are <b>above 75%</b>. You can miss up to <b>' + plural(canMiss, 'class') + '</b> and still stay above 75%.';
+      } else {
+        guidanceText.innerHTML = 'You are <b>above 75%</b>. One missed class would drop you below 75% — attend the next one!';
+      }
+    } else if (pctRounded >= 60) {
+      statusPill.className = 'status-pill risk';
+      statusPill.textContent = 'At risk';
+      var needRisk = classesNeededToReach(held, attended);
+      guidanceText.innerHTML = 'You are <b>below 75%</b>. Attend the next <b>' + plural(needRisk, 'class') + '</b> in a row to reach 75%.';
+    } else {
+      statusPill.className = 'status-pill crit';
+      statusPill.textContent = 'Critical';
+      var needCrit = classesNeededToReach(held, attended);
+      guidanceText.innerHTML = 'You are <b>well below 75%</b>. Attend the next <b>' + plural(needCrit, 'class') + '</b> in a row to reach 75%. Do not miss any class until you recover.';
+    }
+  }
+
+  function clearAll() {
+    heldInput.value = '';
+    attendedInput.value = '';
+    hideError();
+    resetResult();
+    heldInput.focus();
+  }
+
+  heldInput.addEventListener('input', update);
+  attendedInput.addEventListener('input', update);
+  clearBtn.addEventListener('click', clearAll);
+  resetResult();
+})();
+</script>
+</body>
+</html>

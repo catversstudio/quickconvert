@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown to HTML Converter · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Convert Markdown to HTML instantly with live preview. Headings, bold, lists, links, code blocks, blockquotes and tables — raw HTML in the input is safely escaped, never rendered. Free, private, no uploads.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='sans-serif' font-size='24' font-weight='bold' fill='%23fff'%3EM&%238595;%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="Markdown to HTML Converter · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Convert Markdown to HTML instantly with live preview. Headings, bold, lists, links, code blocks, blockquotes and tables — raw HTML in the input is safely escaped, never rendered. Free, private, no uploads.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/markdown-to-html/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/markdown-to-html/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+textarea.ta{
+  width:100%;min-height:120px;resize:vertical;font-family:inherit;font-size:.95rem;
+  color:var(--ink);background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;line-height:1.6;
+}
+textarea.ta:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+textarea.ta::placeholder{color:#9CA3AF}
+textarea.ta.mono{font-family:var(--mono);font-size:.85rem}
+input.txt{
+  width:100%;font-family:inherit;font-size:.98rem;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);
+  border-radius:16px;padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;
+}
+input.txt:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+input.txt::placeholder{color:#9CA3AF}
+input.num{
+  width:96px;font-family:inherit;font-size:.9rem;font-weight:600;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.25);
+  border-radius:12px;padding:10px 12px;min-height:44px;outline:none;
+}
+input.num:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+select.sel{
+  font-family:inherit;font-size:.88rem;font-weight:600;color:var(--ink);
+  background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.25);
+  border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer;outline:none;
+}
+select.sel:focus{border-color:var(--vio)}
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:center}
+.opt-toggle{
+  font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;
+  padding:10px 18px;min-height:44px;border-radius:999px;
+  border:1.5px solid rgba(124,58,237,.25);background:rgba(255,255,255,.6);color:var(--mut);
+  display:inline-flex;align-items:center;gap:8px;transition:all .15s;
+}
+.opt-toggle .sw{width:34px;height:20px;border-radius:999px;background:#D1D5DB;position:relative;flex:0 0 34px;transition:background .15s}
+.opt-toggle .sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.opt-toggle.on{border-color:var(--vio);color:var(--ink);background:rgba(255,255,255,.9)}
+.opt-toggle.on .sw{background:linear-gradient(135deg,var(--vio),#9333EA)}
+.opt-toggle.on .sw::after{left:16px}
+.opt-label{font-size:.85rem;font-weight:600;color:var(--mut);display:inline-flex;align-items:center;gap:8px;padding:10px 4px;min-height:44px}
+.file-label{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
+  padding:10px 20px;min-height:44px;border-radius:999px;
+  border:1.5px dashed rgba(124,58,237,.4);background:rgba(255,255,255,.6);color:var(--vio);
+  transition:all .15s;
+}
+.file-label:hover{background:#fff;border-color:var(--vio)}
+.file-label input{position:absolute;opacity:0;width:1px;height:1px}
+.result-card{margin-bottom:18px}
+.result-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.result-title{font-weight:700;font-size:1.02rem;display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
+.result-title .tag{
+  font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;color:#fff;
+  background:linear-gradient(135deg,var(--vio),#6D28D9);
+}
+.result-title .sub{font-size:.8rem;font-weight:500;color:var(--mut)}
+.copy-btn{
+  font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;
+  padding:8px 20px;min-height:44px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--ink);
+  transition:background .15s,transform .15s;
+}
+.copy-btn:hover{background:#fff}
+.copy-btn:active{transform:scale(.96)}
+.copy-btn.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+.mini-copy{
+  font-family:inherit;font-size:.75rem;font-weight:600;cursor:pointer;flex:0 0 auto;
+  padding:6px 14px;min-height:36px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.8);color:var(--vio);
+}
+.mini-copy:hover{background:#fff}
+.mini-copy.ok{background:linear-gradient(135deg,#10B981,#059669);color:#fff;border-color:transparent}
+.out-box{
+  font-family:var(--mono);font-size:.85rem;line-height:1.65;white-space:pre-wrap;word-break:break-word;
+  background:rgba(31,41,55,.93);color:#D1FAE5;border-radius:14px;
+  padding:18px 20px;min-height:120px;max-height:460px;overflow:auto;
+}
+.out-box .dim{color:#5EEAD4;font-weight:400;opacity:.55}
+.out-box.light{background:rgba(255,255,255,.85);color:var(--ink);font-family:inherit;font-size:1.05rem;font-weight:600}
+.meta{
+  margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.meta .pill{
+  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#4C1D95;
+}
+.btn-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  padding:12px 28px;min-height:44px;border-radius:999px;border:1px solid transparent;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.3)}
+.btn-p:hover{box-shadow:0 10px 26px rgba(124,58,237,.42)}
+.btn-g{
+  background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
+  backdrop-filter:blur(10px);
+}
+.btn-g:hover{background:rgba(255,255,255,.9)}
+.err{
+  display:none;margin-top:14px;background:#FEF2F2;border:1px solid #FECACA;color:#B91C1C;
+  border-radius:12px;padding:12px 16px;font-size:.88rem;line-height:1.6;
+}
+.err.show{display:block}
+.warn{
+  display:none;margin-top:14px;background:#FFFBEB;border:1px solid #FDE68A;color:#92400E;
+  border-radius:12px;padding:12px 16px;font-size:.85rem;line-height:1.7;
+}
+.warn.show{display:block}
+.warn ul{margin:6px 0 0 18px}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"\2212"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+.faq code{font-family:var(--mono);font-size:.82rem;background:rgba(124,58,237,.08);padding:2px 6px;border-radius:6px}
+/* data tables */
+.table-wrap{overflow:auto;max-height:480px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.88)}
+table.data{border-collapse:collapse;width:100%;font-size:.85rem}
+table.data th{
+  position:sticky;top:0;background:linear-gradient(135deg,var(--vio),#6D28D9);color:#fff;
+  text-align:left;padding:10px 14px;font-weight:600;white-space:nowrap;z-index:1;
+}
+table.data td{padding:9px 14px;border-bottom:1px solid #F3F4F6;vertical-align:top}
+table.data tbody tr:nth-child(even) td{background:rgba(124,58,237,.045)}
+table.data td.cell{white-space:nowrap;max-width:320px;overflow:hidden;text-overflow:ellipsis}
+table.data td.k{font-weight:600;color:var(--vio);white-space:nowrap}
+table.data td.v{font-family:var(--mono);font-size:.82rem;word-break:break-all}
+/* frequency bars */
+.freq-row{display:flex;align-items:center;gap:12px;padding:9px 4px;border-bottom:1px solid rgba(124,58,237,.08);font-size:.88rem}
+.freq-row:last-child{border-bottom:none}
+.freq-word{flex:0 0 130px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.freq-count{flex:0 0 56px;text-align:right;font-family:var(--mono);font-weight:700;color:var(--vio)}
+.freq-track{flex:1;height:10px;border-radius:999px;background:rgba(124,58,237,.1);overflow:hidden;min-width:60px}
+.freq-fill{height:100%;border-radius:999px;background:linear-gradient(135deg,var(--vio),var(--cyn))}
+/* rendered markdown preview */
+.md-preview{font-size:.95rem;line-height:1.75;color:var(--ink);word-wrap:break-word}
+.md-preview h1,.md-preview h2,.md-preview h3,.md-preview h4{margin:1em 0 .5em;line-height:1.3;font-weight:700}
+.md-preview h1{font-size:1.5rem}.md-preview h2{font-size:1.3rem}.md-preview h3{font-size:1.12rem}.md-preview h4{font-size:1rem}
+.md-preview p{margin:.6em 0}
+.md-preview ul,.md-preview ol{margin:.6em 0 .6em 1.4em}
+.md-preview li{margin:.25em 0}
+.md-preview a{color:var(--vio);font-weight:600}
+.md-preview code{font-family:var(--mono);font-size:.85em;background:rgba(124,58,237,.09);padding:2px 6px;border-radius:6px}
+.md-preview pre{background:rgba(31,41,55,.94);border-radius:12px;padding:14px 16px;overflow:auto;margin:.8em 0}
+.md-preview pre code{background:none;padding:0;color:#D1FAE5;font-size:.85rem}
+.md-preview blockquote{border-left:4px solid var(--vio);margin:.8em 0;padding:.4em 1em;color:var(--mut);background:rgba(124,58,237,.05);border-radius:0 12px 12px 0}
+.md-preview table{border-collapse:collapse;margin:.8em 0;width:100%;font-size:.88rem;display:block;overflow-x:auto}
+.md-preview th,.md-preview td{border:1px solid rgba(124,58,237,.2);padding:8px 12px;text-align:left}
+.md-preview th{background:rgba(124,58,237,.08);font-weight:700}
+.md-preview hr{border:none;border-top:2px solid rgba(124,58,237,.2);margin:1.2em 0}
+.md-preview del{color:var(--mut)}
+/* preview/source toggle */
+.view-toggle{display:inline-flex;background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px}
+.view-toggle button{
+  font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;border:none;background:transparent;
+  padding:8px 20px;min-height:40px;border-radius:999px;color:var(--mut);
+}
+.view-toggle button.on{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 4px 12px rgba(124,58,237,.3)}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .result-head{align-items:flex-start}
+  .btn{flex:1;min-width:140px}
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .freq-word{flex-basis:96px}
+}
+
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Markdown to HTML Converter · Free Online Tool",
+  "url": "https://quickconvert.freedev.app/markdown-to-html/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">&#8592; All tools</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="card input-card" aria-label="Markdown input">
+    <label class="lab" for="mdInput">Your Markdown (live preview)</label>
+    <textarea class="ta mono" id="mdInput" style="min-height:180px" placeholder="# Hello&#10;&#10;Type **bold**, *italic*, lists, links and more — watch it render below." aria-label="Markdown to convert"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-g" id="sampleBtn" type="button">Load sample</button>
+      <button class="btn btn-g" id="clearBtn" type="button">Clear</button>
+    </div>
+    <div class="meta">
+      <span class="pill" id="metaInfo">0 characters</span>
+      <span>Everything runs locally in your browser — nothing is uploaded.</span>
+    </div>
+  </section>
+  <div class="hero">
+    <h1>Markdown to HTML Converter <span class="plain">&mdash; Free Online Tool</span></h1>
+    <p>Type Markdown on the left, watch clean HTML render live — then copy the source or download it.</p>
+  </div>
+
+  <section class="card result-card" aria-label="Conversion result">
+    <div class="result-head">
+      <div class="result-title"><span class="tag">Result</span></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <div class="view-toggle" role="group" aria-label="Result view">
+          <button type="button" id="viewPreview" class="on" aria-pressed="true">Preview</button>
+          <button type="button" id="viewSource" aria-pressed="false">HTML source</button>
+        </div>
+        <button class="copy-btn" id="copyBtn" type="button">Copy HTML</button>
+        <button class="copy-btn" id="dlBtn" type="button">Download .html</button>
+      </div>
+    </div>
+    <div class="md-preview" id="previewPane" aria-live="polite" style="background:rgba(255,255,255,.6);border-radius:14px;padding:18px 20px;min-height:140px"><span style="color:var(--mut)">Your rendered preview appears here…</span></div>
+    <div class="out-box" id="sourcePane" aria-live="polite" style="display:none"><span class="dim">&lt;!-- html source appears here --&gt;</span></div>
+  </section>
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>100% private — text never uploaded</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Raw HTML safely escaped</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Type or paste Markdown</b> in the box — the preview updates as you type.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Switch views</b> between the rendered preview and the raw HTML source.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Copy or download</b> the clean HTML for your blog, docs or website.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>What Markdown is supported?</summary>
+      <p>Headings, <b>bold</b>, <i>italic</i>, <del>strikethrough</del>, bullet and numbered lists (including nested), links, inline <code>code</code>, fenced code blocks, blockquotes, basic tables and horizontal rules.</p>
+    </details>
+    <details>
+      <summary>Is it safe to paste Markdown containing HTML or scripts?</summary>
+      <p>Yes. Any raw HTML in your input — including <code>&lt;script&gt;</code> tags — is escaped into harmless text and never executed or rendered. The output contains only tags generated from Markdown syntax.</p>
+    </details>
+    <details>
+      <summary>Why hand-rolled instead of a Markdown library?</summary>
+      <p>No CDN or external dependency means the page works offline, loads instantly and keeps your text 100% on your device. The parser covers the everyday Markdown most people actually use.</p>
+    </details>
+  </section>
+
+  <p class="note">Live preview · Sanitized output · 100% local — your text never leaves this page.</p>
+</main>
+
+<footer>
+  <div>Made with &#10084;&#65039; by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first &mdash; every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>&middot;</span><a href="/csv-to-json/">CSV to JSON</a><span>&middot;</span><a href="/markdown-to-html/">Markdown to HTML</a><span>&middot;</span><a href="/url-parser/">URL Parser</a>
+  </nav>
+</footer>
+<script>
+(function () {
+'use strict';
+
+  function $(id) { return document.getElementById(id); }
+  function flashCopy(btn, ok, label) {
+    var original = btn.getAttribute('data-label') || btn.textContent;
+    btn.setAttribute('data-label', original);
+    btn.textContent = ok ? 'Copied \u2713' : 'Copy failed';
+    btn.classList.add('ok');
+    setTimeout(function () { btn.textContent = label || original; btn.classList.remove('ok'); }, 1600);
+  }
+  function copyText(text, btn) {
+    if (!text) return;
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      navigator.clipboard.writeText(text).then(
+        function () { flashCopy(btn, true); },
+        function () { fallbackCopy(text, btn); }
+      );
+    } else { fallbackCopy(text, btn); }
+  }
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.top = '-9999px';
+    document.body.appendChild(ta); ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    flashCopy(btn, ok);
+  }
+  function download(filename, content, mime) {
+    var blob = new Blob([content], { type: mime || 'text/plain;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 800);
+  }
+  function setToggle(el, on) {
+    el.classList.toggle('on', on);
+    el.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+
+'use strict';
+/* Hand-rolled Markdown -> HTML. Raw user HTML is escaped (never rendered). */
+
+function escHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function splitRow(line) {
+  var t = line.trim();
+  if (t.charAt(0) === '|') t = t.slice(1);
+  if (t.charAt(t.length - 1) === '|') t = t.slice(0, -1);
+  return t.split('|').map(function (c) { return c.trim(); });
+}
+
+function inlineBasic(s) {
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+  s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  s = s.replace(/(^|[\s(])_([^_]+)_/g, '$1<em>$2</em>');
+  s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+  return s;
+}
+
+function inlineFmt(s) {
+  s = s.replace(/\[([^\]]+)\]\(([^)\s"]+)(?:\s+"[^"]*")?\)/g, function (m, t, u) {
+    return '<a href="' + u + '" target="_blank" rel="noopener">' + inlineBasic(t) + '</a>';
+  });
+  return inlineBasic(s);
+}
+
+/* Inline markdown on already-escaped text; code spans protected via tokens. */
+function inline(s) {
+  var codes = [];
+  s = s.replace(/`([^`\n]+)`/g, function (m, c) {
+    codes.push('<code>' + c + '</code>');
+    return '\u0000' + (codes.length - 1) + '\u0000';
+  });
+  s = inlineFmt(s);
+  s = s.replace(/\u0000(\d+)\u0000/g, function (m, i) { return codes[+i]; });
+  return s;
+}
+
+function renderList(items, pos, baseIndent) {
+  var ordered = items[pos].ordered;
+  var out = ordered ? '<ol>' : '<ul>';
+  while (pos < items.length && items[pos].indent === baseIndent) {
+    var it = items[pos];
+    out += '<li>' + inline(it.text);
+    pos++;
+    if (pos < items.length && items[pos].indent > baseIndent) {
+      var r = renderList(items, pos, items[pos].indent);
+      out += r.html;
+      pos = r.pos;
+    }
+    out += '</li>';
+  }
+  out += ordered ? '</ol>' : '</ul>';
+  return { html: out, pos: pos };
+}
+
+function mdToHtml(md) {
+  var src = escHtml(String(md));
+  var lines = src.split('\n');
+  var html = [], i = 0, para = [];
+
+  function flushPara() {
+    if (para.length) {
+      var text = para.join('\n').replace(/\n/g, '<br>');
+      html.push('<p>' + inline(text) + '</p>');
+      para = [];
+    }
+  }
+
+  while (i < lines.length) {
+    var line = lines[i];
+
+    // Fenced code block
+    var fence = line.match(/^```(\w*)\s*$/);
+    if (fence) {
+      flushPara();
+      var lang = fence[1], buf = [];
+      i++;
+      while (i < lines.length && !/^```\s*$/.test(lines[i])) { buf.push(lines[i]); i++; }
+      i++;
+      html.push('<pre><code' + (lang ? ' class="language-' + lang + '"' : '') + '>' +
+        buf.join('\n') + '</code></pre>');
+      continue;
+    }
+
+    // ATX heading
+    var h = line.match(/^(#{1,6})\s+(.*)$/);
+    if (h) {
+      flushPara();
+      var lvl = h[1].length;
+      html.push('<h' + lvl + '>' + inline(h[2].trim()) + '</h' + lvl + '>');
+      i++;
+      continue;
+    }
+
+    // Horizontal rule
+    if (/^(\*\*\*|---|___)\s*$/.test(line)) {
+      flushPara();
+      html.push('<hr>');
+      i++;
+      continue;
+    }
+
+    // Blockquote (simple: consecutive > lines)
+    if (/^&gt;/.test(line)) {
+      flushPara();
+      var bq = [];
+      while (i < lines.length && /^&gt;/.test(lines[i])) {
+        bq.push(lines[i].replace(/^&gt;\s?/, ''));
+        i++;
+      }
+      html.push('<blockquote><p>' + inline(bq.join('<br>')) + '</p></blockquote>');
+      continue;
+    }
+
+    // Table: header row + separator row
+    if (line.indexOf('|') !== -1 && i + 1 < lines.length &&
+        /^\s*\|?[\s:|\-]+\|?\s*$/.test(lines[i + 1]) && /-/.test(lines[i + 1])) {
+      flushPara();
+      var header = splitRow(line);
+      i += 2;
+      var thead = '<thead><tr>' + header.map(function (c) {
+        return '<th>' + inline(c) + '</th>';
+      }).join('') + '</tr></thead>';
+      var tbody = '';
+      while (i < lines.length && lines[i].indexOf('|') !== -1 && lines[i].trim() !== '') {
+        var cells = splitRow(lines[i]);
+        tbody += '<tr>' + cells.map(function (c) {
+          return '<td>' + inline(c) + '</td>';
+        }).join('') + '</tr>';
+        i++;
+      }
+      html.push('<table>' + thead + '<tbody>' + tbody + '</tbody></table>');
+      continue;
+    }
+
+    // List
+    var lm = line.match(/^(\s*)([-*+]|\d+[.)])\s+(.*)$/);
+    if (lm) {
+      flushPara();
+      var items = [];
+      while (i < lines.length) {
+        var m2 = lines[i].match(/^(\s*)([-*+]|\d+[.)])\s+(.*)$/);
+        if (!m2) break;
+        items.push({
+          indent: m2[1].replace(/\t/g, '    ').length,
+          ordered: /^\d/.test(m2[2]),
+          text: m2[3]
+        });
+        i++;
+      }
+      var base = items[0].indent;
+      var rr = renderList(items, 0, base);
+      html.push(rr.html);
+      continue;
+    }
+
+    // Blank line ends a paragraph
+    if (/^\s*$/.test(line)) { flushPara(); i++; continue; }
+
+    // Ordinary paragraph line
+    para.push(line);
+    i++;
+  }
+  flushPara();
+  return html.join('\n');
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { mdToHtml: mdToHtml, escHtml: escHtml };
+}
+
+
+
+  var SAMPLE = [
+    '# Markdown demo', '',
+    'This is **bold**, *italic* and ~~strikethrough~~ text with a [link](https://example.com).', '',
+    '## Lists', '',
+    '- Apples', '- Oranges', '  - Nested item', '',
+    '1. First', '2. Second', '',
+    '## Code', '',
+    'Inline \u0060code\u0060 and a block:', '',
+    '\u0060\u0060\u0060js',
+    'function hello() {',
+    '  return "hi <there>";',
+    '}',
+    '\u0060\u0060\u0060', '',
+    '> A wise quote goes here.', '',
+    '| Name | Age |', '|------|-----|', '| Asha | 19  |', '| Ravi | 21  |', '',
+    '---', '', 'That is all!'
+  ].join('\n');
+  var input = $('mdInput'), previewPane = $('previewPane'), sourcePane = $('sourcePane');
+  var viewPreview = $('viewPreview'), viewSource = $('viewSource');
+  var copyBtn = $('copyBtn'), dlBtn = $('dlBtn'), sampleBtn = $('sampleBtn'), clearBtn = $('clearBtn');
+  var metaInfo = $('metaInfo');
+  var lastHtml = '';
+
+  function render() {
+    var md = input.value;
+    metaInfo.textContent = md.length + ' characters';
+    if (!md.trim()) {
+      previewPane.innerHTML = '<span style="color:var(--mut)">Your rendered preview appears here\u2026</span>';
+      sourcePane.innerHTML = '<span class="dim">&lt;!-- html source appears here --&gt;</span>';
+      lastHtml = '';
+      return;
+    }
+    lastHtml = mdToHtml(md);
+    previewPane.innerHTML = lastHtml;
+    sourcePane.textContent = lastHtml;
+  }
+  function setView(which) {
+    var isPrev = which === 'preview';
+    previewPane.style.display = isPrev ? '' : 'none';
+    sourcePane.style.display = isPrev ? 'none' : '';
+    viewPreview.classList.toggle('on', isPrev);
+    viewSource.classList.toggle('on', !isPrev);
+    viewPreview.setAttribute('aria-pressed', isPrev ? 'true' : 'false');
+    viewSource.setAttribute('aria-pressed', !isPrev ? 'true' : 'false');
+  }
+  input.addEventListener('input', render);
+  viewPreview.addEventListener('click', function () { setView('preview'); });
+  viewSource.addEventListener('click', function () { setView('source'); });
+  sampleBtn.addEventListener('click', function () { input.value = SAMPLE; render(); input.focus(); });
+  clearBtn.addEventListener('click', function () { input.value = ''; render(); input.focus(); });
+  copyBtn.addEventListener('click', function () { copyText(lastHtml, copyBtn); });
+  dlBtn.addEventListener('click', function () {
+    if (!lastHtml) return;
+    download('converted.html', '<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Converted Markdown</title>\n</head>\n<body>\n' + lastHtml + '\n</body>\n</html>', 'text/html;charset=utf-8');
+  });
+  render();
+  
+})();
+</script>
+</body>
+</html>

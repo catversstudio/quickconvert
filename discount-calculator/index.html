@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discount Calculator · Free Online Tool | QuickConvert</title>
+<meta name="description" content="Calculate sale prices and savings instantly — stack an extra coupon discount too. Free, private, no sign-up.">
+<meta name="theme-color" content="#7C3AED">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:title" content="Discount Calculator · Free Online Tool | QuickConvert">
+<meta property="og:description" content="Calculate sale prices and savings instantly — stack an extra coupon discount too. Free, private, no sign-up.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickconvert.freedev.app/discount-calculator/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://quickconvert.freedev.app/discount-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
+  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--vio);outline-offset:2px}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
+    radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+  background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
+}
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.hwrap{width:100%;max-width:860px;margin:0 auto;padding:12px clamp(16px,4vw,32px);
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.mark{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
+  background:linear-gradient(135deg,var(--vio),var(--cyn));
+  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+}
+.mark svg{width:26px;height:26px}
+.brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
+.brand b .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
+.back-link{
+  text-decoration:none;color:var(--vio);font-weight:600;font-size:.92rem;
+  background:rgba(255,255,255,.7);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .15s;min-height:44px;display:inline-flex;align-items:center;
+}
+.back-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08);background:#fff}
+main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw,32px) 40px}
+.card{
+  background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:24px;
+  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  padding:clamp(20px,4vw,32px);
+}
+.input-card{margin-bottom:22px}
+.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
+.price-wrap{position:relative;margin-bottom:18px}
+.price-wrap .cur{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--mut);font-size:1rem}
+.num{
+  width:100%;font-family:inherit;font-size:1.05rem;font-weight:600;color:var(--ink);
+  background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  padding:12px 16px;min-height:44px;outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+.num:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.num::placeholder{color:#9CA3AF;font-weight:400}
+.price-wrap .num{padding-left:36px}
+.disc-row{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+input[type=range]{
+  flex:1;min-width:0;accent-color:var(--vio);height:44px;cursor:pointer;
+}
+.pct-wrap{
+  display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.85);
+  border:1.5px solid rgba(124,58,237,.18);border-radius:14px;padding:10px 12px;min-height:44px;
+  transition:border-color .15s,box-shadow .15s;flex:0 0 auto;
+}
+.pct-wrap:focus-within{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.pct-wrap input{
+  width:58px;border:0;outline:0;background:transparent;
+  font-family:inherit;font-size:1rem;font-weight:600;color:var(--ink);
+}
+.pct-wrap span{color:var(--mut);font-weight:600;font-size:.95rem}
+.pct-wrap.full{width:100%;margin-bottom:0}
+.pct-wrap.full input{width:100%}
+.hint{font-size:.8rem;color:var(--mut);margin-bottom:18px;line-height:1.6}
+.hint:last-child{margin-bottom:0}
+.result-card{margin-bottom:18px}
+.rlabel{font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.big-price{
+  font-size:clamp(2.2rem,8vw,3.2rem);font-weight:700;letter-spacing:-.5px;line-height:1.1;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.res-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.save-pill{
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;
+  background:linear-gradient(135deg,#10B981,#059669);color:#fff;
+  font-weight:700;font-size:.95rem;padding:10px 22px;border-radius:999px;
+  box-shadow:0 8px 22px rgba(16,185,129,.35);
+}
+.bar{height:14px;border-radius:999px;background:rgba(124,58,237,.12);overflow:hidden;margin-bottom:20px}
+.bar-save{
+  height:100%;width:0%;border-radius:999px;
+  background:linear-gradient(90deg,var(--vio),var(--pnk),var(--cyn));
+  transition:width .25s ease;
+}
+.bd-row{display:flex;justify-content:space-between;gap:12px;padding:10px 2px;border-bottom:1px dashed rgba(124,58,237,.18);font-size:.92rem}
+.bd-row:last-child{border-bottom:0;font-weight:700;font-size:1.02rem}
+.bd-row .neg{color:#059669;font-weight:600}
+.hero{text-align:center;margin:6px 0 22px}
+.hero h1{
+  font-size:clamp(1.7rem,5vw,2.5rem);font-weight:700;letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--vio),var(--pnk) 60%,var(--cyn));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero h1 .plain{background:none;color:var(--mut);-webkit-text-fill-color:var(--mut);font-size:.55em;font-weight:600}
+.hero p{color:var(--mut);font-size:.95rem;max-width:560px;margin:0 auto}
+.note{margin-top:24px;font-size:.8rem;color:var(--mut);text-align:center;line-height:1.7}
+/* trust strip */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.trust .t{display:flex;align-items:center;gap:10px;background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:.85rem;font-weight:600;
+  box-shadow:0 6px 18px rgba(31,41,55,.05)}
+.trust .t svg{flex:0 0 22px;width:22px;height:22px;color:var(--vio)}
+/* how it works */
+.how{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:0 0 20px;box-shadow:0 8px 22px rgba(31,41,55,.06)}
+.how h2{font-size:1rem;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.step b{color:var(--ink)}
+/* faq */
+.faq{margin:0 0 20px}
+.faq h2{font-size:1rem;margin-bottom:12px}
+.faq details{background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--vio);font-weight:700}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;font-size:.88rem;color:var(--mut);line-height:1.65}
+footer{
+  text-align:center;padding:22px 16px 30px;color:var(--mut);font-size:.88rem;
+}
+footer a{color:var(--vio);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .fpriv{font-size:.8rem;margin-top:8px}
+footer .fnav{font-size:.8rem;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+footer .fnav a{font-weight:500}
+@media(max-width:560px){
+  .trust{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Discount Calculator — Free Online Tool",
+  "url": "https://quickconvert.freedev.app/discount-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="hwrap">
+    <a class="brand" href="/" aria-label="QuickConvert home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg></span>
+      <b>QuickConvert<span class="bs">FREE ONLINE TOOLS</span></b>
+    </a>
+    <a class="back-link" href="/">← All tools</a>
+  </div>
+</header>
+
+<main>
+  <!-- Input first: above any hero text, per design -->
+  <section class="card input-card" aria-label="Discount inputs">
+    <label class="lab" for="priceInput">Original price</label>
+    <div class="price-wrap">
+      <span class="cur" aria-hidden="true">₹</span>
+      <input class="num" id="priceInput" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 1999">
+    </div>
+
+    <label class="lab" for="discountInput">Discount</label>
+    <div class="disc-row">
+      <input id="discountRange" type="range" min="0" max="90" value="20" step="1" aria-label="Discount percentage slider">
+      <div class="pct-wrap">
+        <input id="discountInput" type="number" min="0" max="90" value="20" step="any" inputmode="decimal" aria-label="Discount percentage">
+        <span aria-hidden="true">%</span>
+      </div>
+    </div>
+
+    <label class="lab" for="extraDiscount">Extra coupon <span style="text-transform:none;letter-spacing:0;font-weight:500">(optional)</span></label>
+    <div class="pct-wrap full">
+      <input id="extraDiscount" type="number" min="0" max="90" value="0" step="any" inputmode="decimal" placeholder="0" aria-label="Extra coupon percentage">
+      <span aria-hidden="true">% off</span>
+    </div>
+    <p class="hint">Extra coupons stack multiplicatively — 20% off, then an extra 10% coupon means 28% total off, not 30%.</p>
+  </section>
+
+  <!-- Live results, updates as you type -->
+  <section class="card result-card" aria-label="Discount results" aria-live="polite">
+    <div class="res-top">
+      <div>
+        <div class="rlabel">Final price</div>
+        <div class="big-price" id="finalPrice">₹0.00</div>
+      </div>
+      <div class="save-pill" id="savePill">You save ₹0.00 (0%)</div>
+    </div>
+    <div class="bar" role="img" aria-label="Savings bar"><div class="bar-save" id="barSave"></div></div>
+    <div class="breakdown">
+      <div class="bd-row"><span>Original price</span><span id="bdOriginal">₹0.00</span></div>
+      <div class="bd-row"><span id="bdDisc1Label">Discount (20%)</span><span class="neg" id="bdDisc1">− ₹0.00</span></div>
+      <div class="bd-row"><span id="bdDisc2Label">Extra coupon (0%)</span><span class="neg" id="bdDisc2">− ₹0.00</span></div>
+      <div class="bd-row"><span>You pay</span><span id="bdFinal">₹0.00</span></div>
+    </div>
+  </section>
+
+  <div class="hero">
+    <h1>Discount Calculator <span class="plain">— Free Online Tool</span></h1>
+    <p>See the final price and exactly how much you save — stack an extra coupon discount too. Everything updates live, right in your browser.</p>
+  </div>
+
+  <div class="trust" aria-label="Trust highlights">
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg><span>Instant live results</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>No sign-up needed</span></div>
+    <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Free forever</span></div>
+  </div>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span><b>Enter the original price</b> in the box at the top.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Set the discount %</b> — drag the slider or type it, and add an extra coupon if you have one.</span></div>
+      <div class="step"><span class="n">3</span><span><b>Read your final price</b> and total savings instantly — the full breakdown is right below.</span></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>How are the discount and the extra coupon combined?</summary>
+      <p>Multiplicatively, exactly like real stores do — the second discount applies to the already-discounted price, not the original. So 20% off plus an extra 10% coupon is 28% total off (1 − 0.80 × 0.90 = 0.28), not 30%.</p>
+    </details>
+    <details>
+      <summary>Is my data uploaded to a server?</summary>
+      <p>No. Every calculation happens with plain JavaScript in your browser — your prices never leave this page, and nothing is stored anywhere.</p>
+    </details>
+    <details>
+      <summary>Which currency does the calculator use?</summary>
+      <p>₹ by default. The tool is currency-neutral — the maths is identical for any currency, so just read ₹ as your own currency symbol.</p>
+    </details>
+  </section>
+
+  <p class="note">Stacked discounts multiply · 100% local — your numbers never leave this page.</p>
+</main>
+
+<footer>
+  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
+  <nav class="fnav" aria-label="Footer navigation">
+    <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var priceInput = document.getElementById('priceInput');
+  var discountRange = document.getElementById('discountRange');
+  var discountInput = document.getElementById('discountInput');
+  var extraInput = document.getElementById('extraDiscount');
+
+  var finalPrice = document.getElementById('finalPrice');
+  var savePill = document.getElementById('savePill');
+  var barSave = document.getElementById('barSave');
+  var bdOriginal = document.getElementById('bdOriginal');
+  var bdDisc1Label = document.getElementById('bdDisc1Label');
+  var bdDisc1 = document.getElementById('bdDisc1');
+  var bdDisc2Label = document.getElementById('bdDisc2Label');
+  var bdDisc2 = document.getElementById('bdDisc2');
+  var bdFinal = document.getElementById('bdFinal');
+
+  function num(v) {
+    var n = parseFloat(v);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function clamp(v, min, max) {
+    return Math.min(max, Math.max(min, v));
+  }
+
+  // Currency-neutral formatting — ₹ by default, 2 decimal places.
+  function fmt(n) {
+    return '₹' + n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function pct(n) {
+    return (Math.round(n * 10) / 10) + '%';
+  }
+
+  function update() {
+    var price = Math.max(0, num(priceInput.value));
+    var d1 = clamp(num(discountInput.value), 0, 90);
+    var d2 = clamp(num(extraInput.value), 0, 90);
+
+    var d1amt = price * d1 / 100;
+    var after1 = price - d1amt;
+    var d2amt = after1 * d2 / 100;
+    var final = after1 - d2amt;
+    var saved = price - final;
+    var savedPct = price > 0 ? (saved / price) * 100 : 0;
+
+    finalPrice.textContent = fmt(final);
+    savePill.textContent = 'You save ' + fmt(saved) + ' (' + pct(savedPct) + ')';
+    bdOriginal.textContent = fmt(price);
+    bdDisc1Label.textContent = 'Discount (' + pct(d1) + ')';
+    bdDisc1.textContent = '− ' + fmt(d1amt);
+    bdDisc2Label.textContent = 'Extra coupon (' + pct(d2) + ')';
+    bdDisc2.textContent = '− ' + fmt(d2amt);
+    bdFinal.textContent = fmt(final);
+    barSave.style.width = clamp(savedPct, 0, 100) + '%';
+  }
+
+  // Slider -> number input, then recalc
+  discountRange.addEventListener('input', function () {
+    discountInput.value = discountRange.value;
+    update();
+  });
+
+  // Number input -> slider (rounded), then recalc
+  discountInput.addEventListener('input', function () {
+    var v = clamp(num(discountInput.value), 0, 90);
+    discountRange.value = String(Math.round(v));
+    update();
+  });
+
+  extraInput.addEventListener('input', update);
+  priceInput.addEventListener('input', update);
+
+  update();
+})();
+</script>
+</body>
+</html>
