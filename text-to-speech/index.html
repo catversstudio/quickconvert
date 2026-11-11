@@ -5,31 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Text to Speech · Free Online Tool | QuickConvert</title>
 <meta name="description" content="Convert text to speech instantly in your browser. Free online text-to-speech tool with voice, rate and pitch controls — 100% private, no uploads.">
-<meta name="theme-color" content="#7C3AED">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#08090B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2308090B'/%3E%3Cstop offset='1' stop-color='%23FFC900'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
 <meta property="og:title" content="Text to Speech · Free Online Tool | QuickConvert">
 <meta property="og:description" content="Convert text to speech instantly in your browser. Free online text-to-speech tool with voice, rate and pitch controls — 100% private, no uploads.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://quickconvert.freedev.app/text-to-speech/">
+<meta property="og:url" content="https://quickconvert-tools.pages.dev/text-to-speech/">
 <meta name="twitter:card" content="summary">
-<link rel="canonical" href="https://quickconvert.freedev.app/text-to-speech/">
+<link rel="canonical" href="https://quickconvert-tools.pages.dev/text-to-speech/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4; --pnk:#EC4899; --amb:#F59E0B;
+    --ink:#1F2937; --mut:#6B7280; --vio:#08090B; --cyn:#E0A800; --pnk:#E0A800; --amb:#B78A00;
     --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   :focus-visible{outline:2px solid var(--vio);outline-offset:2px}
   body{
-    font-family:'Poppins',system-ui,sans-serif;color:var(--ink);min-height:100vh;
+    font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);min-height:100vh;
     background:
       radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
       radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
-      radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
-      linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+      radial-gradient(700px 600px at 50% 110%, #FFE9A866, transparent 60%),
+      linear-gradient(160deg,#FFF7ED 0%,#FAF6EC 45%,#FAF8F1 100%);
     background-attachment:fixed;
   }
   .wrap{max-width:760px;margin:0 auto;padding:0 16px 48px}
@@ -40,18 +40,18 @@
   .brand .bt{line-height:1.05}
   .brand .bs{display:block;font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
   .mark{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:#fff;flex:0 0 44px;
-    background:linear-gradient(135deg,var(--vio),var(--cyn));box-shadow:0 6px 16px #7c3aed44}
+    background:linear-gradient(135deg,var(--vio),var(--cyn));box-shadow:0 6px 16px #08090B44}
   .mark svg{width:26px;height:26px}
   .all-tools{font-size:.9rem;color:var(--vio);text-decoration:none;font-weight:600;background:rgba(255,255,255,.6);
     border:1px solid var(--line);padding:10px 18px;border-radius:999px;min-height:44px;display:inline-flex;align-items:center}
   .all-tools:hover{background:#fff}
   .card{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
     border:1px solid var(--line);border-radius:24px;padding:22px;
-    box-shadow:0 12px 32px rgba(124,58,237,.10), 0 2px 6px rgba(31,41,55,.05);margin-bottom:18px}
+    box-shadow:0 12px 32px rgba(8,9,11,.10), 0 2px 6px rgba(31,41,55,.05);margin-bottom:18px}
   label.lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
   #ttsText{width:100%;min-height:150px;resize:vertical;border:1.5px solid #e9e4f7;border-radius:16px;
     padding:14px 16px;font-family:inherit;font-size:1rem;color:var(--ink);background:rgba(255,255,255,.85);outline:none;transition:border-color .15s, box-shadow .15s}
-  #ttsText:focus{border-color:var(--vio);box-shadow:0 0 0 4px #7c3aed1f}
+  #ttsText:focus{border-color:var(--vio);box-shadow:0 0 0 4px #08090B1f}
   #charCount{text-align:right;font-size:.8rem;color:var(--mut);margin:6px 2px 0}
   .hero{margin:18px 0;text-align:center}
   .hero h1{font-size:1.6rem;font-weight:700;background:linear-gradient(120deg,var(--vio),var(--pnk),var(--cyn));
@@ -64,7 +64,7 @@
   .field .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
   .field .top span.lbl{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.9rem}
   .field .top span.lbl svg{width:20px;height:20px;color:var(--vio)}
-  .val{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;font-size:.78rem;font-weight:600;
+  .val{background:linear-gradient(135deg,var(--vio),#08090B);color:#fff;font-size:.78rem;font-weight:600;
     border-radius:999px;padding:2px 10px;min-width:44px;text-align:center}
   input[type=range]{width:100%;accent-color:var(--vio);cursor:pointer;min-height:44px}
   select#voiceSelect{width:100%;margin-top:16px;border:1.5px solid #e9e4f7;border-radius:14px;padding:12px 14px;
@@ -76,14 +76,14 @@
     display:inline-flex;align-items:center;justify-content:center;gap:10px}
   .btn svg{width:20px;height:20px}
   .btn:active{transform:scale(.97)}
-  .btn-p{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 8px 20px #7c3aed4d}
-  .btn-p:hover{box-shadow:0 10px 26px #7c3aed66}
+  .btn-p{background:linear-gradient(135deg,var(--vio),#08090B);color:#fff;box-shadow:0 8px 20px #08090B4d}
+  .btn-p:hover{box-shadow:0 10px 26px #08090B66}
   .btn-p:disabled{opacity:.55;cursor:not-allowed;transform:none}
   .btn-g{background:rgba(255,255,255,.65);color:var(--ink);border:1px solid var(--line);box-shadow:0 4px 12px rgba(31,41,55,.06)}
   .status{display:flex;align-items:center;gap:10px;margin-top:16px}
   #statusPill{font-size:.85rem;font-weight:600;border-radius:999px;padding:7px 16px;
-    background:#EDE9FE;color:var(--vio);transition:background .2s,color .2s}
-  #statusPill.speaking{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;animation:pulse 1.2s ease-in-out infinite}
+    background:#FFF3BF;color:var(--vio);transition:background .2s,color .2s}
+  #statusPill.speaking{background:linear-gradient(135deg,var(--vio),#08090B);color:#fff;animation:pulse 1.2s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.72}}
   #hint{font-size:.85rem;color:var(--amb);font-weight:600;margin-top:10px;min-height:1.2em;text-align:center}
   #nosupport{display:none;text-align:center;padding:18px;border-radius:16px;background:#FEF3C7;color:#92400E;
@@ -101,7 +101,7 @@
   .how h2{font-size:1.05rem;margin-bottom:12px}
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
   .step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
-  .step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+  .step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#08090B);
     color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
   .step b{color:var(--ink)}
   /* faq */
@@ -127,12 +127,13 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Text to Speech — Free Online Tool",
-  "url": "https://quickconvert.freedev.app/text-to-speech/",
+  "url": "https://quickconvert-tools.pages.dev/text-to-speech/",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
 }
 </script>
+<link rel="stylesheet" href="../assets/qc-refresh.css">
 </head>
 <body>
 
@@ -218,7 +219,7 @@
   </section>
 
   <footer>
-    <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+    <div>Made with ❤️ by <a href="https://catversstudio.pages.dev" target="_blank" rel="noopener">CatVers Studio</a></div>
     <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
     <nav class="fnav" aria-label="Footer navigation">
       <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
@@ -351,5 +352,6 @@
   }, 500);
 })();
 </script>
+<script src="../assets/qc-refresh.js" defer></script>
 </body>
 </html>

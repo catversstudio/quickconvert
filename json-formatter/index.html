@@ -5,32 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JSON Formatter — Free Online Tool | QuickConvert</title>
 <meta name="description" content="Format, minify and validate JSON instantly in your browser. 100% local — nothing ever leaves your device.">
-<meta name="theme-color" content="#7C3AED">
+<meta name="theme-color" content="#08090B">
 <meta property="og:title" content="JSON Formatter — Free Online Tool | QuickConvert">
 <meta property="og:description" content="Format, minify and validate JSON with clear line-by-line error messages — 100% local, nothing leaves your device.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://quickconvert.freedev.app/json-formatter/">
+<meta property="og:url" content="https://quickconvert-tools.pages.dev/json-formatter/">
 <meta name="twitter:card" content="summary">
-<link rel="canonical" href="https://quickconvert.freedev.app/json-formatter/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M35 8 18 36h11l-3 20 17-28h-11z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://quickconvert-tools.pages.dev/json-formatter/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2308090B'/%3E%3Cstop offset='1' stop-color='%23FFC900'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M35 8 18 36h11l-3 20 17-28h-11z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#1F2937; --mut:#6B7280;
-    --vio:#7C3AED; --cyn:#06B6D4; --pnk:#EC4899; --amb:#F59E0B;
+    --vio:#08090B; --cyn:#E0A800; --pnk:#E0A800; --amb:#B78A00;
     --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
     --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{
-    font-family:'Poppins',system-ui,sans-serif;color:var(--ink);min-height:100vh;
+    font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);min-height:100vh;
     background:
       radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
       radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
-      radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
-      linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+      radial-gradient(700px 600px at 50% 110%, #FFE9A866, transparent 60%),
+      linear-gradient(160deg,#FFF7ED 0%,#FAF6EC 45%,#FAF8F1 100%);
     background-attachment:fixed;
   }
   .wrap{max-width:920px;margin:0 auto;padding:0 20px 60px}
@@ -41,7 +41,7 @@
     backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
   .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
   .logo .mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--vio),var(--cyn));
-    display:grid;place-items:center;color:#fff;box-shadow:0 10px 24px rgba(124,58,237,.35)}
+    display:grid;place-items:center;color:#fff;box-shadow:0 10px 24px rgba(8,9,11,.35)}
   .logo .mark svg{width:24px;height:24px;display:block}
   .logo small{display:block;font-size:10px;font-weight:700;color:var(--mut);letter-spacing:.18em;text-transform:uppercase}
   .back{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--ink);
@@ -58,20 +58,20 @@
   /* ---------- card ---------- */
   .card{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
     border:1px solid var(--line);border-radius:24px;padding:22px;
-    box-shadow:0 20px 50px rgba(124,58,237,.10);margin-top:22px}
+    box-shadow:0 20px 50px rgba(8,9,11,.10);margin-top:22px}
   .lbl{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
   .lbl span{font-weight:700;font-size:14px}
   textarea{
     width:100%;min-height:220px;resize:vertical;font-family:var(--mono);font-size:13.5px;line-height:1.6;
-    color:var(--ink);background:rgba(255,255,255,.85);border:1.5px solid rgba(124,58,237,.18);
+    color:var(--ink);background:rgba(255,255,255,.85);border:1.5px solid rgba(8,9,11,.18);
     border-radius:16px;padding:14px 16px;outline:none;transition:border-color .15s, box-shadow .15s;
   }
-  textarea:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+  textarea:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(8,9,11,.12)}
   #jsonOutput{min-height:190px;background:rgba(248,250,252,.9)}
 
   /* ---------- buttons ---------- */
   .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-  button{font-family:'Poppins',sans-serif;font-weight:700;font-size:13.5px;border:none;cursor:pointer;min-height:44px;
+  button{font-family:'DM Sans',sans-serif;font-weight:700;font-size:13.5px;border:none;cursor:pointer;min-height:44px;
     padding:11px 22px;border-radius:999px;transition:transform .12s, box-shadow .12s;display:inline-flex;align-items:center;gap:8px}
   button:active{transform:scale(.97)}
   :focus-visible{outline:2px solid var(--vio);outline-offset:2px}
@@ -82,13 +82,13 @@
   .etitle .et{display:inline-flex;align-items:center;gap:8px}
   .etitle svg{width:18px;height:18px;flex:none}
   #errorBox .etitle button svg{width:14px;height:14px;display:block}
-  .btn-p{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.35)}
-  .btn-p:hover{box-shadow:0 10px 26px rgba(124,58,237,.45)}
+  .btn-p{background:linear-gradient(135deg,var(--vio),#08090B);color:#fff;box-shadow:0 8px 20px rgba(8,9,11,.35)}
+  .btn-p:hover{box-shadow:0 10px 26px rgba(8,9,11,.45)}
   .btn-g{background:rgba(255,255,255,.8);color:var(--ink);border:1px solid var(--line);box-shadow:0 4px 12px rgba(31,41,55,.06)}
   .btn-g:hover{background:#fff}
-  .btn-samp{background:rgba(255,255,255,.6);color:var(--vio);border:1.5px dashed rgba(124,58,237,.4);
+  .btn-samp{background:rgba(255,255,255,.6);color:var(--vio);border:1.5px dashed rgba(8,9,11,.4);
     padding:8px 16px;font-size:12.5px;box-shadow:none}
-  .btn-samp:hover{background:rgba(124,58,237,.06)}
+  .btn-samp:hover{background:rgba(8,9,11,.06)}
 
   /* ---------- error box ---------- */
   #errorBox{display:none;margin-top:16px;border-radius:16px;padding:14px 16px;
@@ -107,7 +107,7 @@
     backdrop-filter:blur(12px);box-shadow:0 4px 14px rgba(31,41,55,.05)}
   .pill.show{display:inline-flex}
   .pill.ok{color:#065F46}.pill.ok .dot{background:#10B981;box-shadow:0 0 0 4px rgba(16,185,129,.18)}
-  .pill.info{color:#1F2937}.pill.info .dot{background:var(--cyn);box-shadow:0 0 0 4px rgba(6,182,212,.18)}
+  .pill.info{color:#1F2937}.pill.info .dot{background:var(--cyn);box-shadow:0 0 0 4px rgba(224,168,0,.18)}
   .pill.hint{color:var(--mut)}.pill.hint .dot{background:var(--amb);box-shadow:0 0 0 4px rgba(245,158,11,.18)}
   .dot{width:9px;height:9px;border-radius:50%}
 
@@ -127,7 +127,7 @@
   .howto h2{font-size:16px;font-weight:700;text-align:center;margin-bottom:14px}
   .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
   .step{padding:20px 16px;text-align:center;font-size:13px;color:var(--mut);line-height:1.55;margin-top:0}
-  .step .n{display:grid;place-items:center;width:34px;height:34px;margin:0 auto 10px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;font-weight:800;font-size:14px}
+  .step .n{display:grid;place-items:center;width:34px;height:34px;margin:0 auto 10px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#08090B);color:#fff;font-weight:800;font-size:14px}
   .step b{color:var(--ink);display:block;margin-bottom:4px;font-size:13.5px}
 
   /* faq */
@@ -147,8 +147,9 @@
   }
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JSON Formatter","url":"https://quickconvert.freedev.app/json-formatter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":0,"priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JSON Formatter","url":"https://quickconvert-tools.pages.dev/json-formatter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":0,"priceCurrency":"USD"}}
 </script>
+<link rel="stylesheet" href="../assets/qc-refresh.css">
 </head>
 <body>
 <div class="wrap">
@@ -219,7 +220,7 @@
     <details class="card"><summary>How large a file can it handle?</summary><div class="a">It is designed for typical API responses and config files. Extremely large pastes may slow down older phones, but there is no hard limit.</div></details>
   </section>
 
-  <footer>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a>
+  <footer>Made with ❤️ by <a href="https://catversstudio.pages.dev" target="_blank" rel="noopener">CatVers Studio</a>
     <span class="fline">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</span>
     <nav class="fnav" aria-label="Footer"><a href="/">All tools</a><a href="/pdf-to-jpg/">PDF to JPG</a><a href="/image-compressor/">Image Compressor</a><a href="/qr-code-generator/">QR Generator</a></nav>
   </footer>
@@ -369,5 +370,6 @@
   });
 })();
 </script>
+<script src="../assets/qc-refresh.js" defer></script>
 </body>
 </html>

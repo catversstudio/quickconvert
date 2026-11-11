@@ -5,33 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Text Cleaner · Free Online Tool | QuickConvert</title>
 <meta name="description" content="Remove extra spaces, empty lines and tabs, trim every line and tidy messy text instantly in your browser. Free, private, no uploads.">
-<meta name="theme-color" content="#7C3AED">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#08090B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2308090B'/%3E%3Cstop offset='1' stop-color='%23FFC900'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
 <meta property="og:title" content="Text Cleaner · Free Online Tool | QuickConvert">
 <meta property="og:description" content="Remove extra spaces, empty lines and tabs, trim every line and tidy messy text instantly in your browser. Free, private, no uploads.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://quickconvert.freedev.app/text-cleaner/">
+<meta property="og:url" content="https://quickconvert-tools.pages.dev/text-cleaner/">
 <meta name="twitter:card" content="summary">
-<link rel="canonical" href="https://quickconvert.freedev.app/text-cleaner/">
+<link rel="canonical" href="https://quickconvert-tools.pages.dev/text-cleaner/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
-  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --ink:#1F2937; --mut:#6B7280; --vio:#08090B; --cyn:#E0A800;
+  --pnk:#E0A800; --amb:#B78A00; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 :focus-visible{outline:2px solid var(--vio);outline-offset:2px}
 html{-webkit-text-size-adjust:100%}
 body{
-  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;color:var(--ink);
   background:
     radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
     radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
-    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
-    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+    radial-gradient(700px 600px at 50% 110%, #FFE9A866, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FAF6EC 45%,#FAF8F1 100%);
   background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
 }
 header.top{
@@ -45,7 +45,7 @@ header.top{
 .mark{
   width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
   background:linear-gradient(135deg,var(--vio),var(--cyn));
-  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+  color:#fff;box-shadow:0 6px 18px rgba(8,9,11,.35);
 }
 .mark svg{width:26px;height:26px}
 .brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
@@ -61,7 +61,7 @@ main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw
 .card{
   background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border:1px solid var(--line);border-radius:24px;
-  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  box-shadow:0 12px 40px rgba(8,9,11,.10),0 2px 8px rgba(0,0,0,.04);
   padding:clamp(20px,4vw,32px);
 }
 .input-card{margin-bottom:18px}
@@ -70,10 +70,10 @@ main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw
 textarea{
   width:100%;min-height:130px;resize:vertical;font-family:inherit;font-size:.98rem;
   color:var(--ink);background:rgba(255,255,255,.85);
-  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  border:1.5px solid rgba(8,9,11,.18);border-radius:16px;
   padding:14px 16px;outline:none;transition:border-color .15s,box-shadow .15s;line-height:1.6;
 }
-textarea:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+textarea:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(8,9,11,.12)}
 textarea::placeholder{color:#9CA3AF}
 textarea#outText{background:rgba(248,250,252,.92);min-height:110px}
 /* toggle switches */
@@ -84,12 +84,12 @@ textarea#outText{background:rgba(248,250,252,.92);min-height:110px}
   padding:8px 14px;font-size:.88rem;font-weight:500;user-select:none;
   transition:border-color .15s,box-shadow .15s;
 }
-.toggle:hover{border-color:rgba(124,58,237,.35);box-shadow:0 4px 14px rgba(124,58,237,.08)}
+.toggle:hover{border-color:rgba(8,9,11,.35);box-shadow:0 4px 14px rgba(8,9,11,.08)}
 .toggle input{position:absolute;opacity:0;width:100%;height:100%;top:0;left:0;cursor:pointer;margin:0}
 .tk{flex:0 0 42px;width:42px;height:24px;border-radius:999px;background:#D1D5DB;position:relative;transition:background .2s}
 .tk::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;
   background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
-.toggle input:checked + .tk{background:linear-gradient(135deg,var(--vio),#9333EA)}
+.toggle input:checked + .tk{background:linear-gradient(135deg,var(--vio),#08090B)}
 .toggle input:checked + .tk::after{transform:translateX(18px)}
 .toggle input:focus-visible + .tk{outline:2px solid var(--vio);outline-offset:2px}
 .tt{line-height:1.3}
@@ -102,10 +102,10 @@ textarea#outText{background:rgba(248,250,252,.92);min-height:110px}
 }
 .btn:active{transform:scale(.97)}
 .btn-p{
-  background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;
-  box-shadow:0 8px 24px rgba(124,58,237,.35);
+  background:linear-gradient(135deg,var(--vio),#08090B);color:#fff;
+  box-shadow:0 8px 24px rgba(8,9,11,.35);
 }
-.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(124,58,237,.42)}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(8,9,11,.42)}
 .btn-p:disabled{opacity:.55;cursor:wait;transform:none}
 .btn-g{
   background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);
@@ -116,8 +116,8 @@ textarea#outText{background:rgba(248,250,252,.92);min-height:110px}
   margin-top:12px;font-size:.82rem;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
 }
 .meta .pill{
-  background:linear-gradient(135deg,#EDE9FE,#E0F2FE);border-radius:999px;
-  padding:4px 12px;font-weight:500;color:#4C1D95;
+  background:linear-gradient(135deg,#FFF3BF,#FFF3BF);border-radius:999px;
+  padding:4px 12px;font-weight:500;color:#08090B;
 }
 .error{
   display:none;margin-top:14px;padding:14px 18px;border-radius:16px;
@@ -147,7 +147,7 @@ textarea#outText{background:rgba(248,250,252,.92);min-height:110px}
 .how h2{font-size:1rem;margin-bottom:12px}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
-.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#08090B);
   color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
 .step b{color:var(--ink)}
 /* faq */
@@ -180,12 +180,13 @@ footer .fnav a{font-weight:500}
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Text Cleaner — Free Online Tool",
-  "url": "https://quickconvert.freedev.app/text-cleaner/",
+  "url": "https://quickconvert-tools.pages.dev/text-cleaner/",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
 }
 </script>
+<link rel="stylesheet" href="../assets/qc-refresh.css">
 </head>
 <body>
 
@@ -271,7 +272,7 @@ footer .fnav a{font-weight:500}
 </main>
 
 <footer>
-  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div>Made with ❤️ by <a href="https://catversstudio.pages.dev" target="_blank" rel="noopener">CatVers Studio</a></div>
   <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
   <nav class="fnav" aria-label="Footer navigation">
     <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
@@ -430,5 +431,6 @@ footer .fnav a{font-weight:500}
   refresh();
 })();
 </script>
+<script src="../assets/qc-refresh.js" defer></script>
 </body>
 </html>

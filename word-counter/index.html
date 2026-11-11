@@ -5,32 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Word Counter — Free Online Tool | QuickConvert</title>
 <meta name="description" content="Count words, characters, sentences and reading time instantly as you type. Free, private, and 100% in your browser — nothing is ever uploaded.">
-<meta name="theme-color" content="#7C3AED">
+<meta name="theme-color" content="#08090B">
 <meta property="og:title" content="Word Counter — Free Online Tool | QuickConvert">
 <meta property="og:description" content="Count words, characters, sentences and reading time instantly as you type — free, private, 100% in your browser.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://quickconvert.freedev.app/word-counter/">
+<meta property="og:url" content="https://quickconvert-tools.pages.dev/word-counter/">
 <meta name="twitter:card" content="summary">
-<link rel="canonical" href="https://quickconvert.freedev.app/word-counter/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M35 8 18 36h11l-3 20 17-28h-11z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://quickconvert-tools.pages.dev/word-counter/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2308090B'/%3E%3Cstop offset='1' stop-color='%23FFC900'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M35 8 18 36h11l-3 20 17-28h-11z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
-    --pnk:#EC4899; --amb:#F59E0B;
+    --ink:#1F2937; --mut:#6B7280; --vio:#08090B; --cyn:#E0A800;
+    --pnk:#E0A800; --amb:#B78A00;
     --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{
-    font-family:'Poppins',system-ui,sans-serif; color:var(--ink);
+    font-family:'DM Sans',system-ui,sans-serif; color:var(--ink);
     min-height:100vh; background-attachment:fixed;
     background:
       radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
       radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
-      radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
-      linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+      radial-gradient(700px 600px at 50% 110%, #FFE9A866, transparent 60%),
+      linear-gradient(160deg,#FFF7ED 0%,#FAF6EC 45%,#FAF8F1 100%);
   }
   header{
     max-width:1100px; margin:0 auto; padding:12px 20px;
@@ -46,7 +46,7 @@
     width:44px; height:44px; border-radius:14px; display:grid; place-items:center;
     color:#fff;
     background:linear-gradient(135deg,var(--vio),var(--cyn));
-    box-shadow:0 8px 22px #7c3aed44;
+    box-shadow:0 8px 22px #08090B44;
   }
   .mark svg{width:24px; height:24px; display:block}
   .alltools{
@@ -66,20 +66,20 @@
   .editor{padding:26px}
   #textInput{
     width:100%; min-height:260px; resize:vertical;
-    font-family:'Poppins',sans-serif; font-size:1.05rem; line-height:1.7; color:var(--ink);
+    font-family:'DM Sans',sans-serif; font-size:1.05rem; line-height:1.7; color:var(--ink);
     background:rgba(255,255,255,.85); border:1px solid #e5e7eb; border-radius:18px;
     padding:20px; outline:none; transition:border .15s ease, box-shadow .15s ease;
   }
-  #textInput:focus{border-color:var(--vio); box-shadow:0 0 0 4px #7c3aed22}
+  #textInput:focus{border-color:var(--vio); box-shadow:0 0 0 4px #08090B22}
   .actions{display:flex; align-items:center; justify-content:space-between; margin-top:16px; flex-wrap:wrap; gap:10px}
   .hint{color:var(--mut); font-size:.9rem}
   .btn-p, .btn-g{
-    border:none; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:600;
+    border:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:600;
     font-size:.95rem; padding:12px 28px; border-radius:999px;
     transition:transform .15s ease, box-shadow .15s ease;
   }
-  .btn-p{background:linear-gradient(135deg,var(--vio),#9333EA); color:#fff; box-shadow:0 8px 22px #7c3aed44}
-  .btn-p:hover{transform:translateY(-2px); box-shadow:0 12px 26px #7c3aed55}
+  .btn-p{background:linear-gradient(135deg,var(--vio),#08090B); color:#fff; box-shadow:0 8px 22px #08090B44}
+  .btn-p:hover{transform:translateY(-2px); box-shadow:0 12px 26px #08090B55}
   .btn-g{background:rgba(255,255,255,.65); color:var(--ink); border:1px solid var(--line)}
 
   h1{font-size:1.6rem; font-weight:700; text-align:center; margin:34px 0 6px}
@@ -88,11 +88,11 @@
   .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
   .stat{padding:26px 18px; text-align:center}
   .stat.v .icon{color:var(--vio)} .stat.c .icon{color:var(--cyn)} .stat.p .icon{color:var(--pnk)}
-  .stat.a .icon{color:var(--amb)} .stat.g .icon{color:#10B981} .stat.b .icon{color:#3B82F6}
+  .stat.a .icon{color:var(--amb)} .stat.g .icon{color:#10B981} .stat.b .icon{color:#08090B}
   .stat .num{font-size:2rem; font-weight:800; line-height:1.1}
   .stat .lbl{color:var(--mut); font-size:.85rem; font-weight:500; margin-top:6px}
   .stat.v .num{color:var(--vio)} .stat.c .num{color:var(--cyn)} .stat.p .num{color:var(--pnk)}
-  .stat.a .num{color:var(--amb)} .stat.g .num{color:#10B981} .stat.b .num{color:#3B82F6}
+  .stat.a .num{color:var(--amb)} .stat.g .num{color:#10B981} .stat.b .num{color:#08090B}
 
   footer{text-align:center; color:var(--mut); font-size:.9rem; padding:24px 20px 40px}
   footer a{color:var(--vio); font-weight:600; text-decoration:none}
@@ -115,7 +115,7 @@
   .howto h2{font-size:1.05rem; font-weight:700; text-align:center; margin-bottom:14px}
   .steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px}
   .step{padding:20px 16px; text-align:center; font-size:.88rem; color:var(--mut); line-height:1.55}
-  .step .n{display:grid; place-items:center; width:34px; height:34px; margin:0 auto 10px; border-radius:50%; background:linear-gradient(135deg,var(--vio),#9333EA); color:#fff; font-weight:800; font-size:.95rem}
+  .step .n{display:grid; place-items:center; width:34px; height:34px; margin:0 auto 10px; border-radius:50%; background:linear-gradient(135deg,var(--vio),#08090B); color:#fff; font-weight:800; font-size:.95rem}
   .step b{color:var(--ink); display:block; margin-bottom:4px; font-size:.92rem}
 
   /* faq */
@@ -139,8 +139,9 @@
   }
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Word Counter","url":"https://quickconvert.freedev.app/word-counter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":0,"priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Word Counter","url":"https://quickconvert-tools.pages.dev/word-counter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":0,"priceCurrency":"USD"}}
 </script>
+<link rel="stylesheet" href="../assets/qc-refresh.css">
 </head>
 <body>
 
@@ -198,7 +199,7 @@
 </main>
 
 <footer>
-  Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a>
+  Made with ❤️ by <a href="https://catversstudio.pages.dev" target="_blank" rel="noopener">CatVers Studio</a>
   <span class="fline">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</span>
   <nav class="fnav" aria-label="Footer"><a href="/">All tools</a><a href="/pdf-to-jpg/">PDF to JPG</a><a href="/image-compressor/">Image Compressor</a><a href="/qr-code-generator/">QR Generator</a></nav>
 </footer>
@@ -252,5 +253,6 @@
 })();
 </script>
 
+<script src="../assets/qc-refresh.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,152 @@
+/* ============================================================
+   QuickConvert Refresh — 2026-11-11
+   Design system (one shared layer for the homepage + all tools):
+   - Palette (unexpected-accent method): Midnight #08090B + Paper
+     #F5F3EF base pair, ONE accent — Vibrant Golden Yellow #FFC900,
+     used sparingly (~10%): glows, focus rings, highlights, hovers.
+   - Type (google-fonts pairing "Tech Startup"): Space Grotesk for
+     headings, DM Sans for body/UI. Minor-third scale feel.
+   - Motion (uxui-shrut playbook + Vengeance UI patterns, vanilla):
+     staggered rise-in, glow-border cards, cursor spotlight on the
+     homepage grid, button glow + lift, icon-tile hover flip.
+   Tool logic is untouched — this file only re-skins via cascade.
+   ============================================================ */
+
+:root{
+  --qc-ink:#08090B;
+  --qc-ink-2:#23252A;
+  --qc-paper:#F5F3EF;
+  --qc-gold:#FFC900;
+  --qc-gold-deep:#C99700;
+  --qc-ease:cubic-bezier(.22,.9,.28,1);
+
+  /* tool-page variables, remapped */
+  --vio:#08090B;
+  --cyn:#E0A800;
+  --pnk:#E0A800;
+  --amb:#B78A00;
+  --ink:#14161A;
+  --mut:#5F645F;
+  --card:#FFFFFF;
+  --line:rgba(8,9,11,.10);
+
+  /* homepage variables, remapped */
+  --bg:#F5F3EF;
+  --bg2:#EFECE3;
+  --text:#08090B;
+  --muted:#555A53;
+  --faint:#8A8F87;
+  --line2:#E4DFCF;
+  --em:#08090B;
+  --em-dark:#08090B;
+  --em-soft:#FFF3BF;
+  --amber:#B78A00;
+  --amber-soft:#FFF3BF;
+  --sh:0 1px 2px rgba(8,9,11,.05),0 10px 30px rgba(8,9,11,.07);
+}
+
+::selection{background:var(--qc-gold);color:var(--qc-ink)}
+:focus-visible{outline:3px solid var(--qc-gold);outline-offset:2px}
+
+html{scrollbar-color:var(--qc-ink-2) var(--qc-paper)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--qc-paper)}
+::-webkit-scrollbar-thumb{background:#C9C4B4;border-radius:99px;border:2px solid var(--qc-paper)}
+::-webkit-scrollbar-thumb:hover{background:var(--qc-ink-2)}
+
+body{
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;
+  background:
+    radial-gradient(900px 480px at 88% -5%,rgba(255,201,0,.20),transparent 60%),
+    radial-gradient(760px 520px at -12% 105%,rgba(8,9,11,.07),transparent 55%),
+    linear-gradient(180deg,#FAF8F1 0%,#F5F3EF 100%);
+  background-attachment:fixed;
+  color:var(--ink);
+}
+h1,h2,h3,.brand b,.card h3,.cat-head h2{
+  font-family:'Space Grotesk','DM Sans',system-ui,sans-serif;
+  letter-spacing:-.015em;
+}
+input,select,textarea,button{font-family:inherit}
+
+/* header: paper glass + one gold keyline */
+header.top,nav{
+  background:rgba(245,243,239,.82);
+  box-shadow:inset 0 3px 0 var(--qc-gold);
+  animation:qc-down .55s var(--qc-ease) both;
+}
+@keyframes qc-down{from{opacity:0;transform:translateY(-10px)}}
+.mark,.brand .logo,footer .flogo .logo{
+  background:linear-gradient(135deg,var(--qc-ink),var(--qc-ink-2));
+  box-shadow:0 8px 22px rgba(8,9,11,.30);
+}
+
+/* entrance motion: tool cards rise in, staggered by qc-refresh.js */
+main>.card{animation:qc-up .6s var(--qc-ease) both;animation-delay:calc(var(--qc-i,0)*70ms)}
+@keyframes qc-up{from{opacity:0;transform:translateY(16px)}}
+
+/* cards: clean white, glow-border on hover (Vengeance pattern) */
+.card{
+  background:#FFFFFF;
+  transition:transform .3s var(--qc-ease),box-shadow .3s var(--qc-ease),border-color .3s var(--qc-ease);
+}
+.card:hover{
+  box-shadow:0 0 0 1.5px rgba(255,201,0,.8),0 22px 48px rgba(8,9,11,.13);
+}
+
+/* homepage spotlight: a soft gold light follows the cursor */
+.qc-home .grid .card{position:relative}
+.qc-home .grid .card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(255,201,0,.16),transparent 65%);
+  opacity:0;transition:opacity .3s var(--qc-ease);
+}
+.qc-home .grid .card:hover::after{opacity:1}
+
+/* homepage icon tiles: ink tiles that flip to gold on hover */
+.qc-home .icon-tile{
+  background:var(--qc-ink);color:var(--qc-paper);
+  transition:background .3s var(--qc-ease),color .3s var(--qc-ease),transform .3s var(--qc-ease);
+}
+.qc-home .card:hover .icon-tile{
+  background:var(--qc-gold);color:var(--qc-ink);
+  transform:rotate(-6deg) scale(1.07);
+  box-shadow:0 10px 26px rgba(255,201,0,.45);
+}
+.qc-home .hero h1 .hl{
+  color:inherit;
+  background:linear-gradient(transparent 64%,var(--qc-gold) 64%);
+  padding:0 .06em;
+}
+.qc-home .eyebrow .dot{background:var(--qc-gold);box-shadow:0 0 12px var(--qc-gold)}
+.qc-home .hero::before{
+  background:radial-gradient(640px 320px at 50% -60px,rgba(255,201,0,.22),transparent 70%);
+}
+
+/* buttons: ink primary + golden glow behind on hover */
+.btn,.back-link,.cat-pill,.filter-btn{transition:transform .25s var(--qc-ease),box-shadow .25s var(--qc-ease),background .25s var(--qc-ease),color .25s var(--qc-ease)}
+.btn-p,.dlbtn,.dl-btn,button[type="submit"]{
+  transition:transform .25s var(--qc-ease),box-shadow .25s var(--qc-ease);
+}
+.btn-p:hover,.dlbtn:hover,.dl-btn:hover,button[type="submit"]:hover,.back-link:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 0 4px rgba(255,201,0,.30),0 16px 38px rgba(255,201,0,.38);
+}
+.btn:active,.btn-p:active{transform:translateY(0) scale(.98)}
+
+/* inputs: gold focus halo instead of violet */
+.numwrap:focus-within,input:focus,select:focus,textarea:focus{
+  box-shadow:0 0 0 4px rgba(255,201,0,.28);
+}
+
+/* dropzones & upload areas pick up the accent on drag/hover */
+.drop:hover,.drop.drag{border-color:var(--qc-gold-deep)}
+
+/* live badge + pills stay in the gold family */
+.live-badge{box-shadow:0 0 0 1px rgba(255,201,0,.35)}
+
+@media (prefers-reduced-motion: reduce){
+  header.top,nav,main>.card{animation:none}
+  .card,.btn,.btn-p,.qc-home .icon-tile{transition:none}
+  .qc-home .grid .card::after{display:none}
+}

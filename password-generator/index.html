@@ -5,30 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Password Generator — Free Online Tool | QuickConvert</title>
 <meta name="description" content="Generate strong, random passwords instantly. Choose length and character sets, check strength, copy with one click. 100% local — nothing leaves your device.">
-<meta name="theme-color" content="#7C3AED">
+<meta name="theme-color" content="#08090B">
 <meta property="og:title" content="Password Generator — Free Online Tool | QuickConvert">
 <meta property="og:description" content="Generate strong random passwords with a strength meter and one-click copy — 100% local, nothing leaves your device.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://quickconvert.freedev.app/password-generator/">
+<meta property="og:url" content="https://quickconvert-tools.pages.dev/password-generator/">
 <meta name="twitter:card" content="summary">
-<link rel="canonical" href="https://quickconvert.freedev.app/password-generator/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M35 8 18 36h11l-3 20 17-28h-11z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://quickconvert-tools.pages.dev/password-generator/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2308090B'/%3E%3Cstop offset='1' stop-color='%23FFC900'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M35 8 18 36h11l-3 20 17-28h-11z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
-  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --ink:#1F2937; --mut:#6B7280; --vio:#08090B; --cyn:#E0A800;
+  --pnk:#E0A800; --amb:#B78A00; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  font-family:'Poppins',system-ui,sans-serif; color:var(--ink); min-height:100vh;
+  font-family:'DM Sans',system-ui,sans-serif; color:var(--ink); min-height:100vh;
   background:
     radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
     radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
-    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
-    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+    radial-gradient(700px 600px at 50% 110%, #FFE9A866, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FAF6EC 45%,#FAF8F1 100%);
   background-attachment:fixed;
 }
 .wrap{max-width:720px;margin:0 auto;padding:20px 16px 40px}
@@ -44,7 +44,7 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .mark{
   width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:#fff;
   background:linear-gradient(135deg,var(--vio),var(--cyn));
-  box-shadow:0 8px 20px rgba(124,58,237,.35);
+  box-shadow:0 8px 20px rgba(8,9,11,.35);
 }
 .mark svg{width:24px;height:24px;display:block}
 .back{display:inline-flex;align-items:center;color:var(--ink);text-decoration:none;font-size:.9rem;font-weight:600;
@@ -73,10 +73,10 @@ input[type=range]{flex:1;min-width:160px;accent-color:var(--vio);height:32px;cur
 .pill{
   display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;
   padding:10px 12px;border-radius:999px;font-size:.85rem;font-weight:600;
-  background:rgba(255,255,255,.55);border:1px solid rgba(124,58,237,.18);transition:all .18s;
+  background:rgba(255,255,255,.55);border:1px solid rgba(8,9,11,.18);transition:all .18s;
 }
 .pill input{accent-color:var(--vio);width:16px;height:16px;cursor:pointer}
-.pill.on{background:linear-gradient(135deg,#ede9fe,#fae8ff);border-color:var(--vio);color:#4c1d95}
+.pill.on{background:linear-gradient(135deg,#FFF3BF,#fae8ff);border-color:var(--vio);color:#08090B}
 .pill small{display:block;font-weight:400;color:var(--mut);font-size:.72rem}
 .pill span.l{line-height:1.25}
 
@@ -85,10 +85,10 @@ input[type=range]{flex:1;min-width:160px;accent-color:var(--vio);height:32px;cur
 .btn-p{
   flex:1;min-width:180px;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:1.05rem;
   color:#fff;padding:14px 24px;border-radius:999px;
-  background:linear-gradient(135deg,var(--vio),#9333EA);
-  box-shadow:0 10px 26px rgba(124,58,237,.4);transition:transform .15s, box-shadow .15s;
+  background:linear-gradient(135deg,var(--vio),#08090B);
+  box-shadow:0 10px 26px rgba(8,9,11,.4);transition:transform .15s, box-shadow .15s;
 }
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(124,58,237,.5)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(8,9,11,.5)}
 .btn-p:active{transform:translateY(0)}
 .btn-g{
   border:1px solid rgba(255,255,255,.9);cursor:pointer;font-family:inherit;font-weight:600;font-size:.95rem;
@@ -100,14 +100,14 @@ input[type=range]{flex:1;min-width:160px;accent-color:var(--vio);height:32px;cur
 /* password display */
 #pwBox{
   font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;font-size:1.15rem;word-break:break-all;
-  background:rgba(31,41,55,.92);color:#e0f2fe;border-radius:16px;padding:18px;cursor:pointer;
+  background:rgba(31,41,55,.92);color:#FFF3BF;border-radius:16px;padding:18px;cursor:pointer;
   min-height:64px;position:relative;transition:transform .12s;
 }
 #pwBox:hover{transform:scale(1.005)}
 #pwHint{font-size:.8rem;color:var(--mut);text-align:center;margin-top:8px}
 #copyToast{
   position:absolute;top:10px;right:12px;background:var(--cyn);color:#fff;font-size:.75rem;font-weight:700;
-  padding:4px 12px;border-radius:999px;opacity:0;transition:opacity .2s;pointer-events:none;font-family:'Poppins',sans-serif;
+  padding:4px 12px;border-radius:999px;opacity:0;transition:opacity .2s;pointer-events:none;font-family:'DM Sans',sans-serif;
 }
 #copyToast.show{opacity:1}
 
@@ -128,7 +128,7 @@ h2.sec{font-size:1.05rem;font-weight:700;margin-bottom:12px}
   padding:10px 14px;cursor:pointer;transition:all .15s;
 }
 #history li:hover{background:#fff;border-color:var(--cyn)}
-#history .empty{font-family:'Poppins',sans-serif;color:var(--mut);text-align:center;cursor:default}
+#history .empty{font-family:'DM Sans',sans-serif;color:var(--mut);text-align:center;cursor:default}
 #history .empty:hover{background:rgba(255,255,255,.55);border-color:rgba(255,255,255,.9)}
 
 /* warning */
@@ -160,7 +160,7 @@ h1{font-size:1.5rem;font-weight:800;text-align:center;margin:28px 0 8px;letter-s
 .howto h2{font-size:1.05rem;font-weight:700;text-align:center;margin-bottom:14px}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
 .step{padding:20px 16px;text-align:center;font-size:.85rem;color:var(--mut);line-height:1.55}
-.step .n{display:grid;place-items:center;width:34px;height:34px;margin:0 auto 10px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;font-weight:800;font-size:.95rem}
+.step .n{display:grid;place-items:center;width:34px;height:34px;margin:0 auto 10px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#08090B);color:#fff;font-weight:800;font-size:.95rem}
 .step b{color:var(--ink);display:block;margin-bottom:4px;font-size:.9rem}
 
 /* faq */
@@ -176,8 +176,9 @@ h1{font-size:1.5rem;font-weight:800;text-align:center;margin:28px 0 8px;letter-s
 @media(max-width:480px){ .card{padding:18px 16px} #pwBox{font-size:1rem} }
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Password Generator","url":"https://quickconvert.freedev.app/password-generator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":0,"priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Password Generator","url":"https://quickconvert-tools.pages.dev/password-generator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":0,"priceCurrency":"USD"}}
 </script>
+<link rel="stylesheet" href="../assets/qc-refresh.css">
 </head>
 <body>
 <div class="wrap">
@@ -269,7 +270,7 @@ h1{font-size:1.5rem;font-weight:800;text-align:center;margin:28px 0 8px;letter-s
     <details class="card"><summary>How long should my password be?</summary><div class="a">16+ characters using all four character sets is strong for most accounts. Use the strength meter and entropy readout as your guide.</div></details>
   </section>
 
-  <footer>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a>
+  <footer>Made with ❤️ by <a href="https://catversstudio.pages.dev" target="_blank" rel="noopener">CatVers Studio</a>
     <span class="fline">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</span>
     <nav class="fnav" aria-label="Footer"><a href="/">All tools</a><a href="/pdf-to-jpg/">PDF to JPG</a><a href="/image-compressor/">Image Compressor</a><a href="/qr-code-generator/">QR Generator</a></nav>
   </footer>
@@ -448,5 +449,6 @@ h1{font-size:1.5rem;font-weight:800;text-align:center;margin:28px 0 8px;letter-s
   generate(); // auto-generate one on page load
 })();
 </script>
+<script src="../assets/qc-refresh.js" defer></script>
 </body>
 </html>

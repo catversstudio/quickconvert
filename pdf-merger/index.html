@@ -5,34 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PDF Merger · Free Online Tool | QuickConvert</title>
 <meta name="description" content="Merge multiple PDF files into one, right in your browser. Reorder pages your way — 100% free, 100% local, your files never leave your device.">
-<meta name="theme-color" content="#7C3AED">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#08090B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2308090B'/%3E%3Cstop offset='1' stop-color='%23FFC900'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M36 8 22 36h9l-2 12 13-20h-9l3-20z' fill='%23fff'/%3E%3C/svg%3E">
 <meta property="og:title" content="PDF Merger · Free Online Tool | QuickConvert">
 <meta property="og:description" content="Merge multiple PDF files into one, right in your browser. 100% free, 100% local — your files never leave your device.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://quickconvert.freedev.app/pdf-merger/">
+<meta property="og:url" content="https://quickconvert-tools.pages.dev/pdf-merger/">
 <meta name="twitter:card" content="summary">
-<link rel="canonical" href="https://quickconvert.freedev.app/pdf-merger/">
+<link rel="canonical" href="https://quickconvert-tools.pages.dev/pdf-merger/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <style>
 :root{
-  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
-  --pnk:#EC4899; --amb:#F59E0B;
+  --ink:#1F2937; --mut:#6B7280; --vio:#08090B; --cyn:#E0A800;
+  --pnk:#E0A800; --amb:#B78A00;
   --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :focus-visible{outline:2px solid var(--vio);outline-offset:2px}
 body{
-  font-family:'Poppins',system-ui,sans-serif; color:var(--ink);
+  font-family:'DM Sans',system-ui,sans-serif; color:var(--ink);
   min-height:100vh;
   background:
     radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
     radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
-    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
-    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+    radial-gradient(700px 600px at 50% 110%, #FFE9A866, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FAF6EC 45%,#FAF8F1 100%);
   background-attachment:fixed;
 }
 header.top{
@@ -45,7 +45,7 @@ header.top{
 .brand .bt{line-height:1.05}
 .brand .bs{display:block;font-size:.6rem;font-weight:700;letter-spacing:.22em;color:var(--mut)}
 .mark{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:#fff;
-  background:linear-gradient(135deg,var(--vio),var(--cyn));box-shadow:0 6px 18px #7C3AED44;flex:0 0 44px}
+  background:linear-gradient(135deg,var(--vio),var(--cyn));box-shadow:0 6px 18px #08090B44;flex:0 0 44px}
 .mark svg{width:26px;height:26px}
 .back{font-weight:600;font-size:.95rem;color:var(--vio);text-decoration:none;padding:10px 18px;border-radius:999px;
   background:rgba(255,255,255,.6);border:1px solid var(--line);min-height:44px;display:inline-flex;align-items:center}
@@ -53,16 +53,16 @@ header.top{
 main{max-width:960px;margin:0 auto;padding:26px 20px 60px}
 /* DROPZONE — first thing on the page */
 .dropzone{
-  border:2.5px dashed #C4B5FD;border-radius:24px;padding:44px 22px;text-align:center;cursor:pointer;
+  border:2.5px dashed #E4DFCF;border-radius:24px;padding:44px 22px;text-align:center;cursor:pointer;
   background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border:1px solid var(--line);box-shadow:0 10px 30px rgba(124,58,237,.08);
+  border:1px solid var(--line);box-shadow:0 10px 30px rgba(8,9,11,.08);
   transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   position:relative;overflow:hidden;
 }
 .dropzone::before{content:"";position:absolute;inset:0;border-radius:24px;
-  border:2.5px dashed #C4B5FD;pointer-events:none;margin:10px}
-.dropzone:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(124,58,237,.14)}
-.dropzone.drag{border-color:var(--vio);box-shadow:0 0 0 6px #7C3AED22,0 16px 38px rgba(124,58,237,.18);transform:scale(1.01)}
+  border:2.5px dashed #E4DFCF;pointer-events:none;margin:10px}
+.dropzone:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(8,9,11,.14)}
+.dropzone.drag{border-color:var(--vio);box-shadow:0 0 0 6px #08090B22,0 16px 38px rgba(8,9,11,.18);transform:scale(1.01)}
 .dropzone.drag::before{border-color:var(--vio)}
 .dz-icon{display:block;margin-bottom:12px;color:var(--vio)}
 .dz-icon svg{width:52px;height:52px}
@@ -110,11 +110,11 @@ input[type=file]{display:none}
 .btnrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .btn-p{
   border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:1.05rem;color:#fff;
-  padding:15px 38px;min-height:48px;border-radius:999px;background:linear-gradient(135deg,var(--vio),#9333EA);
-  box-shadow:0 10px 26px #7C3AED55;transition:transform .15s, box-shadow .15s;
+  padding:15px 38px;min-height:48px;border-radius:999px;background:linear-gradient(135deg,var(--vio),#08090B);
+  box-shadow:0 10px 26px #08090B55;transition:transform .15s, box-shadow .15s;
   display:inline-flex;align-items:center;justify-content:center;
 }
-.btn-p:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 32px #7C3AED66}
+.btn-p:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 32px #08090B66}
 .btn-p:disabled{opacity:.55;cursor:wait;transform:none}
 .btn-g{
   border:1px solid var(--line);cursor:pointer;font-family:inherit;font-weight:600;font-size:.95rem;color:var(--ink);
@@ -127,7 +127,7 @@ input[type=file]{display:none}
 #mergeBtn.is-loading .spin{display:inline-block}
 @keyframes rot{to{transform:rotate(360deg)}}
 .status{margin-top:14px;font-size:.92rem;color:var(--mut);min-height:1.4em}
-.status.ok{color:#059669;font-weight:600}
+.status.ok{color:#08090B;font-weight:600}
 .status.err{color:#DC2626;font-weight:600}
 .status.warn{color:#B45309;font-weight:600}
 /* trust strip */
@@ -142,7 +142,7 @@ input[type=file]{display:none}
 .how h2{font-size:1rem;margin-bottom:12px}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
-.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#08090B);
   color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
 /* faq */
 .faq{margin:0 0 20px}
@@ -182,12 +182,13 @@ footer .fnav a{font-weight:500}
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "PDF Merger — Free Online Tool",
-  "url": "https://quickconvert.freedev.app/pdf-merger/",
+  "url": "https://quickconvert-tools.pages.dev/pdf-merger/",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
 }
 </script>
+<link rel="stylesheet" href="../assets/qc-refresh.css">
 </head>
 <body>
 
@@ -269,7 +270,7 @@ footer .fnav a{font-weight:500}
 </main>
 
 <footer>
-  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div>Made with ❤️ by <a href="https://catversstudio.pages.dev" target="_blank" rel="noopener">CatVers Studio</a></div>
   <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
   <nav class="fnav" aria-label="Footer navigation">
     <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
@@ -559,5 +560,6 @@ footer .fnav a{font-weight:500}
   render();
 })();
 </script>
+<script src="../assets/qc-refresh.js" defer></script>
 </body>
 </html>

@@ -5,33 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Speed Distance Time Calculator with Unit Conversion | QuickConvert</title>
 <meta name="description" content="Solve for speed, distance or time with km/h, m/s and mph/miles unit conversion and clear formulas (v = d/t). Free, private, works fully in your browser.">
-<meta name="theme-color" content="#7C3AED">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C3AED'/%3E%3Cstop offset='1' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M32 12 a18 18 0 1 0 0.01 0' stroke='%23fff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M32 32 L44 22' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#08090B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2308090B'/%3E%3Cstop offset='1' stop-color='%23FFC900'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M32 12 a18 18 0 1 0 0.01 0' stroke='%23fff' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M32 32 L44 22' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%23fff'/%3E%3C/svg%3E">
 <meta property="og:title" content="Speed Distance Time Calculator with Unit Conversion | QuickConvert">
 <meta property="og:description" content="Solve for speed, distance or time with km/h, m/s and mph/miles unit conversion and clear formulas (v = d/t). Free, private, no uploads.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://quickconvert.freedev.app/speed-distance-time-calculator/">
+<meta property="og:url" content="https://quickconvert-tools.pages.dev/speed-distance-time-calculator/">
 <meta name="twitter:card" content="summary">
-<link rel="canonical" href="https://quickconvert.freedev.app/speed-distance-time-calculator/">
+<link rel="canonical" href="https://quickconvert-tools.pages.dev/speed-distance-time-calculator/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1F2937; --mut:#6B7280; --vio:#7C3AED; --cyn:#06B6D4;
-  --pnk:#EC4899; --amb:#F59E0B; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
+  --ink:#1F2937; --mut:#6B7280; --vio:#08090B; --cyn:#E0A800;
+  --pnk:#E0A800; --amb:#B78A00; --card:rgba(255,255,255,.72); --line:rgba(255,255,255,.9);
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 :focus-visible{outline:2px solid var(--vio);outline-offset:2px}
 html{-webkit-text-size-adjust:100%}
 body{
-  font-family:'Poppins',system-ui,-apple-system,sans-serif;color:var(--ink);
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;color:var(--ink);
   background:
     radial-gradient(900px 500px at 10% -5%, #FDE68A55, transparent 60%),
     radial-gradient(800px 500px at 95% 10%, #F9A8D455, transparent 60%),
-    radial-gradient(700px 600px at 50% 110%, #A5F3FC66, transparent 60%),
-    linear-gradient(160deg,#FFF7ED 0%,#FDF2F8 45%,#EFF6FF 100%);
+    radial-gradient(700px 600px at 50% 110%, #FFE9A866, transparent 60%),
+    linear-gradient(160deg,#FFF7ED 0%,#FAF6EC 45%,#FAF8F1 100%);
   background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;
 }
 header.top{
@@ -45,7 +45,7 @@ header.top{
 .mark{
   width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:0 0 44px;
   background:linear-gradient(135deg,var(--vio),var(--cyn));
-  color:#fff;box-shadow:0 6px 18px rgba(124,58,237,.35);
+  color:#fff;box-shadow:0 6px 18px rgba(8,9,11,.35);
 }
 .mark svg{width:26px;height:26px}
 .brand b{font-weight:800;font-size:1.15rem;letter-spacing:.2px;line-height:1.05}
@@ -61,16 +61,16 @@ main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:26px clamp(16px,4vw
 .card{
   background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border:1px solid var(--line);border-radius:24px;
-  box-shadow:0 12px 40px rgba(124,58,237,.10),0 2px 8px rgba(0,0,0,.04);
+  box-shadow:0 12px 40px rgba(8,9,11,.10),0 2px 8px rgba(0,0,0,.04);
   padding:clamp(20px,4vw,32px);
 }
 .input-card{margin-bottom:22px}
 .lab{display:block;font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:0 2px 8px}
 .inp{width:100%;font-family:inherit;font-size:.98rem;color:var(--ink);background:rgba(255,255,255,.85);
-  border:1.5px solid rgba(124,58,237,.18);border-radius:16px;
+  border:1.5px solid rgba(8,9,11,.18);border-radius:16px;
   padding:12px 16px;outline:none;transition:border-color .15s,box-shadow .15s;min-height:48px}
-.inp:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
-select.inp{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237C3AED' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+.inp:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(8,9,11,.12)}
+select.inp{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2308090B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 14px center;background-size:18px;padding-right:40px}
 .unit-row{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;margin-bottom:12px}
 .err{display:none;margin-top:12px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.35);color:#B91C1C;border-radius:14px;padding:12px 16px;font-size:.88rem;line-height:1.55}
@@ -83,8 +83,8 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:url("data:im
   display:inline-flex;align-items:center;justify-content:center;
 }
 .btn:active{transform:scale(.97)}
-.btn-p{background:linear-gradient(135deg,var(--vio),#9333EA);color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.35)}
-.btn-p:hover{box-shadow:0 10px 24px rgba(124,58,237,.45);transform:translateY(-1px)}
+.btn-p{background:linear-gradient(135deg,var(--vio),#08090B);color:#fff;box-shadow:0 8px 20px rgba(8,9,11,.35)}
+.btn-p:hover{box-shadow:0 10px 24px rgba(8,9,11,.45);transform:translateY(-1px)}
 .btn-g{background:rgba(255,255,255,.65);color:var(--ink);border-color:var(--line);backdrop-filter:blur(10px)}
 .btn-g:hover{background:rgba(255,255,255,.9)}
 .hero{text-align:center;margin:6px 0 22px}
@@ -107,7 +107,7 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:url("data:im
 .how h2{font-size:1rem;margin-bottom:12px}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .step{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--mut);line-height:1.55}
-.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#9333EA);
+.step .n{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--vio),#08090B);
   color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
 .step b{color:var(--ink)}
 .faq{margin:0 0 20px}
@@ -129,7 +129,7 @@ footer .fnav a{font-weight:500}
 .result-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
 .result-title{font-weight:700;font-size:1.02rem;display:inline-flex;align-items:center;gap:8px}
 .result-title .tag{font-size:.7rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;
-  padding:4px 10px;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--vio),#6D28D9)}
+  padding:4px 10px;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--vio),#08090B)}
 .big-v{font-family:var(--mono);font-size:clamp(2rem,8vw,3rem);font-weight:700;text-align:center;
   background:linear-gradient(135deg,var(--vio),var(--pnk));-webkit-background-clip:text;background-clip:text;color:transparent;
   padding:18px 10px;line-height:1.3;word-break:break-all}
@@ -138,13 +138,13 @@ footer .fnav a{font-weight:500}
 .res-cell{background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:16px;padding:14px 16px;text-align:center}
 .res-cell .v{font-size:1.2rem;font-weight:700;font-family:var(--mono);color:var(--ink)}
 .res-cell .l{font-size:.75rem;color:var(--mut);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-top:4px}
-.formula{margin-top:14px;background:rgba(31,41,55,.93);color:#A5F3FC;border-radius:14px;
+.formula{margin-top:14px;background:rgba(31,41,55,.93);color:#FFE9A8;border-radius:14px;
   padding:14px 18px;font-family:var(--mono);font-size:.95rem;line-height:1.7}
 .mode-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .mode-pill{font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;
   padding:10px 22px;min-height:44px;border-radius:999px;
-  border:1.5px solid rgba(124,58,237,.25);background:rgba(255,255,255,.6);color:var(--mut);transition:all .15s}
-.mode-pill.on{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--vio),#9333EA);box-shadow:0 6px 16px rgba(124,58,237,.3)}
+  border:1.5px solid rgba(8,9,11,.25);background:rgba(255,255,255,.6);color:var(--mut);transition:all .15s}
+.mode-pill.on{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--vio),#08090B);box-shadow:0 6px 16px rgba(8,9,11,.3)}
 .modepane{display:none}
 .modepane.on{display:block}
 .out-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;align-items:end}
@@ -161,12 +161,13 @@ footer .fnav a{font-weight:500}
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Speed Distance Time Calculator with Unit Conversion",
-  "url": "https://quickconvert.freedev.app/speed-distance-time-calculator/",
+  "url": "https://quickconvert-tools.pages.dev/speed-distance-time-calculator/",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" }
 }
 </script>
+<link rel="stylesheet" href="../assets/qc-refresh.css">
 </head>
 <body>
 
@@ -288,7 +289,7 @@ footer .fnav a{font-weight:500}
 </main>
 
 <footer>
-  <div>Made with ❤️ by <a href="https://catversstudio.infinityfreeapp.com" target="_blank" rel="noopener">CatVers Studio</a></div>
+  <div>Made with ❤️ by <a href="https://catversstudio.pages.dev" target="_blank" rel="noopener">CatVers Studio</a></div>
   <div class="fpriv">Privacy-first — every tool runs 100% in your browser. Your files never leave your device.</div>
   <nav class="fnav" aria-label="Footer navigation">
     <a href="/">All tools</a><span>·</span><a href="/pdf-to-jpg/">PDF to JPG</a><span>·</span><a href="/image-compressor/">Image Compressor</a><span>·</span><a href="/qr-code-generator/">QR Generator</a>
@@ -445,5 +446,6 @@ function solveTime(d, dU, v, vU, outU) {
   });
 })();
 </script>
+<script src="../assets/qc-refresh.js" defer></script>
 </body>
 </html>
