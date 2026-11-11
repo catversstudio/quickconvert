@@ -145,6 +145,27 @@ main>.card{animation:qc-up .6s var(--qc-ease) both;animation-delay:calc(var(--qc
 /* live badge + pills stay in the gold family */
 .live-badge{box-shadow:0 0 0 1px rgba(255,201,0,.35)}
 
+/* === Header fix (2026-11-12, user's word): header carries ONLY the
+   logo + the tool's own name; QuickConvert / CatVers Studio info
+   lives in the footer. The old "← All tools" pill becomes one
+   compact round arrow button that works the same on phone & PC. === */
+header .brand,header .logo{min-width:0}
+header .mark{flex:none}
+header .brand b,header .brand-text,header .logo>span:last-child{
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
+}
+.qc-back{
+  width:44px;height:44px;min-height:44px;padding:0!important;border-radius:50%;
+  display:inline-flex!important;align-items:center;justify-content:center;
+  font-size:20px;line-height:1;flex:none;
+}
+@media (max-width:560px){
+  header .brand b,header .brand-name,header .logo{font-size:1rem}
+  header .mark{width:36px;height:36px;border-radius:11px}
+  header .mark svg{width:21px;height:21px}
+  .hwrap{padding-top:10px;padding-bottom:10px}
+}
+
 @media (prefers-reduced-motion: reduce){
   header.top,nav,main>.card{animation:none}
   .card,.btn,.btn-p,.qc-home .icon-tile{transition:none}
