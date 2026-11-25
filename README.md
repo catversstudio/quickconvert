@@ -27,7 +27,7 @@ Every page is a single self-contained HTML file: markup + styles + logic, with S
 
 ## Deploy
 
-This is a static site. Serve the folder root with any static host (the live site runs on InfinityFree). Tool links are root-relative (`/pdf-to-jpg/`), so on a host that serves the repo at a sub-path, use a custom domain or rewrite accordingly.
+This is a static site. Serve the folder root with any static host (the live site runs on Cloudflare Pages at quickconvert-tools.pages.dev). Tool links are root-relative (`/pdf-to-jpg/`), so on a host that serves the repo at a sub-path, use a custom domain or rewrite accordingly.
 
 ## License
 
