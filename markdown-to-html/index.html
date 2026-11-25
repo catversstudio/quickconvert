@@ -286,6 +286,14 @@ footer .fnav a{font-weight:500}
 }
 </script>
 <link rel="stylesheet" href="../assets/qc-refresh.css">
+<!-- QC-PWA -->
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#08090B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="QuickConvert">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
 </head>
 <body>
 
@@ -650,7 +658,8 @@ if (typeof module !== 'undefined' && module.exports) {
   copyBtn.addEventListener('click', function () { copyText(lastHtml, copyBtn); });
   dlBtn.addEventListener('click', function () {
     if (!lastHtml) return;
-    download('converted.html', '<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Converted Markdown</title>\n</head>\n<body>\n' + lastHtml + '\n</body>\n</html>', 'text/html;charset=utf-8');
+    download('converted.html', '<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Converted Markdown</title>\n</head>\n<body>\n' + lastHtml + '\n<script src="/assets/pwa.js" defer></script>
+</body>\n</html>', 'text/html;charset=utf-8');
   });
   render();
   

@@ -196,6 +196,14 @@ footer .fnav a{font-weight:500}
 }
 </script>
 <link rel="stylesheet" href="../assets/qc-refresh.css">
+<!-- QC-PWA -->
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#08090B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="QuickConvert">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
 </head>
 <body>
 
@@ -496,7 +504,8 @@ footer .fnav a{font-weight:500}
   downloadBtn.addEventListener('click', function () {
     var snippet = outBox.textContent;
     var doc = '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n' +
-              snippet + '\n</head>\n<body>\n</body>\n</html>\n';
+              snippet + '\n</head>\n<body>\n<script src="/assets/pwa.js" defer></script>
+</body>\n</html>\n';
     var blob = new Blob([doc], { type: 'text/html' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);

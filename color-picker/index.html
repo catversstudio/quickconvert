@@ -193,6 +193,14 @@ main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:20px 18px 40px}
 }
 </script>
 <link rel="stylesheet" href="../assets/qc-refresh.css">
+<!-- QC-PWA -->
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#08090B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="QuickConvert">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
 </head>
 <body>
 <header class="site-header">
@@ -435,5 +443,6 @@ render(colorInput.value);
 pushRecent(colorInput.value);
 </script>
 <script src="../assets/qc-refresh.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
 </body>
 </html>

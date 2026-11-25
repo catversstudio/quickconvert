@@ -195,6 +195,14 @@ footer .fnav a{font-weight:500}
 }
 </script>
 <link rel="stylesheet" href="../assets/qc-refresh.css">
+<!-- QC-PWA -->
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#08090B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="QuickConvert">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
 </head>
 <body>
 
@@ -444,7 +452,8 @@ footer .fnav a{font-weight:500}
       '<head><meta charset="utf-8">' +
       '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]-->' +
       '<style>p{margin:0 0 10pt 0;font-size:11pt}h1{font-size:16pt}h2{font-size:13pt;color:#08090B}</style>' +
-      '</head><body>' + body + '</body></html>';
+      '</head><body>' + body + '<script src="/assets/pwa.js" defer></script>
+</body></html>';
   }
 
   function downloadDoc(filename, html) {
